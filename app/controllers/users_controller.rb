@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
-  before_action :generate_password, only: :create
   def new
     @user = user_type.new
   end
 
   def create
     @user = user_type.new(user_params)
-    @user.password = @password
-    @user.password_confirmation = @password
     @user.save
     @user.send_reset_password_instructions
   end
@@ -24,9 +21,5 @@ class UsersController < ApplicationController
 
   def required_user
     params[:type].downcase.to_sym
-  end
-
-  def generate_password
-    @password = Devise.friendly_token[0,20]
   end
 end
