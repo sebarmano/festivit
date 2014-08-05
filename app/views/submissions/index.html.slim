@@ -1,0 +1,15 @@
+h1 listing Applications
+
+- @submissions.each do |submission|
+  ul
+    li = submission.first_name
+    li = submission.last_name
+    li = submission.phone
+    li = submission.email
+    li = submission.bio
+  = link_to 'Show', submission
+  = link_to 'Edit', edit_submission_path(submission)
+  = link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+br
+
+= link_to 'New Band', new_submission_path
