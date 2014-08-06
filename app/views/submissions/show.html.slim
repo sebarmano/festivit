@@ -11,8 +11,10 @@
     li = @submission.site
     - @submission.attachments.each do |attachment|
       li = attachment.title
-      li = embed(attachment.link) unless attachment.link ==""
-      li = image_tag attachment.image.thumb('400x200#').url if attachment.image
+      - unless attachment.link == ""
+        li = embed(attachment.link)
+      -  if attachment.image
+        li = image_tag attachment.image.thumb('400x200#').url
   = link_to 'Edit', edit_submission_path(@submission)
   = link_to 'Back', submissions_path
 
