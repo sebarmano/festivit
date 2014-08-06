@@ -1,0 +1,73 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/controllers/users_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        null,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        4,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/spec/models/user_spec.rb": [
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/models/admin.rb": [
+        1,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/mailers/user_mailer.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        2,
+        null,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/models/volunteer.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1407294405
+  }
+}
