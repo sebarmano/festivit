@@ -3,6 +3,7 @@ class Attachment < ActiveRecord::Base
   require 'typhoeus'
   require 'typhoeus/adapters/faraday'
 
-  belongs_to :application
+  dragonfly_accessor :image
+  belongs_to :submission
 
 end

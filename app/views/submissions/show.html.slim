@@ -1,0 +1,19 @@
+.container
+  p
+    #notice
+      = notice
+  ul
+    li = @submission.first_name
+    li = @submission.last_name
+    li = @submission.phone
+    li = @submission.email
+    li = @submission.bio
+    li = @submission.site
+    - @submission.attachments.each do |attachment|
+      li = attachment.title
+      li = embed(attachment.link) unless attachment.link ==""
+      li = image_tag attachment.image.thumb('400x200#').url if attachment.image
+  = link_to 'Edit', edit_submission_path(@submission)
+  = link_to 'Back', submissions_path
+
+

@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 20140805174032) do
   create_table "attachments", force: true do |t|
     t.string   "title"
     t.string   "link"
-    t.string   "file"
+    t.string   "image_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "application_id"
+    t.integer  "submission_id"
   end
 
-  add_index "attachments", ["application_id"], name: "index_attachments_on_application_id", using: :btree
+  add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
   create_table "submissions", force: true do |t|
     t.string   "first_name"
