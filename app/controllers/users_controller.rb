@@ -5,8 +5,13 @@ class UsersController < ApplicationController
 
   def create
     @user = user_type.new(user_params)
-    @user.save
-    @user.send_reset_password_instructions
+    @user.generate_password
+    if @user.save
+      UserMailer.registration_email(@user).deliver
+      redirect_to :root, notice: "#{user_type} was successfully created."
+    else
+      render :new
+    end
   end
 
   private

@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 gem 'unicorn'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 gem 'dragonfly'
 gem 'devise'
 gem 'simple_form'
