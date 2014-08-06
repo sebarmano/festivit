@@ -12,8 +12,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring', group: :development
 # gem 'bcrypt', '~> 3.1.7'
 gem 'unicorn'
-gem 'rails_12factor'
 gem 'dragonfly', '~> 1.0.5'
+gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'simple_form'
 gem 'slim', '~> 2.0.3'
@@ -23,6 +23,8 @@ gem 'acts-as-taggable-on'
 gem 'bourbon'
 gem 'neat'
 gem 'bitters'
+gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
+gem 'authority'
 
 group :test do
   gem 'capybara'
