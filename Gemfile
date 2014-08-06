@@ -21,6 +21,7 @@ gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
 gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
+gem 'authority'
 
 
 group :test do
