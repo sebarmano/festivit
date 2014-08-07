@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807034933) do
+
+ActiveRecord::Schema.define(version: 20140807173837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140807034933) do
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
   create_table "fests", force: true do |t|
-    t.datetime "name"
+    t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140807034933) do
     t.datetime "updated_at"
     t.string   "tag"
     t.integer  "participant_id"
+    t.boolean  "approve"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
