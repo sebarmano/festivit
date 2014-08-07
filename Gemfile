@@ -20,6 +20,9 @@ gem 'slim', '~> 2.0.3'
 gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
+gem 'roo'
+gem 'iconv'
+
 
 group :test do
   gem 'capybara'
