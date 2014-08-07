@@ -20,6 +20,11 @@ gem 'slim', '~> 2.0.3'
 gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
+
+gem 'roo'
+gem 'iconv'
+
+
 gem 'bourbon'
 gem 'neat'
 gem 'bitters'
@@ -27,6 +32,7 @@ gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
 gem 'annotate', '~> 2.6.5'
+
 
 group :test do
   gem 'capybara'

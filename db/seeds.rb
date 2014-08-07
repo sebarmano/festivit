@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Participants table
-10.times do |n|
+50.times do |n|
   Participant.create(
     fname: Faker::Name.first_name,
     lname: Faker::Name.last_name,
@@ -79,4 +79,9 @@ Volunteer.create(email: "volunteer@volunteer.com",
               password: "password",
               password_confirmation: "password"
 )
-
+# Tickets table
+20.times do |n|
+  Tickets.create(
+    order_id: Faker::Number.number(5),
+    
+end
