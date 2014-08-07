@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :authenticate_user!
+  
   def index
     @submissions = Submission.all
   end
