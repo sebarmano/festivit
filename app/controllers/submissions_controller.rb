@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
   before_action :authenticate_user!
-  
+
   def index
     @submissions = Submission.all
   end
@@ -67,11 +67,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit(:first_name, :last_name,:phone,:email,
-                                 :bio, :site, :tag, :complete,
-                                 attachments_attributes: [:id, :title, :link,
-                                                         :image],
-                                 participants_attributes: [:id, :first_name,
-                                                   :last_name, :phone, :email])
+      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
+                                            attachments_attributes: [:id, :title, :link, :image])
   end
 end

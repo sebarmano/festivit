@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :submissions
 
+  resources :orders do
+    collection { post :import }
+  end
+
   root 'welcome#index'
 
   devise_for :users

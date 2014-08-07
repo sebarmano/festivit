@@ -15,5 +15,32 @@
  */
 
 @import 'bourbon';
+@import "base/base";
 @import 'neat';
-// @import "base/base";
+
+
+.form-inputs{
+  margin: auto;
+  text-align:center;
+  width: 250px;
+}
+
+.form-actions{
+  text-align:center;
+}
+
+body{
+
+  text-align:center;
+}
+
+.container{
+  @include outer-container;
+  /*   margin: auto;
+  max-width: 965px; */
+}
+
+.logIn{
+  @include span-columns(4);
+  @include shift(4);
+}
