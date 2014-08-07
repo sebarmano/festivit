@@ -17,3 +17,16 @@
 @import 'bourbon';
 @import "base/base";
 @import 'neat';
+.form-inputs{
+  margin: auto;
+  text-align:center;
+  width: 250px;
+}
+
+.form-actions{
+  text-align:center;
+}
+
+body{
+  text-align:center;
+}
