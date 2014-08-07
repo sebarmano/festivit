@@ -1,1 +1,22 @@
-h1 views/welcome/index.html.slim
+doctype html
+html
+  head
+    title festivit; for the rest of it
+    meta name="keywords" content="festival"
+    meta name="author" content=author
+    javascript:
+      alert('Slim supports embedded javascript!')
+
+  body
+    h1 Markup examples
+    = image_tag("logo_w.svg" ) class="background-color: grey;"
+    #content
+      p This example shows you how a basic Slim file looks like.
+
+      p
+       | No items found.  Please add some inventory.
+         Thank you!
+
+    div id="footer"
+      = render 'footer'
+      | Copyright © #{year} #{author}
