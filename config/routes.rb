@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   resources :admins, controller: 'users', only: [:new, :create], type: 'Admin'
   resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
+
+  resources :participants, only: [:new, :create, :show]
+
+  post 'approve', to: 'submissions#approve'
 end

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806183033) do
+
+ActiveRecord::Schema.define(version: 20140807173837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140806183033) do
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
   create_table "fests", force: true do |t|
-    t.datetime "name"
+    t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
@@ -94,7 +95,11 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "tag"
+    t.integer  "participant_id"
+    t.boolean  "approve"
   end
+
+  add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -148,9 +153,11 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.integer  "participant_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["participant_id"], name: "index_users_on_participant_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

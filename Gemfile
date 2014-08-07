@@ -25,6 +25,7 @@ gem 'neat'
 gem 'bitters'
 gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
+gem 'faker'
 gem 'annotate', '~> 2.6.5'
 
 group :test do

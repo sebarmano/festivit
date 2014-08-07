@@ -80,6 +80,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faker (1.4.1)
+      i18n (~> 0.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
@@ -219,7 +221,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  annotate (~> 2.6.5)
   authority
   bitters
   bourbon
@@ -230,6 +231,7 @@ DEPENDENCIES
   devise
   dragonfly (~> 1.0.5)
   factory_girl_rails
+  faker
   jbuilder (~> 2.0)
   jquery-rails
   neat
