@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable,
          :trackable, :validatable
 
+  include Authority::Abilities
+  include Authority::UserAbilities
+
   def generate_password
     password = Devise.friendly_token[0,20]
     self.password = password
@@ -12,6 +15,14 @@ class User < ActiveRecord::Base
 
   def registration_token
     set_registration_token
+  end
+
+  def admin?
+    type == 'Admin'
+  end
+
+  def applicant?
+    type == 'Applicant'
   end
 
   protected
