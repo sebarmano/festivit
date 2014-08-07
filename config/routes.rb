@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
 
   resources :participants, only: [:new, :create, :show]
-  resources :submissions, only: :update
 end

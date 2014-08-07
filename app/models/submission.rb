@@ -6,4 +6,8 @@ class Submission < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments, :reject_if => :all_blank, :allow_destroy => true
 
+  def mail_if_ready
+    return nil unless complete
+    SubmissionMailer.init_apply(self).deliver
+  end
 end

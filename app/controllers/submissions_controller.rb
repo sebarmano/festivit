@@ -18,7 +18,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
-    SubmissionMailer.init_apply(@submission).deliver
+    @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
         format.html {redirect_to @submission, notice: 'Your application was created!'}
@@ -33,6 +33,7 @@ class SubmissionsController < ApplicationController
   def update
     respond_to do |format|
       if @submission.update(submission_params)
+        @submission.mail_if_ready
         format.html { redirect_to @submission, notice: 'Your application was updated!'}
         format.json { render :show, status: :created, location: @submission }
       else
@@ -57,7 +58,11 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit(:first_name, :last_name,:phone,:email, :bio, :site, :tag, attachments_attributes: [:id, :title, :link, :image],
-                                        participants_attributes: [:id, :first_name, :last_name, :phone, :email])
+      params.require(:submission).permit(:first_name, :last_name,:phone,:email,
+                                 :bio, :site, :tag, :complete,
+                                 attachments_attributes: [:id, :title, :link,
+                                                         :image],
+                                 participants_attributes: [:id, :first_name,
+                                                   :last_name, :phone, :email])
   end
 end
