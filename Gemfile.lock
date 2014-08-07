@@ -216,12 +216,9 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-<<<<<<< HEAD
+  authority
   bitters
   bourbon
-=======
-  authority
->>>>>>> upstream/release-1
   capybara
   cocoon
   coffee-rails (~> 4.0.0)
