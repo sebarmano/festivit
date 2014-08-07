@@ -2,7 +2,8 @@ class Order < ActiveRecord::Base
   belongs_to :participant
   has_many :tickets
 
-
+  #attr_accessor :online_order_id, :date_time
+ # TODO - why do accessors make those fields not display in the view?
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -15,7 +16,9 @@ class Order < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: :true) do |row|
-      Order.create! row.to_hash
+      order = where(row["online_order_id"]) || new
+      order.attributes = row.to_hash.slice(*accessor_attributes)
+      order.save!
     end
   end
 

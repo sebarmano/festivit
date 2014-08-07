@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806183033) do
+ActiveRecord::Schema.define(version: 20140807140726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "application_processes", force: true do |t|
-    t.integer  "submission_id"
-    t.integer  "participant_id"
-    t.integer  "fest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "attachments", force: true do |t|
     t.string   "title"
@@ -39,6 +31,22 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.datetime "name"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fests_participants_role_types", force: true do |t|
+    t.integer  "role_id"
+    t.integer  "participant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "fest_id"
+  end
+
+  create_table "fests_participants_submissions", force: true do |t|
+    t.integer  "submission_id"
+    t.integer  "participant_id"
+    t.integer  "fest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,14 +76,6 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.string   "facebook_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "participations", force: true do |t|
-    t.integer  "role_id"
-    t.integer  "participant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "fest_id"
   end
 
   create_table "role_types", force: true do |t|
@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(version: 20140806183033) do
   create_table "tickets", force: true do |t|
     t.string   "qty"
     t.integer  "ticket_types_id"
-    t.integer  "participant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
