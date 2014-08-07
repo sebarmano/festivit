@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     type == 'Admin'
   end
 
+  def applicant?
+    type == 'Applicant'
+  end
+
   protected
 
   def set_registration_token
