@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20140807173837) do
 
   # These are extensions that must be enabled in order to support this database
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140807173837) do
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
   create_table "fests", force: true do |t|
-    t.datetime "name"
+    t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"

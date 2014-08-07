@@ -25,6 +25,7 @@ gem 'neat'
 gem 'bitters'
 gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
+gem 'faker'
 
 group :test do
   gem 'capybara'
