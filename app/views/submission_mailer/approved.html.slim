@@ -4,10 +4,10 @@ html
       meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     body
       h1
-        |  #{@applicant.first_name}
+        |  Great news #{@applicant.first_name},
       p
-        | #{@applicant.first_name} has submitted a new application.
-      br
-         = link_to "Click to Review Application", edit_submission_url(@applicant)
+        | We have approved your application,
+        | add email info from sekori we need more info.
+        br
 
       p Thanks for your interest in being part of festivit and have a great day!

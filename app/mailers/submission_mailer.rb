@@ -13,4 +13,9 @@ class SubmissionMailer < ActionMailer::Base
     @applicant = applicant
     mail(to: @admin.email, subject: "#{@applicant.first_name} has submitted an application.")
   end
+
+  def approved(applicant)
+    @applicant = applicant
+    mail(to: @applicant.email, subject: "Congratulations! You're application was APPROVED!")
+  end
 end
