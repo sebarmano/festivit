@@ -67,7 +67,12 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
+<<<<<<< HEAD
+      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
+                                            attachments_attributes: [:id, :title, :link, :image])
+=======
       params.require(:submission).permit(:first_name, :last_name,:phone,:email, :bio, :site, :tag, attachments_attributes: [:id, :title, :link, :image],
                                         participants_attributes: [:id, :first_name, :last_name, :phone, :email])
+>>>>>>> upstream/release-1
   end
 end
