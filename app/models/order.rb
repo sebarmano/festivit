@@ -16,9 +16,7 @@ class Order < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: :true) do |row|
-      order = where(row["online_order_id"]) || new
-      order.attributes = row.to_hash.slice(*accessor_attributes)
-      order.save!
+      Order.create! row.to_hash
     end
   end
 
