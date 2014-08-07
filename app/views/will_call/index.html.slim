@@ -1,0 +1,8 @@
+ul
+  = @participants.each do |participant|
+    li
+      =  "#{participant}"
+      h3 Tickets
+      ul
+        = participant.tickets_count.each do |ticket_type|
+          = 
