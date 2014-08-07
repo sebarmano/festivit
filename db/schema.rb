@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140807182606) do
     t.string   "tag"
     t.integer  "participant_id"
     t.boolean  "complete",       default: false
+    t.boolean  "approve"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
