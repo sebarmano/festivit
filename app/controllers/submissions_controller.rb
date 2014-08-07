@@ -54,6 +54,8 @@ class SubmissionsController < ApplicationController
   def approve
     @submission.approve = true
     @submission.save
+    SubmissionMailer.approved(@submission).deliver
+    redirect_to :root
   end
 
   private
