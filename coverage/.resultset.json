@@ -4,15 +4,18 @@
       "/Users/davidm/Documents/IronYard/Projects/festivit/app/controllers/users_controller.rb": [
         1,
         1,
+        1,
+        null,
+        1,
         0,
         null,
         null,
         1,
-        2,
-        2,
-        2,
-        2,
-        2,
+        0,
+        0,
+        0,
+        0,
+        0,
         null,
         0,
         null,
@@ -21,15 +24,15 @@
         1,
         null,
         1,
-        2,
+        0,
         null,
         null,
         1,
-        4,
+        0,
         null,
         null,
         1,
-        2,
+        0,
         null,
         null
       ],
@@ -38,6 +41,36 @@
         null,
         null,
         1,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/spec/mailers/submission_mailer_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/davidm/Documents/IronYard/Projects/festivit/app/mailers/submission_mailer.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
         null
       ],
       "/Users/davidm/Documents/IronYard/Projects/festivit/spec/models/user_spec.rb": [
@@ -50,24 +83,11 @@
         1,
         null
       ],
-      "/Users/davidm/Documents/IronYard/Projects/festivit/app/mailers/user_mailer.rb": [
-        1,
-        1,
-        null,
-        1,
-        null,
-        1,
-        2,
-        2,
-        2,
-        null,
-        null
-      ],
       "/Users/davidm/Documents/IronYard/Projects/festivit/app/models/volunteer.rb": [
         1,
         null
       ]
     },
-    "timestamp": 1407294405
+    "timestamp": 1407440010
   }
 }
