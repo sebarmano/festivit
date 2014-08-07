@@ -18,16 +18,9 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
-<<<<<<< HEAD
     @submission.mail_if_ready
-=======
-    @admin = Admin.first
-    SubmissionMailer.init_apply(@submission).deliver
-
->>>>>>> upstream/release-1
     respond_to do |format|
       if @submission.save
-        SubmissionMailer.init_admin(@submission).deliver
         format.html {redirect_to @submission, notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
@@ -61,8 +54,6 @@ class SubmissionsController < ApplicationController
   def approve
     @submission.approve = true
     @submission.save
-
-
   end
 
   private

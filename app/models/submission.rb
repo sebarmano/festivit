@@ -9,5 +9,6 @@ class Submission < ActiveRecord::Base
   def mail_if_ready
     return nil unless complete
     SubmissionMailer.init_apply(self).deliver
+    SubmissionMailer.init_admin(self).deliver
   end
 end
