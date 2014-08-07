@@ -29,5 +29,17 @@
 }
 
 body{
+
   text-align:center;
+}
+
+.container{
+  @include outer-container;
+  /*   margin: auto;
+  max-width: 965px; */
+}
+
+.logIn{
+  @include span-columns(4);
+  @include shift(4);
 }
