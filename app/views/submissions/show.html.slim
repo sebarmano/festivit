@@ -15,7 +15,9 @@
         li = embed(attachment.link)
       -  if attachment.image
         li = image_tag attachment.image.thumb('400x200#').url
-  = link_to 'Edit', edit_submission_path(@submission)
-  = link_to 'Back', submissions_path
+ - if current_user.admin?
+    =link_to 'approve',
+ = link_to 'Edit', edit_submission_path(@submission)
+ = link_to 'Back', submissions_path
 
 
