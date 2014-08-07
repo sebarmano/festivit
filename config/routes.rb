@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :participants, only: [:new, :create, :show]
 
-  post 'approve', to: 'submissions#approve'
+  post 'approve/:id', to: 'submissions#approve'
 end

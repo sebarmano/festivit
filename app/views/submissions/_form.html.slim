@@ -12,4 +12,5 @@
       = render 'attachment_fields', :f => attachment
     .links
       = link_to_add_association 'add more attachments',f , :attachments
+  =f.input "complete"
   =f.submit
