@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  authorize_actions_for :user_type
+
   def new
     @user = user_type.new
   end
