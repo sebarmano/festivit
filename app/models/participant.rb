@@ -1,6 +1,9 @@
 class Participant < ActiveRecord::Base
-  has_many :orders
-  has_many :fests, :through => :fests_participants_role_types
-  has_many :role_types, :through => :fests_participants_role_types
-  has_many :submissions, :through => :fests_participants_submissions
+  has_one :applicant
+  has_many :tickets
+  has_many :fests, :through => :fest_participant_role_types
+  has_many :role_types, :through => :fest_participant_role_types
+  has_many :submissions, :through => :fest_participant_submissions
+
+  accepts_nested_attributes_for :applicant
 end
