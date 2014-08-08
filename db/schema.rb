@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140807173837) do
-=======
 ActiveRecord::Schema.define(version: 20140807192814) do
->>>>>>> 2d62084a2f2fbf5a44c29246d4286057d271efce
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,8 +84,8 @@ ActiveRecord::Schema.define(version: 20140807192814) do
     t.datetime "updated_at"
     t.string   "tag"
     t.integer  "participant_id"
-    t.boolean  "complete",       default: false
     t.boolean  "approve"
+    t.boolean  "complete",       default: false
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
