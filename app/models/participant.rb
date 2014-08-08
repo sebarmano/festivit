@@ -6,7 +6,6 @@ class Participant < ActiveRecord::Base
   has_many :submissions, :through => :fest_participant_submissions
 
   accepts_nested_attributes_for :applicant
-end
   has_many :submissions, :through => :application_processes
   has_many :fests, :through => :application_processes
 

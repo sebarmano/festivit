@@ -80,8 +80,19 @@ Volunteer.create(email: "volunteer@volunteer.com",
               password_confirmation: "password"
 )
 # Tickets table
+qty = [0, 0, 0, 0, 0, 1, 2, 3, 4, 5]
 20.times do |n|
-  Tickets.create(
-    order_id: Faker::Number.number(5),
+  Ticket.create(
+    online_order_id: Faker::Number.number(5))
     
 end
+
+# fest_participation_role_type
+10.times do |n|
+  FestParticipantRoleType.create(
+    participant_id:  n,
+    role_id: RoleType.where(name: "customer").first.id,
+    fest_id: 1
+  )
+end
+

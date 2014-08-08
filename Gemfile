@@ -24,7 +24,7 @@ gem 'acts-as-taggable-on'
 gem 'roo'
 gem 'iconv'
 
-
+gem 'byebug' , group: :development
 gem 'bourbon'
 gem 'neat'
 gem 'bitters'
