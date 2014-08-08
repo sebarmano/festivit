@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :submissions
 
+  resources :orders do
+    collection { post :import }
+  end
+
   root 'welcome#index'
 
   devise_for :users
@@ -10,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :participants, only: [:new, :create, :show]
 
-  post 'approve', to: 'submissions#approve'
+  post 'approve/:id', to: 'submissions#approve'
 end
