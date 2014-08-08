@@ -76,12 +76,14 @@ header {
 
 article {
   @include outer-container;
+  margin-bottom: 4em;
   section {
     @include span-columns(6);
     @include shift(2);
   }
   aside {
     @include span-columns(4);
+    @include omega;
 
   }
 
@@ -90,11 +92,18 @@ article {
 footer {
   @include outer-container;
   background-color: #82C9C1;
-  position: fixed;
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 0%,
+                         bottom;
+  color: white;
+  position: absolute;
+  padding: 2em;
     z-index: 100;
     bottom: 0;
-    left: 0;
     width: 100%;
+
 }
 
 
