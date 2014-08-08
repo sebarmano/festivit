@@ -20,3 +20,5 @@
 # Ignore all vim's swap files (Sorry guys — Talal)
 *.swp
 *.swo
+
+/coverage/
