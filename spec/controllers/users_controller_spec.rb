@@ -18,20 +18,22 @@ describe UsersController, :type => :controller do
       )
     end
   end
+  describe 'Create Users' do
+    before do
+      @admin = create(:admin)
+      sign_in @admin
+    end
 
-  describe 'POST admin' do
     def create_admin
-      post :create, admin: FactoryGirl.attributes_for(:user), type: "Admin"
+      post :create, admin: FactoryGirl.attributes_for(:admin), type: "Admin"
+    end
+
+    def create_volunteer
+      post :create, volunteer: FactoryGirl.attributes_for(:user), type: "Volunteer"
     end
 
     it 'creates an admin' do
       expect{ create_admin }.to change { Admin.count }.by(1)
-    end
-  end
-
-  describe 'POST volunteer' do
-    def create_volunteer
-      post :create, volunteer: FactoryGirl.attributes_for(:user), type: "Volunteer"
     end
 
     it 'creates an volunteer' do

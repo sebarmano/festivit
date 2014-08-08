@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :authenticate_user!
+
   def index
     @submissions = Submission.all
   end
@@ -18,12 +20,9 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
-    @admin = Admin.first
-    SubmissionMailer.init_apply(@submission).deliver
-
+    @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
-        SubmissionMailer.init_admin(@submission).deliver
         format.html {redirect_to @submission, notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
@@ -36,7 +35,8 @@ class SubmissionsController < ApplicationController
   def update
     respond_to do |format|
       if @submission.update(submission_params)
-        format.html { redirect_to @submission.particpant, notice: 'Your application was updated!'}
+        @submission.mail_if_ready
+        format.html { redirect_to @submission, notice: 'Your application was updated!'}
         format.json { render :show, status: :created, location: @submission }
       else
         format.html {render :new}
@@ -56,8 +56,8 @@ class SubmissionsController < ApplicationController
   def approve
     @submission.approve = true
     @submission.save
-
-
+    SubmissionMailer.approved(@submission).deliver
+    redirect_to :root
   end
 
   private
@@ -67,7 +67,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit(:first_name, :last_name,:phone,:email, :bio, :site, :tag, attachments_attributes: [:id, :title, :link, :image],
-                                        participants_attributes: [:id, :first_name, :last_name, :phone, :email])
+      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
+                                            attachments_attributes: [:id, :title, :link, :image])
   end
 end

@@ -17,6 +17,10 @@
 .env
 .idea
 
+<<<<<<< HEAD
 # Ignore all vim's swap files (Sorry guys — Talal) 
 *.swp
 *.swo
+=======
+/coverage/
+>>>>>>> 2d62084a2f2fbf5a44c29246d4286057d271efce
