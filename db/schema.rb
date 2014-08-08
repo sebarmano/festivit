@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140807192814) do
     t.datetime "updated_at"
     t.string   "tag"
     t.integer  "participant_id"
+    t.boolean  "complete",       default: false
     t.boolean  "approve"
   end
 
