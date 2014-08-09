@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Participants table
-10.times do |n|
+50.times do |n|
   Participant.create(
     fname: Faker::Name.first_name,
     lname: Faker::Name.last_name,
@@ -80,3 +80,28 @@ Volunteer.create(email: "volunteer@volunteer.com",
               password_confirmation: "password"
 )
 
+customers = [];
+# fest_participation_role_type
+10.times do |n|
+  customer = FestParticipantRoleType.create(
+    participant_id:  n,
+    role_type_id: RoleType.where(name: "customer").first.id,
+    fest_id: 1
+  )
+  customers << customer
+end
+
+# Tickets table
+quantity  = [0, 0, 0, 0, 0, 1, 2, 3, 4, 5]
+order_status = ["failed", "success"]
+# Purchased tickets
+100.times do 
+  Ticket.create(
+    qty:  quantity.sample,
+    online_order_id: Faker::Number.number(5),
+    participant_id:  customers.sample.id,
+    ticket_type_id: TicketType.all.sample.id,
+    date_time: DateTime.now,
+    status: order_status.sample
+  )
+end

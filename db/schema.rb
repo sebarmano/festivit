@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807192814) do
+ActiveRecord::Schema.define(version: 20140809194309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140807192814) do
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
   create_table "fest_participant_role_types", force: true do |t|
-    t.integer  "role_id"
+    t.integer  "role_type_id"
     t.integer  "participant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -122,13 +122,14 @@ ActiveRecord::Schema.define(version: 20140807192814) do
 
   create_table "tickets", force: true do |t|
     t.string   "qty"
-    t.integer  "ticket_types_id"
+    t.integer  "ticket_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "online_order_id"
     t.datetime "date_time"
     t.string   "status"
     t.integer  "participant_id"
+    t.integer  "picked_up",       default: 0
   end
 
   add_index "tickets", ["participant_id"], name: "index_tickets_on_participant_id", using: :btree
