@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :submissions
 
-  resources :orders do
+  resources :tickets do
     collection { post :import }
   end
 
