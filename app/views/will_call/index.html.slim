@@ -1,9 +1,0 @@
-ul
-  - @participants.each do |participant|
-    li
-      h3 
-        = participant.name
-      h4 Tickets
-      ul
-        - participant.tickets_count.each do |ticket_type, count|
-          li = "#{ticket_type}, #{count}"
