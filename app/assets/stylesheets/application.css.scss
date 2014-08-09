@@ -10,10 +10,110 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+
  *= require_self
  */
 
 @import 'bourbon';
-@import 'neat';
 @import "base/base";
+@import 'neat';
+
+header {
+  background-color: #82C9C1;
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 90%,
+                         bottom;
+  margin-bottom: 2em;
+  @include outer-container;
+
+  nav {
+    @include span-columns(6);
+    @include shift(6);
+    @include omega;
+    color: white;
+    word-spacing: 1em;
+    padding: 3em 2em;
+
+  }
+
+  section {
+    @include span-columns(3);
+    @include shift(1);
+    height: 15em;
+    color: white;
+  }
+
+  aside {
+    @include span-columns(4);
+    @include shift(2);
+    // border-right: 3px solid white;
+    // border-top: 3px solid white;
+    // border-left: 3px solid white;
+    // border-bottom: 0px solid white;
+    padding:  2em;
+    color: white;
+    margin-top: -1em;
+  }
+}
+
+article {
+  @include outer-container;
+  margin-bottom: 4em;
+  section {
+    @include span-columns(6);
+    @include shift(2);
+  }
+  aside {
+    @include span-columns(4);
+    @include omega;
+
+  }
+
+}
+
+footer {
+  @include outer-container;
+  background-color: #82C9C1;
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 0%,
+                         bottom;
+  color: white;
+  position: absolute;
+  padding: 2em;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
+
+}
+
+
+
+
+
+
+
+.form-inputs{
+  margin: auto;
+  text-align:center;
+  width: 250px;
+}
+
+.form-actions{
+  text-align:center;
+}
+
+
+.container {
+  @include outer-container;
+  /*   margin: auto;
+  max-width: 965px; */
+}
+
+.logIn {
+  @include span-columns(4);
+  @include shift(4);
+}

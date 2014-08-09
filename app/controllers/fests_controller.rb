@@ -1,0 +1,3 @@
+class FestsController < ApplicationController
+
+end

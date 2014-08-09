@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806183033) do
+ActiveRecord::Schema.define(version: 20140809194309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "application_processes", force: true do |t|
-    t.integer  "submission_id"
-    t.integer  "participant_id"
-    t.integer  "fest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "attachments", force: true do |t|
     t.string   "title"
@@ -35,24 +27,29 @@ ActiveRecord::Schema.define(version: 20140806183033) do
 
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
 
+  create_table "fest_participant_role_types", force: true do |t|
+    t.integer  "role_type_id"
+    t.integer  "participant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "fest_id"
+  end
+
+  create_table "fest_participant_submissions", force: true do |t|
+    t.integer  "submission_id"
+    t.integer  "participant_id"
+    t.integer  "fest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fests", force: true do |t|
-    t.datetime "name"
+    t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "orders", force: true do |t|
-    t.string   "online_order_id"
-    t.string   "date_time"
-    t.string   "status"
-    t.integer  "participant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "orders", ["participant_id"], name: "index_orders_on_participant_id", using: :btree
 
   create_table "participants", force: true do |t|
     t.string   "fname"
@@ -68,14 +65,6 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.string   "facebook_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "participations", force: true do |t|
-    t.integer  "role_id"
-    t.integer  "participant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "fest_id"
   end
 
   create_table "role_types", force: true do |t|
@@ -94,7 +83,12 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "tag"
+    t.integer  "participant_id"
+    t.boolean  "approve"
+    t.boolean  "complete",       default: false
   end
+
+  add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -128,11 +122,17 @@ ActiveRecord::Schema.define(version: 20140806183033) do
 
   create_table "tickets", force: true do |t|
     t.string   "qty"
-    t.integer  "ticket_types_id"
-    t.integer  "participant_id"
+    t.integer  "ticket_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "online_order_id"
+    t.datetime "date_time"
+    t.string   "status"
+    t.integer  "participant_id"
+    t.integer  "picked_up",       default: 0
   end
+
+  add_index "tickets", ["participant_id"], name: "index_tickets_on_participant_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -148,9 +148,11 @@ ActiveRecord::Schema.define(version: 20140806183033) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.integer  "participant_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["participant_id"], name: "index_users_on_participant_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
