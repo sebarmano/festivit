@@ -1,8 +1,9 @@
 ul
-  = @participants.each do |participant|
+  - @participants.each do |participant|
     li
-      =  "#{participant}"
-      h3 Tickets
+      h3 
+        = participant.name
+      h4 Tickets
       ul
-        = participant.tickets_count.each do |ticket_type|
-          = 
+        - participant.tickets_count.each do |ticket_type, count|
+          li = "#{ticket_type}, #{count}"

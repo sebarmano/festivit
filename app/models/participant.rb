@@ -11,12 +11,12 @@ class Participant < ActiveRecord::Base
   has_many :submissions, :through => :application_processes
   has_many :fests, :through => :application_processes
 
-  def to_s
+  def name
     "#{lname}, #{fname}"
   end
 
   def tickets_count
-    tickets.select(ticket_types, count).group(tickets_type)
+    tickets.group(:ticket_type).count
   end
 
 
