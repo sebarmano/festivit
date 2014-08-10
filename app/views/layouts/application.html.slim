@@ -3,6 +3,7 @@ html
     title festivit for the rest of it
     meta name="keywords" content="festival"
     = stylesheet_link_tag    "application", :media => "all"
+    = favicon_link_tag 'favicon.ico'
     = javascript_include_tag "application"
     = csrf_meta_tags
 
@@ -24,7 +25,7 @@ html
           span = link_to 'Login', new_user_session_path
         - else
           span
-            Logged in as = current_user.email
+          Logged_in_as = current_user.email
             = link_to 'Logout', destroy_user_session_path, :method => :delete
         == yield
 
