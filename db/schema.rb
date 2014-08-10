@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140810214406) do
-=======
-ActiveRecord::Schema.define(version: 20140809234328) do
->>>>>>> upstream/release-1
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,13 +149,10 @@ ActiveRecord::Schema.define(version: 20140809234328) do
     t.datetime "date_time"
     t.string   "status"
     t.integer  "participant_id"
-<<<<<<< HEAD
     t.text     "customer_notes"
     t.string   "productpairsid"
-    t.string   "item_name"
-=======
     t.integer  "picked_up",       default: 0
->>>>>>> upstream/release-1
+    t.string   "item_name"
   end
 
   add_index "tickets", ["participant_id"], name: "index_tickets_on_participant_id", using: :btree
