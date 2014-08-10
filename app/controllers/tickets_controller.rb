@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
   def pick_up 
-    # TODO edit all picked up tickets
+    Ticket.update(params[:tickets].keys, params[:tickets].values)
     redirect_to participants_path
   end
 end
