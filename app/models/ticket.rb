@@ -1,6 +1,9 @@
 class Ticket < ActiveRecord::Base
   belongs_to :ticket_type
 
+  def remaining
+    qty.to_i - picked_up.to_i
+  end
   # #attr_accessor :online_order_id, :date_time
   # # TODO - why do accessors make those fields not display in the view?
   #
