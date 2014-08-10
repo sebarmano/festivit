@@ -1,37 +1,40 @@
 = simple_form_for @submission do |f|
-  /= f.input "first_name"
-  /= f.input "last_name"
-  /= f.input "phone"
-  /= f.input "email"
-  = f.input "bio"
+  = f.input "group_name"
   = f.input "website"
 
-  h3 Attachments
-  #attachments
-    = f.simple_fields_for :attachments do |attachment|
-      = render 'attachment_fields', :f => attachment
-    .links
-      = link_to_add_association 'add more attachments',f , :attachments
-  - if @submission.approve
-    = f.input "group_name"
-    = f.input "first_name"
-    = f.input "camping"
-    = f.input "practice_type"
-    = f.input "practice_lic_no"
-    = f.input "practice_exp_date"
-    = f.input "practice_years"
-    = f.input "underage"
-    = f.input "ticket_req"
-    = f.input "days_avail"
-    = f.input "deposit_type"
-    = f.input "returning"
-    = f.input "crew_hist"
-    = f.input "crew_pref"
-    = f.input "comments"
-    = f.input "shift_pref"
-    = f.input "why_volunteer"
-    = f.input "mission_statement"
-    = f.input "handouts"
+  - if @role == "Band"
+    = f.input "bio"
+
+  - if @role == "Healing Artist"
+   = f.input "practice_type"
+   = f.input "practice_lic_no"
+   = f.input "practice_exp_date"
+   = f.input "practice_years"
+
+  - if @role == "Band" || "Craft Vendor" || "Food Vendor"
+    h3 Attachments
+    #attachments
+      = f.simple_fields_for :attachments do |attachment|
+        = render 'attachment_fields', :f => attachment
+      .links
+        = link_to_add_association 'add more attachments',f , :attachments
+
+
+  = f.input "camping"
+  - if @role == "Volunteer"
+   = f.input "underage"
+   = f.input "ticket_req"
+   = f.input "days_avail"
+   = f.input "deposit_type"
+   = f.input "returning"
+   = f.input "crew_hist"
+   = f.input "crew_pref"
+   = f.input "comments"
+   = f.input "shift_pref"
+   = f.input "why_volunteer"
+   = f.input "mission_statement"
+   = f.input "handouts"
+  /- if @submission.approve
   =f.input "complete"
 
   =f.submit
