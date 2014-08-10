@@ -18,6 +18,10 @@
 @import "base/base";
 @import 'neat';
 
+body {
+  margin: 0 auto;
+}
+
 header {
   background-color: #82C9C1;
   background-image: url('blue_tint_x4.png');
@@ -48,10 +52,6 @@ header {
   aside {
     @include span-columns(4);
     @include shift(2);
-    // border-right: 3px solid white;
-    // border-top: 3px solid white;
-    // border-left: 3px solid white;
-    // border-bottom: 0px solid white;
     padding:  2em;
     color: white;
     margin-top: -1em;
@@ -59,9 +59,9 @@ header {
 }
 
   article {
-    height: 14em;
+    // height: 14em;
     @include outer-container;
-    margin-bottom: 4em;
+    // margin-bottom: 4em;
     section {
       @include span-columns(6);
       @include shift(2);
@@ -71,23 +71,21 @@ header {
       @include omega;
 
     }
-
   }
 
 footer {
   @include outer-container;
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 0%,
-                         bottom;
-  color: white;
-  position: absolute;
-  padding: 2em;
-    z-index: 100;
-    bottom: 0;
-    width: 100%;
+  div {
+    @include span-columns(12);
+    background-color: #82C9C1;
+    background-image: url('blue_tint_x4.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 0%,
+                           bottom;
+    color: white;
+    padding: 2em;
+  }
 
 }
 
