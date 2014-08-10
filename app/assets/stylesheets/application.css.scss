@@ -58,20 +58,21 @@ header {
   }
 }
 
-article {
-  @include outer-container;
-  margin-bottom: 4em;
-  section {
-    @include span-columns(6);
-    @include shift(2);
-  }
-  aside {
-    @include span-columns(4);
-    @include omega;
+  article {
+    height: 14em;
+    @include outer-container;
+    margin-bottom: 4em;
+    section {
+      @include span-columns(6);
+      @include shift(2);
+    }
+    aside {
+      @include span-columns(4);
+      @include omega;
+
+    }
 
   }
-
-}
 
 footer {
   @include outer-container;
@@ -96,24 +97,24 @@ footer {
 
 
 
-.form-inputs{
-  margin: auto;
-  text-align:center;
-  width: 250px;
-}
-
-.form-actions{
-  text-align:center;
-}
-
-
-.container {
-  @include outer-container;
-  /*   margin: auto;
-  max-width: 965px; */
-}
-
-.logIn {
-  @include span-columns(4);
-  @include shift(4);
-}
+// .form-inputs{
+//   margin: auto;
+//   text-align:center;
+//   width: 250px;
+// }
+//
+// .form-actions{
+//   text-align:center;
+// }
+//
+//
+// .container {
+//   @include outer-container;
+//   /*   margin: auto;
+//   max-width: 965px; */
+// }
+//
+// .logIn {
+//   @include span-columns(4);
+//   @include shift(4);
+// }
