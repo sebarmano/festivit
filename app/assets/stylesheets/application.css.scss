@@ -18,6 +18,21 @@
 @import "base/base";
 @import 'neat';
 
+body{
+
+  //text-align:center;
+}
+
+.container {
+  @include outer-container;
+  /*   margin: auto;
+  max-width: 965px; */
+}
+
+.logIn {
+  @include span-columns(4);
+  @include shift(4);
+
 body {
   margin: 0 auto;
 }
@@ -75,16 +90,36 @@ header {
 
 footer {
   @include outer-container;
-  div {
-    @include span-columns(12);
-    background-color: #82C9C1;
-    background-image: url('blue_tint_x4.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0% 0%,
-                           bottom;
-    color: white;
-    padding: 2em;
-  }
+  background-color: #82C9C1;
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 0%,
+                         bottom;
+  color: white;
+  position: absolute;
+  padding: 2em;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
+
+}
+
+.form-inputs{
+  margin: auto;
+  text-align:center;
+  width: 250px;
+}
+
+.form-actions{
+  text-align:center;
+}
+
+
+.container {
+  @include outer-container;
+  /*   margin: auto;
+  max-width: 965px; */
+}
 
 }
