@@ -3,10 +3,11 @@
     #notice
       = notice
   ul
-    li = @participant.fname
-    li = @participant.lname
-    li = @participant.phone
-    li = @participant.email
+    - unless @participant.nil?
+      li = @participant.fname
+      li = @participant.lname
+      li = @participant.phone
+      li = @participant.email
     li = @submission.bio
     li = @submission.website
     - @submission.attachments.each do |attachment|
