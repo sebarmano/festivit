@@ -10,7 +10,6 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
 
 
-
   def name
     "#{lname}, #{fname}"
   end
