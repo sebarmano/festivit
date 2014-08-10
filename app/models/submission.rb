@@ -11,7 +11,7 @@ class Submission < ActiveRecord::Base
   # accepts_nested_attributes_for :participant
 
   include Authority::Abilities
-  
+
   def mail_if_ready
     return nil unless complete
     @participant = self.participants.first
