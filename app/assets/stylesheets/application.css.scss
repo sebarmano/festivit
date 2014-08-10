@@ -32,6 +32,9 @@ body{
 .logIn {
   @include span-columns(4);
   @include shift(4);
+
+body {
+  margin: 0 auto;
 }
 
 header {
@@ -64,30 +67,26 @@ header {
   aside {
     @include span-columns(4);
     @include shift(2);
-    // border-right: 3px solid white;
-    // border-top: 3px solid white;
-    // border-left: 3px solid white;
-    // border-bottom: 0px solid white;
     padding:  2em;
     color: white;
     margin-top: -1em;
   }
 }
 
-article {
-  @include outer-container;
-  margin-bottom: 4em;
-  section {
-    @include span-columns(6);
-    @include shift(2);
-  }
-  aside {
-    @include span-columns(4);
-    @include omega;
+  article {
+    // height: 14em;
+    @include outer-container;
+    // margin-bottom: 4em;
+    section {
+      @include span-columns(6);
+      @include shift(2);
+    }
+    aside {
+      @include span-columns(4);
+      @include omega;
 
+    }
   }
-
-}
 
 footer {
   @include outer-container;
@@ -106,12 +105,6 @@ footer {
 
 }
 
-
-
-
-
-
-
 .form-inputs{
   margin: auto;
   text-align:center;
@@ -122,10 +115,6 @@ footer {
   text-align:center;
 }
 
-body{
-
-  //text-align:center;
-}
 
 .container {
   @include outer-container;
@@ -133,7 +122,4 @@ body{
   max-width: 965px; */
 }
 
-.logIn {
-  @include span-columns(4);
-  @include shift(4);
 }

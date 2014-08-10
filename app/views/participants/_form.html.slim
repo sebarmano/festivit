@@ -1,0 +1,16 @@
+= simple_form_for @participant do |f|
+  = f.input :fname
+  = f.input :lname
+  = f.input :street_address
+  = f.input :city
+  = f.input :state
+  = f.input :zip
+  = f.input :country, as: :string
+  = f.input :phone
+  = f.input :facebook_link
+  = f.input :twitter_link
+  = f.simple_fields_for :applicant do |p|
+    = p.input :email
+    = p.input :password
+    = p.input :password_confirmation
+  = f.button :submit
