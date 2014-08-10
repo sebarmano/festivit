@@ -8,30 +8,31 @@
       | Performer:
       span.formView<
         = submission.group_name
-    li
-      | First Name:
-      span.formView<
-        = participant.fname
-    li
-      | Last Name:
-      span.formView<
-        = participant.lname
-    li
-      | Phone:
-      span.formView<
-        = participant.phone
-    li
-      | E-Mail:
-      span.formView<
-        = participant.email
-    li
-      | Bio:
-      span.formView<
-          = submission.bio
+    - unless participant.nil?
+      /if participant isn't showing it means there isn't one
+      li
+        | First Name:
+        span.formView<
+          = participant.fname
+      li
+        | Last Name:
+        span.formView<
+          = participant.lname
+      li
+        | Phone:
+        span.formView<
+          = participant.phone
+      li
+        | E-Mail:
+        span.formView<
+          = participant.applicant.email
+      li
+        | Bio:
+        span.formView<
+            = submission.bio
     =>> link_to 'Show', submission
     =>> link_to 'Edit', edit_submission_path(submission)
     =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
     hr
   br
-
   = link_to 'New Band', new_submission_path

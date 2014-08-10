@@ -5,7 +5,6 @@ class SubmissionMailer < ActionMailer::Base
     @applicant = applicant
     puts @applicant.inspect
     mail(to: @applicant.email, subject: "#{@applicant.fname}, Thanks for your application!")
-
   end
 
   def init_admin(applicant)
