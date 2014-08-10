@@ -23,7 +23,8 @@ gem 'acts-as-taggable-on'
 
 gem 'roo'
 gem 'iconv'
-
+gem 'smarter_csv'
+gem 'active_importer'
 
 gem 'bourbon'
 gem 'neat'

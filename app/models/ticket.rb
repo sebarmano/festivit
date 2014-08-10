@@ -77,13 +77,33 @@ class Ticket < ActiveRecord::Base
   #   end
   # end
 
-  def self.import(file)
+  def self.importer(file)
     CSV.foreach(file.path, headers: :true) do |row|
       ticket = find_or_create_by(:online_order_id => row["order id"], :date_time => row["date_time"])
       Ticket.create! row.to_hash
     end
-  # end
-----------------------------------------------
+  end
+
+  def self.import(file)
+    #filename = '/tmp/some.csv'
+    pid = 1
+    n = SmarterCSV.process(file.path,
+        {:remove_unmapped_keys => :true,
+          :key_mapping =>
+            {:order_id => :online_order_id,
+             :date => :date_time,
+             :order_status => :status,
+             :customer_note => :customer_notes,
+             pid => :participant_id,
+            }
+          }) do |array|
+      # we're passing a block in, to process each resulting hash / =row (the block takes array of hashes)
+      # when chunking is not enabled, there is only one hash in each array
+      Ticket.create( array.first )
+    end
+
+  end
+#----------------------------------------------
 
   # def self.import(file)
   #   CSV.foreach(file.path, headers: :true) do |row|

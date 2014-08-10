@@ -5,5 +5,47 @@ class Participant < ActiveRecord::Base
   has_many :role_types, :through => :fest_participant_role_types
   has_many :submissions, :through => :fest_participant_submissions
 
+  validates_uniqueness_of :lname, :scope => [:fname, :street_address]
+
   accepts_nested_attributes_for :applicant
+
+  def self.import(file)
+    p = SmarterCSV.process(file.path, {:remove_unmapped_keys => :true,
+                                     :key_mapping =>
+                                         {
+                                             :billing_first_name => :fname,
+                                             :billing_last_name => :lname,
+                                             # :order_id => :online_order_id,
+                                             #   :date => :date_time,
+                                             #   :order_status => :status,
+                                             #  :shipping => nil,
+                                             # :customer_note => :customer_notes,
+                                             # :item_sku => nil,
+                                             # :item_name => nil,
+                                             # :item_amount => nil,
+                                             #  :row_price => nil,
+                                         }
+    }) do |array|
+    # we're passing a block in, to process each resulting hash / =row (the block takes array of hashes)
+    # when chunking is not enabled, there is only one hash in each array
+    p = Participant.create( array.first )
+    p.save
+    n = SmarterCSV.process(file.path,
+                           {:remove_unmapped_keys => :true,
+                            :key_mapping =>
+                                {:order_id => :online_order_id,
+                                 :date => :date_time,
+                                 :order_status => :status,
+                                 :customer_note => :customer_notes,
+                                # pid => :participant_id,
+                                }
+                           }) do |array|
+      # we're passing a block in, to process each resulting hash / =row (the block takes array of hashes)
+      # when chunking is not enabled, there is only one hash in each array
+    p.create_ticket( array.first ) #.where(participant.fname == :fname)
+    t.save
+    p.ticket << t
+    end
+      end
+  end
 end

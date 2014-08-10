@@ -27,7 +27,7 @@ class TicketsController < ApplicationController
 
   def import
     Ticket.import(params[:file])
-    redirect_to tickets_path, notice: "Orders imported."
+    redirect_to tickets_path, notice: "Tickets imported."
   end
 
   private
