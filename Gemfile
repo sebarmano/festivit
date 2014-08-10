@@ -31,6 +31,7 @@ gem 'bitters'
 gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
+gem 'pry-byebug'
 
 
 group :test do

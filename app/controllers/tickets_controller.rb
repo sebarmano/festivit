@@ -5,6 +5,7 @@ class TicketsController < ApplicationController
       format.html
       #format.csv { send_data @tickets.to_csv }
       #format.xls # { send_data @tickets.to_csv(col_sep: "\t") }
+      #format.xls # { send_data @tickets.to_csv(col_sep: "\t") }
     end
   end
 
