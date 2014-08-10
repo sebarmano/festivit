@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.includes(:tickets).all
+    @participants = Participant.includes(:tickets).order(:lname, :fname)
   end
 
   def new
