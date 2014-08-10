@@ -1,6 +1,7 @@
 class ParticipantsController < ApplicationController
   def index
     @participants = Participant.includes(:tickets).order(:lname, :fname)
+
   end
 
   def new
@@ -23,6 +24,11 @@ class ParticipantsController < ApplicationController
   def show
     @participant = Participant.find(params[:id])
     @submission = @participant.submissions.last
+  end
+
+  def import
+    Participant.import(params[:file])
+    redirect_to participants_path, notice: "Participants imported."
   end
 
   private
