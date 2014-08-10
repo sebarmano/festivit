@@ -3,21 +3,20 @@
     #notice
       = notice
   ul
-    li = @submission.first_name
-    li = @submission.last_name
-    li = @submission.phone
-    li = @submission.email
+    - unless @participant.nil?
+      li = @participant.fname
+      li = @participant.lname
+      li = @participant.phone
+      li = @participant.email
     li = @submission.bio
-    li = @submission.site
+    li = @submission.website
     - @submission.attachments.each do |attachment|
       li = attachment.title
       - unless attachment.link == ""
         li = embed(attachment.link)
       -  if attachment.image
         li = image_tag attachment.image.thumb('400x200#').url
- - if current_user.admin?
-    =link_to 'approve',
- = link_to 'Edit', edit_submission_path(@submission)
- = link_to 'Back', submissions_path
-
-
+  - if current_user.admin?
+   =button_to 'Approve', action: 'approve'
+  = link_to 'Edit', edit_submission_path(@submission)
+  = link_to 'Back', submissions_path

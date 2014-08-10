@@ -30,6 +30,11 @@ class TicketsController < ApplicationController
     redirect_to tickets_path, notice: "Tickets imported."
   end
 
+  def pick_up
+    Ticket.update(params[:tickets].keys, params[:tickets].values)
+    redirect_to participants_path
+  end
+
   private
 
   def ticket_params
@@ -37,6 +42,4 @@ class TicketsController < ApplicationController
     #TODO - add strong params
   end
 end
-
-
 

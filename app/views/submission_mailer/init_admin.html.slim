@@ -4,9 +4,9 @@ html
       meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     body
       h1
-        |  #{@applicant.first_name}
+        |  #{@applicant.fname}
       p
-        | #{@applicant.first_name} has submitted a new application.
+        | #{@applicant.fname} has submitted a new application.
       br
          = link_to "Click to Review Application", edit_submission_url(@applicant)
 

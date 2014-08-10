@@ -1,6 +1,8 @@
 class Participant < ActiveRecord::Base
   has_one :applicant
   has_many :tickets
+  has_many :fest_participant_submissions
+  has_many :fest_participant_role_types
   has_many :fests, :through => :fest_participant_role_types
   has_many :role_types, :through => :fest_participant_role_types
   has_many :submissions, :through => :fest_participant_submissions
@@ -9,6 +11,7 @@ class Participant < ActiveRecord::Base
 
   accepts_nested_attributes_for :applicant
 
+<<<<<<< HEAD
   def self.import(file)
     p = SmarterCSV.process(file.path, {:remove_unmapped_keys => :true,
                                      :key_mapping =>
@@ -48,4 +51,13 @@ class Participant < ActiveRecord::Base
     end
       end
   end
+
+  def name
+    "#{lname}, #{fname}"
+  end
+
+  def tickets_count
+    tickets.group(:ticket_type).count
+  end
+
 end

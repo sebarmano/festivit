@@ -4,8 +4,9 @@ class Ticket < ActiveRecord::Base
 
   require 'csv'
 
-  #attr_accessor :online_order_id, :date_time
-  # TODO - why do accessors make those fields not display in the view?
+  def remaining
+    qty.to_i - picked_up.to_i
+  end
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -15,6 +16,52 @@ class Ticket < ActiveRecord::Base
       end
     end
   end
+  #-------------Mae's importer testing. Apologies for the temporary junk.-------------------------------
+  #---THESE WORK--------------------------------------------------
+  # def self.import(file)
+  #   CSV.foreach(file.path, headers: :true) do |row|
+  #     Ticket.create! row.to_hash
+  #   end
+  # end
+
+  def self.importer(file)
+    CSV.foreach(file.path, headers: :true) do |row|
+      ticket = find_or_create_by(:online_order_id => row["order id"], :date_time => row["date_time"])
+      Ticket.create! row.to_hash
+    end
+  end
+# ------------------------------------------------------
+
+  def self.import(file)
+    #filename = '/tmp/some.csv'
+    pid = 1
+    n = SmarterCSV.process(file.path,
+                           {:remove_unmapped_keys => :true,
+                            :key_mapping =>
+                                {:order_id => :online_order_id,
+                                 :date => :date_time,
+                                 :order_status => :status,
+                                 :customer_note => :customer_notes,
+                                 pid => :participant_id,
+                                }
+                           }) do |array|
+      Ticket.create( array.first )
+    end
+
+  end
+  #----------------------------------------------
+
+  # def self.to_csv(options = {})
+  #   CSV.generate(options) do |csv|
+  #     csv << column_names
+  #     all.each do |order|
+  #       csv << order.attributes.values_at(*column_names)
+  #     end
+
+  #attr_accessor :online_order_id, :date_time
+  # TODO - why do accessors make those fields not display in the view?
+
+
 
   # def self.import(file)
   #   CSV.foreach(file.path, :headers => :true) do |row|
@@ -69,41 +116,7 @@ class Ticket < ActiveRecord::Base
   #
   # }
 
-#--------------------------------------------
-  # #THESE WORK
-  # def self.import(file)
-  #   CSV.foreach(file.path, headers: :true) do |row|
-  #     Ticket.create! row.to_hash
-  #   end
-  # end
 
-  def self.importer(file)
-    CSV.foreach(file.path, headers: :true) do |row|
-      ticket = find_or_create_by(:online_order_id => row["order id"], :date_time => row["date_time"])
-      Ticket.create! row.to_hash
-    end
-  end
-
-  def self.import(file)
-    #filename = '/tmp/some.csv'
-    pid = 1
-    n = SmarterCSV.process(file.path,
-        {:remove_unmapped_keys => :true,
-          :key_mapping =>
-            {:order_id => :online_order_id,
-             :date => :date_time,
-             :order_status => :status,
-             :customer_note => :customer_notes,
-             pid => :participant_id,
-            }
-          }) do |array|
-      # we're passing a block in, to process each resulting hash / =row (the block takes array of hashes)
-      # when chunking is not enabled, there is only one hash in each array
-      Ticket.create( array.first )
-    end
-
-  end
-#----------------------------------------------
 
   # def self.import(file)
   #   CSV.foreach(file.path, headers: :true) do |row|
@@ -205,4 +218,5 @@ class Ticket < ActiveRecord::Base
   #     ).first_or_create
   #   end
   # end
+
 end

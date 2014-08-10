@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   authorize_actions_for :user_type
 
   def new
     @user = user_type.new
+  end
+
+  def show
+
   end
 
   def create
