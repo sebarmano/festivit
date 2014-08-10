@@ -23,7 +23,8 @@ gem 'acts-as-taggable-on'
 
 gem 'roo'
 gem 'iconv'
-
+gem 'smarter_csv'
+gem 'active_importer'
 
 gem 'bourbon'
 gem 'neat'
@@ -31,6 +32,7 @@ gem 'bitters'
 gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
+gem 'pry-byebug'
 
 
 group :test do
