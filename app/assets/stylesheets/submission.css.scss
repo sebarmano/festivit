@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container{
-  max-width: 965px;
+  width: 965px;
 }
 
 li{
@@ -17,4 +17,14 @@ li{
 
 #new_submission{
 max-width:150px;
+}
+
+#newBand{
+  width:300px;
+  background-color: #000000;
+}
+
+.editBand{
+  width:300px;
+  background-color: #000000;
 }

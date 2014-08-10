@@ -4,28 +4,28 @@
   - @submissions.each do |submission|
     ul
       li
-        | First Name: 
-        span.formView
+        | First Name:
+        span.formView<
           = submission.first_name
       li
         | Last Name:
-        span.formView
+        span.formView<
           = submission.last_name
       li
         | Phone:
-        span.formView
+        span.formView<
           = submission.phone
       li
         | E-Mail:
-        span.formView
+        span.formView<
           = submission.email
       li
         | Bio:
-        span.formView
-            = submission.bio
-    = link_to 'Show', submission
-    = link_to 'Edit', edit_submission_path(submission)
-    = link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+        span.formView<
+          = submission.bio
+    =>> link_to 'Show', submission
+    =>> link_to 'Edit', edit_submission_path(submission)
+    =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
     hr
   br
 
