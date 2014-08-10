@@ -1,27 +1,32 @@
 .container
-  h1 listing Applications
+  h1 Listing Band Applications
   hr
   - @submissions.each do |submission|
+    - participant = submission.participants.first
     ul
-      li
-        | First Name:
-        span.formView<
-          = submission.first_name
-      li
-        | Last Name:
-        span.formView<
-          = submission.last_name
-      li
-        | Phone:
-        span.formView<
-          = submission.phone
-      li
-        | E-Mail:
-        span.formView<
-          = submission.email
-      li
-        | Bio:
-        span.formView<
+    li
+      | Performer:
+      span.formView<
+        = submission.group_name
+    li
+      | First Name:
+      span.formView<
+        = participant.fname
+    li
+      | Last Name:
+      span.formView<
+        = participant.lname
+    li
+      | Phone:
+      span.formView<
+        = participant.phone
+    li
+      | E-Mail:
+      span.formView<
+        = participant.email
+    li
+      | Bio:
+      span.formView<
           = submission.bio
     =>> link_to 'Show', submission
     =>> link_to 'Edit', edit_submission_path(submission)
