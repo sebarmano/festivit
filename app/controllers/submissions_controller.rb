@@ -7,7 +7,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-
+    @participant = @submission.participants.first
   end
 
   def new
@@ -33,6 +33,8 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    participant = @submission.participants.first
+    @role = participant.role_types.first # TODO: allow for multi role sign up
     respond_to do |format|
       if @submission.update(submission_params)
         @submission.mail_if_ready
@@ -67,7 +69,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
+      params.require(:submission).permit( :bio, :website, :tag, :first_name, :last_name, :phone, :email, :complete,
                                             attachments_attributes: [:id, :title, :link, :image])
   end
 end

@@ -6,6 +6,7 @@ class ParticipantsController < ApplicationController
   def new
     @participant = Participant.new
     @participant.build_applicant
+    @submission = @participant.submissions.last
   end
 
   def create
@@ -13,7 +14,7 @@ class ParticipantsController < ApplicationController
     @participant.email = @participant.applicant.email
     if @participant.save
       make_submission(@participant)
-      redirect_to @participant, notice: "You've been successfully signed up"
+      redirect_to @participant.applicant, notice: "You've been successfully signed up"
     else
       render :new, flash: @participant.errors
     end
@@ -21,6 +22,7 @@ class ParticipantsController < ApplicationController
 
   def show
     @participant = Participant.find(params[:id])
+    @submission = @participant.submissions.last
   end
 
   private
@@ -34,8 +36,7 @@ class ParticipantsController < ApplicationController
   end
 
   def make_submission(ptcpnt)
-    ptcpnt.submissions.create(first_name: ptcpnt.fname, last_name: ptcpnt.lname,
-                      phone: ptcpnt.phone, email: ptcpnt.email, complete: false)
+    ptcpnt.submissions.create( complete: false)
 
   end
 end
