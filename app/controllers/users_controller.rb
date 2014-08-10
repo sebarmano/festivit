@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @user = user_type.new
   end
 
+  def show
+
+  end
+
   def create
     @user = user_type.new(user_params)
     @user.generate_password
