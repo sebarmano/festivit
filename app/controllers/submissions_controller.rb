@@ -7,7 +7,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-
+    @participant = @submission.participants.first
   end
 
   def new

@@ -1,6 +1,11 @@
 <%= simple_form_for @participant do |f| %>
   <%= f.input :fname %>
   <%= f.input :lname %>
+  <%= f.simple_fields_for :applicant do |p| %>
+    <%= p.input :email %>
+    <%= p.input :password %>
+    <%= p.input :password_confirmation %>
+  <% end %>
   <%= f.input :street_address %>
   <%= f.input :city %>
   <%= f.input :state %>
@@ -9,10 +14,6 @@
   <%= f.input :phone %>
   <%= f.input :facebook_link %>
   <%= f.input :twitter_link %>
-  <%= f.simple_fields_for :applicant do |p| %>
-    <%= p.input :email %>
-    <%= p.input :password %>
-    <%= p.input :password_confirmation %>
-  <% end %>
+
   <%= f.button :submit %>
 <% end %>

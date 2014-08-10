@@ -3,12 +3,12 @@
     #notice
       = notice
   ul
-    li = @submission.first_name
-    li = @submission.last_name
-    li = @submission.phone
-    li = @submission.email
+    li = @participant.fname
+    li = @participant.lname
+    li = @participant.phone
+    li = @participant.email
     li = @submission.bio
-    li = @submission.site
+    li = @submission.website
     - @submission.attachments.each do |attachment|
       li = attachment.title
       - unless attachment.link == ""
