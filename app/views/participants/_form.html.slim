@@ -3,21 +3,20 @@
   = r.input :name, :label => "Select what role you would like to apply for:",
                    :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
  p The information below will be stored as the point of contact for the group.
- = f.input :fname, :label => false, :placeholder => "First Name"
- = f.input :lname, :label => false, :placeholder => "Last Name"
+ = f.input :fname, :label => "First Name"
+ = f.input :lname, :label =>  "Last Name"
  = f.simple_fields_for :applicant do |p|
-  = p.input :email, :label => false, :placeholder => "E-mail"
-  = p.input :password, :label => false, :placeholder => " Password"
-  = p.input :password_confirmation,  :label => false, :placeholder => "Password Confirmation"
+  = p.input :email
+  = p.input :password_confirmation
 
- = f.input :street_address,  :label => false, :placeholder => "Address"
- = f.input :city,  :label => false, :placeholder => "City"
- = f.input :state,  :label => false, :placeholder => "State"
- = f.input :zip,  :label => false, :placeholder => "Zip Code"
- = f.input :country, as: :string,  :label => false, :placeholder => "Country"
- = f.input :phone,  :label => false, :placeholder => "Phone"
- = f.input :facebook_link,  :label => false, :placeholder => "Facebook link"
- = f.input :twitter_link,  :label => false, :placeholder => "Twitter link"
+ = f.input :street_address
+ = f.input :city
+ = f.input :state
+ = f.input :zip
+ = f.input :country
+ = f.input :phone
+ = f.input :facebook_link
+ = f.input :twitter_link
 
  = f.button :submit
 

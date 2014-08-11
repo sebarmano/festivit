@@ -18,7 +18,7 @@ class ParticipantsController < ApplicationController
 
       make_submission(@participant)
       sign_in @participant.applicant
-      redirect_to @participant, notice: "You've been successfully signed up"
+      redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
 
     else
       render :new, flash: @participant.errors
@@ -43,7 +43,7 @@ class ParticipantsController < ApplicationController
                                  :twitter_link, :facebook_link,
                                  applicant_attributes: [:id, :email,:password,
                                                         :password_confirmation],
-                                 role_type_attributes: [:id, :name])
+                                 role_types_attributes: [:id, :name])
   end
 
   def make_submission(ptcpnt)

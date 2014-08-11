@@ -14,10 +14,10 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-
     @submission = Submission.new
+    @participant = Participant.find(params[:participant_id])
+    @role = RoleType.find_by(params[:id]).name
     authorize_action_for(@submission)
-
   end
 
   def edit
