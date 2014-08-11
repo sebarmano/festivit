@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @participant = Applicant.find(params[:id]).participant
   end
 
   def create
