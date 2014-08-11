@@ -8,6 +8,7 @@ class Participant < ActiveRecord::Base
   has_many :submissions, :through => :fest_participant_submissions
 
   accepts_nested_attributes_for :applicant
+  accepts_nested_attributes_for :role_types
 
 
   def name

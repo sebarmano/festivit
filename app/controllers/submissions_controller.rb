@@ -11,7 +11,8 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = Submission.new
+    @participant = Participant.find_by(applicant: current_user.)
+    @role = @participant.role_types.first
   end
 
   def edit
