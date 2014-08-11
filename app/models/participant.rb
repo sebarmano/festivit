@@ -11,7 +11,6 @@ class Participant < ActiveRecord::Base
 
   accepts_nested_attributes_for :applicant
 
-<<<<<<< HEAD
   def self.import(file)
     p = SmarterCSV.process(file.path, {:remove_unmapped_keys => :true,
                                      :key_mapping =>
