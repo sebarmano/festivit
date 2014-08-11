@@ -1,9 +1,12 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
   before_action :authenticate_user!
+  # authorize_actions_for :user_type
 
   def index
     @submissions = Submission.all
+
+
   end
 
   def show
@@ -11,8 +14,10 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @participant = Participant.find_by(applicant: current_user.)
-    @role = @participant.role_types.first
+
+    @submission = Submission.new
+    authorize_action_for(@submission)
+
   end
 
   def edit
@@ -21,6 +26,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
+    authorize_action_for(@submission)
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save

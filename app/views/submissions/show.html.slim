@@ -3,10 +3,11 @@
     #notice
       = notice
   ul
-    li = @participant.fname
-    li = @participant.lname
-    li = @participant.phone
-    li = @participant.email
+    - unless @participant.nil?
+      li = @participant.fname
+      li = @participant.lname
+      li = @participant.phone
+      li = @participant.email
     li = @submission.bio
     li = @submission.website
     - @submission.attachments.each do |attachment|
@@ -17,5 +18,5 @@
         li = image_tag attachment.image.thumb('400x200#').url
   - if current_user.admin?
    =button_to 'Approve', action: 'approve'
-  = link_to 'Edit', edit_submission_path(@submission)
-  = link_to 'Back', submissions_path
+  = link_to 'Edit', edit_participant_submission_path(@participant, @submission)
+  / = link_to 'Back', submissions_path

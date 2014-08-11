@@ -10,11 +10,12 @@ class Submission < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, :reject_if => :all_blank, :allow_destroy => true
   # accepts_nested_attributes_for :participant
 
+  include Authority::Abilities
 
   def mail_if_ready
     return nil unless complete
     @participant = self.participants.first
-    SubmissionMailer.init_apply(@participant).deliver
-    SubmissionMailer.init_admin(@participant).deliver
+    SubmissionMailer.init_apply(@participant.applicant).deliver
+    SubmissionMailer.init_admin(@participant.applicant).deliver
   end
 end

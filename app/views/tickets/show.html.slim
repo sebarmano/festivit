@@ -1,0 +1,11 @@
+.container
+  p
+    #notice
+      = notice
+  ul
+    li = @ticket.online_order_id
+    li = @ticket.date_time
+    li = @ticket.participant_id
+    li = @ticket.status
+  = link_to 'Edit', edit_ticket_path(@ticket)
+  = link_to 'Back', tickets_path

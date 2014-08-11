@@ -1,6 +1,7 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.includes(:tickets).all
+    @participants = Participant.includes(:tickets).order(:lname, :fname)
+
   end
 
   def new
@@ -14,8 +15,11 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(participant_params)
     @participant.email = @participant.applicant.email
     if @participant.save
+
+      make_submission(@participant)
       sign_in @participant.applicant
-      redirect_to new_submission_path, notice: "You've been successfully signed up"
+      redirect_to @participant, notice: "You've been successfully signed up"
+
     else
       render :new, flash: @participant.errors
     end
@@ -24,6 +28,11 @@ class ParticipantsController < ApplicationController
   def show
     @participant = Participant.find(params[:id])
     @submission = @participant.submissions.last
+  end
+
+  def import
+    Participant.import(params[:file])
+    redirect_to participants_path, notice: "Participants imported."
   end
 
   private
