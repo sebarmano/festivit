@@ -20,9 +20,6 @@
 @import "submission";
 @import "participants";
 
-body{
-
-}
 
 .container {
   @include outer-container;
@@ -33,6 +30,7 @@ body{
   @include span-columns(4);
   @include shift(4);
 }
+
 body {
   margin: 0 auto;
 }
