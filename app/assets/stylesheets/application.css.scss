@@ -28,7 +28,7 @@
 
 .logIn {
   @include span-columns(4);
-  @include shift(4);
+  // @include shift(4);
 }
 
 body {
@@ -36,21 +36,32 @@ body {
 }
 
 header {
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
+
+  a {
+    font-size: 1.2em;
+    color:  rgba(255, 255, 255, 1);
+    &:hover {
+      color:  rgba(255, 255, 255, 0.80);
+    }
+  }
+
+  color: white;
+  background-color: #8ED0BD;
+  background-image: url('red_orange_tint_x4_cont.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 100% 90%,
+  background-position: 0% 95%,
                          bottom;
   margin-bottom: 2em;
-  @include outer-container;
+  // @include outer-container;
+  width:100%;
 
-  nav {
+  ul.nav {
     @include span-columns(6);
     @include shift(6);
     @include omega;
     color: white;
-    word-spacing: 1em;
+    // word-spacing: 1em;
     padding: 3em 2em;
 
   }
@@ -58,7 +69,7 @@ header {
   section {
     @include span-columns(3);
     @include shift(1);
-    height: 15em;
+    // height: 15em;
     color: white;
   }
 
@@ -67,40 +78,40 @@ header {
     @include shift(2);
     padding:  2em;
     color: white;
-    margin-top: -1em;
+    // margin-top: -1em;
   }
 }
-
+  // aside {
+  //   @include span-columns(4);
+  //   @include omega;
+  //
+  // }
   article {
     // height: 14em;
     @include outer-container;
-    // margin-bottom: 4em;
+    margin-bottom: 4em;
     section {
-      @include span-columns(6);
+      @include span-columns(8);
       @include shift(2);
     }
-    aside {
-      @include span-columns(4);
-      @include omega;
 
-    }
   }
 
 footer {
   @include outer-container;
   background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
+  background-image: url('red_orange_tint_x4_cont.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0% 0%,
                          bottom;
-  color: white;
-  position: absolute;
-  padding: 2em;
+  div{
+    @include span-columns(12);
+    color: white;
+    padding: 2em;
     z-index: 100;
-    bottom: 0;
-    width: 100%;
-
+    // width: 100%;
+  }
 }
 
 .container {

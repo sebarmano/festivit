@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container{
-  width: 965px;
+  // width: 965px;
 }
 
 li{
@@ -29,11 +29,13 @@ max-width:150px;
 }
 
 .form-inputs{
-  margin: auto;
-  text-align:center;
-  width: 250px;
+  // @include span-columns(6);
+  // @include shift(6);
+  // margin: auto;
+  // text-align:center;
+  // width: 250px;
 }
 
 .form-actions{
-  text-align:center;
+  // text-align:center;
 }
