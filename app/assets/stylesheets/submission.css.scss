@@ -20,11 +20,20 @@ max-width:150px;
 }
 
 #newBand{
-  width:300px;
-  background-color: #000000;
+  width:600px;
 }
 
 .editBand{
   width:300px;
   background-color: #000000;
+}
+
+.form-inputs{
+  margin: auto;
+  text-align:center;
+  width: 250px;
+}
+
+.form-actions{
+  text-align:center;
 }

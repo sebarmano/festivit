@@ -15,7 +15,8 @@ class ParticipantsController < ApplicationController
     @participant.email = @participant.applicant.email
     if @participant.save
       make_submission(@participant)
-      redirect_to @participant.applicant, notice: "You've been successfully signed up"
+      sign_in @participant.applicant
+      redirect_to @participant, notice: "You've been successfully signed up"
     else
       render :new, flash: @participant.errors
     end

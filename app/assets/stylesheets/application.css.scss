@@ -14,15 +14,16 @@
  *= require_self
  */
 
-@import 'bourbon';
+@import "bourbon";
 @import "base/base";
-@import 'neat';
+@import "neat";
+@import "submission";
+@import "participants";
 
 
 .container {
   @include outer-container;
-  /*   margin: auto;
-  max-width: 965px; */
+
 }
 
 .logIn {
@@ -101,17 +102,6 @@ footer {
     width: 100%;
 
 }
-
-.form-inputs{
-  margin: auto;
-  text-align:center;
-  width: 250px;
-}
-
-.form-actions{
-  text-align:center;
-}
-
 
 .container {
   @include outer-container;

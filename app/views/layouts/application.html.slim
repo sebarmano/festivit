@@ -26,6 +26,10 @@ html
         - else
           span Logged_in_as = current_user.email
             = link_to 'Logout', destroy_user_session_path, :method => :delete
+
+          / span
+          / Logged_in_as = current_user.email
+          / = link_to 'Logout', destroy_user_session_path, :method => :delete
         == yield
 
         = javascript_include_tag 'application'
