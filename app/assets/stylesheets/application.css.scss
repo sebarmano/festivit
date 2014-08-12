@@ -23,7 +23,7 @@
 
 body {
   margin: 0 auto;
-  
+
 }
 
 header.topbar {
@@ -42,13 +42,10 @@ header.topbar {
 
     span {
         @include span-columns(2);
-        // @include shift(1);
-        // height: 15em;
         color: white;
       }
 
       ul.nav {
-        // display: inline;
         @include span-columns(3);
         @include shift(6);
         @include omega;
