@@ -26,15 +26,8 @@ html
               = link_to 'Logout', destroy_user_session_path, :method => :delete
 
 
+    == yield
     p.notice
       = notice
     p.alert
       = alert
-    / - unless user_signed_in?
-    /   span = link_to 'Login', new_user_session_path
-    / - else
-    /   span Logged_in_as = current_user.email
-    /     = link_to 'Logout', destroy_user_session_path, :method => :delete
-
-
-    == yield
