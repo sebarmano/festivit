@@ -6,4 +6,6 @@ class Fest < ActiveRecord::Base
   has_many :fest_participant_role_types
   has_many :fest_participant_submissions
 
+  validate :fest_code, :presence => true, :uniqueness => true
+
 end

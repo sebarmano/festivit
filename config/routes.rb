@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   resources :submissions
 
-  resources :tickets do
-    collection { post :import }
-  end
-
   root 'welcome#index'
 
   devise_for :users
@@ -13,13 +9,20 @@ Rails.application.routes.draw do
   resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
 
   resources :participants, only: [:new, :create, :show, :index] do
-    collection { post :import }
+    collection {
+      get :import
+      post :import
+    }
   end
 
   post 'approve/:id', to: 'submissions#approve'
 
+  get 'tickets/import', to: "tickets#import", :as => :import_tickets
+  post 'tickets/import', to: "tickets#import"
+
   resources :tickets do
-    collection { post :import }
-    collection { put :pick_up }
+    collection do
+      put :pick_up
+    end
   end
 end
