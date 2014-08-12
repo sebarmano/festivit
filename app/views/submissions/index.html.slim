@@ -10,14 +10,13 @@ ul.formHeading
     | E-Mail
 
 hr
-- @submissions.each do |submission|
-  - participant = submission.participants.first
+  - @submissions.each do |submission|
+    - participant = submission.participants.first
   ul
     li.form
-        = submission.group_name
-    - unless participant.nil?
+      /= submission.group_name
+      - unless participant.nil?
       /if participant isn't showing it means there isn't one
-<<<<<<< HEAD
     li
         = participant.fname
     li
@@ -31,7 +30,7 @@ hr
     hr
 br
 = link_to 'New Band', new_submission_path
-=======
+
       li
         | First Name:
         span.formView<
@@ -52,11 +51,10 @@ br
         | Bio:
         span.formView<
             = submission.bio
-    - unless submission.participant_id.nil?
-      =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-      =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-      =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
-    hr
-  br
-  / = link_to 'New Band', new_submission_path
->>>>>>> upstream/release-1
+      - unless submission.participant_id.nil?
+        =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
+        =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
+        =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+      hr
+      br
+      / = link_to 'New Band', new_submission_path
