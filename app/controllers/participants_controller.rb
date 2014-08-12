@@ -32,7 +32,7 @@ class ParticipantsController < ApplicationController
     @participants = Participant.customers.order(:lname, :fname)
     render template: 'participants/index'
   end
-  
+
   # def import
   #   WootixImporter.import(params[:file])
   #   #Participant.import(params[:file])
@@ -57,5 +57,5 @@ class ParticipantsController < ApplicationController
                                  role_types_attributes: [:id, :name])
   end
 
-  
+
 end

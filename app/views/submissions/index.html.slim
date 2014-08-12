@@ -1,15 +1,36 @@
-.container
-  h1 Listing Band Applications
-  hr
+h1 Listing Band Applications
+ul.formHeading
+  li
+    | Performer
+  li
+    | First Name
+  li
+    | Last Name
+  li
+    | E-Mail
+
+hr
   - @submissions.each do |submission|
     - participant = submission.participants.first
-    ul
-    li
-      | Performer:
-      span.formView<
-        = submission.group_name
-    - unless participant.nil?
+  ul
+    li.form
+      /= submission.group_name
+      - unless participant.nil?
       /if participant isn't showing it means there isn't one
+    li
+        = participant.fname
+    li
+        = participant.lname
+    li
+        = participant.applicant.email
+  span.manageBands
+    =>> link_to 'Show', submission
+    =>> link_to 'Edit', edit_submission_path(submission)
+    =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+    hr
+br
+= link_to 'New Band', new_submission_path
+
       li
         | First Name:
         span.formView<
@@ -30,10 +51,10 @@
         | Bio:
         span.formView<
             = submission.bio
-    - unless submission.participant_id.nil?
-      =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-      =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-      =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
-    hr
-  br
-  / = link_to 'New Band', new_submission_path
+      - unless submission.participant_id.nil?
+        =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
+        =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
+        =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+      hr
+      br
+      / = link_to 'New Band', new_submission_path
