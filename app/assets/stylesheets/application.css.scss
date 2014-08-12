@@ -41,7 +41,7 @@ header.topbar {
   width: 100%;
   position: fixed;
   top:0;
-  z-level: 100;
+  z-index: 100;
 
   @include background-image(linear-gradient( bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.0) 100%));
 
