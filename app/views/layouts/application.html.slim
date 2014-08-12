@@ -11,7 +11,7 @@ html
 
     header.topbar
       div
-        span
+        div.logo
           = image_tag("logotype.svg" )
 
         ul.nav
@@ -27,6 +27,7 @@ html
 
 
     == yield
+
     p.notice
       = notice
     p.alert
