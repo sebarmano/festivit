@@ -6,6 +6,8 @@ class ParticipantsController < ApplicationController
   def new
     @participant = Participant.new
     @participant.build_applicant
+    @participant.role_types.new
+    @submission = @participant.submissions.last
   end
 
   def create
@@ -13,7 +15,9 @@ class ParticipantsController < ApplicationController
     @participant.email = @participant.applicant.email
     if @participant.save
       make_submission(@participant)
-      redirect_to @participant, notice: "You've been successfully signed up"
+      sign_in @participant.applicant
+      redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
+
     else
       render :new, flash: @participant.errors
     end
@@ -21,6 +25,7 @@ class ParticipantsController < ApplicationController
 
   def show
     @participant = Participant.find(params[:id])
+    @submission = @participant.submissions.last
   end
 
   def customers
@@ -28,6 +33,19 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
   
+  # def import
+  #   WootixImporter.import(params[:file])
+  #   #Participant.import(params[:file])
+  #   redirect_to participants_path, notice: "Participants imported."
+  # end
+
+  def import
+    uploaded_io = params[:file]
+    importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+    importer.import
+    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+  end
+
   private
 
   def participant_params
@@ -35,12 +53,9 @@ class ParticipantsController < ApplicationController
                                  :state, :zip, :country, :phone, :email,
                                  :twitter_link, :facebook_link,
                                  applicant_attributes: [:id, :email,:password,
-                                                        :password_confirmation])
+                                                        :password_confirmation],
+                                 role_types_attributes: [:id, :name])
   end
 
-  def make_submission(ptcpnt)
-    ptcpnt.submissions.create(first_name: ptcpnt.fname, last_name: ptcpnt.lname,
-                      phone: ptcpnt.phone, email: ptcpnt.email, complete: false)
-
-  end
+  
 end

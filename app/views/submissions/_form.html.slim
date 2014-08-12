@@ -1,16 +1,44 @@
-= simple_form_for @submission do |f|
-  = f.input "first_name"
-  = f.input "last_name"
-  = f.input "phone"
-  = f.input "email"
-  = f.input "bio"
-  = f.input "site"
+= simple_form_for [@participant, @submission] do |f|
+  = f.input "group_name"
+  = @role.inspect
+  - if @role == "Performer"
+    = f.input "bio"
 
-  h3 Attachments
-  #attachments
-    = f.simple_fields_for :attachments do |attachment|
-      = render 'attachment_fields', :f => attachment
-    .links
-      = link_to_add_association 'add more attachments',f , :attachments
+  -unless @role == "Volunteer"
+    = f.input "website"
+
+  - if @role == "Healing Artist"
+   = f.input "practice_type"
+   = f.input "practice_lic_no"
+   = f.input "practice_exp_date"
+   = f.input "practice_years"
+
+  - if @role == "Performer" || @role =="Craft vendor" || @role == "Food Vendor"
+    h3 Attachments
+    #attachments
+      = f.simple_fields_for :attachments do |attachment|
+        = render 'attachment_fields', :f => attachment
+      .links
+        = link_to_add_association 'add more attachments',f , :attachments
+
+
+
+  - if @role == "Volunteer"
+   = f.input "underage",:label => "Under 18?"
+   = f.input "ticket_req"
+   = f.input "days_avail", :label => "Days Available", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
+                            :input_html => {:multiple => true}
+   = f.input "deposit_type"
+   = f.input "returning"
+   = f.input "crew_hist", :label => "Crew History"
+   = f.input "crew_pref", :label => "Crew Preference"
+   = f.input "comments"
+   = f.input "shift_pref"
+   = f.input "why_volunteer"
+   = f.input "mission_statement"
+   = f.input "handouts"
+
+  = f.input "camping"
   =f.input "complete"
+
   =f.submit

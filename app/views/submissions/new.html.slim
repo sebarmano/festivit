@@ -1,7 +1,19 @@
 div class="container"
-  h1 New Band
+  - if @role == "Performer"
+    h1 Performer Application
+  - if @role == "Volunteer"
+    h1 Volunteer Application
+  - if @role == "Healing Artist"
+    h1 Healing Artist Application
+  - if @role == "Craft Vendor"
+    h1 Craft Vendor Application
+  - if @role == "Food Vendor"
+    h1 Food Vendor Application
 
 
+
+  div id="newBand"
     = render 'form'
 
-    = link_to 'Back', submissions_path
+
+  = link_to 'Back', submissions_path

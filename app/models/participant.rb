@@ -8,8 +8,7 @@ class Participant < ActiveRecord::Base
   has_many :submissions, :through => :fest_participant_submissions
 
   accepts_nested_attributes_for :applicant
-  has_many :submissions, :through => :application_processes
-  has_many :fests, :through => :application_processes
+  accepts_nested_attributes_for :role_types
 
   def name
     "#{lname}, #{fname}"
@@ -19,6 +18,9 @@ class Participant < ActiveRecord::Base
     tickets.group(:ticket_type).count
   end
 
+  def import(file)
+    WootixImporter.import(file.path)
+  end
   def self.search(search)
     if search
       where("lname LIKE ?","%#{search}%")
