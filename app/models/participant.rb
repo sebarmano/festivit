@@ -19,5 +19,11 @@ class Participant < ActiveRecord::Base
     tickets.group(:ticket_type).count
   end
 
+  def self.results(value)
+    where("lname LIKE ?","%#{value}%")
+  end
 
+  def self.customers
+    where(role_types: "customer")
+  end
 end

@@ -23,6 +23,16 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
   end
 
+  def results
+    @participants = Participant.results(params[:search])
+    render template: 'participants/index'
+  end
+
+  def customers
+    @participants = Participant.customers
+    render template: 'participants/index'
+  end
+  
   private
 
   def participant_params
