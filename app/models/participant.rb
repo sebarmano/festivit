@@ -7,9 +7,9 @@ class Participant < ActiveRecord::Base
   has_many :role_types, :through => :fest_participant_role_types
   has_many :submissions, :through => :fest_participant_submissions
 
-  validates_uniqueness_of :lname, :scope => [:fname, :street_address]
 
   accepts_nested_attributes_for :applicant
+  accepts_nested_attributes_for :role_types
 
   def self.import(file)
     p = SmarterCSV.process(file.path, {:remove_unmapped_keys => :true,

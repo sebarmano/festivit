@@ -4,12 +4,12 @@ html
     meta name="keywords" content="festival"
     = stylesheet_link_tag    "application", :media => "all"
     = favicon_link_tag 'favicon.ico'
-    = javascript_include_tag "application"
     = csrf_meta_tags
 
   body
     header
       ul.nav
+
         li = link_to "Home |", root_url
         li = link_to "Apply |", new_participant_path
         li = link_to "Contact |", root_url
@@ -17,31 +17,6 @@ html
 
 
 
-      / section
-      /   = image_tag("logotype.svg" )
+    == yield
 
-      / aside
-      /   - unless user_signed_in?
-      /     span = link_to 'Login', new_user_session_path
-      /     = render 'devise/sessions/form'
-      /   - else
-      /     span = "Logged in as #{current_user.email}"
-      /     p
-      /     = link_to 'Logout', destroy_user_session_path, :method => :delete
-
-    article
-      section
-        p.notice
-          = notice
-        p.alert
-          = alert
-
-        == yield
-
-        = javascript_include_tag 'application'
-      / aside
-
-    footer
-      div
-        p
-        | Something goes here in the footer, we will figure that out later
+    = javascript_include_tag 'application'
