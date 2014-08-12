@@ -7,13 +7,14 @@
  = f.input :lname, :label =>  "Last Name"
  = f.simple_fields_for :applicant do |p|
   = p.input :email
+  = p.input :password
   = p.input :password_confirmation
 
  = f.input :street_address
  = f.input :city
  = f.input :state
  = f.input :zip
- = f.input :country
+ = f.input :country, as: :string
  = f.input :phone
  = f.input :facebook_link
  = f.input :twitter_link

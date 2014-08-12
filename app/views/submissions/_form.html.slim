@@ -1,6 +1,6 @@
-= simple_form_for @submission do |f|
+= simple_form_for [@participant, @submission] do |f|
   = f.input "group_name"
-
+  = @role.inspect
   - if @role == "Performer"
     = f.input "bio"
 
@@ -13,7 +13,7 @@
    = f.input "practice_exp_date"
    = f.input "practice_years"
 
-  - if @role == "Performer" || "Craft vendor" || "Food Vendor"
+  - if @role == "Performer" || @role =="Craft vendor" || @role == "Food Vendor"
     h3 Attachments
     #attachments
       = f.simple_fields_for :attachments do |attachment|
