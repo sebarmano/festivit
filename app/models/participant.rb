@@ -10,6 +10,7 @@ class Participant < ActiveRecord::Base
   validates_uniqueness_of :lname, :scope => [:fname, :email]
 
   accepts_nested_attributes_for :applicant
+  accepts_nested_attributes_for :role_types
 
   def name
     "#{lname}, #{fname}"
@@ -20,7 +21,6 @@ class Participant < ActiveRecord::Base
   end
 
   def import(file)
-  #def self.import(file)
     WootixImporter.import(file.path)
   end
 

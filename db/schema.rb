@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.text     "craft_desc"
     t.text     "photo_desc"
     t.text     "booth_desc"
-    t.string   "camping"
     t.string   "practice_type"
     t.string   "practice_lic_no"
     t.string   "practice_exp_date"
@@ -107,6 +106,7 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.text     "why_volunteer"
     t.text     "mission_statement"
     t.text     "handouts"
+    t.boolean  "camping"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
