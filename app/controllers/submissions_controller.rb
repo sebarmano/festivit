@@ -1,17 +1,23 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
   before_action :authenticate_user!
+  # authorize_actions_for :user_type
 
   def index
     @submissions = Submission.all
+
+
   end
 
   def show
-
+    @participant = @submission.participants.first
   end
 
   def new
     @submission = Submission.new
+    @participant = Participant.find(params[:participant_id])
+    @role = RoleType.find_by(params[:id]).name
+    authorize_action_for(@submission)
   end
 
   def edit
@@ -20,6 +26,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
+    authorize_action_for(@submission)
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
@@ -33,6 +40,8 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    participant = @submission.participants.first
+    @role = participant.role_types.first # TODO: allow for multi role sign up
     respond_to do |format|
       if @submission.update(submission_params)
         @submission.mail_if_ready
@@ -67,7 +76,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
+      params.require(:submission).permit( :bio, :website, :tag, :first_name, :last_name, :phone, :email, :complete,
                                             attachments_attributes: [:id, :title, :link, :image])
   end
 end

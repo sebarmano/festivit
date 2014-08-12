@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809194309) do
+ActiveRecord::Schema.define(version: 20140811201524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140809194309) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "submission_id"
+    t.string   "type"
   end
 
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
@@ -74,18 +75,37 @@ ActiveRecord::Schema.define(version: 20140809194309) do
   end
 
   create_table "submissions", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.string   "email"
     t.text     "bio"
-    t.string   "site"
+    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "tag"
     t.integer  "participant_id"
     t.boolean  "approve"
-    t.boolean  "complete",       default: false
+    t.boolean  "complete",          default: false
+    t.string   "group_name"
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.text     "craft_desc"
+    t.text     "photo_desc"
+    t.text     "booth_desc"
+    t.string   "practice_type"
+    t.string   "practice_lic_no"
+    t.string   "practice_exp_date"
+    t.string   "practice_years"
+    t.boolean  "underage"
+    t.string   "ticket_req"
+    t.string   "days_avail"
+    t.string   "deposit_type"
+    t.boolean  "returning"
+    t.text     "crew_hist"
+    t.string   "crew_pref"
+    t.text     "comments"
+    t.string   "shift_pref"
+    t.text     "why_volunteer"
+    t.text     "mission_statement"
+    t.text     "handouts"
+    t.boolean  "camping"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
@@ -129,7 +149,10 @@ ActiveRecord::Schema.define(version: 20140809194309) do
     t.datetime "date_time"
     t.string   "status"
     t.integer  "participant_id"
+    t.text     "customer_notes"
+    t.string   "productpairsid"
     t.integer  "picked_up",       default: 0
+    t.string   "item_name"
   end
 
   add_index "tickets", ["participant_id"], name: "index_tickets_on_participant_id", using: :btree

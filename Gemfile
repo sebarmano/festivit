@@ -21,8 +21,10 @@ gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
 
+#CSV import gems
 gem 'roo'
-gem 'iconv'
+gem 'smarter_csv'
+gem 'active_importer'
 
 gem 'pry-byebug' , group: :development
 gem 'bourbon'
@@ -32,7 +34,6 @@ gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
 gem 'annotate', '~> 2.6.5'
-
 
 group :test do
   gem 'capybara'
