@@ -84,4 +84,13 @@ max-width: 150px;
 
 .adminTools{
   clear:both;
+  // @include span-columns(6);
+  // @include shift(6);
+  // margin: auto;
+  // text-align:center;
+  // width: 250px;
+}
+
+.form-actions{
+  // text-align:center;
 }

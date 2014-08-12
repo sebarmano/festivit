@@ -26,8 +26,14 @@ class TicketsController < ApplicationController
   end
 
   def import
-    Ticket.import(params[:file])
-    redirect_to tickets_path, notice: "Tickets imported."
+    if request.post?
+      uploaded_io = params[:file]
+      importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer.import
+      redirect_to import_tickets_path, notice: "#{importer.row_success_count} tickets imported, with #{importer.row_error_count} errors."
+    else
+      @tickets = Ticket.all
+    end
   end
 
   def pick_up
@@ -42,4 +48,3 @@ class TicketsController < ApplicationController
     #TODO - add strong params
   end
 end
-

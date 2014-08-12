@@ -1,7 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.includes(:tickets).order(:lname, :fname)
-
+    @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
   end
 
   def new
@@ -15,7 +14,6 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(participant_params)
     @participant.email = @participant.applicant.email
     if @participant.save
-
       make_submission(@participant)
       sign_in @participant.applicant
       redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
@@ -30,9 +28,22 @@ class ParticipantsController < ApplicationController
     @submission = @participant.submissions.last
   end
 
+  def customers
+    @participants = Participant.customers.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
+  # def import
+  #   WootixImporter.import(params[:file])
+  #   #Participant.import(params[:file])
+  #   redirect_to participants_path, notice: "Participants imported."
+  # end
+
   def import
-    Participant.import(params[:file])
-    redirect_to participants_path, notice: "Participants imported."
+    uploaded_io = params[:file]
+    importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+    importer.import
+    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
   end
 
   private
@@ -46,8 +57,5 @@ class ParticipantsController < ApplicationController
                                  role_types_attributes: [:id, :name])
   end
 
-  def make_submission(ptcpnt)
-    ptcpnt.submissions.create( complete: false)
 
-  end
 end
