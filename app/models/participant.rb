@@ -7,8 +7,6 @@ class Participant < ActiveRecord::Base
   has_many :role_types, :through => :fest_participant_role_types
   has_many :submissions, :through => :fest_participant_submissions
 
-  validates_uniqueness_of :lname, :scope => [:fname, :email]
-
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
@@ -23,5 +21,14 @@ class Participant < ActiveRecord::Base
   def import(file)
     WootixImporter.import(file.path)
   end
+  def self.search(search)
+    if search
+      where("lname LIKE ?","%#{search}%")
+    else
+      all
+    end
+  end
 
+
+  scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
 end

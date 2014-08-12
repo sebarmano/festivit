@@ -10,12 +10,12 @@ Rails.application.routes.draw do
   resources :participants, only: [:new, :create, :edit, :show, :index] do
     resources :submissions, except: :index
     collection {
+	  get :customers
       get :import
       post :import
     }
   end
 
-  resources :submissions
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
