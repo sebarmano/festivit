@@ -44,5 +44,5 @@
 .adminTools
   - if current_user.admin?
    =button_to 'Approve', action: 'approve'
-  = link_to 'Edit', edit_submission_path(@submission)
-  = link_to 'Back', submissions_path
+  = link_to 'Edit', edit_participant_submission_path(@participant, @submission)
+  / = link_to 'Back', submissions_path

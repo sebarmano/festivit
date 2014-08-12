@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :submissions
-
   resources :tickets do
     collection { post :import }
   end
@@ -11,10 +9,14 @@ Rails.application.routes.draw do
 
   resources :admins, controller: 'users', only: [:new, :create], type: 'Admin'
   resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
+  resources :applicants, controller: 'users', only: [:show], type: 'Applicant'
 
-  resources :participants, only: [:new, :create, :show, :index] do
+  resources :participants, only: [:new, :create, :edit, :show, :index] do
+    resources :submissions, except: :index
     collection { post :import }
   end
+
+  get 'submissions', to: 'submissions#index'
 
   post 'approve/:id', to: 'submissions#approve'
 
