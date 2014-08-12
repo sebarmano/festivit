@@ -16,7 +16,7 @@ SimpleForm.setup do |config|
     # Determines whether to use HTML5 (:email, :url, ...)
     # and required attributes
     b.use :html5
-
+    b.use :maxlength
     # Calculates placeholders automatically from I18n
     # You can also pass a string as f.input placeholder: "Placeholder"
     b.use :placeholder

@@ -5,8 +5,6 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.all
-
-
   end
 
   def show
@@ -21,7 +19,7 @@ class SubmissionsController < ApplicationController
   end
 
   def edit
-
+    @participant = Participant.find(params[:participant_id])
   end
 
   def create
@@ -41,12 +39,12 @@ class SubmissionsController < ApplicationController
   end
 
   def update
-    participant = @submission.participants.first
-    @role = participant.role_types.first # TODO: allow for multi role sign up
+    @participant = Participant.find(params[:participant_id])
+    @role = @participant.role_types.first # TODO: allow for multi role sign up
     respond_to do |format|
       if @submission.update(submission_params)
         @submission.mail_if_ready
-        format.html { redirect_to @submission, notice: 'Your application was updated!'}
+        format.html { redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was updated!'}
         format.json { render :show, status: :created, location: @submission }
       else
         format.html {render :new}
@@ -77,7 +75,6 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit( :bio, :website, :tag, :first_name, :last_name, :phone, :email, :complete,
-                                            attachments_attributes: [:id, :title, :link, :image])
+      params.require(:submission).permit!
   end
 end

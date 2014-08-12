@@ -14,10 +14,8 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(participant_params)
     @participant.email = @participant.applicant.email
     if @participant.save
-      make_submission(@participant)
       sign_in @participant.applicant
       redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
-
     else
       render :new, flash: @participant.errors
     end
@@ -32,7 +30,7 @@ class ParticipantsController < ApplicationController
     @participants = Participant.customers.order(:lname, :fname)
     render template: 'participants/index'
   end
-  
+
   # def import
   #   WootixImporter.import(params[:file])
   #   #Participant.import(params[:file])
@@ -57,5 +55,5 @@ class ParticipantsController < ApplicationController
                                  role_types_attributes: [:id, :name])
   end
 
-  
+
 end
