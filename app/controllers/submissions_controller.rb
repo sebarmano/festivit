@@ -10,13 +10,13 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @participant = @submission.participants.first
+    @participant = Participant.find(params[:participant_id])
   end
 
   def new
-    @submission = Submission.new
     @participant = Participant.find(params[:participant_id])
-    @role = RoleType.find_by(params[:id]).name
+    @submission = @participant.submissions.new
+    @role = @participant.role_types.first.name
     authorize_action_for(@submission)
   end
 
@@ -25,12 +25,13 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = Submission.new(submission_params)
+    @participant = Participant.find(params[:participant_id])
+    @submission = @participant.submissions.new(submission_params)
     authorize_action_for(@submission)
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
-        format.html {redirect_to @submission, notice: 'Your application was created!'}
+        format.html {redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
         format.html {render :new}
