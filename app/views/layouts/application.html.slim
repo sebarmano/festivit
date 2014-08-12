@@ -3,46 +3,31 @@ html
     title festivit for the rest of it
     meta name="keywords" content="festival"
     = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.ico'
-    = javascript_include_tag "application"
     = csrf_meta_tags
 
   body
-    header
-      ul.nav
-        li = link_to "Home", root_url
-        li = link_to "Apply", new_participant_path
-        li = link_to "Contact", root_url
-        li = link_to "About", root_url
-      section
-        = image_tag("logotype.svg" )
 
-      aside
-        h1  Login
-    article
-      section
-        p.notice
-          = notice
-        p.alert
-          = alert
-        - unless user_signed_in?
-          span = link_to 'Login', new_user_session_path
-        - else
-          span Logged_in_as = current_user.email
-            = link_to 'Logout', destroy_user_session_path, :method => :delete
+    header.topbar
+      div
+        span
+          = image_tag("logotype.svg" )
 
-          / span
-          / Logged_in_as = current_user.email
-          / = link_to 'Logout', destroy_user_session_path, :method => :delete
-        == yield
+        ul.nav
+          li = link_to "Home", root_url
+          li = link_to "Apply", new_participant_path
+          li = link_to "Contact", root_url
+          li = link_to "About", root_url
 
-        = javascript_include_tag 'application'
-      aside
-        h3 Side-column
-        p
-        Bacon ipsum dolor sit amet short ribs short loin shankle strip steak rump ham hock. Leberkas turducken pork loin doner biltong jowl fatback boudin tri-tip. Tongue turducken chuck, pancetta porchetta jowl tail salami landjaeger chicken meatball shankle short loin. Chicken prosciutto cow beef ribs shoulder.
-      /
-      /footer
-      /  div
-      /    p
-      /    | Something goes here in the footer, we will figure that out later
+        / p.notice
+        /   = notice
+        / p.alert
+        /   = alert
+    - unless user_signed_in?
+      span = link_to 'Login', new_user_session_path
+    - else
+      span Logged_in_as = current_user.email
+        = link_to 'Logout', destroy_user_session_path, :method => :delete
+
+    == yield
