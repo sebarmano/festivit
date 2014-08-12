@@ -1,1 +1,38 @@
+body {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
 
+article {
+  margin-top: 4em;
+  color: white;
+  @include outer-container;
+  div {
+    @include span-columns(12);
+    // @include shift(2);
+  }
+}
+
+// #parallaxContainer
+//   .layer1
+//   .layer2
+//   .layer3
+
+// #parallaxContainer {
+//   div.layer1 {
+//     background-image: url('bg.jpg');
+//     // position: absolute;
+//     height: 800px;
+//     width: 100%;
+//
+//   }
+//   div.layer2 {
+//     background-image: url('logistics_woah.png');
+//     height: 800px;
+//     width: 100%;
+//   }
+//   div.layer3 {
+//
+//   }
+// }

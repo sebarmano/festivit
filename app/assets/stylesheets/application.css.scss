@@ -19,92 +19,48 @@
 @import "neat";
 @import "submission";
 @import "participants";
-
-
-.container {
-  @include outer-container;
-
-}
-
-.logIn {
-  @include span-columns(4);
-  @include shift(4);
-}
+@import "welcome";
 
 body {
   margin: 0 auto;
+  
 }
 
-header {
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 100% 90%,
-                         bottom;
-  margin-bottom: 2em;
+header.topbar {
+  background-color: rgba(0,0,0,.2);
+  margin: auto 0;
+  width: 100%;
+  position: fixed;
+  top:0;
+  z-level: 100;
+
+  @include background-image(linear-gradient( bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.0) 100%));
+
+  div {
   @include outer-container;
 
-  nav {
-    @include span-columns(6);
-    @include shift(6);
-    @include omega;
-    color: white;
-    word-spacing: 1em;
-    padding: 3em 2em;
 
+    span {
+        @include span-columns(2);
+        // @include shift(1);
+        // height: 15em;
+        color: white;
+      }
+
+      ul.nav {
+        // display: inline;
+        @include span-columns(3);
+        @include shift(6);
+        @include omega;
+        color: white;
+        right: 0;
+        padding: 1em 0em;
+        a {
+          color: rgba(255,255,255,.85);
+          &:hover {
+            color: rgba(255,255,255,1)
+          }
+        }
+      }
   }
-
-  section {
-    @include span-columns(3);
-    @include shift(1);
-    height: 15em;
-    color: white;
-  }
-
-  aside {
-    @include span-columns(4);
-    @include shift(2);
-    padding:  2em;
-    color: white;
-    margin-top: -1em;
-  }
-}
-
-  article {
-    // height: 14em;
-    @include outer-container;
-    // margin-bottom: 4em;
-    section {
-      @include span-columns(6);
-      @include shift(2);
-    }
-    aside {
-      @include span-columns(4);
-      @include omega;
-
-    }
-  }
-
-footer {
-  @include outer-container;
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 0%,
-                         bottom;
-  color: white;
-  position: absolute;
-  padding: 2em;
-    z-index: 100;
-    bottom: 0;
-    width: 100%;
-
-}
-
-.container {
-  @include outer-container;
-  /*   margin: auto;
-  max-width: 965px; */
 }
