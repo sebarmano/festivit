@@ -19,6 +19,10 @@ class Participant < ActiveRecord::Base
     tickets.group(:ticket_type).count
   end
 
+  def total_tickets
+    tickets.map {|t| t.qty.to_i}.reduce(:+)
+  end
+
   def self.search(search)
     if search
       where("lname LIKE ?","%#{search}%")
