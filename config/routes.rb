@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :tickets do
-    collection { post :import }
-  end
-
   root 'welcome#index'
 
   devise_for :users
@@ -13,15 +9,23 @@ Rails.application.routes.draw do
 
   resources :participants, only: [:new, :create, :edit, :show, :index] do
     resources :submissions, except: :index
-    collection { post :import }
+    collection {
+	  get :customers
+      get :import
+      post :import
+    }
   end
 
-  get 'submissions', to: 'submissions#index'
 
+  get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
+  get 'tickets/import', to: "tickets#import", :as => :import_tickets
+  post 'tickets/import', to: "tickets#import"
 
   resources :tickets do
-    collection { post :import }
-    collection { put :pick_up }
+    collection do
+      put :pick_up
+      post :import
+    end
   end
 end
