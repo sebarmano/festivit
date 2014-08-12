@@ -2,20 +2,45 @@
   p
     #notice
       = notice
-  ul
+  img.bandImage src="http://upload.wikimedia.org/wikipedia/commons/a/aa/Average_White_Band_Edinburgh.jpg" /
+
+  h3 Band Information
+
+  ul.showBand
+      li participant.fname
+      li participant.lname
+      li participant.phone
+      li participant.website
+      li participant.twitter
+      li participant.facebook
+  ul.showBand
     - unless @participant.nil?
       li = @participant.fname
       li = @participant.lname
       li = @participant.phone
-      li = @participant.email
-    li = @submission.bio
-    li = @submission.website
+      li = @participant.twitter_link
+      li = @participant.facebook_link
+      / - unless attachment.link == ""
+      /   li = embed(attachment.link)
+      / -  if attachment.image
+      /   li = image_tag attachment.image.thumb('400x200#').url
+
+
+  .video
     - @submission.attachments.each do |attachment|
-      li = attachment.title
-      - unless attachment.link == ""
-        li = embed(attachment.link)
-      -  if attachment.image
-        li = image_tag attachment.image.thumb('400x200#').url
+      = embed(attachment.link)
+
+    - @submission.attachments.each do |attachment|
+      = embed(attachment.link)
+
+  .music
+    iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
+
+    iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
+
+  .reccomendation
+    p This band rocks! I can't wait to see them again!
+.adminTools
   - if current_user.admin?
    =button_to 'Approve', action: 'approve'
   = link_to 'Edit', edit_participant_submission_path(@participant, @submission)

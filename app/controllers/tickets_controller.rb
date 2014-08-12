@@ -48,4 +48,3 @@ class TicketsController < ApplicationController
     #TODO - add strong params
   end
 end
-

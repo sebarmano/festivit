@@ -18,16 +18,12 @@
 @import "neat";
 @import "submission";
 @import "participants";
+@import "login";
 @import "welcome";
 
 .container {
   @include outer-container;
 
-}
-
-.logIn {
-  @include span-columns(4);
-  // @include shift(4);
 }
 
 body {
