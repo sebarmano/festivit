@@ -150,9 +150,9 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.datetime "date_time"
     t.string   "status"
     t.integer  "participant_id"
-    t.integer  "picked_up",       default: 0
     t.text     "customer_notes"
     t.string   "productpairsid"
+    t.integer  "picked_up",       default: 0
     t.string   "item_name"
   end
 

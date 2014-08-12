@@ -19,6 +19,12 @@ html
           li = link_to "Apply", new_participant_path
           li = link_to "Contact", root_url
           li = link_to "About", root_url
+          - unless user_signed_in?
+            li = link_to 'Login', new_user_session_path
+          - else
+            li Logged_in_as = current_user.email
+              = link_to 'Logout', destroy_user_session_path, :method => :delete
+
 
     p.notice
       = notice
@@ -29,5 +35,6 @@ html
     / - else
     /   span Logged_in_as = current_user.email
     /     = link_to 'Logout', destroy_user_session_path, :method => :delete
+
 
     == yield
