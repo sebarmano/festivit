@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.includes(:tickets).order(:lname, :fname)
+    @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
   end
 
   def new
@@ -23,13 +23,8 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
   end
 
-  def results
-    @participants = Participant.results(params[:search])
-    render template: 'participants/index'
-  end
-
   def customers
-    @participants = Participant.customers
+    @participants = Participant.customers.order(:lname, :fname)
     render template: 'participants/index'
   end
   

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
 
   resources :participants, only: [:new, :create, :show, :index] do
-    collection {get :results}
     collection {get :customers}
   end
 
