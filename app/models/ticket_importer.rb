@@ -18,6 +18,7 @@ class TicketImporter < ActiveImporter::Base
   column 'Item SKU', :ticket_type_id do |sku|
     Ticket_type.find_by(name: sku)
   end
+
   column 'Billing Last Name', :participant_id do |lname, fname|
     Participant.find_by(name: lname, fname)
   end
