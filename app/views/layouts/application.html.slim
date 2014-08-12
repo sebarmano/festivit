@@ -3,20 +3,31 @@ html
     title festivit for the rest of it
     meta name="keywords" content="festival"
     = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.ico'
     = csrf_meta_tags
 
   body
-    header
-      ul.nav
 
-        li = link_to "Home |", root_url
-        li = link_to "Apply |", new_participant_path
-        li = link_to "Contact |", root_url
-        li = link_to "About", root_url
+    header.topbar
+      div
+        span
+          = image_tag("logotype.svg" )
 
+        ul.nav
+          li = link_to "Home", root_url
+          li = link_to "Apply", new_participant_path
+          li = link_to "Contact", root_url
+          li = link_to "About", root_url
 
+        / p.notice
+        /   = notice
+        / p.alert
+        /   = alert
+    - unless user_signed_in?
+      span = link_to 'Login', new_user_session_path
+    - else
+      span Logged_in_as = current_user.email
+        = link_to 'Logout', destroy_user_session_path, :method => :delete
 
     == yield
-
-    = javascript_include_tag 'application'
