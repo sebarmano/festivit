@@ -2,38 +2,86 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin fieldset{
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  margin: 0 0 .75em;
+  padding: 1.5em;
+  }
+
+li{
+  }
+
 .container{
   width: 965px;
 }
 
-li{
-  float:left;
-  padding-right: 10px;
-  }
-
 .formView{
-  float:left;
+  float: left;
 }
 
 #new_submission{
-max-width:150px;
+max-width: 150px;
 }
 
 #newBand{
-  width:600px;
+  width: 600px;
 }
 
 .editBand{
-  width:300px;
-  background-color: #000000;
+
+}
+
+.showBand{
+  @include fieldset;
+  @include span-columns(8);
+  @include shift (2);
 }
 
 .form-inputs{
   margin: auto;
-  text-align:center;
+  text-align: center;
   width: 250px;
 }
 
 .form-actions{
-  text-align:center;
+  text-align: center;
+}
+.formHeading{
+  @include span-columns(8);
+  @include shift (2);
+}
+.embedContainer {
+  @include span-columns(4);
+  @include omega(2n);
+  //display: block;
+  position: relative;
+  overflow: hidden;
+  max-width: 50%;
+  height: auto;
+  padding-right: 10px;
+  }
+
+.embed-container iframe, .embed-container object, .embed-container embed {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  }
+
+.music{
+  @include span-columns(4);
+  @include omega(2n);
+  height: 166px;
+  max-width: 50%;
+}
+
+.reccomendation{
+  @include span-columns(8);
+  @include fieldset;
+  max-width: 45%;
+}
+
+.adminTools{
+  clear:both;
 }
