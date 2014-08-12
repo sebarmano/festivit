@@ -1,39 +1,39 @@
 h1 Listing Band Applications
-ul.formHeading
-  li
+tr.formHeading
+  th
     | Performer
-  li
+  th
     | First Name
-  li
+  th
     | Last Name
-  li
+  th
     | E-Mail
 
 hr
   - @submissions.each do |submission|
     - participant = submission.participants.first
-    ul
-      li.form
+    tr
+      tr.form
         /= submission.group_name
       - unless participant.nil?
         /if participant isn't showing it means there isn't one
-        li
+        td
           | First Name:
           span.formView<
             = participant.fname
-        li
+        td
           | Last Name:
           span.formView<
             = participant.lname
-        li
+        td
           | Phone:
           span.formView<
             = participant.phone
-        li
+        td
           | E-Mail:
           span.formView<
             = participant.applicant.email
-        li
+        td
           | Bio:
           span.formView<
               = submission.bio
