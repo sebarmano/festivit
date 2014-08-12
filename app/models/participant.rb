@@ -23,7 +23,5 @@ class Participant < ActiveRecord::Base
     where("lname LIKE ?","%#{value}%")
   end
 
-  def self.customers
-    where(role_types: "customer")
-  end
+  scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
 end

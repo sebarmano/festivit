@@ -1,8 +1,10 @@
-= form_tag 'participants/results', method: :get
+= form_tag results_participants_path, method: :get
   = text_field_tag :search, params[:search]
   = submit_tag "Search"
 
 = link_to "Customers", customers_participants_path
+= link_to "  Volunteers", customers_participants_path
+
 ul id="participants_list"
   - @participants.each do |participant|
     li
