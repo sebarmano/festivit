@@ -18,13 +18,12 @@
       li = @participant.fname
       li = @participant.lname
       li = @participant.phone
-      li = @participant.website
-      li = @participant.twitter
-      li = @participant.facebook
-      - unless attachment.link == ""
-        li = embed(attachment.link)
-      -  if attachment.image
-        li = image_tag attachment.image.thumb('400x200#').url
+      li = @participant.twitter_link
+      li = @participant.facebook_link
+      / - unless attachment.link == ""
+      /   li = embed(attachment.link)
+      / -  if attachment.image
+      /   li = image_tag attachment.image.thumb('400x200#').url
 
 
   .video
