@@ -7,10 +7,11 @@
 
 ul id="participants_list"
   - @participants.each do |participant|
-    li
-      h3
-        = link_to participant.name, participant
-      / h4 Tickets
-        ul
-          = participant.tickets_count.each do |ticket_type, count|
-            li = "#{ticket_type.name}, #{count}"
+    - if participant.total_tickets 
+      li
+        h3 
+          = link_to participant.name, participant
+        / h4 Tickets
+          ul
+            = participant.tickets_count.each do |ticket_type, count|
+              li = "#{ticket_type.name}, #{count}"
