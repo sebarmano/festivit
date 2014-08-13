@@ -1,7 +1,6 @@
 = simple_form_for [@participant, @submission] do |f|
   = f.input "group_name"
 
-  = @role.inspect
   - if @role == "Performer"
     = f.input "bio", :label => "Performer Bio:"
 
@@ -14,13 +13,7 @@
    = f.input "practice_exp_date", :label => "License expires:"
    = f.input "practice_years", :label => "Length of Time Practicing:"
 
-  - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
-    h3 Attachments
-    #attachments
-      = f.simple_fields_for :attachments do |attachment|
-        = render 'attachment_fields', :f => attachment
-      .links
-        = link_to_add_association 'add more attachments',f , :attachments
+
 
   - if @role == "Volunteer"
    = f.input "underage", :label => "Under 18?"
@@ -51,19 +44,29 @@
    = f.input "photo_desc", :label => "Photo descriptions(note materials, technique, description and price range):"
 
    = f.input "booth_desc", :label => "Booth descriptions and special requirements:"
-
+    = f.input "electrical"
 
   - if @role == "Food Vendor"
-
+    /TODO: add food vendor questions
 
   - if @role == "Non-Profit"
    = f.input "mission_statement", :label => "Mission:"
    = f.input "handouts", :label => "Materials you will be handing out at booth (ex: buttons, stickers, water):"
+   = f.input "facebook_link"
+   = f.input "twitter_link"
+   = f.input "camping", :label => "Will you be camping at the festival?"
+   = f.input "complete", :label => "If application is complete, please check this box."
 
 
-  = f.input "facebook_link"
-  = f.input "twitter_link"
-  = f.input "camping", :label => "Will you be camping at the festival?"
-  = f.input "complete", :label => "If application is complete, please check this box."
+  - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
+    h3 Attachments
+    #attachments
+      = f.simple_fields_for :attachments do |attachment|
+        = render 'attachment_fields', :f => attachment
+      .links
+        = link_to_add_association 'add more attachments',f , :attachments
+  = f.input "camping"
+  =f.input "complete"
+
 
   =f.submit
