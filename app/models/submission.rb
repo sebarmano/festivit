@@ -14,8 +14,9 @@ class Submission < ActiveRecord::Base
 
   def mail_if_ready
     return nil unless complete
-    @participant = self.participants.first
-    SubmissionMailer.init_apply(@participant.applicant).deliver
-    SubmissionMailer.init_admin(@participant.applicant).deliver
+    @thing = self.fest_participant_submissions.find_by(submission_id: self.id)
+    @participant = Participant.find_by(id: @thing.participant_id)
+    SubmissionMailer.init_apply(@participant).deliver
+    SubmissionMailer.init_admin(@participant).deliver
   end
 end

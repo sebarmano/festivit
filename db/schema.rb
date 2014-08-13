@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812153859) do
+ActiveRecord::Schema.define(version: 20140813060053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.text     "mission_statement"
     t.text     "handouts"
     t.boolean  "camping"
+    t.string   "electrical"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree

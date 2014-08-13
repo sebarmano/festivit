@@ -29,10 +29,11 @@ class SubmissionsController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     @submission = @participant.submissions.new(submission_params)
     authorize_action_for(@submission)
-    @submission.mail_if_ready
+
     respond_to do |format|
       if @submission.save
         @participant.fest_participant_submissions.create(:submission_id => @submission.id)
+        @submission.mail_if_ready
         format.html {redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
@@ -68,7 +69,9 @@ class SubmissionsController < ApplicationController
   def approve
     @submission.approve = true
     @submission.save
-    SubmissionMailer.approved(@submission).deliver
+    @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
+    @participant = Participant.find_by(id: @thing.participant_id)
+    SubmissionMailer.approved(@participant).deliver
     redirect_to :root
   end
 
@@ -80,7 +83,7 @@ class SubmissionsController < ApplicationController
 
   def submission_params
       params.require(:submission).permit(:bio, :website, :complete, :group_name, :craft_desc, :photo_desc,
-                                         :booth_desc, :practice_type, :practice_lic_no,
+                                         :booth_desc, :practice_type, :practice_lic_no, :electrical,
                                          :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
                                          :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
                                          :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
