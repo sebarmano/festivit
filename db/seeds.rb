@@ -23,6 +23,12 @@
   )
 end
 
+10.times do
+  Submission.create(
+      group_name: Faker::Lorem.word,
+  )
+end
+
 # Fest table
 Fest.create(
     name: Faker::Company.name,
