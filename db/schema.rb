@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140813144003) do
     t.text     "mission_statement"
     t.text     "handouts"
     t.boolean  "camping"
+    t.string   "electrical"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
