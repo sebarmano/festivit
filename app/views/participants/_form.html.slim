@@ -6,7 +6,7 @@
    p The information below will be stored as the point of contact for the group.
    span.name
      = f.input :fname, :label => "First Name"
-     = f.input :lname, :label =>  "Last Name"
+     = f.input :lname, :label => "Last Name"
    = f.simple_fields_for :applicant do |p|
     = p.input :email
     = p.input :password

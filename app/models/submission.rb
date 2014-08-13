@@ -13,9 +13,10 @@ class Submission < ActiveRecord::Base
   include Authority::Abilities
 
   def mail_if_ready
-    return nil unless complete
-    @participant = self.participants.first
-    SubmissionMailer.init_apply(@participant.applicant).deliver
-    SubmissionMailer.init_admin(@participant.applicant).deliver
+    return nil if complete
+    @thing = self.fest_participant_submissions.find_by(submission_id: self.id)
+    @participant = Participant.find_by(id: @thing.participant_id)
+    SubmissionMailer.init_apply(@participant).deliver
+    SubmissionMailer.init_admin(@participant).deliver
   end
 end
