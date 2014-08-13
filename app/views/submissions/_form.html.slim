@@ -3,18 +3,19 @@ section
     - if @role == "Performer"
       h1 Performer Application
     - if @role == "Volunteer"
-        h1 Volunteer Application
+      h1 Volunteer Application
     - if @role == "Healing Artist"
-        h1 Healing Artist Application
+      h1 Healing Artist Application
     - if @role == "Craft Vendor"
-        h1 Craft Vendor Application
+      h1 Craft Vendor Application
     - if @role == "Food Vendor"
-        h1 Food Vendor Application
+      h1 Food Vendor Application
     h6 Step 2 (of 2): Application Details
     br
     = simple_form_for [@participant, @submission] do |f|
       - unless @role == "Volunteer"
         = f.input "group_name"
+
 
       - if @role == "Performer"
         = f.input "bio", :label => "Performer Bio:"
@@ -27,6 +28,7 @@ section
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
+
 
       - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
         h3 Attachments
