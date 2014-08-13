@@ -1,19 +1,20 @@
 = simple_form_for [@participant, @submission] do |f|
   = f.input "group_name"
+
   = @role.inspect
   - if @role == "Performer"
-    = f.input "bio"
+    = f.input "bio", :label => "Performer Bio:"
 
   -unless @role == "Volunteer"
     = f.input "website"
 
   - if @role == "Healing Artist"
-   = f.input "practice_type"
-   = f.input "practice_lic_no"
-   = f.input "practice_exp_date"
-   = f.input "practice_years"
+   = f.input "practice_type", :label => "Practice Type:"
+   = f.input "practice_lic_no", :label => "License number:"
+   = f.input "practice_exp_date", :label => "License expires:"
+   = f.input "practice_years", :label => "Length of Time Practicing:"
 
-  - if @role == "Performer" || @role =="Craft vendor" || @role == "Food Vendor"
+  - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
     h3 Attachments
     #attachments
       = f.simple_fields_for :attachments do |attachment|
@@ -21,24 +22,48 @@
       .links
         = link_to_add_association 'add more attachments',f , :attachments
 
-
-
   - if @role == "Volunteer"
-   = f.input "underage",:label => "Under 18?"
-   = f.input "ticket_req"
-   = f.input "days_avail", :label => "Days Available", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
-                            :input_html => {:multiple => true}
-   = f.input "deposit_type"
-   = f.input "returning"
-   = f.input "crew_hist", :label => "Crew History"
-   = f.input "crew_pref", :label => "Crew Preference"
-   = f.input "comments"
-   = f.input "shift_pref"
-   = f.input "why_volunteer"
-   = f.input "mission_statement"
-   = f.input "handouts"
+   = f.input "underage", :label => "Under 18?"
 
-  = f.input "camping"
-  =f.input "complete"
+   = f.input "ticket_req", :label => "What type of tickets do you want to earn for the festival? 4-Day (Thursday, Friday, Saturday, Sunday) or 3-Day (Thursday, Friday, and Saturday)"
+
+   = f.input "days_avail", :label => "Please select all days that you would like to volunteer at the festival:", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
+                            :input_html => {:multiple => true}
+
+   = f.input "deposit_type", :label => "How do you plan to put down the volunteer deposit?"
+
+   = f.input "returning", :label => "Are you a returning volunteer?"
+
+   = f.input "crew_hist", :label => "If so, what crew(s) were you on in the past? Please be specific, If you worked in the Hospitality Kitchen what position were you in."
+
+   = f.input "crew_pref", :label => "Please list in order Your Top 3 Crew Preferences. (Crew descriptions and requirements are found on the website at http://shakorihillsgrassroots.org/be-a-part/be-a-volunteer/volunteer-crew-details)"
+
+   = f.input "comments", :label => "Special skills related to crew interest, or a place for comments: (if you have a friend or family that you would like to volunteer with please indicate that here and have them do the same on their application. We will try our best to work with you!)"
+
+   = f.input "shift_pref", :label => "Please list in order Your General Time Preferences - Morning, Afternoon, Evening (We will try to work with you on this but there is no way that we can place everyone in their top choice and we have shifts that need to be filled at all hours.)"
+
+   = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
+
+
+  - if @role == "Craft Vendor"
+   = f.input "craft_desc", :label => "Description of your craft:"
+
+   = f.input "photo_desc", :label => "Photo descriptions(note materials, technique, description and price range):"
+
+   = f.input "booth_desc", :label => "Booth descriptions and special requirements:"
+
+
+  - if @role == "Food Vendor"
+
+
+  - if @role == "Non-Profit"
+   = f.input "mission_statement", :label => "Mission:"
+   = f.input "handouts", :label => "Materials you will be handing out at booth (ex: buttons, stickers, water):"
+
+
+  = f.input "facebook_link"
+  = f.input "twitter_link"
+  = f.input "camping", :label => "Will you be camping at the festival?"
+  = f.input "complete", :label => "If application is complete, please check this box."
 
   =f.submit
