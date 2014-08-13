@@ -1,0 +1,122 @@
+
+/ html
+/   head
+/     title festivit for the rest of it
+/     meta name="keywords" content="festival"
+/     = stylesheet_link_tag    "application", :media => "all"
+/     = javascript_include_tag 'application'
+/     = favicon_link_tag 'favicon.ico'
+/     = csrf_meta_tags
+/
+/   body
+/
+/     article
+/       div
+/ javascript:
+/   var controller;
+/   $(document).ready(function($) {
+/     // init controller
+/     controller = new ScrollMagic({vertical: false});
+/   });
+/
+/ #parallaxContainer
+/   .layer1
+/   .layer2
+/   .layer3
+/
+/ javascript:
+/   $(document).ready(function($) {
+/ 		// build tween
+/ 		var tween = new TimelineMax ()
+/ 			.add([
+/ 				TweenMax.to("#parallaxContainer .layer1", 1, {backgroundPosition: "-40% 0", ease: Linear.easeNone}),
+/ 				TweenMax.to("#parallaxContainer .layer2", 1, {backgroundPosition: "-500% 0", ease: Linear.easeNone}),
+/ 				TweenMax.to("#parallaxContainer .layer3", 1, {backgroundPosition: "-225% 0", ease: Linear.easeNone})
+/ 			]);
+/
+/ 		// build scene
+/ 		var scene = new ScrollScene({triggerElement: "#parallaxContainer", duration: 2000, offset: 450})
+/ 						.setTween(tween)
+/ 						.setPin("#parallaxContainer")
+/ 						.addTo(controller);
+/
+/ 		// show indicators (requires debug extension)
+/ 		scene.addIndicators();
+/ 	});
+
+.bg1
+
+.pnl1
+
+.pnl1
+  .main
+    .block
+
+      h3 apply
+      p
+      |  Fast, online process (no more USPS). Upload media (songs, videos, PDF’s, etc). Optional save or submit. Supports multiple applications.
+
+      p.smoothanchor
+        = link_to "apply", "#apply"
+
+    .block
+      h3 evaluate
+      p
+      |  Secure admin dashboard, See all applications, Listen to song demos. View photos, videos & PDFs (uploaded to Dropbox).
+
+      p.smoothanchor
+        = link_to "evaluate", "#evaluate"
+
+    .block
+      h3 process
+      p
+      |  Applicant names are sent to will-call. Manual import from other sources. Simplifies complex data processing. Live connection to Google docs API.
+
+
+
+      p.smoothanchor
+        = link_to "process", "#process"
+
+    .block
+      h3 check-in
+      p
+      |  Mobile-optimized. Secure. Easy switch between lists. Partial check-ins. Search filter. Group filters. Easy switch between lists. 
+
+
+      p.smoothanchor
+        = link_to "check-in", "#check-in"
+
+.cont1
+  #apply
+  .mainContainer
+    .halfArea
+      h2 Apply to your festival of choice
+      p
+      | Fast, online process (no more USPS). Upload media (songs, videos, PDF’s, etc). Optional save or submit. Supports multiple applications. Automated confirmation emails. Single database.
+
+.cont2
+  #evaluate
+  .mainContainer
+    .halfArea
+      h2 Pick and choose; decisions decisions decisions
+      p
+      | Secure admin dashboard, See all applications, Listen to song demos. View photos, videos & PDFs (uploaded to Dropbox). Linked emails, One-click processing. Auto emails to accepted/rejected applicants. -click processing.
+
+
+
+.cont3
+  #process
+  .mainContainer
+    .halfArea
+      h2 Festivit Secret Recipe; automated processing of all logistics
+      p
+      | Applicant names are sent to will-call. Manual import from other sources. Simplifies complex data processing. Live connection to Google docs API. Applicant names are sent to will-call. Manual import from other sources. Simplifies complex data processing. Live connection to Google docs API.
+
+
+.cont4
+  #check-in
+  .mainContainer
+    .halfArea
+      h2 Say goodbye to long lines; check-in is a breeze
+      p
+      | Mobile-optimized. Secure. Easy switch between lists. Partial check-ins. Search filter. Group filters.Mobile-optimized. Secure. Easy switch between lists. Partial check-ins. Search filter. Group filters.

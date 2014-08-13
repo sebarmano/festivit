@@ -1,0 +1,12 @@
+section
+  article
+    p
+      #notice
+        = notice
+    ul
+      li = @order.online_order_id
+      li = @order.date_time
+      li = @order.participant_id
+      li = @order.status
+    = link_to 'Edit', edit_order_path(@order)
+    = link_to 'Back', orders_path

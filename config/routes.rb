@@ -1,56 +1,31 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  root 'welcome#index'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  devise_for :users
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  resources :admins, controller: 'users', only: [:new, :create], type: 'Admin'
+  resources :volunteers, controller: 'users', only: [:new, :create], type: 'Volunteer'
+  resources :applicants, controller: 'users', only: [:show], type: 'Applicant'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  resources :participants, only: [:new, :create, :edit, :show, :index] do
+    resources :submissions, except: :index
+    collection {
+	  get :customers
+      get :import
+      post :import
+    }
+  end
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  get 'submissions', to: 'submissions#index'
+  post 'approve/:id', to: 'submissions#approve'
+  get 'tickets/import', to: "tickets#import", :as => :import_tickets
+  post 'tickets/import', to: "tickets#import"
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  resources :tickets do
+    collection do
+      put :pick_up
+      post :import
+    end
+  end
 end

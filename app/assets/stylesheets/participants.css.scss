@@ -1,0 +1,39 @@
+.form{
+  width: 50%;
+}
+.name{
+  float: left;
+}
+.participants{
+  @include fieldset;
+}
+.address{
+  @include fieldset;
+  .street{
+    width: 40%;
+  }
+  .city{
+    width: 35%;
+    float: left;
+    margin-right: 10px;
+  }
+  .state{
+    width: 25%;
+    float: left;
+    margin-right: 10px;
+  }
+  .zip{
+    float: left;
+    width: 20%;
+    margin-right: 10px;
+  }
+}
+
+.bgcont {
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  z-index: 0;
+  position: fixed;
+}
