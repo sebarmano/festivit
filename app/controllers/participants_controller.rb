@@ -12,7 +12,6 @@ class ParticipantsController < ApplicationController
 
   def create
     @participant = Participant.new(participant_params)
-    @participant.email = @participant.applicant.email
     if @participant.save
       sign_in @participant.applicant
       redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"

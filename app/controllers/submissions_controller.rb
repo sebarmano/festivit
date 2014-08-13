@@ -24,11 +24,12 @@ class SubmissionsController < ApplicationController
 
   def create
     @participant = Participant.find(params[:participant_id])
-    @submission = @participant.submissions.new(submission_params)
+    @submission = Submission.new(submission_params)
     authorize_action_for(@submission)
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
+        @participant.fest_participant_submissions.create(:submission_id => @submission.id)
         format.html {redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
