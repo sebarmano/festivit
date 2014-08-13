@@ -10,6 +10,7 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   has_many :submissions, :through => :application_processes
   has_many :fests, :through => :application_processes
+  accepts_nested_attributes_for :role_types
 
   def name
     "#{lname}, #{fname}"

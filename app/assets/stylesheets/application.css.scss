@@ -10,110 +10,82 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-
  *= require_self
  */
 
-@import 'bourbon';
+@import "bourbon";
 @import "base/base";
-@import 'neat';
-
-header {
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 100% 90%,
-                         bottom;
-  margin-bottom: 2em;
-  @include outer-container;
-
-  nav {
-    @include span-columns(6);
-    @include shift(6);
-    @include omega;
-    color: white;
-    word-spacing: 1em;
-    padding: 3em 2em;
-
-  }
-
-  section {
-    @include span-columns(3);
-    @include shift(1);
-    height: 15em;
-    color: white;
-  }
-
-  aside {
-    @include span-columns(4);
-    @include shift(2);
-    // border-right: 3px solid white;
-    // border-top: 3px solid white;
-    // border-left: 3px solid white;
-    // border-bottom: 0px solid white;
-    padding:  2em;
-    color: white;
-    margin-top: -1em;
-  }
-}
-
-article {
-  @include outer-container;
-  margin-bottom: 4em;
-  section {
-    @include span-columns(6);
-    @include shift(2);
-  }
-  aside {
-    @include span-columns(4);
-    @include omega;
-
-  }
-
-}
-
-footer {
-  @include outer-container;
-  background-color: #82C9C1;
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 0%,
-                         bottom;
-  color: white;
-  position: absolute;
-  padding: 2em;
-    z-index: 100;
-    bottom: 0;
-    width: 100%;
-
-}
-
-
-
-
-
-
-
-.form-inputs{
-  margin: auto;
-  text-align:center;
-  width: 250px;
-}
-
-.form-actions{
-  text-align:center;
-}
-
+@import "neat";
+@import "submission";
+@import "participants";
+@import "login";
+@import "welcome";
 
 .container {
   @include outer-container;
-  /*   margin: auto;
-  max-width: 965px; */
+
 }
 
-.logIn {
-  @include span-columns(4);
-  @include shift(4);
+body {
+  margin: 0 auto;
 }
+
+header.topbar {
+  background-color: rgba(0,0,0,.2);
+  margin: auto 0;
+  width: 100%;
+  position: fixed;
+  top:0;
+  z-index: 100;
+  padding: .5em;
+
+  @include background-image(linear-gradient( bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.0) 100%));
+  div {
+    @include outer-container;
+    div.logo {
+        @include span-columns(2);
+        @include media($mobile) {
+          @include span-columns(2);
+          @include shift(0);
+
+        }
+        // @include shift(0);
+        color: white;
+      }
+
+      ul.nav {
+        @include span-columns(4);
+        @include shift(6);
+        @include omega;
+        @include media($mobile) {
+          @include span-columns(4);
+          @include shift(0);
+        }
+        color: white;
+        right: 0;
+        padding: .7em 0em;
+
+        li {
+          display: inline-block;
+          padding: 0em .5em .7em 0em;
+          position: relative;
+          right: 0;
+          // float: right;
+        }
+        a {
+          color: rgba(255,255,255,.85);
+          &:hover {
+            color: rgba(255,255,255,1)
+          }
+        }
+      }
+    }
+  }
+
+  section {
+    @include outer-container;
+    margin-top: 8em;
+    article {
+      @include span-columns(12);
+    }
+  }

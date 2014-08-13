@@ -1,29 +1,35 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
   before_action :authenticate_user!
+  # authorize_actions_for :user_type
 
   def index
     @submissions = Submission.all
   end
 
   def show
-
+    @participant = Participant.find(params[:participant_id])
   end
 
   def new
-    @submission = Submission.new
+    @participant = Participant.find(params[:participant_id])
+    @submission = @participant.submissions.new
+    @role = @participant.role_types.first.name
+    authorize_action_for(@submission)
   end
 
   def edit
-
+    @participant = Participant.find(params[:participant_id])
   end
 
   def create
-    @submission = Submission.new(submission_params)
+    @participant = Participant.find(params[:participant_id])
+    @submission = @participant.submissions.new(submission_params)
+    authorize_action_for(@submission)
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
-        format.html {redirect_to @submission, notice: 'Your application was created!'}
+        format.html {redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
         format.html {render :new}
@@ -33,10 +39,12 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    @participant = Participant.find(params[:participant_id])
+    @role = @participant.role_types.first # TODO: allow for multi role sign up
     respond_to do |format|
       if @submission.update(submission_params)
         @submission.mail_if_ready
-        format.html { redirect_to @submission, notice: 'Your application was updated!'}
+        format.html { redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was updated!'}
         format.json { render :show, status: :created, location: @submission }
       else
         format.html {render :new}
@@ -67,7 +75,6 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit( :bio, :site, :tag, :first_name, :last_name, :phone, :email,
-                                            attachments_attributes: [:id, :title, :link, :image])
+      params.require(:submission).permit!
   end
 end

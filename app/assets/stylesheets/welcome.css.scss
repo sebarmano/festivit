@@ -1,9 +1,34 @@
-html
-  head
-    title festivit for the rest of it
-    meta name="keywords" content="festival"
+div.bg1 {
+  position: fixed;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  z-index: 0;
+}
 
-  body
-    header
-      h1 festivit for the rest of it
-      = image_tag("logo_w.svg" )
+
+
+
+            // #parallaxContainer
+            //   .layer1
+            //   .layer2
+            //   .layer3
+            //
+            // #parallaxContainer {
+            //   div.layer1 {
+            //     background-image: url('bg.jpg');
+            //     // position: absolute;
+            //     height: 800px;
+            //     width: 100%;
+            //
+            //   }
+            //   div.layer2 {
+            //     background-image: url('logistics_woah.png');
+            //     height: 800px;
+            //     width: 100%;
+            //   }
+            //   div.layer3 {
+            //
+            //   }
+            // }
