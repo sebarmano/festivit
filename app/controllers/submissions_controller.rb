@@ -9,6 +9,9 @@ class SubmissionsController < ApplicationController
 
   def show
     @participant = Participant.find(params[:participant_id])
+    # TODO: need to fix all the blah.first
+    @submission = @participant.submissions.first
+    @role = @participant.role_types.first.name
   end
 
   def new
@@ -29,6 +32,7 @@ class SubmissionsController < ApplicationController
     @submission.mail_if_ready
     respond_to do |format|
       if @submission.save
+        @participant.fest_participant_submissions.create(:submission_id => @submission.id)
         format.html {redirect_to participant_submission_path(@participant,@submission), notice: 'Your application was created!'}
         format.json { render :show, status: :created, location: @submission }
       else
@@ -75,6 +79,11 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-      params.require(:submission).permit!
+      params.require(:submission).permit(:bio, :website, :complete, :group_name, :craft_desc, :photo_desc,
+                                         :booth_desc, :practice_type, :practice_lic_no,
+                                         :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
+                                         :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
+                                         :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
+                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type ])
   end
 end

@@ -1,6 +1,6 @@
 = simple_form_for [@participant, @submission] do |f|
   = f.input "group_name"
-  = @role.inspect
+  = @participant.fname
   - if @role == "Performer"
     = f.input "bio"
 
