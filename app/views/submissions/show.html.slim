@@ -6,42 +6,68 @@
 
   h3 Band Information
 
-  ul.showBand
-      li participant.fname
-      li participant.lname
-      li participant.phone
-      li participant.website
-      li participant.twitter
-      li participant.facebook
-  ul.showBand
+  ul.showParticipant
     - unless @participant.nil?
       li = @participant.fname
       li = @participant.lname
       li = @participant.phone
+      li = @participant.email
       li = @participant.twitter_link
       li = @participant.facebook_link
-      / - unless attachment.link == ""
-      /   li = embed(attachment.link)
-      / -  if attachment.image
-      /   li = image_tag attachment.image.thumb('400x200#').url
+      li = @participant.street_address
+      li = @participant.city
+      li = @participant.state
+      li = @participant.zip
+      li = @participant.country
+    br
 
+    - if @role == "Performer"
+      li = @submission.group_name
+      li = @submission.bio
+      li = @submission.website
 
-  .video
+    - if @role == "Craft Vendor"
+      ul.showCraft
+        li = @submission.group_name
+        li = @submission.bio
+        li = @submission.website
+        li = @submission.booth_desc
+        /li = @submission.electrical
+
+    - if @role == "Food Vendor"
+      ul.showFood
+        li = @submission.group.name
+        li = @submission.website
+
+    - if @role == "Healing Artist"
+      ul.showHeal
+        li = @submission.group.name
+        li = @submission.website
+        li = @submission.practice_no
+        li = @submission.practice_lic_no
+        li = @submission.practice_exp_date
+        li = @submission.practice_years
+
     - @submission.attachments.each do |attachment|
-      = embed(attachment.link)
+      - unless attachment.link == ""
+       li = embed(attachment.link)
+      -  if attachment.image
+         li = image_tag attachment.image.thumb('400x200#').url
 
-    - @submission.attachments.each do |attachment|
-      = embed(attachment.link)
+  /- unless @submission.attachments == nil
+  /  .video
+  /    - @submission.attachments.each do |attachment|
+  /     = embed(attachment.link)
 
-  .music
-    iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
+  /.music
+  /  iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
+  /
+  /  iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
 
-    iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
-
-  .reccomendation
-    p This band rocks! I can't wait to see them again!
+  /.reccomendation
+  /  p This band rocks! I can't wait to see them again!
 .adminTools
   - if current_user.admin?
    =button_to 'Approve', action: 'approve'
-  = link_to 'Edit', edit_participant_submission_path(@participant, @submission)
+  = link_to 'Edit', edit_participant_submission_path
   / = link_to 'Back', submissions_path
