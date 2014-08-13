@@ -13,7 +13,7 @@ class Submission < ActiveRecord::Base
   include Authority::Abilities
 
   def mail_if_ready
-    return nil unless complete
+    return nil if complete
     @participant = self.participants.first
     SubmissionMailer.init_apply(@participant.applicant).deliver
     SubmissionMailer.init_admin(@participant.applicant).deliver
