@@ -1,10 +1,15 @@
-section
-  article
-    h1
-      |  #{@applicant.fname}
-    p
-      | #{@applicant.fname} has submitted a new application.
-    br
-       = link_to "Click to Review Application", edit_submission_url(@applicant)
+
+doctype html
+html
+    head
+      meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    body
+      h1
+        |  #{@applicant.fname}
+      p
+        | #{@applicant.fname} has submitted a new application.
+      br
+         = link_to "Click to Review Application", participant_submission_url(@applicant, @applicant.submissions.first)
+
 
     p Thanks for your interest in being part of festivit and have a great day!
