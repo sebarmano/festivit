@@ -25,6 +25,7 @@ gem 'acts-as-taggable-on'
 gem 'roo'
 gem 'smarter_csv'
 gem 'active_importer'
+gem 'font-awesome-sass'
 gem 'google_drive'
 
 gem 'pry-byebug' , group: :development
