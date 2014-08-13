@@ -27,7 +27,7 @@ h1{
 }
 
 #new_submission{
-max-width: 150px;
+max-width: 600px;
 }
 
 #newBand{
@@ -93,19 +93,37 @@ max-width: 150px;
   // width: 250px;
 }
 
+th{
+  text-align: center;
+}
+
 td{
   .photo{
     height: 112px;
   }
   .decision{
-    width:107px;
+    width: 107px;
   }
   .modalContainer{
     height: 500px;
   }
+  .tags{
+    padding-left: 25px;
+  }
+  .social{
+    img{
+      height: 50px;
+    }
+    margin-left: 23px;
+  }
 }
+
+.paid{
+  margin-left: 30px;
+}
+
 .dashboardPhoto{
-  padding-top:10px;
+  padding-top: 20px;
   img{
     height: 43px;
   }
@@ -113,6 +131,7 @@ td{
 //Modal Refill
 
 .modal {
+  margin-left: 25px;
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: gray;

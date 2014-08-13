@@ -1,4 +1,14 @@
 = simple_form_for [@participant, @submission] do |f|
+  - if @role == "Performer"
+    h1 Performer Application
+  - if @role == "Volunteer"
+    h1 Volunteer Application
+  - if @role == "Healing Artist"
+    h1 Healing Artist Application
+  - if @role == "Craft Vendor"
+    h1 Craft Vendor Application
+  - if @role == "Food Vendor"
+    h1 Food Vendor Application
   = f.input "group_name"
 
   - if @role == "Performer"
@@ -57,14 +67,34 @@
    = f.input "camping", :label => "Will you be camping at the festival?"
    = f.input "complete", :label => "If application is complete, please check this box."
 
+  - if @role == "Performer"
+    h3 Photos
+    #photos
+      = f.simple_fields_for :photos do |photo|
+        = render 'photo_fields', :f => photo
+      .links
+        = link_to_add_association 'add more photos',f , :photos
+    h3 Songs
+    #songs
+      = f.simple_fields_for :songs do |song|
+        = render 'song_fields', :f => song
+      .links
+        = link_to_add_association 'add more songs',f , :songs
+    h3 Videos
+    #videos
+      = f.simple_fields_for :videos do |video|
+        = render 'video_fields', :f => video
+      .links
+        = link_to_add_association 'add more videos',f , :videos
 
-  - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
+  - if @role == "Craft Vendor" || @role == "Food Vendor"
     h3 Attachments
     #attachments
       = f.simple_fields_for :attachments do |attachment|
         = render 'attachment_fields', :f => attachment
       .links
         = link_to_add_association 'add more attachments',f , :attachments
+
   = f.input "camping"
   =f.input "complete"
 
