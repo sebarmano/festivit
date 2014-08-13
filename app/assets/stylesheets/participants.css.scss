@@ -28,3 +28,12 @@
     margin-right: 10px;
   }
 }
+
+.bgcont {
+  background-image: url('blue_tint_x4.png');
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  z-index: 0;
+  position: fixed;
+}
