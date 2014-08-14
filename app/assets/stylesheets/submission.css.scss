@@ -26,7 +26,10 @@ h1{
 }
 
 #new_submission{
-max-width: 100%;
+<<<<<<< HEAD
+max-width: 600px;
+
+
 }
 
 #newBand{
@@ -92,19 +95,37 @@ max-width: 100%;
   // width: 250px;
 }
 
+th{
+  text-align: center;
+}
+
 td{
   .photo{
     height: 112px;
   }
   .decision{
-    width:107px;
+    width: 107px;
   }
   .modalContainer{
     height: 500px;
   }
+  .tags{
+    padding-left: 25px;
+  }
+  .social{
+    img{
+      height: 50px;
+    }
+    margin-left: 23px;
+  }
 }
+
+.paid{
+  margin-left: 30px;
+}
+
 .dashboardPhoto{
-  padding-top:10px;
+  padding-top: 20px;
   img{
     height: 43px;
   }
@@ -113,6 +134,7 @@ td{
 //Modal Refill
 
 .modal {
+  margin-left: 25px;
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: gray;
@@ -143,6 +165,23 @@ td{
     width: 64px;
     //margin-bottom: $base-line-height;
   }
+
+  .btnMusic {
+    @include button(simple, #477DCF);
+    //padding: 5px 5px;
+    font-size: 1em;
+    height: 64px;
+    width: 128px;
+    //margin-bottom: $base-line-height;
+  }
+
+  .modal {
+    margin-left: 25px;
+    $modal-padding: 3em;
+    $modal-background: $base-background-color;
+    $modal-close-color: gray;
+    $modal-image-height: 648px;
+    //$modal-image-width: $modal-image-height;
 
   .modal-open {
     overflow: hidden;

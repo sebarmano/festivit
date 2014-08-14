@@ -1,3 +1,4 @@
+
 section
   article
     - if @role == "Performer"
@@ -15,6 +16,7 @@ section
     = simple_form_for [@participant, @submission] do |f|
       - unless @role == "Volunteer"
         = f.input "group_name"
+
 
 
       - if @role == "Performer"
@@ -74,6 +76,7 @@ section
 
       - if @role == "Craft Vendor"
        = f.input "craft_desc", :label => "Description of your craft:"
+
 
        = f.input "photo_desc", :label => "Photo descriptions:", :label_html => { class: "tooltip-input" }
          i.fa.fa-question.tooltip-item
