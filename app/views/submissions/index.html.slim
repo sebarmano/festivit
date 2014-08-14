@@ -39,7 +39,9 @@
             .modal
               label for="modal-1"
                 .btn.js-btn
-                   = submission.photos.first.inspect
+                  - submission.attachments.each do |attachment|
+                    -  if attachment.image
+                       = image_tag attachment.image.thumb('40x40#').url
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner

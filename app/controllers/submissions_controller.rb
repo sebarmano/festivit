@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.all
+
   end
 
   def show
@@ -18,6 +19,7 @@ class SubmissionsController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     @submission = @participant.submissions.new
     @role = @participant.role_types.first.name
+    @types = ['song', 'video', 'photo']
     authorize_action_for(@submission)
   end
 
