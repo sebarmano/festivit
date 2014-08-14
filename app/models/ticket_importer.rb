@@ -20,7 +20,7 @@ class TicketImporter < ActiveImporter::Base
   end
 
   column 'Billing Last Name', :participant_id do |lname, fname|
-    Participant.find_by(name: lname, fname)
+    Participant.find_by(name: "#{lname}, #{fname}")
   end
 
   on :import_failed do |ex|
