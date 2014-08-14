@@ -16,16 +16,17 @@ div.pnl1 {
 
   div.main {
     @include outer-container;
-    padding: 3em;
+    padding: 5em;
     div.block {
       @include span-columns(3);
       text-align: center;
       h3 {
         margin-bottom: 1em;
+        margin-top: 21
       }
 
-      p.smoothanchor {
-        margin-top: 1em;
+      a {
+        color: $dark-gray;
       }
 
     }
