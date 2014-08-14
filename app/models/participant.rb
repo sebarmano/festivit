@@ -10,6 +10,8 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
+  validates_uniqueness_of :lname, :scope => [:fname, :email]
+
   def name
     "#{lname}, #{fname}"
   end
@@ -18,8 +20,13 @@ class Participant < ActiveRecord::Base
     tickets.group(:ticket_type).count
   end
 
+  def import(file)
+    ImporterWootix.import(file.path)
+  end
+
   def total_tickets
     tickets.map {|t| t.qty.to_i}.reduce(:+)
+
   end
 
   def self.search(search)

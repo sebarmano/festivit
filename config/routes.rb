@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :participants, only: [:new, :create, :edit, :show, :index] do
     resources :submissions, except: :index
     collection {
-	  get :customers
+	    get :customers
       get :import
       post :import
     }
@@ -19,12 +19,31 @@ Rails.application.routes.draw do
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
+
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"
+
+  get 'fests/import', to: "fests#import", :as => :import_fests
+  post 'fests/import', to: "fests#import"
+
+  get 'ticket_types/import', to: "ticket_types#import", :as => :import_ticket_types
+  post 'ticket_types/import', to: "ticket_types#import"
 
   resources :tickets do
     collection do
       put :pick_up
+      post :import
+    end
+  end
+
+  resources :ticket_types do
+    collection do
+      post :import
+    end
+  end
+
+  resources :fests do
+    collection do
       post :import
     end
   end
