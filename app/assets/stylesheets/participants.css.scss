@@ -28,3 +28,26 @@
     margin-right: 10px;
   }
 }
+
+.pick_up {
+  @include outer-container;
+
+  .button-add {
+    @include span-columns(1);
+    @include button(blue);
+    text-align: center;
+  }
+
+  .tickets_form{
+    @include span-columns(2);
+    text-align: center;
+    width: 50%;
+ } 
+
+  .button-subtract {
+    @include span-columns(1);
+    @include button(red);
+    text-align: center;
+  }
+}
+

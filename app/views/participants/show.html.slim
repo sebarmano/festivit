@@ -7,14 +7,12 @@ h2
 ul
   - @participant.tickets.order(:ticket_type_id).each do |ticket|
     - unless ticket.qty== '0' 
-      li = "Order: #{ticket.online_order_id} - #{ticket.ticket_type.name}, Total: #{ticket.qty}, Remaining: #{ticket.remaining}"
+      li = "#{ticket.ticket_type.name}: #{pluralize(ticket.qty, "ticket")} (remaining #{ticket.remaining}) - Order: #{ticket.online_order_id} "
       = fields_for "tickets[]", ticket do |f|
-        = f.label :picked_up, 'To pick up:'
-        #pick_up
-          = button_to "+", "#"
-
+        .pick_up
+          = link_to "-", "#", class:"button-subtract"
           = f.number_field :picked_up, max: ticket.remaining, min: 0,
-            value: ticket.remaining
-          = button_to "-", "#"
+            value: ticket.remaining, class:"tickets_form"
+          = link_to "+", "#", class:"button-add"
 
 = submit_tag "Submit picked up tickets"

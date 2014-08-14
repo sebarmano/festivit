@@ -23,19 +23,12 @@ class ParticipantsController < ApplicationController
 
   def show
     @participant = Participant.find(params[:id])
-    @submission = @participant.submissions.last
   end
 
   def customers
     @participants = Participant.customers.order(:lname, :fname)
     render template: 'participants/index'
   end
-
-  # def import
-  #   WootixImporter.import(params[:file])
-  #   #Participant.import(params[:file])
-  #   redirect_to participants_path, notice: "Participants imported."
-  # end
 
   def import
     uploaded_io = params[:file]
