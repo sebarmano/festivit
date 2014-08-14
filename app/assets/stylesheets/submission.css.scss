@@ -92,13 +92,23 @@ max-width: 100%;
   // width: 250px;
 }
 
-.form-actions{
-  // text-align:center;
+td{
+  .photo{
+    height: 112px;
+  }
+  .decision{
+    width:107px;
+  }
+  .modalContainer{
+    height: 500px;
+  }
 }
-.modalContainer{
-  height: 500px;
+.dashboardPhoto{
+  padding-top:10px;
+  img{
+    height: 43px;
+  }
 }
-
 //Modal Refill
 
 .modal {
@@ -126,7 +136,10 @@ max-width: 100%;
 
   .btn {
     @include button(simple, #477DCF);
-    font-size: $base-font-size;
+    padding: 20px 9px;
+    font-size: 1em;
+    height: 64px;
+    width: 64px;
     //margin-bottom: $base-line-height;
   }
 
