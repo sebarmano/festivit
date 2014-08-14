@@ -163,6 +163,23 @@ td{
     //margin-bottom: $base-line-height;
   }
 
+  .btnMusic {
+    @include button(simple, #477DCF);
+    //padding: 5px 5px;
+    font-size: 1em;
+    height: 64px;
+    width: 128px;
+    //margin-bottom: $base-line-height;
+  }
+
+  .modal {
+    margin-left: 25px;
+    $modal-padding: 3em;
+    $modal-background: $base-background-color;
+    $modal-close-color: gray;
+    $modal-image-height: 648px;
+    //$modal-image-width: $modal-image-height;
+
   .modal-open {
     overflow: hidden;
   }
