@@ -39,9 +39,11 @@ class ParticipantsController < ApplicationController
 
   def import
     uploaded_io = params[:file]
-    importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+    importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
     importer.import
     redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+  else
+    @participants = Participant.all
   end
 
   private
