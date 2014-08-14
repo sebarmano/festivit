@@ -6,7 +6,7 @@ h2
 
 ul
   - @participant.tickets.order(:ticket_type_id).each do |ticket|
-    - unless ticket.qty== '0' 
+    - unless ticket.qty== '0'
       li = "#{ticket.ticket_type.name}: #{pluralize(ticket.qty, "ticket")} (remaining #{ticket.remaining}) - Order: #{ticket.online_order_id} "
       = fields_for "tickets[]", ticket do |f|
         .pick_up

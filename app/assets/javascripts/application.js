@@ -21,7 +21,7 @@ $(document).ready(function() {
     console.log("hi there");
     elm = $(this).parent().children(".tickets_form");
     var val = elm.val();
-    elm.val(val-1);
+    elm.val(Number(val)-1);
   });
 
   $(".button-add").click(function(e) {

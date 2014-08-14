@@ -39,9 +39,8 @@
   }
 
   .tickets_form{
-    @include span-columns(2);
-    text-align: center;
-    width: 50%;
+    @include span-columns(1);
+    text-align: right;
  } 
 
   .button-subtract {
@@ -49,5 +48,12 @@
     @include button(red);
     text-align: center;
   }
+}
+
+.contact  {
+  @include outer-container;
+  @include span-columns(12);
+  padding: 10px 0;
+  border-bottom: 1px solid;
 }
 

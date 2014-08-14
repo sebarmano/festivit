@@ -8,8 +8,8 @@
 ul id="participants_list"
   - @participants.each do |participant|
     - if participant.total_tickets 
-      li
-        h3 
+      li class="contact"
+        h2 
           = link_to participant.name, participant
         / h4 Tickets
           ul
