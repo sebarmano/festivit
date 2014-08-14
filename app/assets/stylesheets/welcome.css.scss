@@ -1,5 +1,7 @@
 div.bg1 {
-  background-image: url('bg.jpg');
+  // display: none;
+  // position: fixed;
+  background-image: asset-url('bg.jpg');
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
@@ -31,7 +33,7 @@ div.pnl1 {
 }
 
 div.cont1 {
-  background-image: url('iphone.jpg');
+  background-image: asset-url('iphone.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -52,7 +54,7 @@ div.cont1 {
 }
 
 div.cont2 {
-  background-image: url('macbook.jpg');
+  background-image: asset-url('macbook.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -73,7 +75,7 @@ div.cont2 {
 }
 
 div.cont3 {
-  background-image: url('secret.jpg');
+  background-image: asset-url('secret.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -93,7 +95,7 @@ div.cont3 {
 }
 
 div.cont4 {
-  background-image: url('iphonec.png');
+  background-image: asset-url('iphonec.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
