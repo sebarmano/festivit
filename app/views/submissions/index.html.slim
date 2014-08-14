@@ -7,7 +7,7 @@
       th
         | Paid?
       th
-        | Band Name
+        | Performer
       th
         | Band Photo
       th
@@ -29,20 +29,19 @@
         - unless participant.nil?
           /if participant isn't showing it means there isn't one
           td
-            button Y
-            button N
+            button.decision Accepted
+            button.decision Declined
           td
-            button Y
-            button N
+            button $
           td
             /TODO: need to get seed data for band
             a href="#"
-              | Smashing
-            /= submission.group_name
+              = submission.group_name
           td
             .modal
               label for="modal-1"
-                .btn.js-btn Photo
+                .btn.js-btn 
+                    | Photo
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
@@ -71,10 +70,14 @@
                   .modal-inner
                     label.modal-close for="modal-3"
                     .modalContainer
-                      = image_tag('soundcloud.jpg')
+                      h1 = submission.group_name
+                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
+                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
+                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
+                /= image_tag('soundcloud.jpg')
                         /= embed(attachment.link)
           td
-            a href="https://www.facebook.com/skillet"
+            a href="https://www.facebook.com"
               = image_tag('facebook.png')
               /= submission.facebook_link
           td
