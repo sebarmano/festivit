@@ -1,4 +1,6 @@
-class WootixImporter < ActiveImporter::Base
+class ImporterWootix < ActiveImporter::Base
+  class NoFestError < StandardError; end
+
   imports Ticket
 
   skip_rows_if { row['Item Name'].blank? }
@@ -42,15 +44,23 @@ class WootixImporter < ActiveImporter::Base
     sku_regex = /([A-Z]{3}20\d\d)([A-Z0-9]{3})/
     match = row['Item SKU'].match(sku_regex)
     fest_code = match[1] if match
+    raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
 
     if fest_code
       # find or create fest name
-      fest = Fest.where(
-        fest_code: fest_code
-      ).first_or_initialize
+      fest = Fest.where(fest_code: fest_code).first
+
+      raise NoFestCode, "No fest with code #{fest_code}" unless fest
+
+      role_type = RoleType.where(name: 'customer').first_or_initialize
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
+
+      fprt = FestParticipantRoleType.where(:participant => participant,
+                                           :fest => fest,
+                                           :role_type => role_type).first_or_initialize
+      fprt.save!
     end
   end
 
@@ -61,13 +71,6 @@ class WootixImporter < ActiveImporter::Base
   on :import_finished do
     Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
   end
-
-  # TODO - add option to participant import for willcall & dreamteam
-  # FOR THE WILL CALL & DREAMTIME IMPORT FILES ONLY
-  # column('First name', :full_name do |first_name|
-  #   last_name = row['Last name']
-  #   [first_name, last_name].compact.join(' ')
-  # end
 end
 
 

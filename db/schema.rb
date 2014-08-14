@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812153859) do
+ActiveRecord::Schema.define(version: 20140814144722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.integer  "participant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "fest_id"
+    t.integer  "fest_id"
   end
 
   create_table "fest_participant_submissions", force: true do |t|
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.text     "mission_statement"
     t.text     "handouts"
     t.boolean  "camping"
+    t.string   "electrical"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
@@ -139,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.integer  "fest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "productpairsid"
   end
 
   create_table "tickets", force: true do |t|
@@ -152,7 +154,6 @@ ActiveRecord::Schema.define(version: 20140812153859) do
     t.integer  "participant_id"
     t.integer  "picked_up",       default: 0
     t.text     "customer_notes"
-    t.string   "productpairsid"
     t.string   "item_name"
   end
 
