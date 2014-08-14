@@ -27,7 +27,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @participant = Participant.find(params[:participant_id])
-    @submission = @participant.submissions.new(submission_params)
+    @submission = Submission.new(submission_params)
     authorize_action_for(@submission)
 
     respond_to do |format|

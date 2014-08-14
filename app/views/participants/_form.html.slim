@@ -1,6 +1,8 @@
-
 section
   article
+    H1 Apply to Shakori Hills!
+    H6 Step 1 (of 2): Your contact info
+    br
     = simple_form_for @participant do |f|
      .form
        = f.simple_fields_for :role_types do |r|
@@ -19,7 +21,6 @@ section
          span.street
            = f.input :street_address
 
-
          span.city
            = f.input :city
          span.state
@@ -28,7 +29,4 @@ section
            = f.input :zip
          = f.input :country, as: :string
        = f.input :phone
-       = f.input :facebook_link
-       = f.input :twitter_link
-
      = f.button :submit

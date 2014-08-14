@@ -87,7 +87,7 @@ Volunteer.create(email: "volunteer@volunteer.com",
 )
 
 customers = [];
-# fest_participation_role_type
+# fest_participant_role_type
 10.times do |n|
   customer = FestParticipantRoleType.create(
     participant_id:  n,
