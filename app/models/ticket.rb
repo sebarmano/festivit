@@ -4,6 +4,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :ticket_type
   belongs_to :participant
 
+  validates_uniqueness_of :ticket_type_id, :scope => [:online_order_id]
+
   def remaining
     qty.to_i - picked_up.to_i
   end

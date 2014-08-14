@@ -1,4 +1,4 @@
-class WootixImporter < ActiveImporter::Base
+class ImporterWootix < ActiveImporter::Base
   imports Ticket
 
   skip_rows_if { row['Item Name'].blank? }
@@ -43,14 +43,34 @@ class WootixImporter < ActiveImporter::Base
     match = row['Item SKU'].match(sku_regex)
     fest_code = match[1] if match
 
+    # # lookup role_type
+    # sku_regex = /([A-Z]{3}20\d\d)([A-Z0-9]{3})/
+    # match = row['Item SKU'].match(sku_regex)
+    # fest_code = match[1] if match
+    #
+    #role_type =
+
     if fest_code
       # find or create fest name
       fest = Fest.where(
         fest_code: fest_code
       ).first_or_initialize
 
+      fest.update!( :name => row['name'],
+                    :fest_code => row['fest_code'])
+
+      role_type = RoleType.where(
+          role_type: role_type
+      ).first_or_initialize
+
       model.ticket_type.fest = fest
       model.ticket_type.save!
+
+      model.participant.fest_participant_role_type.participant_id = participant
+      model.participant.fest_participant_role_type.fest_id = fest
+      model.participant.fest_participant_role_type.role_type_id = role_type
+            #TODO - make sure role_type #5 is customer in live data
+
     end
   end
 
@@ -61,13 +81,6 @@ class WootixImporter < ActiveImporter::Base
   on :import_finished do
     Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
   end
-
-  # TODO - add option to participant import for willcall & dreamteam
-  # FOR THE WILL CALL & DREAMTIME IMPORT FILES ONLY
-  # column('First name', :full_name do |first_name|
-  #   last_name = row['Last name']
-  #   [first_name, last_name].compact.join(' ')
-  # end
 end
 
 
