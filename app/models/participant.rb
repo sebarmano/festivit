@@ -23,6 +23,12 @@ class Participant < ActiveRecord::Base
   def import(file)
     ImporterWootix.import(file.path)
   end
+
+  def total_tickets
+    tickets.map {|t| t.qty.to_i}.reduce(:+)
+
+  end
+
   def self.search(search)
     if search
       where("lname LIKE ?","%#{search}%")

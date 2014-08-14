@@ -1,11 +1,120 @@
 div.bg1 {
-  position: fixed;
+  // display: none;
+  // position: fixed;
   background-image: url('bg.jpg');
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
   z-index: 0;
 }
+
+
+div.pnl1 {
+  background-color: white;
+  width: 100%;
+
+  div.main {
+    @include outer-container;
+    padding: 3em;
+    div.block {
+      @include span-columns(3);
+      text-align: center;
+      h3 {
+        margin-bottom: 1em;
+      }
+
+      p.smoothanchor {
+        margin-top: 1em;
+      }
+
+    }
+  }
+}
+
+div.cont1 {
+  background-image: url('iphone.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+  color: white;
+
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(1);
+      padding-top: 14em;
+    }
+  }
+
+}
+
+div.cont2 {
+  background-image: url('macbook.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+  color: white;
+
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(1);
+      padding-top: 18em;
+    }
+  }
+
+}
+
+div.cont3 {
+  background-image: url('secret.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(1);
+      padding-top: 8em;
+    }
+  }
+
+}
+
+div.cont4 {
+  background-image: url('iphonec.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+  color: white;
+
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(7);
+      padding-top: 14em;
+    }
+  }
+
+
+}
+
 
 
 

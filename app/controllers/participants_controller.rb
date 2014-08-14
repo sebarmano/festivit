@@ -7,14 +7,15 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new
     @participant.build_applicant
     @participant.role_types.new
-    @submission = @participant.submissions.last
+    @participant.submissions.new
+    # @submission = @participant.submissions.last
   end
 
   def create
     @participant = Participant.new(participant_params)
-    @participant.email = @participant.applicant.email
     if @participant.save
       sign_in @participant.applicant
+
       redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
     else
       render :new, flash: @participant.errors
@@ -50,7 +51,7 @@ class ParticipantsController < ApplicationController
 
   def participant_params
     params.require(:participant).permit(:fname, :lname, :street_address, :city,
-                                 :state, :zip, :country, :phone, :email,
+                                 :state, :zip, :country, :phone,
                                  :twitter_link, :facebook_link,
                                  applicant_attributes: [:id, :email,:password,
                                                         :password_confirmation],

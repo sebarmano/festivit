@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140813144003) do
     t.text     "mission_statement"
     t.text     "handouts"
     t.boolean  "camping"
+    t.string   "electrical"
   end
 
   add_index "submissions", ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
@@ -151,8 +152,8 @@ ActiveRecord::Schema.define(version: 20140813144003) do
     t.datetime "date_time"
     t.string   "status"
     t.integer  "participant_id"
-    t.text     "customer_notes"
     t.integer  "picked_up",       default: 0
+    t.text     "customer_notes"
     t.string   "item_name"
   end
 
