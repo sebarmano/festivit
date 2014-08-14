@@ -19,11 +19,6 @@
 @import "participants";
 @import "login";
 @import "welcome";
-//= depend_on_asset "bg.jpg"
-//= depend_on_asset "iphone.jpg"
-//= depend_on_asset "macbook.jpg"
-//= depend_on_asset "secret.jpg"
-//= depend_on_asset "iphonec.png"
 
 .container {
   @include outer-container;
