@@ -5,8 +5,6 @@
       th
         | Decision
       th
-        | Paid
-      th
         | Performer
       th
         | Photo
@@ -31,15 +29,15 @@
             button.decision Accept
             button.decision Decline
           td
-            button.paid $
-          td
             /TODO: need to get seed data for band
-            = submission.group_name
+            | Performer
+            span.notPaid $
+            /= submission.group_name
           td
             .modal
               label for="modal-1"
                 .btn.js-btn
-                   = submission.photos.first.inspect
+                   | Photo
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
@@ -58,49 +56,12 @@
                     .modalContainer
                       = image_tag('video.png')
                     //= embed(attachment.link)
-          td
-            / TODO: Add music
-            .modal
-                label for="modal-3"
-                  .btn.js-btn
-                    iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
+          td.btnMusic
+                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
+                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
+                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
 
-            .modal
-                label for="modal-3"
-                  .btnMusic.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-            .modal
-                label for="modal-3"
-                  .btn.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-                /= image_tag('soundcloud.jpg')
+                      /= image_tag('soundcloud.jpg')
                         /= embed(attachment.link)
           td
             .contact
