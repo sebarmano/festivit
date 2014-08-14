@@ -13,7 +13,6 @@ class ParticipantsController < ApplicationController
 
   def create
     @participant = Participant.new(participant_params)
-    @participant.email = @participant.applicant.email
     if @participant.save
       sign_in @participant.applicant
 
