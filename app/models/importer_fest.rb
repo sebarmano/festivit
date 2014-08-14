@@ -10,7 +10,7 @@ class ImporterFest < ActiveImporter::Base
     ).first_or_initialize
   end
 
-  column 'name', :name
+  #column 'name', :name
   column 'fest_code', :fest_code
 
 end

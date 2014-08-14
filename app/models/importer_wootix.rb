@@ -1,4 +1,6 @@
 class ImporterWootix < ActiveImporter::Base
+  class NoFestError < StandardError; end
+
   imports Ticket
 
   skip_rows_if { row['Item Name'].blank? }
@@ -42,35 +44,23 @@ class ImporterWootix < ActiveImporter::Base
     sku_regex = /([A-Z]{3}20\d\d)([A-Z0-9]{3})/
     match = row['Item SKU'].match(sku_regex)
     fest_code = match[1] if match
-
-    # # lookup role_type
-    # sku_regex = /([A-Z]{3}20\d\d)([A-Z0-9]{3})/
-    # match = row['Item SKU'].match(sku_regex)
-    # fest_code = match[1] if match
-    #
-    #role_type =
+    raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
 
     if fest_code
       # find or create fest name
-      fest = Fest.where(
-        fest_code: fest_code
-      ).first_or_initialize
+      fest = Fest.where(fest_code: fest_code).first
 
-      fest.update!( :name => row['name'],
-                    :fest_code => row['fest_code'])
+      raise NoFestCode, "No fest with code #{fest_code}" unless fest
 
-      role_type = RoleType.where(
-          role_type: role_type
-      ).first_or_initialize
+      role_type = RoleType.where(name: 'customer').first_or_initialize
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
 
-      model.participant.fest_participant_role_type.participant_id = participant
-      model.participant.fest_participant_role_type.fest_id = fest
-      model.participant.fest_participant_role_type.role_type_id = role_type
-            #TODO - make sure role_type #5 is customer in live data
-
+      fprt = FestParticipantRoleType.where(:participant => participant,
+                                           :fest => fest,
+                                           :role_type => role_type).first_or_initialize
+      fprt.save!
     end
   end
 
