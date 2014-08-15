@@ -89,6 +89,6 @@ class SubmissionsController < ApplicationController
                                          :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
                                          :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
                                          :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
-                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type] )
+                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type, :song] )
   end
 end
