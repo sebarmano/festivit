@@ -1,16 +1,7 @@
 
 section
   article
-    - if @role == "Performer"
-      h1 Performer Application
-    - if @role == "Volunteer"
-      h1 Volunteer Application
-    - if @role == "Healing Artist"
-      h1 Healing Artist Application
-    - if @role == "Craft Vendor"
-      h1 Craft Vendor Application
-    - if @role == "Food Vendor"
-      h1 Food Vendor Application
+    h1 = @role
     h6 Step 2 (of 2): Application Details
     br
     = simple_form_for [@participant, @submission] do |f|
@@ -32,13 +23,26 @@ section
        = f.input "practice_years", :label => "Length of time practicing:"
 
 
-      - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
-        h3 Attachments
-        #attachments
-          = f.simple_fields_for :attachments do |attachment|
-            = render 'attachment_fields', :f => attachment
-          .links
-            = link_to_add_association 'add more attachments',f , :attachments
+      - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
+        - @types.each do |type|
+          h3 = type.capitalize
+          .attachments class = "#{type}s"
+            = f.simple_fields_for :attachments do |attachment|
+              = render 'attachment_fields', :f => attachment, locals: {:type => type }
+            .links
+              = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
+      /h3 Songs
+        /#attachments
+        /  = f.simple_fields_for :attachments do |attachment|
+        /    = render 'attachment_fields', :f => attachment
+        /  .links
+        /    = link_to_add_association 'add more attachments',f , :attachments
+        /h3 Videos
+        /#attachments
+        /  = f.simple_fields_for :attachments do |attachment|
+        /    = render 'attachment_fields', :f => attachment
+        /  .links
+        /    = link_to_add_association 'add more attachments',f , :attachments
 
       - if @role == "Volunteer"
        = f.input "underage", :label => "Under 18?"

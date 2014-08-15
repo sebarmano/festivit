@@ -20,6 +20,9 @@ doctype html
         | Tags
 
       - @submissions.each do |submission|
+        - photos = submission.attachments.where(type: "photo")
+        - videos = submission.attachments.where(type: "video")
+        - songs = submission.attachments.where(type: "song")
         - participant = submission.participants.first
         tr
           /= submission.group_name
@@ -43,7 +46,8 @@ doctype html
             .modal
               label for="modal-1"
                 .thumbPic
-                   = image_tag('Performer.jpg')
+                  - if photos.first
+                    = image_tag photos.first.image.thumb('50x50x').url
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner

@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.all
+
   end
 
   def show
@@ -18,6 +19,7 @@ class SubmissionsController < ApplicationController
     @participant = Participant.find(params[:participant_id])
     @submission = @participant.submissions.new
     @role = @participant.role_types.first.name
+    @types = ['song', 'video', 'photo']
     authorize_action_for(@submission)
   end
 
@@ -87,9 +89,6 @@ class SubmissionsController < ApplicationController
                                          :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
                                          :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
                                          :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
-                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type ],
-                                         songs_attributes: [:id, :song_title, :song_link],
-                                         photos_attributes: [:id, :photo_desc, :image],
-                                         videos_attributes: [:id, :vid_title, :vid_link])
+                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type] )
   end
 end
