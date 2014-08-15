@@ -29,33 +29,45 @@
   }
 }
 
-.bgcont {
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-attachment: fixed;
-  width: 100%;
-  z-index: 0;
-  position: fixed;
-}
+.ticket-card {
+  border: 1px solid;
+  border-top: 4px solid green;
+  border-radius: 0 0 3px 3px;
+  margin:5px auto;
+  padding: 3px;
+  text-align: center;
+//  box-shadow: 1px 5px 10px gray;
+   box-shadow: 0 2px 4px darken($base-background-color, 10);
+  @include span-columns(5);
+  background: #5cb85c;
+//  @include radial-gradient(#1e5799, #3dc3d1);
 
-.pick_up {
-  @include outer-container;
-
-  .button-add {
-    @include span-columns(1);
-    @include button(blue);
-    text-align: center;
+  p {
+  clear: both;
+  color: white;
+  font-family: sans-serif;
   }
 
-  .tickets_form{
-    @include span-columns(1);
-    text-align: right;
- } 
+  .pick_up {
+    @include span-columns(5 of 5);
+    @include shift(1);
 
-  .button-subtract {
-    @include span-columns(1);
-    @include button(red);
-    text-align: center;
+    .button-add {
+      @include span-columns(1 of 5);
+      @include button(lightblue);
+      text-align: center;
+    }
+
+    .tickets_form{
+      @include span-columns(1 of 5);
+      text-align: right;
+    }
+
+    .button-subtract {
+      @include span-columns(1 of 5);
+      @include button(lightblue);
+      text-align: center;
+    }
   }
 }
 
@@ -66,3 +78,7 @@
   border-bottom: 1px solid;
 }
 
+.submit-button {
+  display: block;
+  clear: both;
+}
