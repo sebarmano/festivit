@@ -22,6 +22,7 @@
         | Tags
 
       - @submissions.each do |submission|
+        - photo = submission.attachments.where(type)
         - participant = submission.participants.first
         tr
           /= submission.group_name

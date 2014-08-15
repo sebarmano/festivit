@@ -49,8 +49,9 @@
         li = @submission.practice_years
 
     - @submission.attachments.each do |attachment|
-      - unless attachment.link == ""
+      - unless attachment.link == nil
        li = embed(attachment.link)
+       li = image_tag thumb(attachment.link), class: "thumb"
       -  if attachment.image
          li = image_tag attachment.image.thumb('400x200#').url
 
