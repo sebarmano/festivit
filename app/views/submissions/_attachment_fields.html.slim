@@ -1,5 +1,8 @@
 .nested-fields
   = f.input :title
-  = f.input :link
-  = f.file_field :image
+  - if type == "song" || type == "video"
+    = f.input :link
+  - if type == "photo"
+    = f.file_field :image
+  = f.hidden_field :type, :value => type
   = link_to_remove_association "remove attachment", f
