@@ -22,7 +22,9 @@
         | Tags
 
       - @submissions.each do |submission|
-        - photo = submission.attachments.where(type)
+        - photos = submission.attachments.where(type: "photo")
+        - videos = submission.attachments.where(type: "video")
+        - songs = submission.attachments.where(type: "song")
         - participant = submission.participants.first
         tr
           /= submission.group_name
