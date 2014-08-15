@@ -13,13 +13,13 @@
   padding-top: 100px;
 }
 
-h1{
-  padding-bottom: 15px;
-  }
-
 .container{
   width: 965px;
 }
+
+h1{
+  padding-bottom: 15px;
+  }
 
 .formView{
   float: left;
@@ -95,62 +95,78 @@ h1{
 }
 
 th{
-  text-align: center;
+  text-align: start;
 }
 
 td{
-  .photo{
-    height: 112px;
-  }
-  .decision{
-    button{
+    text-align: center;
+
+    .photo{
+      height: 112px;
+    }
+
+    .accept{
       background-color: white;
-      border:1px solid #000000;
-      color:black;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 0;
+      width: 60px;
+      button:hover{
+        background-color: green;
+        color: white;
+      }
     }
-    button:hover{
-      background-color: green;
+
+    .decline{
+      background-color: white;
+      border: 1px solid #000000;
+      color: black;
+      font-size: .75em;
+      padding: 0;
+      width: 60px;
+      :hover{
+        background-color: red;
+      }
+
     }
-    font-size: .75em;
-    width: 80px;
-  }
-  .modalContainer{
-    height: 500px;
-  }
-  .tags{
-    padding-left: 25px;
-  }
-  .social{
-    img{
-      height: 50px;
+    .paid{
+      margin-left: 5px;
+      height: 10px;
     }
-    margin-left: 23px;
-  }
-  .btnMusic {
-    @include button(simple, #477DCF);
-    //padding: 5px 5px;
-    font-size: 1em;
-    height: 64px;
-    width: 128px;
-    margin-right: 10px;
-    //margin-bottom: $base-line-height;
-  }
+    .modalContainer{
+      height: 500px;
+    }
+    .tags{
+      padding-left: 25px;
+    }
+    .social{
+      float:left;
+      clear:both;
+      .fa{
+        background:none!important
+      }
+    }
+    .contact{
+      float:right;
+    }
+    .clearFloat{
+      clear:both;
+    }
+    .btnMusic {
+      height: 20px;
+      width: 128px;
+      float:left;
+      margin-bottom: 5px;
+    }
 }
 
-.notPaid{
-  background-color: #cec8c8;
-  border: 6px black;
-  border-radius: 50%;
-  color: black;
-  margin-left: 5px;
-  padding: 5px;
-  }
 
 .dashboardPhoto{
-  padding-top: 20px;
-  img{
-    height: 43px;
-  }
+    padding-top: 20px;
+    img{
+      height: 43px;
+    }
 }
 
 //Modal Refill
@@ -168,13 +184,6 @@ td{
     margin-bottom: 0;
   }
 
-  label img {
-    $img-width: 300px;
-    border-radius: $img-width/2;
-    display: block;
-    max-width: $img-width;
-  }
-
   input[type="checkbox"] {
     display: none;
   }
@@ -185,17 +194,16 @@ td{
     font-size: 1em;
     height: 64px;
     width: 64px;
-    //margin-bottom: $base-line-height;
   }
 
-  .btnMusic {
-    @include button(simple, #477DCF);
-    //padding: 5px 5px;
-    font-size: 1em;
-    height: 64px;
-    width: 128px;
-    margin-right: 10px;
-    //margin-bottom: $base-line-height;
+  .thumbPic {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .thumbVideo {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .modal {
@@ -203,7 +211,7 @@ td{
     $modal-padding: 3em;
     $modal-background: $base-background-color;
     $modal-close-color: gray;
-    $modal-image-height: 648px;
+    $modal-image-height: auto;
     //$modal-image-width: $modal-image-height;
   }
   .modal-open {
@@ -257,7 +265,7 @@ td{
     border-radius: $base-border-radius;
     background: $modal-background;
     margin: auto;
-    max-height: 95%;
+    height: auto;
     position: relative;
     overflow: auto;
     width: 95%;
@@ -298,9 +306,9 @@ td{
         color: $base-font-color;
         line-height: 1.45em;
 
-        @include media($medium-screen) {
-          @include columns(2 8em);
-        }
+/*         @include media(\$medium-screen) {
+  @include columns(2 8em);
+} */
       }
     }
 

@@ -1,3 +1,5 @@
+doctype html
+
 .container.topSpacing
   h1 Band Applications
   table
@@ -15,8 +17,6 @@
       th
         | Contact
       th
-        | Social
-      th
         | Tags
 
       - @submissions.each do |submission|
@@ -26,66 +26,87 @@
         - unless participant.nil?
           /if participant isn't showing it means there isn't one
           td
-            button.decision Accept
-            button.decision Decline
+            button.accept Accept
+            .clearFloat
+              button.decline Decline
           td
             /TODO: need to get seed data for band
-            | Performer
-            span.notPaid $
-            /= submission.group_name
+            span
+              | Performer
+
+              /= submission.group_name
+            span.paid
+              = image_tag('dollar-sign-green.png')
+                    / TODO: Logic if paid
+                    /- submission.paid
+                    /if Paid display icon
           td
             .modal
               label for="modal-1"
-                .btn.js-btn
-                   | Photo
+                .thumbPic
+                   = image_tag('Performer.jpg')
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
                   label.modal-close for="modal-1"
                   .modalContainer
-                    = image_tag('bg.jpg')
+                    = image_tag('Performer.jpg')
           td
             / TODO: Add video
             .modal
                 label for="modal-2"
-                  .btn.js-btn Video
+                  .thumbVideo = image_tag('video.png')
                 input#modal-2.modal-state type="checkbox" /
                 .modal-window
                   .modal-inner
                     label.modal-close for="modal-2"
                     .modalContainer
-                      = image_tag('video.png')
+                    embed width="420" height="345"src="http://www.youtube.com/v/XGSy3_Czz8k"type="application/x-shockwave-flash"
+                    / = image_tag('video.png')
                     //= embed(attachment.link)
           td.btnMusic
-                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                /iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-
+            .clearFloat
+              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            .clearFloat
+              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            .clearFloat
+              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
                       /= image_tag('soundcloud.jpg')
                         /= embed(attachment.link)
           td
-            .contact
+            .box
+              span.social
+                a href= "#"
+                  i.fa.fa-facebook
+                    = link_to"", submission.facebook_link
+                        /= submission.facebook_link
+              span.contact
                 | Bob Smith
-                br
-                | 919-867-5309
-                br
+                /= submission.fname
+                /submission.lname
+              .clearFloat
+              span.social
+                a href= "#"
+                  i.fa.fa-twitter
+                    = link_to "", submission.twitter_link
+                        /= submission.twitter_link
+              .contact
                 a href="#"
                   | E-Mail
-                br
-                  | 07-07-14
-
-          td
-            .social
-              = link_to "Facebook", submission.facebook_link
-
-                br
-                /= submission.facebook_link
-              = link_to "Twitter", submission.twitter_link
-
-                br
-                /= submission.twitter_link
-                = link_to "Website", submission.website
-                /= submission.twitter_link
+                  /= submission.phone
+              .clearFloat
+              .social
+                a href= "#"
+                  i.fa.fa-globe
+                    = link_to "", submission.website
+                      /= submission.twitter_link
+              .contact
+                | 919-867-5309
+                /= submission.email
+              .clearFloat
+              .contact
+                | 07-07-14
+                /= submission.createdOn
           td
             .tags
               | Rock
