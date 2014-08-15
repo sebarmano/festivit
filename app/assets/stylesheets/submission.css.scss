@@ -104,32 +104,6 @@ td{
     .photo{
       height: 112px;
     }
-
-    .accept{
-      background-color: white;
-      border: 1px solid #000000;
-      color: #000000;
-      font-size: .75em;
-      padding: 0;
-      width: 60px;
-      button:hover{
-        background-color: green;
-        color: white;
-      }
-    }
-
-    .decline{
-      background-color: white;
-      border: 1px solid #000000;
-      color: black;
-      font-size: .75em;
-      padding: 0;
-      width: 60px;
-      :hover{
-        background-color: red;
-      }
-
-    }
     .paid{
       margin-left: 5px;
       height: 10px;
@@ -142,9 +116,8 @@ td{
     }
     .social{
       float:left;
-      clear:both;
-      .fa{
-        background:none!important
+      &::before{
+        content:" ";
       }
     }
     .contact{
@@ -153,11 +126,42 @@ td{
     .clearFloat{
       clear:both;
     }
-    .btnMusic {
-      height: 20px;
-      width: 128px;
-      float:left;
-      margin-bottom: 5px;
+    &.tracks {
+      embed{
+        width: 75%;
+        display: block;
+        margin: 5px auto;
+
+      }
+    }
+
+    &.decision {
+      button{
+        display: block;
+        margin: 10 auto;
+        background-color: #FFFFFF;
+        border: 1px solid #000000;
+        color: #000000;
+        font-size: .75em;
+        padding: 10px;
+        width: 80px;
+
+        &.accept{
+          &:hover{
+            background-color: #009900;
+            color: #FFFFFF;
+          }
+
+        }
+
+        &.decline{
+          &:hover{
+            background-color: #990000;
+            color: #FFFFFF;
+          }
+        }
+
+      }
     }
 }
 

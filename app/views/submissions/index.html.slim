@@ -1,7 +1,7 @@
 doctype html
 
 .container.topSpacing
-  h1 Band Applications
+  h1 Performer Applications
   table
     tr
       th
@@ -25,10 +25,9 @@ doctype html
           /= submission.group_name
         - unless participant.nil?
           /if participant isn't showing it means there isn't one
-          td
+          td.decision
             button.accept Accept
-            .clearFloat
-              button.decline Decline
+            button.decline Decline
           td
             /TODO: need to get seed data for band
             span
@@ -64,20 +63,20 @@ doctype html
                     embed width="420" height="345"src="http://www.youtube.com/v/XGSy3_Czz8k"type="application/x-shockwave-flash"
                     / = image_tag('video.png')
                     //= embed(attachment.link)
-          td.btnMusic
-            .clearFloat
-              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-            .clearFloat
-              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-            .clearFloat
-              embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+          td.tracks
+            embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+                      / | Song 3
+                      /| Song 2
+                      /| Song 1
                       /= image_tag('soundcloud.jpg')
                         /= embed(attachment.link)
           td
             .box
               span.social
                 a href= "#"
-                  i.fa.fa-facebook
+                  i.fa.fa-facebook-square
                     = link_to"", submission.facebook_link
                         /= submission.facebook_link
               span.contact
