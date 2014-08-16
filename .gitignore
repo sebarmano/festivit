@@ -21,4 +21,8 @@
 *.swp
 *.swo
 
+# added .DS_Store
+.DS_Store
+
 /coverage/
+tags

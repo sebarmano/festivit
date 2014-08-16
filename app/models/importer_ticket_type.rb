@@ -25,7 +25,7 @@ class ImporterTicketType < ActiveImporter::Base
 
     # parse sku
     fest_regex = /^(\w{7})(.*)/
-    match = row['Item SKU'].match(fest_regex)
+    match = row['sku'].match(fest_regex)
     fest_code = match[1] if match
 
     if fest_code
@@ -33,8 +33,16 @@ class ImporterTicketType < ActiveImporter::Base
           fest_code: fest_code
       ).first_or_initialize
 
-      model.fest_id = fest
+      model.fest = fest
       model.save!
     end
+  end
+
+  on :row_error do |ex|
+    Rails.logger.error("Did not import: #{ex}")
+  end
+
+  on :import_finished do
+    Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
   end
 end

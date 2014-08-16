@@ -1,0 +1,103 @@
+.circle-container {
+    position: relative;
+    width: 30em;
+    height: 30em;
+    padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+    border: none;
+    border-radius: 50%;
+    margin: 1.75em auto 0;
+}
+.circle-container a {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+
+    top: 50%; left: 50%;
+    width: 6em; height: 6em;
+    margin: -2em; /* 2em = 4em/2 */ /* half the width */
+}
+.circle-container img { display: block; width: 100%; }
+.deg0 {
+    @include transform(translate(12em) );
+} /* 12em = half the width of the wrapper */
+.lt-ie9 .deg0 {
+    margin-left: 10em;
+}
+.deg45 {
+    @include transform(rotate(60deg) translate(12em) rotate(-60deg));
+
+}
+.lt-ie9 .deg45 {
+    margin: 6.485em;
+}
+.deg135 {
+    @include transform(rotate(120deg) translate(12em) rotate(-120deg));
+}
+.lt-ie9 .deg135 {
+    margin: 6.485em -10.485em;
+}
+.deg180 {
+
+  @include transform(rotate(180deg) translate(12em) rotate(-180deg));
+}
+.lt-ie9 .deg180 {
+    margin-left: -14em;
+}
+.deg225 {
+    @include transform(rotate(240deg) translate(12em) rotate(-240deg));
+
+}
+.lt-ie9 .deg225 {
+    margin: -10.485em;
+}
+.deg315 {
+    @include transform(rotate(300deg) translate(12em) rotate(-300deg));
+}
+.lt-ie9 .deg315 {
+    margin: -10.485em 6.485em;
+}
+
+/* this is just for showing the angle on hover */
+.circle-container a:not(.center):before {
+    position: absolute;
+    width: 4em;
+    color: white;
+    opacity: 0;
+    background: rgba(0,0,0,.5);
+    font: 1.25em/3.45 Courier, monospace;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-indent: -2em;
+    text-shadow: 0 0 .1em deeppink;
+    transition: .7s; /* only works in Firefox */
+    content: attr(class)'°';
+}
+// .circle-container a:hover:before { opacity: 1; }
+
+/* this is for showing the circle on which the images are placed */
+.circle-container:after {
+    position: absolute;
+    top: 2.8em; left: 2.8em;
+    width: 24em; height: 24em;
+    border: none;
+    border-radius: 50%;
+    opacity: .3;
+    pointer-events: none;
+    content: '';
+}
+//
+// .circle-container:hover:after { opacity: 1; }
+// .circle-container a:not(.center):after {
+//     position: absolute;
+//     top: 50%; left: 50%;
+//     width: 4px; height: 4px;
+//     border-radius: 50%;
+//     box-shadow: 0 0 .5em .5em white;
+//     margin: -2px;
+//     background: deeppink;
+//     opacity: .3;
+//     content: '';
+// }
+// .circle-container:hover a:after { opacity: 1; }
+// .circle-container a:hover:after { opacity: .3; }

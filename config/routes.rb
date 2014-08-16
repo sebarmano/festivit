@@ -47,4 +47,7 @@ Rails.application.routes.draw do
       post :import
     end
   end
+
+  get '/about', to: 'welcome#about'
+  get '/contact', to: 'welcome#contact'
 end

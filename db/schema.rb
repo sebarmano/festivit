@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140813191907) do
+=======
+ActiveRecord::Schema.define(version: 20140814144722) do
+>>>>>>> 9a85c442daf68dfa226634f4f87c13d88d5f6038
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140813191907) do
     t.integer  "participant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "fest_id"
+    t.integer  "fest_id"
   end
 
   create_table "fest_participant_submissions", force: true do |t|
