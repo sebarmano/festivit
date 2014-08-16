@@ -29,11 +29,180 @@
   }
 }
 
-.bgcont {
-  background-image: url('blue_tint_x4.png');
-  background-size: cover;
-  background-attachment: fixed;
-  width: 100%;
-  z-index: 0;
-  position: fixed;
+#search {
+  width: 70%;
+  display: inline;
+}
+
+// Refills cards styling
+.cards {
+  @include clearfix;
+  font-family: helvetica;
+}
+
+.card {
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10);
+  $card-header-background: $green;
+  $card-hover-background: lighten($card-background, 5);
+  $card-image-background: #DBD199;
+  $card-image-hover-background: lighten($card-image-background, 5);
+  $card-stats-color: lighten($base-accent-color, 10);
+
+  @include transition (all 0.2s ease-in-out);
+  background-color: $card-background;
+  border-radius: $base-border-radius;
+  border: $card-border;
+  margin-bottom: $base-line-height;
+  cursor: pointer;
+  box-shadow: 0 2px 4px darken($base-background-color, 10);
+  position: relative;
+
+  @include media($large-screen) {
+    @include span-columns(4);  
+    @include omega(3n);
+  }
+
+  .card-image {
+    overflow: hidden;
+    max-height: 150px;
+
+    img {
+      width: 100%;
+      @include transition (all 0.2s ease-in-out);
+      background: $card-image-background;
+      border-top-left-radius: $base-border-radius;
+      border-top-right-radius: $base-border-radius;
+    }
+  }
+
+  .ribbon-wrapper {
+    $ribbon-size: 85px;
+    $ribbon-background: $base-accent-color;
+    @include size($ribbon-size);
+    overflow: hidden;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+
+    .ribbon {
+      font-size: .8em;
+      font-weight: 800;
+      text-align: center;
+      @include transform(rotate(45deg));
+      position: relative;
+      padding: 2px 7px;
+      left: -5px;
+      top: 15px;
+      width: 120px;
+      background-color: $ribbon-background;
+      color: white;
+      box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    }
+  }
+
+  .card-header {
+    @include transition (all 0.2s ease-in-out);
+    background-color: $card-header-background;
+    border-bottom: $card-border;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-weight: bold;
+    padding: $base-line-height/3 $gutter/2;
+  }
+
+  .card-copy {
+    padding: $base-line-height/8 $gutter/8;
+    font-size: 3em;
+    font-weight: 900;
+    line-height: 1.5em;
+    text-align: center;
+    
+    .tickets-pu {
+      background: none;
+      padding: 0px;
+      border: none;
+      text-align: center;
+      font-family: helvetica;
+      box-shadow: none;
+      display: inline;
+      width: 50%;
+      line-height: 50px;
+    }
+  }
+
+  .card-stats {
+    padding: $base-line-height/2 $gutter/2;
+    overflow: auto;
+
+    ul li {
+      display: inline;
+      color: $medium-gray;
+      font-weight: 500;
+      font-size: 1.0em;
+      float: right;
+      border-right: 1px solid transparentize($base-font-color, .8);
+      line-height: 1.1em;
+      padding: 0 .7em 0 .7em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        border-right: 0;
+      }
+
+      span {
+        color: $base-font-color;
+        font-size: .7em;
+        display: block;
+        font-weight: normal;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $card-hover-background;
+    
+    .card-image img {
+      background: $card-image-hover-background;
+    }
+  
+    .card-header {
+      background-color: $card-hover-background;
+    }
+  }
+
+  &:active {
+    background-color: $card-background;
+
+    .card-header {
+      background-color: $card-background;
+    }
+  }
+}
+
+.button-add, .button-subtract {
+  &:hover {
+    color: gray;
+  }
+}
+
+// Remove arrows for number field
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+}
+
+.contact  {
+  @include outer-container;
+  @include span-columns(12);
+  padding: 10px 0;
+  border-bottom: 1px solid;
+}
+
+.submit-button {
+  display: block;
+  clear: both;
 }
