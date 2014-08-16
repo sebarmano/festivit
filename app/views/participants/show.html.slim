@@ -10,21 +10,23 @@
         .cards
           .card
             .card-header
-              | "#{ticket.ticket_type.productpairsid}"
+              strong
+                | #{ticket.ticket_type.productpairsid}
+              | #{ticket.online_order_id}
             .card-copy 
               i.fa.fa-minus-circle.button-subtract  
               = fields_for "tickets[]", ticket do |f|
                  = f.number_field :picked_up, max: ticket.remaining, min: 0,
                    value: ticket.remaining, class: "tickets-pu"
               i.fa.fa-plus-circle.button-add
-            .ribbon-wrapper
-              .ribbon TKTID
-            /.card-stats
+            /.ribbon-wrapper
+                .ribbon 
+                  | #{ticket.ticket_type.id}
+            .card-stats
               ul
                 li 
-                  = "#{ticket.qty}"
-                  span Total
-                li
+                  = "total: #{ticket.qty}  -  remaining: #{ticket.remaining}"
+            /    li
                   = "#{ticket.remaining}"
                   span Remaining
                 li
