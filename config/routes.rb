@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :participants, only: [:new, :create, :edit, :show, :index] do
     resources :submissions, except: :index
     collection {
-	    get :customers
+      get :guests
+      get :customers
+      get :performers
       get :import
       post :import
     }

@@ -20,6 +20,10 @@
 @import "participants";
 @import "login";
 @import "welcome";
+@import "about";
+@import "team";
+
+
 
 .container {
   @include outer-container;
@@ -105,7 +109,7 @@ header.topbar {
 
   section {
     @include outer-container;
-    margin-top: 8em;
+    margin-top: 2em;
     article {
       @include span-columns(12);
       @include media($mobile) {
