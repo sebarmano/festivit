@@ -2,10 +2,21 @@
   width: 100%;
   background-image: asset-url('hills_01.jpg');
   background-size: cover;
+  background-position: 50% 20%;
+  background-repeat: no-repeat;
   z-index: 0;
   height: 16em;
 }
 
+.bgheader_particpants {
+  width: 100%;
+  background-image: asset-url('tickets.jpg');
+  background-size: cover;
+  background-position: 50% 20%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
 
 .form{
   width: 50%;
