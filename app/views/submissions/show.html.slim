@@ -49,11 +49,11 @@
         li = @submission.practice_years
 
     - @submission.attachments.each do |attachment|
-      - unless attachment.link == nil
+      - if attachment.type == "video" 
        li = embed(attachment.link)
        li = image_tag thumb(attachment.link), class: "thumb"
-      -  if attachment.image
-         li = image_tag attachment.image.thumb('400x200#').url
+      - if attachment.type == "photo"
+       li = image_tag attachment.image.thumb('400x200#').url
 
   /- unless @submission.attachments == nil
   /  .video

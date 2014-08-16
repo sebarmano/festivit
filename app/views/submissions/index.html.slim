@@ -1,7 +1,7 @@
 doctype html
 
 .container.topSpacing
-  h1 Performer Applications
+  h1.title Performer Applications
   table
     tr
       th
@@ -25,34 +25,34 @@ doctype html
         - songs = submission.attachments.where(type: "song")
         - participant = submission.participants.first
         tr
-          /= submission.group_name
         - unless participant.nil?
-          /if participant isn't showing it means there isn't one
+
           td.decision
             button.accept Accept
             button.decline Decline
-          td
+          td.groupName
+            span.name
+              | Supercalifragilisticoespialidoso
+            span.paid
+              button Paid
+            .clearFloat
             /TODO: need to get seed data for band
-            span
-              | Performer
+
 
               /= submission.group_name
-            span.paid
-              = image_tag('dollar-sign-green.png')
-                    / TODO: Logic if paid
-                    /- submission.paid
-                    /if Paid display icon
           td
             .modal
               label for="modal-1"
                 .thumbPic
-                  - if photos.first
-                    = image_tag photos.first.image.thumb('50x50x').url
+                  = image_tag('Performer.jpg')
+                        / - if photos.first
+                        /   = image_tag photos.first.image.thumb('50x50x').url
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
                   label.modal-close for="modal-1"
                   .modalContainer
+                    h3 Performer Name
                     = image_tag('Performer.jpg')
           td
             / TODO: Add video
@@ -69,47 +69,36 @@ doctype html
                     //= embed(attachment.link)
           td.tracks
             embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            | Song 1
             embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            | Song 2
             embed height="15" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-                      / | Song 3
-                      /| Song 2
-                      /| Song 1
-                      /= image_tag('soundcloud.jpg')
-                        /= embed(attachment.link)
-          td
-            .box
+            | Song 3
+          td.info
+            span.contact
+              | Matthew Steinberg
+            .clearFloat
+            span.contact
+              a href="#"
+                | E-Mail
+            .clearFloat
+            span.contact
+              | 919-867-5309
+            .clearFloat
+            span.createdOn
+              | 07-07-14
+            .clearFloat
+            span
               span.social
-                a href= "#"
+                = link_to"#", submission.facebook_link
                   i.fa.fa-facebook-square
-                    = link_to"", submission.facebook_link
-                        /= submission.facebook_link
-              span.contact
-                | Bob Smith
-                /= submission.fname
-                /submission.lname
-              .clearFloat
               span.social
-                a href= "#"
+                = link_to"#", submission.twitter_link
                   i.fa.fa-twitter
-                    = link_to "", submission.twitter_link
-                        /= submission.twitter_link
-              .contact
-                a href="#"
-                  | E-Mail
-                  /= submission.phone
-              .clearFloat
-              .social
-                a href= "#"
+              span.social
+                = link_to"#", submission.twitter_link
                   i.fa.fa-globe
-                    = link_to "", submission.website
-                      /= submission.twitter_link
-              .contact
-                | 919-867-5309
-                /= submission.email
-              .clearFloat
-              .contact
-                | 07-07-14
-                /= submission.createdOn
+
           td
             .tags
               | Rock
