@@ -31,6 +31,16 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
 
+  def guests
+    @participants = Participant.guests.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+  
+  def performers
+    @participants = Participant.performers.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
   def import
     uploaded_io = params[:file]
     importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
