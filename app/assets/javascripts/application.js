@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require carousel
 //= require cocoon
 //= require_tree .
 
