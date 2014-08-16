@@ -10,7 +10,7 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
-  validates_uniqueness_of :lname, :scope => [:fname, :email]
+  validate :lname, :uniqueness => {scope: [:fname, :email], case_sensitive: false}
 
   def name
     "#{lname}, #{fname}"
@@ -31,12 +31,15 @@ class Participant < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where("lname LIKE ?","%#{search}%")
+      search = search.capitalize! #TODO fix the capitalization on search
+      where("lname LIKE ? OR fname LIKE ?","%#{search}%", "%#{search}%")
     else
       all
     end
   end
-
-
+  
+  #TODO add LIKE in guests to be able to search for it
   scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
+  scope :guests, ->{includes(:role_types).where("role_types.name = 'guest'").references(:role_type)}
+  scope :performers, ->{includes(:role_types).where("role_types.name = 'Performer'").references(:role_type)}
 end
