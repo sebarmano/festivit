@@ -9,12 +9,16 @@
   padding: 1.5em;
   }
 
+a{
+  color: #477dca;
+}
+
 .topSpacing{
   padding-top: 100px;
 }
 
 .container{
-  @include outer-container
+  @include outer-container;
 }
 
 .title{
@@ -87,12 +91,27 @@
 
 .adminTools{
   clear:both;
-  // @include span-columns(6);
-  // @include shift(6);
-  // margin: auto;
-  // text-align:center;
-  // width: 250px;
+/*  @include span-columns(6);
+  @include shift(6);
+  margin: auto;
+  text-align:center;
+  width: 250px;*/
 }
+
+.whiteButton{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+    &:hover{
+        background-color: $blueGreen;
+        color: #FFFFFF;
+        }
+      }
 
 table {
   table-layout: auto;
@@ -103,28 +122,59 @@ th{
 }
 
 td{
-  margin: 2px 10px;
+  margin: 0 10px;
+  padding: 0;
+  display: block;
 
-  .groupName{
+  .participant{
+    @include span-columns(2);
     margin: 0 10px;
-    text-align: center;
-    width: 90%;
+    }
+
+  &.decision {
+/*    @include span-columns(1);
+*/    button{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+
+      &.accept{
+        &:hover{
+          background-color: $green;
+          color: #FFFFFF;
+        }
+      }
+
+      &.decline{
+        &:hover{
+          background-color: $red;
+          color: #FFFFFF;
+        }
+      }
+      }
     }
 
   .name{
     margin: 0 10px;
-    text-align: center;
-    text-wrap: none;
+    width: 90%
     }
 
-    .photo{
-      height: 112px;
-    }
+  .ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;  // IE 6+, FF 7+, Op 11+, Saf 1.3+, Chr 1+
+      -o-text-overflow: ellipsis;  // for Opera 9 & 10
+  }
 
     .paid{
       height: 10px;
       button {
-        background-color: #009900;
+        background-color: $green;
         font-size:.75em;
         color: #FFFFFF;
         height: 20px;
@@ -135,42 +185,23 @@ td{
     }
 
     .modalContainer{
+      height: 60%
       img{
-        height: 300px;
+        height: 70%;
       }
     }
 
-    .tags{
-      padding-left: 25px;
+    .picTable{
+/*      @include span-columns(2);
+*/      padding: 0;
     }
-
-    .info{
-      min-width: 150px;
-      margin: 2px 20px;
-    }
-
-    .social{
-      margin-left: 10px;
-      text-align: center;
-    }
-
-    .contact{
-      margin-left: 10px;
-
-      text-align: center;
-    }
-
-    .createdOn{
-      margin-left: 10px;
-      text-align: center;
-    }
-
-    .clearFloat{
-      clear:both;
-    }
+    .videoTable{
+/*      @include span-columns(2);
+*/    }
 
     &.tracks {
-      text-align: center;
+/*      @include span-columns(2);
+*/      text-align: center;
       font-size: .75em;
       embed{
         width: 132px;
@@ -180,41 +211,32 @@ td{
       }
     }
 
-    &.decision {
-      button{
-        display: block;
-        margin: 10 auto;
-        background-color: #FFFFFF;
-        border: 1px solid #000000;
-        color: #000000;
-        font-size: .75em;
-        padding: 10px;
-        width: 80px;
-
-        &.accept{
-          &:hover{
-            background-color: #009900;
-            color: #FFFFFF;
-          }
-
-        }
-
-        &.decline{
-          &:hover{
-            background-color: #990000;
-            color: #FFFFFF;
-          }
-        }
-
-      }
+    .tags{
+/*      @include span-columns(1);
+*/      padding-left: 25px;
     }
-}
 
+    .info{
+/*      @include span-columns(2);
+*/      width: 100px;
+      margin: 2px 20px;
+    }
 
-.dashboardPhoto{
-    padding-top: 20px;
-    img{
-      height: 43px;
+    .social{
+      margin-left: 10px;
+      text-align: center;
+    }
+
+    .contact{
+      text-align: center;
+    }
+
+    .createdOn{
+      text-align: center;
+    }
+
+    .clearFloat{
+      clear:both;
     }
 }
 
@@ -225,8 +247,8 @@ td{
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: gray;
-  $modal-image-height: 648px;
-  //$modal-image-width: $modal-image-height;
+  //$modal-image-height: 648px;
+  //$modal-image-width: $modal-image-height: 600px;
 
   label {
     cursor: pointer;
@@ -246,20 +268,16 @@ td{
   }
 
   .thumbPic {
-    height: 90px;
     margin: 0 auto;
   }
 
   .thumbVideo {
-    height: 90px;
-
-    //margin-left: auto;
-    //margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
     overflow: hidden;
   }
 
   .modal {
-    margin-left: 25px;
     $modal-padding: 3em;
     $modal-background: $base-background-color;
     $modal-close-color: gray;
@@ -329,7 +347,7 @@ td{
       padding: $modal-padding;
       width: 60%;
       max-height: 60%;
-      margin-top: 10em;
+      margin-top: 6em;
     }
 
     @include media($large-screen) {

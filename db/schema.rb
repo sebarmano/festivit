@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813144003) do
+ActiveRecord::Schema.define(version: 20140813191907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,11 +69,31 @@ ActiveRecord::Schema.define(version: 20140813144003) do
     t.datetime "updated_at"
   end
 
+  create_table "photos", force: true do |t|
+    t.string   "photo_desc"
+    t.string   "image_uid"
+    t.integer  "submission_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photos", ["submission_id"], name: "index_photos_on_submission_id", using: :btree
+
   create_table "role_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "songs", force: true do |t|
+    t.string   "song_title"
+    t.string   "song_link"
+    t.integer  "submission_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "songs", ["submission_id"], name: "index_songs_on_submission_id", using: :btree
 
   create_table "submissions", force: true do |t|
     t.text     "bio"
@@ -179,5 +199,15 @@ ActiveRecord::Schema.define(version: 20140813144003) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["participant_id"], name: "index_users_on_participant_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "videos", force: true do |t|
+    t.string   "vid_title"
+    t.string   "vid_link"
+    t.integer  "submission_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "videos", ["submission_id"], name: "index_videos_on_submission_id", using: :btree
 
 end
