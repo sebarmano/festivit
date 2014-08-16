@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: tickets
+#
+#  id              :integer          not null, primary key
+#  qty             :string(255)
+#  ticket_type_id  :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  online_order_id :string(255)
+#  date_time       :datetime
+#  status          :string(255)
+#  participant_id  :integer
+#  picked_up       :integer          default(0)
+#  customer_notes  :text
+#  item_name       :string(255)
+#
+
 require 'csv'
 
 class Ticket < ActiveRecord::Base

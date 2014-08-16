@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: participants
+#
+#  id             :integer          not null, primary key
+#  fname          :string(255)
+#  lname          :string(255)
+#  street_address :string(255)
+#  city           :string(255)
+#  state          :string(255)
+#  zip            :string(255)
+#  country        :string(255)
+#  phone          :string(255)
+#  email          :string(255)
+#  twitter_link   :string(255)
+#  facebook_link  :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Participant < ActiveRecord::Base
   has_one :applicant
   has_many :tickets

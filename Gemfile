@@ -43,4 +43,8 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'guard', '~> 2.6.1'
 end
+
+# Guard with Mac OSX notifications, you can remove this gem if you don't use it.
+gem 'terminal-notifier-guard', group: :development
