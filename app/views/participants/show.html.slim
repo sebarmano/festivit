@@ -7,13 +7,29 @@
   ul
     - @participant.tickets.order(:ticket_type_id).each do |ticket|
       - unless ticket.qty == '0'
-        li class="ticket-card #{ticket.ticket_type.productpairsid}"
-          p = "#{ticket.ticket_type.productpairsid}:#{ticket.qty} (left: #{ticket.remaining}) - Order: #{ticket.online_order_id} " 
-          .pick_up
-            = fields_for "tickets[]", ticket do |f|
-              = link_to "-", "#", class:"button-subtract"
-              = f.number_field :picked_up, max: ticket.remaining, min: 0,
-                value: ticket.remaining, class:"tickets_form"
-              = link_to "+", "#", class:"button-add"
+        .cards
+          .card
+            .card-header
+              | "#{ticket.ticket_type.productpairsid}"
+            .card-copy 
+              i.fa.fa-minus-circle.button-subtract  
+              = fields_for "tickets[]", ticket do |f|
+                 = f.number_field :picked_up, max: ticket.remaining, min: 0,
+                   value: ticket.remaining, class: "tickets-pu"
+              i.fa.fa-plus-circle.button-add
+            .ribbon-wrapper
+              .ribbon TKTID
+            /.card-stats
+              ul
+                li 
+                  = "#{ticket.qty}"
+                  span Total
+                li
+                  = "#{ticket.remaining}"
+                  span Remaining
+                li
+                  = "#{ticket.online_order_id}"
+                  span Order id
+
 
   = submit_tag "Submit picked up tickets", class: "submit-button"
