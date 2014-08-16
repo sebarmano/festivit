@@ -33,16 +33,14 @@ $(function() {
 $(document).ready(function() {
   $(".button-subtract").click(function(e) {
     e.preventDefault();
-    console.log("hi there");
-    elm = $(this).parent().children(".tickets_form");
+    elm = $(this).parent().children(".tickets-pu");
     var val = elm.val();
     elm.val(Number(val)-1);
   });
 
   $(".button-add").click(function(e) {
     e.preventDefault();
-    console.log("hi there");
-    elm = $(this).parent().children(".tickets_form");
+    elm = $(this).parent().children(".tickets-pu");
     var val = elm.val();
     elm.val(Number(val)+1);
   });

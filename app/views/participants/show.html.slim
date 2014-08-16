@@ -1,18 +1,35 @@
+.container
+  h2
+    = @participant.name
 
-h2
-  = @participant.name
+  = form_tag pick_up_tickets_path, method: :put
 
-= form_tag pick_up_tickets_path, method: :put
+  ul
+    - @participant.tickets.order(:ticket_type_id).each do |ticket|
+      - unless ticket.qty == '0'
+        .cards
+          .card
+            .card-header
+              | "#{ticket.ticket_type.productpairsid}"
+            .card-copy 
+              i.fa.fa-minus-circle.button-subtract  
+              = fields_for "tickets[]", ticket do |f|
+                 = f.number_field :picked_up, max: ticket.remaining, min: 0,
+                   value: ticket.remaining, class: "tickets-pu"
+              i.fa.fa-plus-circle.button-add
+            .ribbon-wrapper
+              .ribbon TKTID
+            /.card-stats
+              ul
+                li 
+                  = "#{ticket.qty}"
+                  span Total
+                li
+                  = "#{ticket.remaining}"
+                  span Remaining
+                li
+                  = "#{ticket.online_order_id}"
+                  span Order id
 
-ul
-  - @participant.tickets.order(:ticket_type_id).each do |ticket|
-    - unless ticket.qty== '0'
-      li = "#{ticket.ticket_type.name}: #{pluralize(ticket.qty, "ticket")} (remaining #{ticket.remaining}) - Order: #{ticket.online_order_id} "
-      = fields_for "tickets[]", ticket do |f|
-        .pick_up
-          = link_to "-", "#", class:"button-subtract"
-          = f.number_field :picked_up, max: ticket.remaining, min: 0,
-            value: ticket.remaining, class:"tickets_form"
-          = link_to "+", "#", class:"button-add"
 
-= submit_tag "Submit picked up tickets"
+  = submit_tag "Submit picked up tickets", class: "submit-button"
