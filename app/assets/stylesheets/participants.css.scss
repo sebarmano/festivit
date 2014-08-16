@@ -34,6 +34,12 @@
   display: inline;
 }
 
+.filters {
+  button {
+    @include button(white);
+  }
+}
+
 // Refills cards styling
 .cards {
   @include clearfix;
@@ -127,7 +133,6 @@
       box-shadow: none;
       display: inline;
       width: 50%;
-      line-height: 50px;
     }
   }
 

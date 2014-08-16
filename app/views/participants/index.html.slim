@@ -4,10 +4,16 @@ section
     = text_field_tag :search, params[:search]
     = submit_tag "Search"
 
-    = link_to "Customers", customers_participants_path
-    = link_to "  Volunteers", customers_participants_path
+    .filters
+      button
+        = link_to "Customers", customers_participants_path
+      button
+        = link_to "  Guests", guests_participants_path
+      button
+        = link_to "  Performers", guests_participants_path
 
     ul id="participants_list"
+      
       - @participants.each do |participant|
         - if participant.total_tickets
           .contact
