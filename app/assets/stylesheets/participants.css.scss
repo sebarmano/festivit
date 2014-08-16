@@ -29,9 +29,12 @@
   }
 }
 
-// Refills cars styling
+#search {
+  width: 70%;
+  display: inline;
+}
 
-
+// Refills cards styling
 .cards {
   @include clearfix;
   font-family: helvetica;
@@ -193,47 +196,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           -webkit-appearance: none; 
           margin: 0; 
 }
-
-
-// .ticket-card {
-//   border: 1px solid;
-//   border-top: 4px solid green;
-//   border-radius: 0 0 3px 3px;
-//   margin:5px auto;
-//   padding: 3px;
-//   text-align: center;
-//   box-shadow: 0 2px 4px darken($base-background-color, 10);
-//   @include span-columns(5);
-//   background: #5cb85c;
-// 
-//   p {
-//   clear: both;
-//   color: white;
-//   font-family: sans-serif;
-//   }
-// 
-//   .pick_up {
-//     @include span-columns(5 of 5);
-//     @include shift(1);
-// 
-//     .button-add {
-//       @include span-columns(1 of 5);
-//       @include button(lightblue);
-//       text-align: center;
-//     }
-// 
-//     .tickets_form{
-//       @include span-columns(1 of 5);
-//       text-align: right;
-//     }
-// 
-//     .button-subtract {
-//       @include span-columns(1 of 5);
-//       @include button(lightblue);
-//       text-align: center;
-//     }
-//   }
-// }
 
 .contact  {
   @include outer-container;
