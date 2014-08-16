@@ -22,3 +22,4 @@
 *.swo
 
 /coverage/
+.DS_Store

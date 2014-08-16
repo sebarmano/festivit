@@ -38,22 +38,25 @@ class ParticipantsController < ApplicationController
   #   redirect_to participants_path, notice: "Participants imported."
   # end
 
-  def import
-    uploaded_io = params[:file]
-    importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
-    importer.import
-    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
-  else
-    @participants = Participant.all
-  end
+  # def import
+  #     uploaded_io = params[:file]
+  #     importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+  #     importer.import
+  #     redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+  #   else
+  #     @participants = Participant.all
+  #   end
+  # end
 
   def import_guests
-    uploaded_io = params[:file]
-    importer = ImporterGuest.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
-    importer.import
-    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
-  else
-    @participants = Participant.all
+    if request.post?
+      uploaded_io = params[:file]
+      importer = ImporterGuest.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer.import
+      redirect_to import_guests_participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+    else
+      @participants = Participant.all
+    end
   end
 
   private
