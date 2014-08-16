@@ -1,3 +1,12 @@
+.bgheader_new_particpants {
+  width: 100%;
+  background-image: asset-url('hills_01.jpg');
+  background-size: cover;
+  z-index: 0;
+  height: 16em;
+}
+
+
 .form{
   width: 50%;
 }
@@ -30,7 +39,7 @@
 }
 
 .bgcont {
-  background-image: url('blue_tint_x4.png');
+  background-image: asset_url('blue_tint_x4.png');
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
