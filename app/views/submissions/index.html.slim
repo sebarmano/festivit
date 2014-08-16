@@ -1,93 +1,108 @@
+doctype html
+
 .container.topSpacing
-  h1 Band Applications
+  h1.title Performer Applications
   table
     tr
       th
-        | Accepted?
-      th
-        | Paid?
+        | Decision
       th
         | Performer
       th
-        | Band Photo
+        | Photo
       th
         | Video
       th
         | Music
       th
-        | Facebook
-      th
-        | Twitter
-
+        | Contact
       th
         | Tags
 
       - @submissions.each do |submission|
+        - photos = submission.attachments.where(type: "photo")
+        - videos = submission.attachments.where(type: "video")
+        - songs = submission.attachments.where(type: "song")
         - participant = submission.participants.first
         tr
-          /= submission.group_name
         - unless participant.nil?
-          /if participant isn't showing it means there isn't one
-          td
-            button.decision Accepted
-            button.decision Declined
-          td
-            button $
-          td
+
+          td.decision
+            button.accept Accept
+            button.decline Decline
+          td.participant
+            span.name.ellipsis
+              | Supercalifragilisticexpialidocious
+            span.paid
+              button Paid
+            .clearFloat
             /TODO: need to get seed data for band
-            a href="#"
-              = submission.group_name
-          td
+
+
+              /= submission.group_name
+          td.picTable
             .modal
               label for="modal-1"
-                .btn.js-btn 
-                    | Photo
+                .thumbPic
+                  = image_tag photos.first.image.thumb('400x200#').url
+                
               input#modal-1.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
                   label.modal-close for="modal-1"
                   .modalContainer
+                    /h3 Performer Name
                     = image_tag('bg.jpg')
-          td
+          td.videoTable
             / TODO: Add video
             .modal
                 label for="modal-2"
-                  .btn.js-btn Video
+                  .thumbVideo = image_tag('Performer.jpg')
                 input#modal-2.modal-state type="checkbox" /
                 .modal-window
                   .modal-inner
                     label.modal-close for="modal-2"
                     .modalContainer
-                      = image_tag('video.png')
+                    embed width="420" height="345"src="http://www.youtube.com/v/XGSy3_Czz8k"type="application/x-shockwave-flash"
+                    / = image_tag('video.png')
                     //= embed(attachment.link)
+          td.tracks
+            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            | Song 1
+            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            | Song 2
+            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
+            | Song 3
+          td.info
+            span.contact
+              | Matthew Steinberg
+            .clearFloat
+            span.contact
+              a href="#"
+                | E-Mail
+            .clearFloat
+            span.contact
+              | 919-867-5309
+            .clearFloat
+            span.createdOn
+              | 07-07-14
+            .clearFloat
+            span
+              span.social
+                = link_to"#", submission.facebook_link
+                  i.fa.fa-facebook-square
+              span.social
+                = link_to"#", submission.twitter_link
+                  i.fa.fa-twitter
+              span.social
+                = link_to"#", submission.twitter_link
+                  i.fa.fa-globe
+
           td
-            / TODO: Add music
-            .modal
-                label for="modal-3"
-                  .btn.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                /= image_tag('soundcloud.jpg')
-                        /= embed(attachment.link)
-          td
-            a href="https://www.facebook.com"
-              = image_tag('facebook.png')
-              /= submission.facebook_link
-          td
-            a href="https://www.twitter.com/"
-              = image_tag('twitter.png')
-              /= submission.twitter_link
-          td
-            / TODO: Add notes section in database
-            | Rock
+            .tags
+              | Accoustic, solo local, preferred
             /= submission.tags
+            / TODO: Add notes section in database
 
           / Do we
           / - unless submission.participant_id.nil?

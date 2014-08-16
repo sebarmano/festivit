@@ -12,10 +12,10 @@ html
     header.topbar
       div
         div.logo
-          = image_tag("logotype.svg" )
+          = link_to do
+            = image_tag("logotype.svg" )
 
         ul.nav
-          li = link_to "Home", root_url
           li = link_to "Apply", new_participant_path
           li = link_to "Contact", root_url
           li = link_to "About", root_url

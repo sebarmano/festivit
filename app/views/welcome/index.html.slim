@@ -1,53 +1,4 @@
-
-/ html
-/   head
-/     title festivit for the rest of it
-/     meta name="keywords" content="festival"
-/     = stylesheet_link_tag    "application", :media => "all"
-/     = javascript_include_tag 'application'
-/     = favicon_link_tag 'favicon.ico'
-/     = csrf_meta_tags
-/
-/   body
-/
-/     article
-/       div
-/ javascript:
-/   var controller;
-/   $(document).ready(function($) {
-/     // init controller
-/     controller = new ScrollMagic({vertical: false});
-/   });
-/
-/ #parallaxContainer
-/   .layer1
-/   .layer2
-/   .layer3
-/
-/ javascript:
-/   $(document).ready(function($) {
-/ 		// build tween
-/ 		var tween = new TimelineMax ()
-/ 			.add([
-/ 				TweenMax.to("#parallaxContainer .layer1", 1, {backgroundPosition: "-40% 0", ease: Linear.easeNone}),
-/ 				TweenMax.to("#parallaxContainer .layer2", 1, {backgroundPosition: "-500% 0", ease: Linear.easeNone}),
-/ 				TweenMax.to("#parallaxContainer .layer3", 1, {backgroundPosition: "-225% 0", ease: Linear.easeNone})
-/ 			]);
-/
-/ 		// build scene
-/ 		var scene = new ScrollScene({triggerElement: "#parallaxContainer", duration: 2000, offset: 450})
-/ 						.setTween(tween)
-/ 						.setPin("#parallaxContainer")
-/ 						.addTo(controller);
-/
-/ 		// show indicators (requires debug extension)
-/ 		scene.addIndicators();
-/ 	});
-
 .bg1
-
-.pnl1
-
 .pnl1
   .main
     .block
@@ -80,7 +31,7 @@
     .block
       h3 check-in
       p
-      |  Mobile-optimized. Secure. Easy switch between lists. Partial check-ins. Search filter. Group filters. Easy switch between lists. 
+      |  Mobile-optimized. Secure. Easy switch between lists. Partial check-ins. Search filter. Group filters. Easy switch between lists.
 
 
       p.smoothanchor

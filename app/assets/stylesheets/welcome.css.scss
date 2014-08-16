@@ -1,11 +1,10 @@
 div.bg1 {
-  // display: none;
-  // position: fixed;
   background-image: url('bg.jpg');
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
   z-index: 0;
+  height: 900px;
 }
 
 
@@ -114,30 +113,3 @@ div.cont4 {
 
 
 }
-
-
-
-
-
-            // #parallaxContainer
-            //   .layer1
-            //   .layer2
-            //   .layer3
-            //
-            // #parallaxContainer {
-            //   div.layer1 {
-            //     background-image: url('bg.jpg');
-            //     // position: absolute;
-            //     height: 800px;
-            //     width: 100%;
-            //
-            //   }
-            //   div.layer2 {
-            //     background-image: url('logistics_woah.png');
-            //     height: 800px;
-            //     width: 100%;
-            //   }
-            //   div.layer3 {
-            //
-            //   }
-            // }

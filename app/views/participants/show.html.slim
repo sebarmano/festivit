@@ -5,9 +5,10 @@ section
     = form_tag pick_up_tickets_path, method: :put
     ul
       - @participant.tickets.order(:ticket_type_id).each do |ticket|
-        li = "Order: #{ticket.online_order_id} - #{ticket.ticket_type.name}, Total: #{ticket.qty}, Remaining: #{ticket.remaining}"
-        = fields_for "tickets[]", ticket do |f|
-          = f.label :picked_up, 'To pick up:'
-          = f.number_field :picked_up, max: ticket.remaining, min: 0,
-            value: ticket.remaining
+        - unless ticket.qty == '0'
+          li = "Order: #{ticket.online_order_id} - #{ticket.ticket_type.name}, Total: #{ticket.qty}, Remaining: #{ticket.remaining}"
+          = fields_for "tickets[]", ticket do |f|
+            = f.label :picked_up, 'To pick up:'
+            = f.number_field :picked_up, max: ticket.remaining, min: 0,
+              value: ticket.remaining
     = submit_tag "Submit picked up tickets"
