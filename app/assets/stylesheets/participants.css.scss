@@ -32,18 +32,20 @@
 
 .logInCreate{
   @include fieldset;
-  @include span-columns(8 of 8);
+  @include span-columns(6 of 6);
 }
 .email{
-  @include span-columns(8 of 8);
-  @include omega();
-}
+  @include span-columns(6 of 6);
+  }
 .passwordCreate{
-  @include span-columns(4 of 8);
+  @include span-columns(2.5 of 6);
 }
 .passwordCreateConf{
-  @include span-columns(4 of 8);
-  @include omega();
+  @include span-columns(2.5 of 6);
+}
+
+.shield{
+  @include span-columns(8)
 }
 
 
@@ -65,9 +67,6 @@
 }
 .country{
   @include span-columns(2 of 8);
-}
-.shield{
-  @include span-columns(8 of 8);
 }
 .phone{
   @include span-columns(4 of 8);
