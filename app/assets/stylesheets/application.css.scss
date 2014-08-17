@@ -9,7 +9,6 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
  *= require_self
  */
 
@@ -21,6 +20,11 @@
 @import "participants";
 @import "login";
 @import "welcome";
+@import "about";
+@import "team";
+@import "jquery.carousel";
+
+
 
 .container {
   @include outer-container;
@@ -38,14 +42,15 @@ header.topbar {
   position: fixed;
   top:0;
   z-index: 100;
-  padding: .5em;
 
   @include background-image(linear-gradient( bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.0) 100%));
   div {
     @include outer-container;
     div.logo {
+        padding: 1em 1em 1em 0em;
         @include span-columns(2);
         @include media($mobile) {
+          padding: 1em 1em 1em 1em;
           @include span-columns(2);
           @include shift(0);
 
@@ -55,22 +60,42 @@ header.topbar {
       }
 
       ul.nav {
-        @include span-columns(4);
-        @include shift(6);
+        font-family: $sans-serif;
+        font-size: 1.2em;
+        text-align: right;
+        @include span-columns(5);
+        @include shift(5);
         @include omega;
         @include media($mobile) {
           @include span-columns(4);
           @include shift(0);
+          font-family: $sans-serif;
+          font-size: 1em;
+          text-align: left;
+          padding: 0em 1em 1em 1em;
+
         }
         color: white;
         right: 0;
-        padding: .7em 0em;
+        padding: 1em 0em 1em 1em;
+
 
         li {
           display: inline-block;
-          padding: 0em .5em .7em 0em;
+          padding: 0em .7em;
           position: relative;
           right: 0;
+          vertical-align: middle;
+          &:last-child {
+            padding-right: 0;
+
+            }
+          @include media($mobile) {
+          &:first-child {
+            padding-left: 0;
+          }
+          }
+
           // float: right;
         }
         a {
@@ -85,11 +110,22 @@ header.topbar {
 
   section {
     @include outer-container;
-    margin-top: 8em;
+    margin-top: 2em;
     article {
       @include span-columns(12);
+      @include media($mobile) {
+        @include span-columns(4);
+        @include shift(0);
+        padding: 1em 1em 1em 1em;
+
+      }
     }
   }
+
+
+
+
+
 .tooltip-item {
   $tooltip-background: lightgrey;
   $tooltip-color: $base-font-color;
@@ -154,5 +190,3 @@ header.topbar {
   margin-right: 5px;
   margin-top: 5px;
 }
-
-
