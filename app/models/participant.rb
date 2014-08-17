@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: participants
+#
+#  id             :integer          not null, primary key
+#  fname          :string(255)
+#  lname          :string(255)
+#  street_address :string(255)
+#  city           :string(255)
+#  state          :string(255)
+#  zip            :string(255)
+#  country        :string(255)
+#  phone          :string(255)
+#  email          :string(255)
+#  twitter_link   :string(255)
+#  facebook_link  :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Participant < ActiveRecord::Base
   has_one :applicant
   has_many :tickets
@@ -11,7 +31,8 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
-  validate :lname, :uniqueness => {scope: [:fname, :email], case_sensitive: false}
+  validates :lname, :fname, presence: true
+  validates :lname, :uniqueness => {scope: [:fname, :email], case_sensitive: false}
 
   def name
     "#{lname}, #{fname}"
@@ -27,17 +48,19 @@ class Participant < ActiveRecord::Base
 
   def total_tickets
     tickets.map {|t| t.qty.to_i}.reduce(:+)
-
   end
 
   def self.search(search)
     if search
-      where("lname LIKE ?","%#{search}%")
+      search = search.capitalize! #TODO fix the capitalization on search
+      where("lname LIKE ? OR fname LIKE ?","%#{search}%", "%#{search}%")
     else
       all
     end
   end
-
-
+  
+  #TODO add LIKE in guests to be able to search for it
   scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
+  scope :guests, ->{includes(:role_types).where("role_types.name = 'guest'").references(:role_type)}
+  scope :performers, ->{includes(:role_types).where("role_types.name = 'Performer'").references(:role_type)}
 end

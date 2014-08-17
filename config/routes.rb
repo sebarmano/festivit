@@ -14,18 +14,26 @@ Rails.application.routes.draw do
     get '/profile', to: 'participants#profile'
     post :comments, to: 'comments#create'
     collection {
-	    get :customers
+      get :guests
+      get :customers
+      get :performers
       get :import
       post :import
+      get :import_guests
+      post :import_guests
     }
   end
 
+  #TODO - ck all these routes are needed outside the collections
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
 
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"
+
+  get 'participants/import_guests', to: "participants#import_guests", :as => :import_guests
+  post 'participants/import_guests', to: "participants#import_guests"
 
   get 'fests/import', to: "fests#import", :as => :import_fests
   post 'fests/import', to: "fests#import"

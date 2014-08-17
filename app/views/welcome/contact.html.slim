@@ -5,9 +5,33 @@ section
     .circle-container
       /! <![endif]
       a.center href="#"
-        img src="/assets/mae.png" /
+        .modal
+            label for="modal-3"
+              .btn
+                = image_tag('mae.png')
+            input#modal-3.modal-state type="checkbox" /
+            .modal-window
+              .modal-inner
+                label.modal-close for="modal-3"
+                .modalContainer
+                  = image_tag('someotherimage.png')
+                  p
+                  | something goes here about ma
+
       a.deg0 href="#"
-        img src="/assets/talal.png" /
+        .modal
+            label for="modal-4"
+              .btn
+                = image_tag('talal.png')
+            input#modal-4.modal-state type="checkbox" /
+            .modal-window
+              .modal-inner
+                label.modal-close for="modal-4"
+                .modalContainer
+                  = image_tag('talal.png')
+                  p
+                  | something goes here about ma
+
       a.deg45 href="#"
         img src="/assets/david.png" /
       a.deg135 href="#"

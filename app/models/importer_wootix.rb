@@ -21,7 +21,7 @@ class ImporterWootix < ActiveImporter::Base
   column 'Date', :date_time
   column 'Order Status', :status
   column 'Item Amount', :qty
-  column 'Customer Note', :customer_notes
+  column 'Customer Note', :customer_notes #TODO - add filter for if cust notes = lname, fname or fname lname
 
   on :row_processing do
     # find or create participant
@@ -41,7 +41,7 @@ class ImporterWootix < ActiveImporter::Base
     model.participant = participant
 
     # parse sku
-    sku_regex = /([A-Z]{3}20\d\d)([A-Z0-9]{3})/
+    sku_regex = /([A-Z]{3,4}20\d\d)([A-Z0-9]{3})/
     match = row['Item SKU'].match(sku_regex)
     fest_code = match[1] if match
     raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
@@ -52,7 +52,7 @@ class ImporterWootix < ActiveImporter::Base
 
       raise NoFestCode, "No fest with code #{fest_code}" unless fest
 
-      role_type = RoleType.where(name: 'customer').first_or_initialize
+      role_type = RoleType.where(name: 'customers').first_or_initialize
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
