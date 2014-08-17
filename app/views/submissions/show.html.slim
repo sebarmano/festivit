@@ -69,8 +69,22 @@
 
   /.reccomendation
   /  p This band rocks! I can't wait to see them again!
-.adminTools
-  - if current_user.admin?
-   =button_to 'Approve', action: 'approve'
-  = link_to 'Edit', edit_participant_submission_path
-  / = link_to 'Back', submissions_path
+
+section
+  article
+    .adminTools
+      - if current_user.admin?
+      =button_to 'Approve', action: 'approve'
+      = link_to 'Edit', edit_participant_submission_path
+      / = link_to 'Back', submissions_path
+      = simple_form_for [@participant, @submission, @comment] do |f|
+        = f.input "body", label: "Add a Comment:"
+        = f.submit
+      - @submission.comments.each do |comment|
+        p
+          = comment.author
+          br
+          = comment.body
+
+
+
