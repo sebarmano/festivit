@@ -44,6 +44,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'guard', '~> 2.6.1'
+  gem 'guard-rspec'
 end
 
 # Guard with Mac OSX notifications, you can remove this gem if you don't use it.

@@ -30,7 +30,8 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
-  validate :lname, :uniqueness => {scope: [:fname, :email], case_sensitive: false}
+  validates :lname, :fname, presence: true
+  validates :lname, :uniqueness => {scope: [:fname, :email], case_sensitive: false}
 
   def name
     "#{lname}, #{fname}"
@@ -46,7 +47,6 @@ class Participant < ActiveRecord::Base
 
   def total_tickets
     tickets.map {|t| t.qty.to_i}.reduce(:+)
-
   end
 
   def self.search(search)

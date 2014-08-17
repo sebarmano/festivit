@@ -18,6 +18,7 @@ feature "Participant" do
   end
 
   scenario "craft vendor applies to festival" do
+    pending ("working on models")
     apply
     fill_in_details
   end
