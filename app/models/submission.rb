@@ -1,3 +1,42 @@
+# == Schema Information
+#
+# Table name: submissions
+#
+#  id                :integer          not null, primary key
+#  bio               :text
+#  website           :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  tag               :string(255)
+#  participant_id    :integer
+#  approve           :boolean
+#  complete          :boolean          default(FALSE)
+#  group_name        :string(255)
+#  facebook_link     :string(255)
+#  twitter_link      :string(255)
+#  craft_desc        :text
+#  photo_desc        :text
+#  booth_desc        :text
+#  practice_type     :string(255)
+#  practice_lic_no   :string(255)
+#  practice_exp_date :string(255)
+#  practice_years    :string(255)
+#  underage          :boolean
+#  ticket_req        :string(255)
+#  days_avail        :string(255)
+#  deposit_type      :string(255)
+#  returning         :boolean
+#  crew_hist         :text
+#  crew_pref         :string(255)
+#  comments          :text
+#  shift_pref        :string(255)
+#  why_volunteer     :text
+#  mission_statement :text
+#  handouts          :text
+#  camping           :boolean
+#  electrical        :string(255)
+#
+
 class Submission < ActiveRecord::Base
   acts_as_taggable
   has_many :attachments
