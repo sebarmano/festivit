@@ -1,6 +1,14 @@
 class ParticipantsController < ApplicationController
   def index
     @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = Prawn::Document.new
+        pdf.text "Welcome to Festivit"
+        send_data pdf.render
+      end
+    end
   end
 
   def new
