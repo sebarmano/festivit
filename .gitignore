@@ -22,4 +22,6 @@
 *.swo
 
 /coverage/
+.DS_Store
 tags
+

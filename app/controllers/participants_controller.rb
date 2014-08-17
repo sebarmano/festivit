@@ -31,13 +31,35 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
 
-  def import
-    uploaded_io = params[:file]
-    importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
-    importer.import
-    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
-  else
-    @participants = Participant.all
+  def guests
+    @participants = Participant.guests.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+  
+  def performers
+    @participants = Participant.performers.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
+  # def import
+  #     uploaded_io = params[:file]
+  #     importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+  #     importer.import
+  #     redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+  #   else
+  #     @participants = Participant.all
+  #   end
+  # end
+
+  def import_guests
+    if request.post?
+      uploaded_io = params[:file]
+      importer = ImporterGuest.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer.import
+      redirect_to import_guests_participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+    else
+      @participants = Participant.all
+    end
   end
 
   private

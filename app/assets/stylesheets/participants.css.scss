@@ -1,3 +1,23 @@
+.bgheader_new_particpants {
+  width: 100%;
+  background-image: asset-url('hills_01.jpg');
+  background-size: cover;
+  background-position: 50% 20%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+.bgheader_particpants {
+  width: 100%;
+  background-image: asset-url('hola.jpg');
+  background-size: cover;
+  background-position: 70% 20%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
 .form{
   width: 50%;
 }
@@ -29,9 +49,12 @@
   }
 }
 
-#search {
-  width: 70%;
-  display: inline;
+
+
+.filters {
+  button {
+    @include button(white);
+  }
 }
 
 // Refills cards styling
@@ -40,12 +63,11 @@
   font-family: helvetica;
 }
 
-.card {  
-  $card-background: #5cb85c;
+.card {
   $card-border-color: $base-border-color;
   $card-border: 1px solid $card-border-color;
   $card-background: lighten($card-border-color, 10);
-  $card-header-background: $card-background;
+  $card-header-background: $green;
   $card-hover-background: lighten($card-background, 5);
   $card-image-background: #DBD199;
   $card-image-hover-background: lighten($card-image-background, 5);
@@ -61,7 +83,7 @@
   position: relative;
 
   @include media($large-screen) {
-    @include span-columns(4);  
+    @include span-columns(4);
     @include omega(3n);
   }
 
@@ -113,12 +135,12 @@
   }
 
   .card-copy {
-    padding: $base-line-height/4 $gutter/4;
+    padding: $base-line-height/8 $gutter/8;
     font-size: 3em;
     font-weight: 900;
     line-height: 1.5em;
     text-align: center;
-    
+
     .tickets-pu {
       background: none;
       padding: 0px;
@@ -128,21 +150,19 @@
       box-shadow: none;
       display: inline;
       width: 50%;
-      -webkit-appearance: none;
     }
   }
 
   .card-stats {
     padding: $base-line-height/2 $gutter/2;
     overflow: auto;
-    background: black;
 
     ul li {
       display: inline;
-      color: $card-stats-color;
-      font-weight: 800;
-      font-size: 1.2em;
-      float: left;
+      color: $medium-gray;
+      font-weight: 500;
+      font-size: 1.0em;
+      float: right;
       border-right: 1px solid transparentize($base-font-color, .8);
       line-height: 1.1em;
       padding: 0 .7em 0 .7em;
@@ -166,11 +186,11 @@
 
   &:hover {
     background-color: $card-hover-background;
-    
+
     .card-image img {
       background: $card-image-hover-background;
     }
-  
+
     .card-header {
       background-color: $card-hover-background;
     }
@@ -192,9 +212,9 @@
 }
 
 // Remove arrows for number field
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
-          -webkit-appearance: none; 
-          margin: 0; 
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
 }
 
 .contact  {
