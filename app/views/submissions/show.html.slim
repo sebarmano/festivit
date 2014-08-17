@@ -53,11 +53,23 @@ section
           li = @submission.practice_exp_date
           li = @submission.practice_years
 
+<<<<<<< HEAD
+    - @submission.attachments.each do |attachment|
+      - if attachment.type == "video"
+        li = embed(attachment.link)
+       /li = image_tag thumb(attachment.link), class: "thumb"
+      -  if attachment.image
+         li = image_tag attachment.image.thumb('400x200#').url
+      - if attachment.type == "song"
+        li = embed height="25" autoplay="false" src= attachment.song.url width="60"
+
+=======
       - @submission.attachments.each do |attachment|
         - unless attachment.link == ""
          li = embed(attachment.link)
         -  if attachment.image
            li = image_tag attachment.image.thumb('400x200#').url
+>>>>>>> upstream/release-1
 
   /- unless @submission.attachments == nil
   /  .video
