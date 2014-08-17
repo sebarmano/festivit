@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require carousel
 //= require cocoon
 //= require_tree .
 
@@ -60,3 +61,20 @@ $(function() {
         }
     }
 })
+
+$(document).ready(function() {
+  $(".button-subtract").click(function(e) {
+    e.preventDefault();
+    elm = $(this).parent().children(".tickets-pu");
+    var val = elm.val();
+    elm.val(Number(val)-1);
+  });
+
+  $(".button-add").click(function(e) {
+    e.preventDefault();
+    elm = $(this).parent().children(".tickets-pu");
+    var val = elm.val();
+    elm.val(Number(val)+1);
+  });
+});
+

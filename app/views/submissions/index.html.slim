@@ -1,11 +1,11 @@
+doctype html
+
 .container.topSpacing
-  h1 Band Applications
+  h1.title Performer Applications
   table
     tr
       th
         | Decision
-      th
-        | Paid
       th
         | Performer
       th
@@ -17,8 +17,6 @@
       th
         | Contact
       th
-        | Social
-      th
         | Tags
 
       - @submissions.each do |submission|
@@ -26,117 +24,76 @@
         - videos = submission.attachments.where(type: "video")
         - songs = submission.attachments.where(type: "song")
         - participant = submission.participants.first
+        - id = sumbission.id
         tr
-          /= submission.group_name
-        - unless participant.nil?
-          /if participant isn't showing it means there isn't one
-          td
-            button.decision Accept
-            button.decision Decline
-          td
-            button.paid $
-          td
-            /TODO: need to get seed data for band
-            = submission.group_name
-          td
+
+          td.decision
+            button.accept Accept
+            button.decline Decline
+          td.participant
+            span.name.ellipsis
+              | Supercalifragilisticexpialidocious
+            span.paid
+              button Paid
+            .clearFloat
+              /TODO: need to get seed data for band
+
+          td.picTable
             .modal
-              label for="modal-1"
-                .btn.js-btn
-                  - if photos.first
-                    = image_tag photos.first.image.thumb('50x50x').url
-              input#modal-1.modal-state type="checkbox" /
+              label for="modal-#{id}"
+                .thumbPic
+                  - unless photos.first.nil?
+                    = image_tag photos.first.image.url, size: '100x100'
+                    = submission.inspect
+              input#modal-id.modal-state type="checkbox" /
               .modal-window
                 .modal-inner
-                  label.modal-close for="modal-1"
+                  label.modal-close for="modal-#{id}"
                   .modalContainer
-                    = image_tag('bg.jpg')
-          td
+                    = submission.inspect
+
+          td.videoTable
             / TODO: Add video
             .modal
-                label for="modal-2"
-                  .btn.js-btn Video
-                input#modal-2.modal-state type="checkbox" /
+                label for="modal-#{submision.id+ 1}"
+                  .thumbVideo = image_tag('Performer.jpg')
+                input#modal-.modal-state type="checkbox" /
                 .modal-window
                   .modal-inner
-                    label.modal-close for="modal-2"
+                    label.modal-close for="modal-#{submision.id+ 1}"
                     .modalContainer
-                      = image_tag('video.png')
+                    embed width="420" height="345"src="http://www.youtube.com/v/XGSy3_Czz8k"type="application/x-shockwave-flash"
+                    / = image_tag('video.png')
                     //= embed(attachment.link)
-          td
-            / TODO: Add music
-            .modal
-                label for="modal-3"
-                  .btn.js-btn
-                    iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
+          td.tracks
+            - songs.each do |audio|
+               embed height="25" autoplay="false" src= audio.link width="60"
+              
+          td.info
+            span.contact
+              | Matthew Steinberg
+            .clearFloat
+            span.contact
+              a href="#"
+                | E-Mail
+            .clearFloat
+            span.contact
+              | 919-867-5309
+            .clearFloat
+            span.createdOn
+              | 07-07-14
+            .clearFloat
+            span
+              span.social
+                = link_to"#", submission.facebook_link
+                  i.fa.fa-facebook-square
+              span.social
+                = link_to"#", submission.twitter_link
+                  i.fa.fa-twitter
+              span.social
+                = link_to"#", submission.twitter_link
+                  i.fa.fa-globe
 
-            .modal
-                label for="modal-3"
-                  .btnMusic.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-            .modal
-                label for="modal-3"
-                  .btn.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-                /= image_tag('soundcloud.jpg')
-                        /= embed(attachment.link)
-          td
-            .contact
-                | Bob Smith
-                br
-                | 919-867-5309
-                br
-                a href="#"
-                  | E-Mail
-                br
-                  | 07-07-14
-
-          td
-            .social
-              = link_to "Facebook", submission.facebook_link
-
-                br
-                /= submission.facebook_link
-              = link_to "Twitter", submission.twitter_link
-
-                br
-                /= submission.twitter_link
-                = link_to "Website", submission.website
-                /= submission.twitter_link
           td
             .tags
-              | Rock
-            /= submission.tags
-            / TODO: Add notes section in database
-
-          / Do we
-          / - unless submission.participant_id.nil?
-          /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-          /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-          /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+              | Accoustic, solo local, preferred
