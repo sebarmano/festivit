@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.bgheader_submissions_show {
+  width: 100%;
+  background-image: asset-url('concert.jpg');
+  background-size: cover;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+
 .bgheader_submissions {
   width: 100%;
   background-image: asset-url('dancers.jpg');
