@@ -9,6 +9,7 @@ section
 
     = form_tag pick_up_tickets_path, method: :put
 
+
     ul
       - @participant.tickets.order(:ticket_type_id).each do |ticket|
         - unless ticket.qty == '0'
@@ -37,6 +38,7 @@ section
                   li
                     = "#{ticket.online_order_id}"
                     span Order id
+
 
 
     = submit_tag "Submit picked up tickets", class: "submit-button"

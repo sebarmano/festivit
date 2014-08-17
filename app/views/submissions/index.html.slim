@@ -1,11 +1,11 @@
+doctype html
+
 .container.topSpacing
-  h1 Band Applications
+  h1.title Performer Applications
   table
     tr
       th
         | Decision
-      th
-        | Paid
       th
         | Performer
       th
@@ -17,50 +17,60 @@
       th
         | Contact
       th
-        | Social
-      th
         | Tags
 
       - @submissions.each do |submission|
         - photos = submission.attachments.where(type: "photo")
         - videos = submission.attachments.where(type: "video")
         - songs = submission.attachments.where(type: "song")
-        - participant = submission.participants.first
+        - thing = submission.fest_participant_submissions.first
+        - participant = Participant.find_by(id: thing)
+
         tr
-          /= submission.group_name
-        - unless participant.nil?
-          /if participant isn't showing it means there isn't one
-          td
-            button.decision Accept
-            button.decision Decline
-          td
-            button.paid $
-          td
-            /TODO: need to get seed data for band
-            = submission.group_name
-          td
+
+          td.decision
+
+            = button_to 'Approve', {action: 'approve', id: submission.id}, class: 'accept'
+            = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+          td.participant
+            span.name.ellipsis
+               = submission.group_name
+            span.paid
+              button Paid
+            .clearFloat
+              /TODO: need to get seed data for band
+
+          td.picTable
             .modal
-              label for="modal-1"
-                .btn.js-btn
-                  - if photos.first
-                    = image_tag photos.first.image.thumb('50x50x').url
-              input#modal-1.modal-state type="checkbox" /
+              label for="modal-#{submission.id*2 -1}"
+                .thumbPic
+                  - unless photos.first.nil?
+                    = image_tag photos.first.image.url, size: '140x100'
+
+              input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
               .modal-window
                 .modal-inner
-                  label.modal-close for="modal-1"
+                  label.modal-close for="modal-#{submission.id*2-1}"
                   .modalContainer
-                    = image_tag('bg.jpg')
-          td
+                    - photos.each do |photo|
+                      = image_tag photo.image.url
+          td.videoTable
             / TODO: Add video
             .modal
-                label for="modal-2"
-                  .btn.js-btn Video
-                input#modal-2.modal-state type="checkbox" /
+                label for="modal-#{submission.id*2}"
+                  - if videos.first
+                    .thumbVideo
+                      = image_tag thumb(videos.first.link), size: '140x100'
+                  - else
+                    .thumbVideo = image_tag('Performer.jpg')
+                input id="modal-#{submission.id*2}" class="modal-state" type="checkbox" /
                 .modal-window
                   .modal-inner
-                    label.modal-close for="modal-2"
+                    label.modal-close for="modal-#{submission.id*2}"
                     .modalContainer
-                      = image_tag('video.png')
+                      - videos.each do |video|
+                        = embed(video.link)
+                    / = image_tag('video.png')
                     //= embed(attachment.link)
           td
             / TODO: Add music
@@ -172,11 +182,38 @@ section
                 br
                 /= submission.facebook_link
               = link_to "Twitter", submission.twitter_link
+          td.tracks
+            - songs.each do |audio|
+               embed height="25" autoplay="false" src= audio.link width="60"
+              
+          td.info
+            span.contact
+               - if participant
+                = participant.name
+            .clearFloat
+            span.contact
+              a href="#"
+                - if participant
+                 = mail_to participant.email, name = "E-mail"
+            .clearFloat
+            span.contact
+              - if participant
+                = participant.phone
+            .clearFloat
+            span.createdOn
+              = submission.created_at.to_date
+            .clearFloat
+            span
+              span.social
+                = link_to"#", submission.facebook_link
+                  i.fa.fa-facebook-square
+              span.social
+                = link_to"#", submission.twitter_link
+                  i.fa.fa-twitter
+              span.social
+                = link_to"#", submission.website
+                  i.fa.fa-globe
 
-                br
-                /= submission.twitter_link
-                = link_to "Website", submission.website
-                /= submission.twitter_link
           td
             .tags
               | Rock
@@ -229,9 +266,5 @@ section
               / TODO: Add notes section in database
               | Rock
               /= submission.tags
+              | Accoustic, solo local, preferred
 
-            / Do we
-            / - unless submission.participant_id.nil?
-            /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-            /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-            /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}

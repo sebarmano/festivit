@@ -76,3 +76,4 @@ $(document).ready(function() {
     elm.val(Number(val)+1);
   });
 });
+

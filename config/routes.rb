@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
+  post 'decline/:id', to: 'submission#decline'
 
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"
@@ -40,6 +41,9 @@ Rails.application.routes.draw do
 
   get 'ticket_types/import', to: "ticket_types#import", :as => :import_ticket_types
   post 'ticket_types/import', to: "ticket_types#import"
+
+  get 'role_types/import', to: "role_types#import", :as => :import_role_types
+  post 'role_types/import', to: "role_types#import"
 
   resources :tickets do
     collection do
@@ -54,11 +58,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :role_types do
+    collection do
+      post :import
+    end
+  end
+
   resources :fests do
     collection do
       post :import
     end
   end
+
+  resources :fest_participant_role_types, only: [:index]
 
   get '/about', to: 'welcome#about'
   get '/contact', to: 'welcome#contact'

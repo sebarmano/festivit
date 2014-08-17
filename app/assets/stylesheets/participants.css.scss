@@ -60,7 +60,7 @@
     width: 30%;
     margin-right: 10px;
   }
-  
+
 }
 
 
@@ -68,7 +68,7 @@
 .filters {
   button {
     @include button(white);
-  }
+  } 
 }
 
 // Refills cards styling

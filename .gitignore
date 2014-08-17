@@ -22,6 +22,10 @@
 *.swo
 
 /coverage/
-.DS_Store
+*.DS_Store
 tags
+
+
+# ignore dragonfly uploads
+public/system/dragonfly/development
 
