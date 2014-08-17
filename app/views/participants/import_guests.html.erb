@@ -1,10 +1,7 @@
 <section>
   <article>
     <h4>Import Participants</h4>
-    <%= form_tag import_participants_path, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Import Tickets" %>
-    <% end %>
+
 
     <%= form_tag import_guests_participants_path, multipart: true do %>
         <%= file_field_tag :file %>
