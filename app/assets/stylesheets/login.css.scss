@@ -1,4 +1,17 @@
 .logIn {
   @include span-columns(4);
   @include shift(4);
+  h3 {
+    margin-bottom: 1em;
+  }
+}
+
+.bgheader_user_login {
+  width: 100%;
+  background-image: asset-url('upside.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
 }
