@@ -17,6 +17,6 @@ class TicketType < ActiveRecord::Base
   belongs_to :fest
   has_many :tickets
 
-  validates :name, :presence => true, :uniqueness => true
-  validates :fest_id, :productpairsid, presence: :true
+  # validates :name, :presence => true, :uniqueness => true
+  # validates :fest_id, :productpairsid, presence: :true
 end

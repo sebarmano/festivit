@@ -22,11 +22,11 @@ Dragonfly.app.configure do
 
   if Rails.env.production?
     datastore :dropbox,
-    app_key:              Rails.application.secrets.dropbox_app_key
-    app_secret:           Rails.application.secrets.dropbox_app_secret
-    access_token:         Rails.application.secrets.dropbox_access_token
-    access_token_secret:  Rails.application.secrets.dropbox_access_token_secret
-    user_id:              Rails.application.secrets.dropbox_user_id
+    app_key:              Rails.application.secrets.dropbox_app_key,
+    app_secret:           Rails.application.secrets.dropbox_app_secret,
+    access_token:         Rails.application.secrets.dropbox_access_token,
+    access_token_secret:  Rails.application.secrets.dropbox_access_token_secret,
+    user_id:              Rails.application.secrets.dropbox_user_id,
     root_path:            Rails.root.join('public/system/dragonfly', Rails.env)
   else
     datastore :file,
