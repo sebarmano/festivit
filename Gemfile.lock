@@ -157,8 +157,12 @@ GEM
       multi_json
       typhoeus
     orm_adapter (0.5.0)
+    pdf-core (0.2.5)
     pg (0.17.1)
     polyglot (0.3.5)
+    prawn (1.2.1)
+      pdf-core (~> 0.2.5)
+      ttfunk (~> 1.2.0)
     pry (0.10.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -267,6 +271,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.2.0)
     typhoeus (0.6.9)
       ethon (>= 0.7.1)
     tzinfo (1.2.1)
@@ -310,6 +315,7 @@ DEPENDENCIES
   neat
   oembedr
   pg
+  prawn (~> 1.2.1)
   pry-byebug
   rails (= 4.1.4)
   rails_12factor
