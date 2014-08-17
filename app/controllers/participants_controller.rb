@@ -32,6 +32,11 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
   end
 
+  def profile
+    @participant = Participant.find(params[:participant_id])
+    @comment = @participant.comments.new
+  end
+
   def customers
     @participants = Participant.customers.order(:lname, :fname)
     render template: 'participants/index'

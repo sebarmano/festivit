@@ -26,6 +26,7 @@ class Participant < ActiveRecord::Base
   has_many :fests, :through => :fest_participant_role_types
   has_many :role_types, :through => :fest_participant_role_types
   has_many :submissions, :through => :fest_participant_submissions
+  has_many :comments, as: :commentable
 
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types

@@ -12,6 +12,7 @@ class SubmissionsController < ApplicationController
     # TODO: need to fix all the blah.first
     @submission = @participant.submissions.first
     @role = @participant.role_types.first.name
+    @comment = @submission.comments.new
   end
 
   def new
