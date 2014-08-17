@@ -12,10 +12,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140813191907) do
 =======
 ActiveRecord::Schema.define(version: 20140814144722) do
 >>>>>>> 9a85c442daf68dfa226634f4f87c13d88d5f6038
+=======
+ActiveRecord::Schema.define(version: 20140815214131) do
+>>>>>>> upstream/release-1
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140814144722) do
     t.datetime "updated_at"
     t.integer  "submission_id"
     t.string   "type"
+    t.string   "song_uid"
   end
 
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree

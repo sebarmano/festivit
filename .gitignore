@@ -25,4 +25,10 @@
 .DS_Store
 
 /coverage/
+*.DS_Store
 tags
+
+
+# ignore dragonfly uploads
+public/system/dragonfly/development
+

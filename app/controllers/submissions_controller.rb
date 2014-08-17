@@ -5,7 +5,6 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.all
-
   end
 
   def show
@@ -74,9 +73,17 @@ class SubmissionsController < ApplicationController
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
     SubmissionMailer.approved(@participant).deliver
-    redirect_to :root
+    redirect_to submissions_path
   end
 
+  def decline
+    @submission.approve = false
+    @submission.save
+    @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
+    @participant = Participant.find_by(id: @thing.participant_id)
+    SubmissionMailer.decline(@participant).deliver
+    redirect_to submissions_path
+  end
   private
 
   def set_submission
@@ -89,6 +96,6 @@ class SubmissionsController < ApplicationController
                                          :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
                                          :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
                                          :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
-                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type] )
+                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type, :song] )
   end
 end

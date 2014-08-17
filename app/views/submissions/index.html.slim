@@ -23,69 +23,75 @@ I'doctype html
         - photos = submission.attachments.where(type: "photo")
         - videos = submission.attachments.where(type: "video")
         - songs = submission.attachments.where(type: "song")
-        - participant = submission.participants.first
+        - thing = submission.fest_participant_submissions.first
+        - participant = Participant.find_by(id: thing)
+
         tr
-        - unless participant.nil?
 
           td.decision
-            button.accept Accept
-            button.decline Decline
+
+            = button_to 'Approve', {action: 'approve', id: submission.id}, class: 'accept'
+            = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
           td.participant
             span.name.ellipsis
-              | Supercalifragilisticexpialidocious
+               = submission.group_name
             span.paid
               button Paid
             .clearFloat
-            /TODO: need to get seed data for band
+              /TODO: need to get seed data for band
 
-
-              /= submission.group_name
           td.picTable
             .modal
-              label for="modal-1"
+              label for="modal-#{submission.id*2 -1}"
                 .thumbPic
-                  = image_tag photos.first.image.thumb('400x200#').url
-                
-              input#modal-1.modal-state type="checkbox" /
+                  - unless photos.first.nil?
+                    = image_tag photos.first.image.url, size: '140x100'
+
+              input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
               .modal-window
                 .modal-inner
-                  label.modal-close for="modal-1"
+                  label.modal-close for="modal-#{submission.id*2-1}"
                   .modalContainer
-                    /h3 Performer Name
-                    = image_tag('bg.jpg')
+                    - photos.each do |photo|
+                      = image_tag photo.image.url
           td.videoTable
             / TODO: Add video
             .modal
-                label for="modal-2"
-                  .thumbVideo = image_tag('Performer.jpg')
-                input#modal-2.modal-state type="checkbox" /
+                label for="modal-#{submission.id*2}"
+                  - if videos.first
+                    .thumbVideo
+                      = image_tag thumb(videos.first.link), size: '140x100'
+                  - else
+                    .thumbVideo = image_tag('Performer.jpg')
+                input id="modal-#{submission.id*2}" class="modal-state" type="checkbox" /
                 .modal-window
                   .modal-inner
-                    label.modal-close for="modal-2"
+                    label.modal-close for="modal-#{submission.id*2}"
                     .modalContainer
-                    embed width="420" height="345"src="http://www.youtube.com/v/XGSy3_Czz8k"type="application/x-shockwave-flash"
+                      - videos.each do |video|
+                        = embed(video.link)
                     / = image_tag('video.png')
                     //= embed(attachment.link)
           td.tracks
-            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-            | Song 1
-            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-            | Song 2
-            embed height="25" autoplay="false" src="http://clyp.it/h4xzegie.mp3" width="60"
-            | Song 3
+            - songs.each do |audio|
+               embed height="25" autoplay="false" src= audio.link width="60"
+              
           td.info
             span.contact
-              | Matthew Steinberg
+               - if participant
+                = participant.name
             .clearFloat
             span.contact
               a href="#"
-                | E-Mail
+                - if participant
+                 = mail_to participant.email, name = "E-mail"
             .clearFloat
             span.contact
-              | 919-867-5309
+              - if participant
+                = participant.phone
             .clearFloat
             span.createdOn
-              | 07-07-14
+              = submission.created_at.to_date
             .clearFloat
             span
               span.social
@@ -95,17 +101,10 @@ I'doctype html
                 = link_to"#", submission.twitter_link
                   i.fa.fa-twitter
               span.social
-                = link_to"#", submission.twitter_link
+                = link_to"#", submission.website
                   i.fa.fa-globe
 
           td
             .tags
               | Accoustic, solo local, preferred
-            /= submission.tags
-            / TODO: Add notes section in database
 
-          / Do we
-          / - unless submission.participant_id.nil?
-          /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-          /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-          /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}

@@ -2,6 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.bgheader_submissions_show {
+  width: 100%;
+  background-image: asset-url('concert.jpg');
+  background-size: cover;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+
+.bgheader_submissions {
+  width: 100%;
+  background-image: asset-url('dancers.jpg');
+  background-size: cover;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
 @mixin fieldset{
   background: #f7f7f7;
   border: 1px solid #ddd;
@@ -130,7 +151,10 @@ td{
     @include span-columns(2);
     margin: 0 10px;
     }
-
+audio{
+  width: 80;
+  height: 10;
+}
   &.decision {
 /*    @include span-columns(1);
 */    button{
@@ -158,7 +182,9 @@ td{
       }
       }
     }
-
+  .participant{
+    width: 100px;
+  }
   .name{
     margin: 0 10px;
     width: 90%
@@ -203,12 +229,9 @@ td{
 /*      @include span-columns(2);
 */      text-align: center;
       font-size: .75em;
-      embed{
-        width: 132px;
-        display: block;
-        margin: 2px 20px;
-
-      }
+      width: 50px;
+      display: block;
+      margin: 2px 20px;
     }
 
     .tags{

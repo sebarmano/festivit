@@ -1,3 +1,14 @@
+
+.bgheader_particpants_show {
+  width: 100%;
+  background-image: asset-url('hills_01.jpg');
+  background-size: cover;
+  background-position: 50% 20%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
 .bgheader_new_particpants {
   width: 100%;
   background-image: asset-url('hills_01.jpg');
@@ -10,9 +21,9 @@
 
 .bgheader_particpants {
   width: 100%;
-  background-image: asset-url('tickets.jpg');
+  background-image: asset-url('hola.jpg');
   background-size: cover;
-  background-position: 50% 20%;
+  background-position: 70% 20%;
   background-repeat: no-repeat;
   z-index: 0;
   height: 16em;
@@ -22,13 +33,17 @@
   @include span-columns(8);
   @include shift (1);
 }
+
+.fullName{
+  float: left;
+  width: 100%;
+}
 .firstName{
   @include span-columns(4 of 8);
 }
 .lastName{
   @include span-columns(4 of 8);
 }
-
 
 .logInCreate{
   @include fieldset;
@@ -70,12 +85,40 @@
 }
 .phone{
   @include span-columns(4 of 8);
+
+.address {
+  @include fieldset;
+
+  .street{
+    width: 40%;
+  }
+  .city{
+    width: 30%;
+    float: left;
+    margin-right: 10px;
+  }
+  .state{
+    width: 30%;
+    float: left;
+    margin-right: 10px;
+  }
+  .zip{
+    float: left;
+    width: 30%;
+    margin-right: 10px;
+  }
 }
 
 .participants{
   @include fieldset;
 }
 
+
+.filters {
+  button {
+    @include button(white);
+  } 
+}
 
 // Refills cards styling
 .cards {
@@ -170,7 +213,6 @@
       box-shadow: none;
       display: inline;
       width: 50%;
-      line-height: 50px;
     }
   }
 

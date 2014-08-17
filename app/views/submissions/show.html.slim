@@ -1,9 +1,13 @@
-.container
-  p
-    #notice
-      = notice
-  img.bandImage src="http://upload.wikimedia.org/wikipedia/commons/a/aa/Average_White_Band_Edinburgh.jpg" /
+.bgheader_submissions_show
 
+section
+  article
+    p.notice
+      = notice
+    p.alert
+      = alert
+
+<<<<<<< HEAD
   h3 Participant Information
 
   .fieldset
@@ -55,6 +59,71 @@
              li = image_tag thumb(attachment.link), class: "thumb"
             - if attachment.type == "photo"
              li = image_tag attachment.image.thumb('400x200#').url
+=======
+    img.bandImage src="http://upload.wikimedia.org/wikipedia/commons/a/aa/Average_White_Band_Edinburgh.jpg" /
+
+    h3 Band Information
+
+    ul.showParticipant
+      - unless @participant.nil?
+        li = @participant.fname
+        li = @participant.lname
+        li = @participant.phone
+        li = @participant.email
+        li = @participant.twitter_link
+        li = @participant.facebook_link
+        li = @participant.street_address
+        li = @participant.city
+        li = @participant.state
+        li = @participant.zip
+        li = @participant.country
+      br
+
+      - if @role == "Performer"
+        li = @submission.group_name
+        li = @submission.bio
+        li = @submission.website
+
+      - if @role == "Craft Vendor"
+        ul.showCraft
+          li = @submission.group_name
+          li = @submission.bio
+          li = @submission.website
+          li = @submission.booth_desc
+          /li = @submission.electrical
+
+      - if @role == "Food Vendor"
+        ul.showFood
+          li = @submission.group.name
+          li = @submission.website
+
+      - if @role == "Healing Artist"
+        ul.showHeal
+          li = @submission.group.name
+          li = @submission.website
+          li = @submission.practice_no
+          li = @submission.practice_lic_no
+          li = @submission.practice_exp_date
+          li = @submission.practice_years
+
+<<<<<<< HEAD
+    - @submission.attachments.each do |attachment|
+      - if attachment.type == "video"
+        li = embed(attachment.link)
+       /li = image_tag thumb(attachment.link), class: "thumb"
+      -  if attachment.image
+         li = image_tag attachment.image.thumb('400x200#').url
+      - if attachment.type == "song"
+        li = embed height="25" autoplay="false" src= attachment.song.url width="60"
+
+=======
+      - @submission.attachments.each do |attachment|
+        - unless attachment.link == ""
+         li = embed(attachment.link)
+        -  if attachment.image
+           li = image_tag attachment.image.thumb('400x200#').url
+>>>>>>> upstream/release-1
+>>>>>>> upstream/release-1
 
   /- unless @submission.attachments == nil
   /  .video
