@@ -21,6 +21,8 @@ gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
 gem 'dragonfly-dropbox_data_store'
+gem 'prawn', '~> 1.2.1'
+
 
 #CSV import gems
 gem 'roo'
@@ -44,4 +46,9 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'guard', '~> 2.6.1'
+  gem 'guard-rspec'
 end
+
+# Guard with Mac OSX notifications, you can remove this gem if you don't use it.
+gem 'terminal-notifier-guard', group: :development
