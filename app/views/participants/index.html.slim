@@ -1,3 +1,5 @@
+.bgheader_particpants
+
 section
   article
     = form_tag participants_path, method: :get
@@ -10,10 +12,11 @@ section
     ul id="participants_list"
       - @participants.each do |participant|
         - if participant.total_tickets
-          li
-            h3
-              = link_to participant.name, participant
-            / h4 Tickets
-              ul
-                = participant.tickets_count.each do |ticket_type, count|
-                  li = "#{ticket_type.name}, #{count}"
+          .contact
+            li
+              h3
+                = link_to participant.name, participant
+              / h4 Tickets
+                ul
+                  = participant.tickets_count.each do |ticket_type, count|
+                    li = "#{ticket_type.name}, #{count}"
