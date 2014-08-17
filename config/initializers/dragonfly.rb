@@ -19,6 +19,7 @@ Dragonfly.app.configure do
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.extend Dragonfly::Model
     ActiveRecord::Base.extend Dragonfly::Model::Validations
+  end
 
   if Rails.env.production?
     datastore :dropbox,
@@ -31,6 +32,5 @@ Dragonfly.app.configure do
     datastore :file,
       root_path: Rails.root.join('public/system/dragonfly', Rails.env),
       server_root: Rails.root.join('public')
-    end
   end
 end
