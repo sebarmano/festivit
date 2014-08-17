@@ -11,7 +11,7 @@
           .card
             .card-header
               strong
-                | #{ticket.ticket_type.productpairsid}
+                | #{ticket.ticket_type.first.productpairsid}
               | #{ticket.online_order_id}
             .card-copy 
               i.fa.fa-minus-circle.button-subtract  
