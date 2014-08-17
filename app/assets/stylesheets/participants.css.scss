@@ -19,36 +19,63 @@
 }
 
 .form{
-  width: 50%;
+  @include span-columns(8);
+  @include shift (1);
 }
-.name{
-  float: left;
+.firstName{
+  @include span-columns(4 of 8);
 }
+.lastName{
+  @include span-columns(4 of 8);
+}
+
+
+.logInCreate{
+  @include fieldset;
+  @include span-columns(8 of 8);
+}
+.email{
+  @include span-columns(8 of 8);
+  @include omega();
+}
+.passwordCreate{
+  @include span-columns(4 of 8);
+}
+.passwordCreateConf{
+  @include span-columns(4 of 8);
+  @include omega();
+}
+
+
+.address{
+  @include fieldset;
+  @include span-columns(8 of 8);
+}
+.street{
+  @include span-columns(8 of 8);
+}
+.city{
+  @include span-columns(2.5 of 8);
+}
+.state{
+  @include span-columns(1.5 of 8);
+}
+.zip{
+  @include span-columns(2 of 8);
+}
+.country{
+  @include span-columns(2 of 8);
+}
+.shield{
+  @include span-columns(8 of 8);
+}
+.phone{
+  @include span-columns(4 of 8);
+}
+
 .participants{
   @include fieldset;
 }
-.address{
-  @include fieldset;
-  .street{
-    width: 40%;
-  }
-  .city{
-    width: 35%;
-    float: left;
-    margin-right: 10px;
-  }
-  .state{
-    width: 25%;
-    float: left;
-    margin-right: 10px;
-  }
-  .zip{
-    float: left;
-    width: 20%;
-    margin-right: 10px;
-  }
-}
-
 
 
 // Refills cards styling
