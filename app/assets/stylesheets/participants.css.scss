@@ -85,6 +85,7 @@
 }
 .phone{
   @include span-columns(4 of 8);
+}
 
 .address {
   @include fieldset;
