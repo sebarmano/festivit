@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   get 'ticket_types/import', to: "ticket_types#import", :as => :import_ticket_types
   post 'ticket_types/import', to: "ticket_types#import"
 
+  get 'role_types/import', to: "role_types#import", :as => :import_role_types
+  post 'role_types/import', to: "role_types#import"
+
   resources :tickets do
     collection do
       put :pick_up
@@ -50,11 +53,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :role_types do
+    collection do
+      post :import
+    end
+  end
+
   resources :fests do
     collection do
       post :import
     end
   end
+
+  resources :fest_participant_role_types, only: [:index]
 
   get '/about', to: 'welcome#about'
   get '/contact', to: 'welcome#contact'

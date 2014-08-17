@@ -25,6 +25,7 @@ class Ticket < ActiveRecord::Base
   validates_uniqueness_of :ticket_type_id, :scope => [:online_order_id]
   validates :participant_id, presence: true
 
+
   def remaining
     qty.to_i - picked_up.to_i
   end

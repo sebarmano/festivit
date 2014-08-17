@@ -1,83 +1,59 @@
-#
-# # TODO - add option to participant import for willcall & dreamteam
+# # TODO - add option to participant import view for willcall & dreamteam
 
-#
+#will import Google doc dreamteam list
 class ImporterDreamteam < ActiveImporter::Base
   class NoFestError < StandardError; end
 
-  imports Ticket
+    imports Participant
 
-  skip_rows_if { row['Lastname'].blank? }
+    skip_rows_if { row['lname'].blank? }
 
-#   fetch_model do
-#     # find or create ticket type
-#     ticket_type = TicketType.where(
-#         sku: row['Item SKU']
-#     ).first_or_initialize
-#
-#     ticket_type.update!(:name => row['Item Name'],
-#                         :price => row['Row Price'])
-#
-#     ticket_type.tickets.where(online_order_id: row['Order ID']).first_or_initialize
-#   end
+    fetch_model do
+      # find or create participant
+      participant = Participant.where(
+          lname: row['lastname'],
+          fname: row['firstname']
+      ).first_or_initialize
+    end
 
-#   column 'Status', :status
-#   column 'Lastname', :lname
-#   column 'Firstname', :fname
-#   column 'Lastname', :lname
-#   column 'Order ID', :online_order_id
+    column 'Email', :email
+    column 'Address', :street_address
+    column 'City', :city
+    column 'State', :state
+    column 'Zip', :zip
+    column 'Phone', :phone
+    #
+    on :row_processing do
 
-#   column 'Item Amount', :qty
-#   column 'Customer Note', :customer_notes #TODO - add filter for if cust notes = lname, fname or fname lname
-#
-#   on :row_processing do
-#     # find or create participant
-#     participant = Participant.where(
-#         fname: row['Billing First Name'],
-#         lname: row['Billing Last Name'],
-#         email: row['Billing Email']
-#     ).first_or_initialize
-#
-#     participant.update!(:phone => row['Billing Phone'],
-#                         :street_address => row['Billing Address 1'],
-#                         :zip => row['Billing Post code'],
-#                         :city => row['Billing City'],
-#                         :state => row['Billing State'],
-#                         :country => row['Billing Country'])
-#
-#     model.participant = participant
-#
-#     # parse sku
-#     sku_regex = /([A-Z]{3,4}20\d\d)([A-Z0-9]{3})/
-#     match = row['Item SKU'].match(sku_regex)
-#     fest_code = match[1] if match
-#     raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
-#
-#     if fest_code
-#       # find or create fest name
-#       fest = Fest.where(fest_code: fest_code).first
-#
-#       raise NoFestCode, "No fest with code #{fest_code}" unless fest
-#
-#       role_type = RoleType.where(name: 'customer').first_or_initialize
-#
-#       model.ticket_type.fest = fest
-#       model.ticket_type.save!
-#
-#       fprt = FestParticipantRoleType.where(:participant => participant,
-#                                            :fest => fest,
-#                                            :role_type => role_type).first_or_initialize
-#       fprt.save!
-#     end
-#   end
-#
-#   on :row_error do |ex|
-#     Rails.logger.error("Did not import: #{ex}")
-#   end
-#
-#   on :import_finished do
-#     Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
-#   end
-# end
-#
-#
+      tix_columns = ["4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "Anyday",
+                     "TENT", "TENT1", "TENTps", "VHC", "VHC1", "VHCps", "FPKNG", "FPKNGps",
+                    "DTLAN", "DT50","DREAM"]
+      tix_columns.each do |tix_column|
+        if row[tix_column]
+          #create a ticket
+          ticket = model.tickets.build(qty: row[tix_column],
+                                       online_order_id: (row['OrderID']).to_s,
+                                       customer_notes: row['customer_notes'],
+                                       date_time: row['Date'],
+                                       status: row['status'])
+          ticket_type = TicketType.where(productpairsid: tix_column, price: '0').first
+          ticket.ticket_type = ticket_type
+          ticket.save!
+        end
+      end
+
+
+        role_type = RoleType.where(name: 'customer').first_or_initialize
+        fprt = FestParticipantRoleType.where(:participant => participant,
+                                             :fest => model.ticket_type.fest,
+                                             :role_type => role_type).first_or_initialize
+        fprt.save!
+
+    on :row_error do |ex|
+      Rails.logger.error("Did not import: #{ex}")
+    end
+
+    on :import_finished do
+      Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
+    end
+  end
