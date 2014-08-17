@@ -1,0 +1,15 @@
+.bgheader_particpants
+
+section
+  article
+    table
+      - @fest_participant_role_types.each do |fprt|
+        tr
+          td
+            = fprt.role_type.name
+          td
+            = fprt.fest.name
+          td
+            = fprt.participant.lname
+          td
+            = fprt.participant.fname
