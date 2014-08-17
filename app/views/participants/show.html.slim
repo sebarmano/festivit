@@ -1,9 +1,15 @@
-.container
-  h2
+.bgheader_particpants_show
+
+
+section
+  article
+
+    h3
     = @participant.name
 
-  = form_tag pick_up_tickets_path, method: :put
+    = form_tag pick_up_tickets_path, method: :put
 
+<<<<<<< HEAD
   ul
     - @participant.tickets.order(:ticket_type_id).each do |ticket|
       - unless ticket.qty == '0'
@@ -32,6 +38,36 @@
                 li
                   = "#{ticket.online_order_id}"
                   span Order id
+=======
+    ul
+      - @participant.tickets.order(:ticket_type_id).each do |ticket|
+        - unless ticket.qty == '0'
+          .cards
+            .card
+              .card-header
+                strong
+                  | #{ticket.ticket_type.productpairsid}
+                | #{ticket.online_order_id}
+              .card-copy
+                i.fa.fa-minus-circle.button-subtract
+                = fields_for "tickets[]", ticket do |f|
+                   = f.number_field :picked_up, max: ticket.remaining, min: 0,
+                     value: ticket.remaining, class: "tickets-pu"
+                i.fa.fa-plus-circle.button-add
+              /.ribbon-wrapper
+                  .ribbon
+                    | #{ticket.ticket_type.id}
+              .card-stats
+                ul
+                  li
+                    = "total: #{ticket.qty}  -  remaining: #{ticket.remaining}"
+              /    li
+                    = "#{ticket.remaining}"
+                    span Remaining
+                  li
+                    = "#{ticket.online_order_id}"
+                    span Order id
+>>>>>>> upstream/release-1
 
 
-  = submit_tag "Submit picked up tickets", class: "submit-button"
+    = submit_tag "Submit picked up tickets", class: "submit-button"
