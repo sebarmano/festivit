@@ -20,6 +20,7 @@ gem 'slim', '~> 2.0.3'
 gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
+gem 'dragonfly-dropbox_data_store'
 
 #CSV import gems
 gem 'roo'
