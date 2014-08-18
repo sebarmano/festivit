@@ -7,14 +7,31 @@ section
       - unless @role == "Volunteer"
         = f.input "group_name"
 
-
-
       - if @role == "Performer"
         = f.input "bio", :label => "Performer Bio:"
+      
+      - if @role == "Healing Artist"
 
+        .fieldset
+           = f.input "practice_type", :label => "Modality:"
+           = f.input "practice_lic_no", :label => "License number:"
+           = f.input "practice_exp_date", :label => "License expiration date:"
+           = f.input "practice_years", :label => "Length of time practicing:"
+
+<<<<<<< HEAD
       -unless @role == "Volunteer"
-        = f.input "website"
 
+        .fieldset
+          = f.input "website"
+          = f.input "facebook_link"
+          = f.input "twitter_link"
+        
+      = f.input "camping", :label => "Camping at the festival?"
+      = f.input "complete", :label => "Optional: save and complete later."
+
+      - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
+        
+=======
       - if @role == "Healing Artist"
        = f.input "practice_type", :label => "Practice type:"
        = f.input "practice_lic_no", :label => "License number:"
@@ -28,6 +45,7 @@ section
         i.fa.fa-question.tooltip-item
           .tooltip
             p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
+>>>>>>> upstream/release-1
         - @types.each do |type|
           h4 = type.capitalize
           .attachments class = "#{type}s"
@@ -45,65 +63,60 @@ section
             = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => @types[2]}}, class: "add_#{@types[2]}"
 
       - if @role == "Volunteer"
-       = f.input "underage", :label => "Under 18?"
+       
+       .fieldset
 
-       = f.input "ticket_req", :label => "What type of tickets do you want to earn for the festival?", collection: ["4-Day", "3-Day"]
+         = f.input "underage", :label => "Under 18?"
 
-       = f.input "days_avail", :label => "Days available (multi-select):", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
-                                :input_html => {:multiple => true}
+         = f.input "ticket_req", :label => "What type of tickets do you want to earn for the festival?", collection: ["4-Day", "3-Day"]
 
-       = f.input "deposit_type", :label => "Deposit payment type:", collection: ["credit card", "check", "money order"]
+         = f.input "days_avail", :label => "Days available (multi-select):", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
+                                  :input_html => {:multiple => true}
 
-       = f.input "returning", :label => "First time volunteer?"
+         = f.input "deposit_type", :label => "Deposit payment type:", collection: ["credit card", "check", "money order"]
 
-       = f.input "crew_hist", :label => "What were your crew(s)? (For Hospitality Kitchen, also list position)."
+         = f.input "returning", :label => "First time volunteer?"
 
-       = f.input "crew_pref", :label => ("Top 3 Crew Preferences. (Crew descriptions and requirements are found on the #{link_to "Shakori Hills website", 'http://shakorihillsgrassroots.org/be-a-part/be-a-volunteer/volunteer-crew-details'}).").html_safe
+         = f.input "crew_hist", :label => "What were your crew(s)? (For Hospitality Kitchen, also list position)."
 
-       = f.input "comments", :label => "Special skills related to crew interest, or list other comments:", :label_html => { class: "tooltip-input" }
-        i.fa.fa-question.tooltip-item
-          .tooltip
-            p If you have a friend or family that you would like to volunteer with please indicate that here and have them do the same on their application. We will try our best to work with you!
-        = f.input_field "comments"
+         = f.input "crew_pref", :label => ("Top 3 Crew Preferences. (Crew descriptions and requirements are found on the #{link_to "Shakori Hills website", 'http://shakorihillsgrassroots.org/be-a-part/be-a-volunteer/volunteer-crew-details'}).").html_safe
 
-
-       = f.input "shift_pref", :label => "Time preference(s):", :label_html => { class: "tooltip-input" }
-        i.fa.fa-question.tooltip-item
-          .tooltip
-            p We will try to work with you on this but there is no way that we can place everyone in their top choice and we have shifts that need to be filled at all hours.
-        = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
+         = f.input "comments", :label => "Special skills related to crew interest, or list other comments:", :label_html => { class: "tooltip-input" }
+          i.fa.fa-question.tooltip-item
+            .tooltip
+              p If you have a friend or family that you would like to volunteer with please indicate that here and have them do the same on their application. We will try our best to work with you.
+          = f.input_field "comments"
 
 
+         = f.input "shift_pref", :label => "Time preference(s):", :label_html => { class: "tooltip-input" }
+          i.fa.fa-question.tooltip-item
+            .tooltip
+              p We will try to work with you, we can't place everyone in their top choice and we have shifts that need to be filled at all hours.
+            = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
 
-       = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
+         = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
 
 
       - if @role == "Craft Vendor"
-       = f.input "craft_desc", :label => "Description of your craft:"
 
+        .fieldset
+           = f.input "craft_desc", :label => "Description of your craft:"
 
-       = f.input "photo_desc", :label => "Photo descriptions:", :label_html => { class: "tooltip-input" }
-         i.fa.fa-question.tooltip-item
-           .tooltip
-             p Note materials, technique, description and price range.
-         = f.input_field "photo_desc"
+           = f.input "photo_desc", :label => "Photo descriptions:", :label_html => { class: "tooltip-input" }
+             i.fa.fa-question.tooltip-item
+               .tooltip
+                 p Note materials, technique, description and price range.
+             = f.input_field "photo_desc"
 
-       = f.input "booth_desc", :label => "Booth descriptions and special requirements:"
+           = f.input "booth_desc", :label => "Booth descriptions and special requirements:"
 
-       = f.input "electrical", :label => "Electrical needs and amperage required:"
-
-
-      - if @role == "Food Vendor"
-
+           = f.input "electrical", :label => "Electrical needs and amperage required:"
 
       - if @role == "Non-Profit"
-       = f.input "mission_statement", :label => "Mission:"
-       = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
 
-      -unless @role == "Volunteer"
-        = f.input "facebook_link"
-        = f.input "twitter_link"
-      = f.input "camping", :label => "Camping at the festival?"
-      = f.input "complete", :label => "Optional: save and complete later."
+        = f.input "mission_statement", :label => "Mission:"
+        = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
+
+      - if @role == "Food Vendor"
 
       =f.submit
