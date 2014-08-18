@@ -62,6 +62,7 @@ $(function() {
     }
 })
 
+
 $(document).ready(function() {
   $(".button-subtract").click(function(e) {
     e.preventDefault();
