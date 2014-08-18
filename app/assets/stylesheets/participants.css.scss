@@ -1,4 +1,5 @@
-$card-type-background: $red-orange;
+$t4day-header-background: $red-orange;
+$tvhc-header-background: $blue;
 
 .bgheader_particpants_show {
   width: 100%;
@@ -152,12 +153,12 @@ $card-type-background: $red-orange;
     padding: $base-line-height/3 $gutter/2;
 
 
-    .c4day {
-        background-color: $card-type-background;
+    &.t4day {
+        background-color: $t4day-header-background;
     }
 
-    .cvhc {
-        background-color: $green;
+    &.tvhc {
+        background-color: $tvhc-header-background;
      }
   }
 
@@ -182,7 +183,7 @@ $card-type-background: $red-orange;
   }
 
   .card-stats {
-    padding: $base-line-height/2 $gutter/2;
+    padding: 0px $gutter/2 $base-line-height/2 $gutter/2;
     overflow: auto;
 
     ul li {
@@ -204,10 +205,7 @@ $card-type-background: $red-orange;
       }
 
       span {
-        color: $base-font-color;
-        font-size: .7em;
-        display: block;
-        font-weight: normal;
+        display: inline;
       }
     }
   }
