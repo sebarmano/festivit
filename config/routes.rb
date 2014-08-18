@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   resources :applicants, controller: 'users', only: [:show], type: 'Applicant'
 
   resources :participants, only: [:new, :create, :edit, :show, :index] do
-    resources :submissions, except: :index
+    resources :submissions, except: :index do
+      post :comments, to: 'comments#create'
+    end
+    get '/profile', to: 'participants#profile'
+    post :comments, to: 'comments#create'
     collection {
       get :guests
       get :customers
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
+  post 'decline/:id', to: 'submission#decline'
 
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"

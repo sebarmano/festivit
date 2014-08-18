@@ -1,264 +1,140 @@
-.circle-container {
-    position: relative;
-    width: 30em;
-    height: 30em;
-    padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
-    border: none;
-    border-radius: 50%;
-    margin: 1.75em auto 0;
+.bgheader_team {
+  width: 100%;
+  background-image: asset-url('field.jpg');
+  background-size: cover;
+  background-position: 20% 0%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
 
-    .modal {
-  $modal-padding: 3em;
-  $modal-background: $base-background-color;
-  $modal-close-color: $light-gray;
-  $modal-image-height: 96px;
-  $modal-image-width: $modal-image-height;
+.hover-tile-outer {
+  $hover-tile-height: 16em;
 
-  label {
-    cursor: pointer;
-    margin-bottom: 0;
-  }
+  background-position: bottom;
+  background-size: cover;
+  background: asset-url("mae.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-color: #BEB56E;
+  border: 1px solid $base-border-color;
+  height: $hover-tile-height;
+  margin-bottom: $base-line-height;
+  cursor: pointer;
 
-  label img {
-    // $img-width: 300px;
-    // border-radius: $img-width/2;
-    display: block;
-    // max-width: $img-width;
-    padding: 0;
-  }
+  // @include media($medium-screen) {
+  //   width: 40%;
+  // }
 
-  input[type="checkbox"] {
-    display: none;
-  }
-
-  .btn {
-    @include button(simple, $base-background-color);
-    font-size: $base-font-size;
-    margin-bottom: $base-line-height;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    width: 96px !important;
-  }
-
-  .modal-open {
+  .hover-tile-container {
+    height: $hover-tile-height;
     overflow: hidden;
+
   }
 
-  .modal-window {
-// overlay
-    @include transition(opacity .25s ease);
-    @include position(fixed, 0px 0px 0px 0px);
-    background: rgba(0,0,0, .85);
-    opacity: 0;
-    text-align: left;
-    visibility: hidden;
-    z-index: 99999999999;
-
-    .modal-bg {
-      @include position(absolute, 0px 0px 0px 0px);
-      cursor: pointer;
-    }
+  .hover-tile-container:hover > .hover-tile {
+    @include transform(translate(0, -100%));
   }
 
-  .modal-close {
-    @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
-    @include size(1.5em);
-    cursor: pointer;
-    background: $modal-background;
-
-    &:after,
-    &:before {
-      @include position(absolute, 3px 3px 0 50%);
-      @include transform(rotate(45deg));
-      @include size(.15em 1.5em);
-      background: $modal-close-color;
-      content: '';
-      display: block;
-      margin: -3px 0 0 -1px;
-    }
-
-    &:hover:after,
-    &:hover:before {
-      background: darken($modal-close-color, 10);
-    }
-
-    &:before {
-      @include transform(rotate(-45deg));
-    }
-  }
-
-  .modal-inner {
-    @include transition(opacity .25s ease);
-    border-radius: $base-border-radius;
-    background: $modal-background;
-    margin: auto;
-    max-height: 95%;
-    position: relative;
-    overflow: auto;
-    width: 95%;
-    padding: $modal-padding /2;
-    margin-top: .6em;
-
-    @include media($medium-screen) {
-      padding: $modal-padding;
-      width: 60%;
-      max-height: 60%;
-      margin-top: 10em;
-    }
-
-    @include media($large-screen) {
-      width: 50%;
-      margin-top: 10em;
-    }
-
-    h1 {
-      color: $base-font-color;
-      margin-bottom: .6em;
-      text-align: left;
-      text-transform: capitalize;
-    }
-
-    p {
-      font-size: $base-font-size;
-      max-width: 100% !important;
-      padding: 0;
-      text-align: left;
-
-      &.intro {
-        color: $blue;
-        line-height: 1.6em;
-      }
-
-      &.body {
-        color: $base-font-color;
-        line-height: 1.45em;
-
-        @include media($medium-screen) {
-          @include columns(2 8em);
-        }
-      }
-    }
-
-    a.cta {
-      color: white;
-      display: inline-block;
-      margin-right: .5em;
-      margin-top: 1em;
-
-      &:last-child {
-        padding: 0 0em;
-      }
-    }
-  }
-
-  .modal-state:checked + .modal-window {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .modal-state:checked + .modal-window .modal-inner {
-    top: 0;
-  }
-}
-
-// Based on code by Kasper Mikiewicz
-}
-
-
-.circle-container a {
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    text-decoration: none;
-    color: $base-font-color;
-    border-radius: 50%;
-
-    top: 50%; left: 50%;
-    width: 6em; height: 6em;
-    margin: -2em; /* 2em = 4em/2 */ /* half the width */
-}
-.circle-container img { display: block; width: 100%; }
-.deg0 {
-    @include transform(translate(12em) );
-} /* 12em = half the width of the wrapper */
-.lt-ie9 .deg0 {
-    margin-left: 10em;
-}
-.deg45 {
-    @include transform(rotate(60deg) translate(12em) rotate(-60deg));
-
-}
-.lt-ie9 .deg45 {
-    margin: 6.485em;
-}
-.deg135 {
-    @include transform(rotate(120deg) translate(12em) rotate(-120deg));
-}
-.lt-ie9 .deg135 {
-    margin: 6.485em -10.485em;
-}
-.deg180 {
-
-  @include transform(rotate(180deg) translate(12em) rotate(-180deg));
-}
-.lt-ie9 .deg180 {
-    margin-left: -14em;
-}
-.deg225 {
-    @include transform(rotate(240deg) translate(12em) rotate(-240deg));
-
-}
-.lt-ie9 .deg225 {
-    margin: -10.485em;
-}
-.deg315 {
-    @include transform(rotate(300deg) translate(12em) rotate(-300deg));
-}
-.lt-ie9 .deg315 {
-    margin: -10.485em 6.485em;
-}
-
-/* this is just for showing the angle on hover */
-.circle-container a:not(.center):before {
-    position: absolute;
-    width: 4em;
+  .hover-tile {
+    @include transition(all, .2s ease-in-out);
+    background:inherit;
     color: white;
-    opacity: 0;
-    background: rgba(0,0,0,.5);
-    font: 1.25em/3.45 Courier, monospace;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-indent: -2em;
-    text-shadow: 0 0 .1em deeppink;
-    transition: .7s; /* only works in Firefox */
-    content: attr(class)'°';
-}
-// .circle-container a:hover:before { opacity: 1; }
+    height:inherit;
+    padding: 1em 1.5em;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+  }
 
-/* this is for showing the circle on which the images are placed */
-.circle-container:after {
-    position: absolute;
-    top: 2.8em; left: 2.8em;
-    width: 24em; height: 24em;
-    border: none;
-    border-radius: 50%;
-    opacity: .3;
-    pointer-events: none;
-    content: '';
+  .hover-tile-visible {
+    color: transparentize(white, .2);
+    font-family: $serif;
+    font-size: 1.5em;
+    font-weight: 200;
+    padding-top: 8.25em;
+    text-align: left;
+  }
+
+  .hover-tile-hidden {
+    background: transparentize(black, .5);
+    h4 {
+      margin-bottom: .5em;
+    }
+    p {
+      color: transparentize(white, .3);
+    }
+  }
 }
-//
-// .circle-container:hover:after { opacity: 1; }
-// .circle-container a:not(.center):after {
-//     position: absolute;
-//     top: 50%; left: 50%;
-//     width: 4px; height: 4px;
-//     border-radius: 50%;
-//     box-shadow: 0 0 .5em .5em white;
-//     margin: -2px;
-//     background: deeppink;
-//     opacity: .3;
-//     content: '';
-// }
-// .circle-container:hover a:after { opacity: 1; }
-// .circle-container a:hover:after { opacity: .3; }
+
+li.block {
+@include span-columns(3);
+@include omega(4n);
+}
+
+li.block.talal {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("talal.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.david {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("david.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.justin {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("justin.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.jeremy {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("jeremy.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.scott {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("scott.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.sebastian {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("sebastian.png");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+.fa-2x {
+  margin-right: .5em;
+}

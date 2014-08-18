@@ -17,4 +17,9 @@ class SubmissionMailer < ActionMailer::Base
     @applicant = applicant
     mail(to: @applicant.email, subject: "Congratulations! You're application was APPROVED!")
   end
+
+  def decline(applicant)
+    @applicant = applicant
+    mail(to: @applicant.email, subject: "I'm sorry, but you have not been selected for this years show")
+  end
 end
