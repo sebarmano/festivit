@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.roundabout
 //= require cocoon
 //= require_tree .
 
@@ -78,3 +79,8 @@ $(document).ready(function() {
   });
 });
 
+$(function() {
+  $('ol.carousel').roundabout({
+      btnNext: ".next"
+  });
+});
