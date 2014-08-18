@@ -30,6 +30,37 @@ $(function() {
   });
 });
 
+$(function() {
+    // limits the number of categories
+    $('.attachments').bind('cocoon:after-insert', function() {
+        check_to_hide_or_show_add_link();
+    });
+
+    $('.attachments').bind('cocoon:after-remove', function() {
+        check_to_hide_or_show_add_link();
+    });
+
+    check_to_hide_or_show_add_link();
+
+    function check_to_hide_or_show_add_link() {
+        if ($('.photos .nested-fields').length == 3) {
+            $('.add_photo').hide();
+        } else {
+            $('.add_photo').show();
+        }
+        if ($('.videos .nested-fields').length == 3) {
+            $('.add_video').hide();
+        } else {
+            $('.add_video').show();
+        }
+        if ($('.songs .nested-fields').length == 3) {
+            $('.add_song').hide();
+        } else {
+            $('.add_song').show();
+        }
+    }
+})
+
 $(document).ready(function() {
   $(".button-subtract").click(function(e) {
     e.preventDefault();
@@ -45,3 +76,4 @@ $(document).ready(function() {
     elm.val(Number(val)+1);
   });
 });
+

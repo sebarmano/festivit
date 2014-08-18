@@ -34,16 +34,6 @@
   height: 16em;
 }
 
-
-
-
-
-
-
-
-
-
-
 .container {
   @include outer-container;
 
@@ -211,7 +201,6 @@ header.topbar {
 
 
 .alert{
-  // padding: 1em;
   text-align: center;
   line-height: 3em;
   background-color: $alert-color;
@@ -219,10 +208,14 @@ header.topbar {
 }
 
 .notice {
-  // padding: 1em;
   text-align: center;
   line-height: 3em;
   background-color: $alert-color;
   margin-bottom: 1em;
+}
 
+.tooltip-input-attachment {
+  float: left;
+  margin-right: 5px;
+  margin-top: -1px;
 }

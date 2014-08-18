@@ -30,24 +30,30 @@
   padding: 1.5em;
   }
 
+a{
+  color: #477dca;
+}
+
 .topSpacing{
   padding-top: 100px;
 }
 
-h1{
+.container{
+  @include outer-container;
+}
+
+.title{
+  text-align: center;
   padding-bottom: 15px;
   }
-
-.container{
-  width: 965px;
-}
 
 .formView{
   float: left;
 }
 
 #new_submission{
-max-width: 100%;
+  max-width: 600px;
+
 }
 
 #newBand{
@@ -106,50 +112,170 @@ max-width: 100%;
 
 .adminTools{
   clear:both;
-  // @include span-columns(6);
-  // @include shift(6);
-  // margin: auto;
-  // text-align:center;
-  // width: 250px;
+/*  @include span-columns(6);
+  @include shift(6);
+  margin: auto;
+  text-align:center;
+  width: 250px;*/
+}
+
+.whiteButton{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+    &:hover{
+        background-color: $blueGreen;
+        color: #FFFFFF;
+        }
+      }
+
+table {
+  table-layout: auto;
+}
+
+th{
+  text-align: start;
 }
 
 td{
-  .photo{
-    height: 112px;
-  }
-  .decision{
-    width:107px;
-  }
-  .modalContainer{
-    height: 500px;
-  }
+  margin: 0 10px;
+  padding: 0;
+  display: block;
+
+  .participant{
+    @include span-columns(2);
+    margin: 0 10px;
+    }
+audio{
+  width: 80;
+  height: 10;
 }
-.dashboardPhoto{
-  padding-top:10px;
-  img{
-    height: 43px;
+  &.decision {
+/*    @include span-columns(1);
+*/    button{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+
+      &.accept{
+        &:hover{
+          background-color: $green;
+          color: #FFFFFF;
+        }
+      }
+
+      &.decline{
+        &:hover{
+          background-color: $red;
+          color: #FFFFFF;
+        }
+      }
+      }
+    }
+  .participant{
+    width: 100px;
   }
+  .name{
+    margin: 0 10px;
+    width: 90%
+    }
+
+  .ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;  // IE 6+, FF 7+, Op 11+, Saf 1.3+, Chr 1+
+      -o-text-overflow: ellipsis;  // for Opera 9 & 10
+  }
+
+    .paid{
+      height: 10px;
+      button {
+        background-color: $green;
+        font-size:.75em;
+        color: #FFFFFF;
+        height: 20px;
+        margin: 12px 10px 0;
+        padding: 5px;
+        width: 90%;
+      }
+    }
+
+    .modalContainer{
+      height: 60%
+      img{
+        height: 70%;
+      }
+    }
+
+    .picTable{
+/*      @include span-columns(2);
+*/      padding: 0;
+    }
+    .videoTable{
+/*      @include span-columns(2);
+*/    }
+
+    &.tracks {
+/*      @include span-columns(2);
+*/      text-align: center;
+      font-size: .75em;
+      width: 50px;
+      display: block;
+      margin: 2px 20px;
+    }
+
+    .tags{
+/*      @include span-columns(1);
+*/      padding-left: 25px;
+    }
+
+    .info{
+/*      @include span-columns(2);
+*/      width: 100px;
+      margin: 2px 20px;
+    }
+
+    .social{
+      margin-left: 10px;
+      text-align: center;
+    }
+
+    .contact{
+      text-align: center;
+    }
+
+    .createdOn{
+      text-align: center;
+    }
+
+    .clearFloat{
+      clear:both;
+    }
 }
 
 //Modal Refill
 
 .modal {
+  margin-left: 25px;
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: gray;
-  $modal-image-height: 648px;
-  //$modal-image-width: $modal-image-height;
+  //$modal-image-height: 648px;
+  //$modal-image-width: $modal-image-height: 600px;
 
   label {
     cursor: pointer;
     margin-bottom: 0;
-  }
-
-  label img {
-    $img-width: 300px;
-    border-radius: $img-width/2;
-    display: block;
-    max-width: $img-width;
   }
 
   input[type="checkbox"] {
@@ -162,7 +288,24 @@ td{
     font-size: 1em;
     height: 64px;
     width: 64px;
-    //margin-bottom: $base-line-height;
+  }
+
+  .thumbPic {
+    margin: 0 auto;
+  }
+
+  .thumbVideo {
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+
+  .modal {
+    $modal-padding: 3em;
+    $modal-background: $base-background-color;
+    $modal-close-color: gray;
+    $modal-image-height: auto;
+    //$modal-image-width: $modal-image-height;
   }
 
   .modal-open {
@@ -216,7 +359,7 @@ td{
     border-radius: $base-border-radius;
     background: $modal-background;
     margin: auto;
-    max-height: 95%;
+    height: auto;
     position: relative;
     overflow: auto;
     width: 95%;
@@ -227,7 +370,7 @@ td{
       padding: $modal-padding;
       width: 60%;
       max-height: 60%;
-      margin-top: 10em;
+      margin-top: 6em;
     }
 
     @include media($large-screen) {
@@ -257,9 +400,9 @@ td{
         color: $base-font-color;
         line-height: 1.45em;
 
-        @include media($medium-screen) {
-          @include columns(2 8em);
-        }
+/*         @include media(\$medium-screen) {
+  @include columns(2 8em);
+} */
       }
     }
 
@@ -284,7 +427,3 @@ td{
     top: 0;
   }
 }
-
-
-
-// Based on code by Kasper Mikiewicz

@@ -7,8 +7,6 @@ section
     p.alert
       = alert
 
-    img.bandImage src="http://upload.wikimedia.org/wikipedia/commons/a/aa/Average_White_Band_Edinburgh.jpg" /
-
     h3 Band Information
 
     ul.showParticipant
@@ -53,26 +51,43 @@ section
           li = @submission.practice_exp_date
           li = @submission.practice_years
 
+    - @submission.attachments.each do |attachment|
+      - if attachment.link
+       li = embed(attachment.link)
+       /li = image_tag thumb(attachment.link), class: "thumb"
+      -  if attachment.image
+         li = image_tag attachment.image.thumb('400x200#').url
+      - if attachment.type == "song"
+        li = audio_tag attachment.song.url, controls: true
       - @submission.attachments.each do |attachment|
         - unless attachment.link == ""
          li = embed(attachment.link)
         -  if attachment.image
            li = image_tag attachment.image.thumb('400x200#').url
 
-  /- unless @submission.attachments == nil
-  /  .video
-  /    - @submission.attachments.each do |attachment|
-  /     = embed(attachment.link)
+section
+  article
+    .adminTools
+      - if current_user.admin?
+      =button_to 'Approve', action: 'approve'
+      = link_to 'Edit', edit_participant_submission_path
+      / = link_to 'Back', submissions_path
+      = simple_form_for [@participant, @submission, @comment] do |f|
+        = f.input "body", label: "Add a Comment:"
+        = f.submit
+      - @submission.comments.each do |comment|
+        p
+          = comment.author
+          br
+          = comment.body
 
-  /.music
-  /  iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
-  /
-  /  iframe frameborder="no" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17303095&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
 
-  /.reccomendation
-  /  p This band rocks! I can't wait to see them again!
-.adminTools
-  - if current_user.admin?
-   =button_to 'Approve', action: 'approve'
-  = link_to 'Edit', edit_participant_submission_path
-  / = link_to 'Back', submissions_path
+
+      - @submission.attachments.each do |attachment|
+        - if attachment.type == "video"
+          li = embed(attachment.link)
+        - if attachment.image
+          li = image_tag attachment.image.thumb('400x200#').url
+        - if attachment.type == "song"
+          li = embed(height="25", autoplay="false", src= attachment.song.url, width="60")
+

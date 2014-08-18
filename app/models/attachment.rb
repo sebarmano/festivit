@@ -17,8 +17,11 @@ class Attachment < ActiveRecord::Base
   require 'typhoeus'
   require 'typhoeus/adapters/faraday'
 
+  self.inheritance_column = nil
+
   dragonfly_accessor :image
+  dragonfly_accessor :song
   belongs_to :submission
 
-  validates :submission_id, presence: true
+  # validates :submission_id, presence: true
 end
