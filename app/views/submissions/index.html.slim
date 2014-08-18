@@ -80,16 +80,15 @@ html
                         = embed(video.link)
             td.tracks
               - songs.each do |audio|
-                embed height="25" autoplay="false" src= audio.link width="80"
+                - if audio.song
+                  = audio.title
+                  embed height="25" autoplay="false" src= audio.song.url width="80"
 
             td.info
               span.contact
-                - if participant
-                  = participant.name
-              span.contact
                 a href="#"
                   - if participant
-                    = mail_to participant.email, name = "E-mail"
+                    = mail_to participant.email, name = "#{participant.name}"
               span.contact
                 - if participant
                   = participant.phone
@@ -110,4 +109,5 @@ html
 
             td
               .tags
-                | Accoustic, solo local, preferred
+                - if submission.tags
+                 = submission.tag_list

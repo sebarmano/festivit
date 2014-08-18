@@ -23,7 +23,7 @@ section
 
       = f.input "tag_list", :label => "Tags"
 
-      - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
+      - if @role == "Performer"
         h3.tooltip-input-attachment Attachments
         i.fa.fa-question.tooltip-item
           .tooltip
@@ -36,7 +36,13 @@ section
             .links
               = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
 
-
+      - if @role == "Craft Vendor" || @role == "Food Vendor"
+        h4 = @types[2].capitalize
+        .attachments class = "#{@types[2]}s"
+          = f.simple_fields_for :attachments do |attachment|
+            = render 'attachment_fields', :f => attachment, locals: {:type => @types[2] }
+          .links
+            = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => @types[2]}}, class: "add_#{@types[2]}"
 
       - if @role == "Volunteer"
        = f.input "underage", :label => "Under 18?"
