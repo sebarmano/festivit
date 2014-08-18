@@ -65,4 +65,13 @@ class Submission < ActiveRecord::Base
     SubmissionMailer.init_apply(@participant).deliver
     SubmissionMailer.init_admin(@participant).deliver
   end
+
+  def self.search(search)
+    if search
+      search = search #TODO fix the capitalization on search
+      where("group_name LIKE ? OR tag LIKE ?","%#{search}%", "%#{search}%")
+    else
+      all
+    end
+  end
 end

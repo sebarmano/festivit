@@ -21,6 +21,7 @@ section
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
+      = f.input "tag_list", :label => "Tags"
 
       - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
         h3.tooltip-input-attachment Attachments
@@ -34,18 +35,8 @@ section
               = render 'attachment_fields', :f => attachment, locals: {:type => type }
             .links
               = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
-      /h3 Songs
-        /#attachments
-        /  = f.simple_fields_for :attachments do |attachment|
-        /    = render 'attachment_fields', :f => attachment
-        /  .links
-        /    = link_to_add_association 'add more attachments',f , :attachments
-        /h3 Videos
-        /#attachments
-        /  = f.simple_fields_for :attachments do |attachment|
-        /    = render 'attachment_fields', :f => attachment
-        /  .links
-        /    = link_to_add_association 'add more attachments',f , :attachments
+
+
 
       - if @role == "Volunteer"
        = f.input "underage", :label => "Under 18?"

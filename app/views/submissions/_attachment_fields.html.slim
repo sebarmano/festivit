@@ -1,6 +1,7 @@
 .nested-fields
   = f.input :title
-  = f.input :link
+  - if type == "video"
+    = f.input :link
   - if type == "song"
     = f.file_field :song
   - if type == "photo"
