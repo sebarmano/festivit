@@ -53,7 +53,7 @@ doctype html
                     ul.carousel
                       - photos.each do |photo|
                         li
-                          = image_tag photo.image.url
+                          = image_tag photo.image.url, size:"400"
 
                       //a#previous href="#"  Previous
                       //a#next href="#"  Next
@@ -76,7 +76,7 @@ doctype html
                         = embed(video.link)
           td.tracks
             - songs.each do |audio|
-               embed height="25" autoplay="false" src= audio.link width="80"
+               embed height="25" autoplay="false" preload="none" src= audio.link width="80"
                 
           td.info
               span.contact

@@ -188,7 +188,11 @@ td{
     margin: 0 10px;
     width: 90%
     }
-
+    .carousel{
+      img {
+        min-width: 100% !important;
+      }
+    }
     .picTable{
       @include span-columns(2.5);
       padding: 0;
@@ -243,7 +247,8 @@ td{
   }
 }
 .modalContainer{
-  height: 80%
+  height: 90%
+  padding-top:;
   img{
     height: 40%;
   }
