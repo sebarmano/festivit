@@ -1,36 +1,29 @@
-section
-  article
-    .notice
-      = notice
-    .alert
-      = alert
-      
-    H1 Apply to Shakori Hills!
-    H6 Step 1 (of 2): Your contact info
-    br
-    = simple_form_for @participant do |f|
-     .form
-       = f.simple_fields_for :role_types do |r|
-        = r.input :name, :label => "Select what role you would like to apply for:",
-                         :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
-       p The information below will be stored as the point of contact for the group.
-       span.name
-         = f.input :fname, :label => "First Name"
-         = f.input :lname, :label =>  "Last Name"
-       = f.simple_fields_for :applicant do |p|
-        = p.input :email
-        = p.input :password, required: true
-        = p.input :password_confirmation, required: true
-       hr
-       .address
-         span.street
-           = f.input :street_address
-         span.city
-           = f.input :city
-         span.state
-           = f.input :state
-         span.zip
-           = f.input :zip
-         = f.input :country, as: :string
-       = f.input :phone
-     = f.button :submit
+H1 Apply to Shakori Hills!
+H6 Step 1 (of 2): Your contact info
+br
+= simple_form_for @participant do |f|
+ .form
+   = f.simple_fields_for :role_types do |r|
+    = r.input :name, :label => "Select what role you would like to apply for:",
+                     :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
+   p The information below will be stored as the point of contact for the group.
+   span.name
+     = f.input :fname, :label => "First Name"
+     = f.input :lname, :label =>  "Last Name"
+   = f.simple_fields_for :applicant do |p|
+    = p.input :email
+    = p.input :password, required: true
+    = p.input :password_confirmation, required: true
+   hr
+   .address
+     span.street
+       = f.input :street_address
+     span.city
+       = f.input :city
+     span.state
+       = f.input :state
+     span.zip
+       = f.input :zip
+     = f.input :country, as: :string
+   = f.input :phone
+ = f.button :submit
