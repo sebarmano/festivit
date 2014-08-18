@@ -8,7 +8,7 @@ doctype html
       th
         | Decision
       th
-        | Performer
+        | Participant
       th
         | Photo
       th
@@ -33,6 +33,7 @@ doctype html
 
             = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
             /= button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+          
           td.participant
             span.name.ellipsis
                = submission.group_name
@@ -76,34 +77,33 @@ doctype html
           td.tracks
             - songs.each do |audio|
                embed height="25" autoplay="false" src= audio.link width="80"
-              
+                
           td.info
-            span.contact
-               - if participant
-                = participant.name
-            span.contact
-              a href="#"
+              span.contact
+                 - if participant
+                  = participant.name
+              span.contact
                 - if participant
-                 = mail_to participant.email, name = "E-mail"
-            span.contact
-              - if participant
-                = participant.phone
-            span.contact
-              = submission.created_at.to_date
-            .clearFloat
-            span
-              span.social
-                = link_to  "http://#{submission.facebook_link}"
-                  i.fa.fa-facebook-square
-                  
-              span.social
-                = link_to "http://#{submission.twitter_link}"
-                  i.fa.fa-twitter
-              span.social
-                = link_to "http://#{submission.website}"
-                  i.fa.fa-globe
+                  = participant.phone
+              span.contact
+                = submission.created_at.to_date
+              .clearFloat
+              span
+                span.social
+                  = link_to  "http://#{submission.facebook_link}"
+                    i.fa.fa-facebook-square
+                    
+                span.social
+                  = link_to "http://#{submission.twitter_link}"
+                    i.fa.fa-twitter
+                span.social
+                  = link_to "http://#{submission.website}"
+                    i.fa.fa-globe
+                span.social
+                  - if participant
+                   = mail_to participant.email
+                      i.fa.fa-envelope
 
-          td
-            .tags
+          td.tags
               | Accoustic, solo local, preferred
 
