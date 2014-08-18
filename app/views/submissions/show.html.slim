@@ -52,18 +52,14 @@ section
           li = @submission.practice_years
 
     - @submission.attachments.each do |attachment|
-      - if attachment.link
+      - if attachment.type == "video"
        li = embed(attachment.link)
        /li = image_tag thumb(attachment.link), class: "thumb"
       -  if attachment.image
          li = image_tag attachment.image.thumb('400x200#').url
       - if attachment.type == "song"
         li = audio_tag attachment.song.url, controls: true
-      - @submission.attachments.each do |attachment|
-        - unless attachment.link == ""
-         li = embed(attachment.link)
-        -  if attachment.image
-           li = image_tag attachment.image.thumb('400x200#').url
+
 
 section
   article
