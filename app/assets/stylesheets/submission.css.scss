@@ -243,14 +243,15 @@ td{
     height: 20px;
     margin: 12px 10px 0;
     padding: 5px;
-    width: 90%;
+    width: 20%;
   }
 }
 .modalContainer{
-  height: 90%
-  padding-top:;
+  height: 90%;
+  padding-top:4em;
+  width: 80%;
   img{
-    height: 40%;
+    height: 90%;
   }
 }
 //Modal Refill
@@ -260,8 +261,8 @@ td{
   $modal-padding: 3em;
   $modal-background: $base-background-color;
   $modal-close-color: gray;
-  //$modal-image-height: 648px;
-  //$modal-image-width: $modal-image-height: 600px;
+  /*//$modal-image-height: 648px;
+  //$modal-image-width: $modal-image-height: 600px;*/
 
   label {
     cursor: pointer;
