@@ -7,6 +7,18 @@ div.bg1 {
   width: 100%;
   z-index: 0;
   height: 900px;
+
+  .hero {
+    @include outer-container;
+    .unit {
+      text-align: center;
+      padding-top: 36em;
+      @include span-columns(6);
+      @include shift(3);
+      color: white;
+
+    }
+  }
 }
 
 

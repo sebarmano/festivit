@@ -24,6 +24,25 @@
 @import "team";
 
 
+.bgheader {
+  width: 100%;
+  background-image: asset-url('blue_tint_x4.png');
+  background-size: cover;
+  background-position: 50% 55%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+
+
+
+
+
+
+
+
+
 
 .container {
   @include outer-container;
@@ -188,4 +207,22 @@ header.topbar {
   float: left;
   margin-right: 5px;
   margin-top: 5px;
+}
+
+
+.alert{
+  // padding: 1em;
+  text-align: center;
+  line-height: 3em;
+  background-color: $alert-color;
+  margin-bottom: 1em;
+}
+
+.notice {
+  // padding: 1em;
+  text-align: center;
+  line-height: 3em;
+  background-color: $alert-color;
+  margin-bottom: 1em;
+
 }
