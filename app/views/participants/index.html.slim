@@ -2,6 +2,11 @@
 
 section
   article
+    .notice
+      = notice
+    .alert
+      = alert
+      
     = form_tag participants_path, method: :get
     = text_field_tag :search, params[:search]
     = submit_tag "Search"
@@ -17,7 +22,7 @@ section
         = link_to "  All", participants_path
 
     ul id="participants_list"
-      
+
       - @participants.each do |participant|
         - if participant.total_tickets
           .contact

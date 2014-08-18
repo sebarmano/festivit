@@ -1,5 +1,21 @@
+.bgheader
 section
   article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    - if @role == "Performer"
+      h1 Performer Application
+    - if @role == "Volunteer"
+      h1 Volunteer Application
+    - if @role == "Healing Artist"
+      h1 Healing Artist Application
+    - if @role == "Craft Vendor"
+      h1 Craft Vendor Application
+    - if @role == "Food Vendor"
+      h1 Food Vendor Application
     h1 = @role
     h6 Step 2 (of 2): Application Details
     br
