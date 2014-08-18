@@ -1,35 +1,27 @@
-<div>1</div>
-<div>2</div>
-<div>3</div>
-<div>4</div>
-<div>5</div>
-<h4>Import Role Types</h4>
-<%= form_tag import_role_types_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Import" %>
-<% end %>
-
-<br>
-
-<h1>Current Role Types</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>RoleType id</th>
-    <th>name</th>
-    <th>Tuple date</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @role_types.each do |role_type| %>
-      <tr>
-        <td><%= role_type.id %></td>
-        <td><%= role_type.name %></td>
-        <td><%= role_type.created_at %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h3 Import Role Types
+    = form_tag import_role_types_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+    br
+      h1 Current Role Types
+      table
+        thead
+          tr
+            th RoleType id
+            th name
+            th Tuple date
+            th colspan="3"
+        tbody
+          - @role_types.each do |role_type|
+            tr
+              td= role_type.id
+              td= role_type.name
+              td= role_type.created_at
