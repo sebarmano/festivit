@@ -13,12 +13,16 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140813191907) do
 =======
 ActiveRecord::Schema.define(version: 20140814144722) do
 >>>>>>> 9a85c442daf68dfa226634f4f87c13d88d5f6038
 =======
 ActiveRecord::Schema.define(version: 20140815214131) do
+>>>>>>> upstream/release-1
+=======
+ActiveRecord::Schema.define(version: 20140817180304) do
 >>>>>>> upstream/release-1
 
   # These are extensions that must be enabled in order to support this database
@@ -36,6 +40,18 @@ ActiveRecord::Schema.define(version: 20140815214131) do
   end
 
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "fest_participant_role_types", force: true do |t|
     t.integer  "role_type_id"
@@ -78,31 +94,11 @@ ActiveRecord::Schema.define(version: 20140815214131) do
     t.datetime "updated_at"
   end
 
-  create_table "photos", force: true do |t|
-    t.string   "photo_desc"
-    t.string   "image_uid"
-    t.integer  "submission_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "photos", ["submission_id"], name: "index_photos_on_submission_id", using: :btree
-
   create_table "role_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "songs", force: true do |t|
-    t.string   "song_title"
-    t.string   "song_link"
-    t.integer  "submission_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "songs", ["submission_id"], name: "index_songs_on_submission_id", using: :btree
 
   create_table "submissions", force: true do |t|
     t.text     "bio"
@@ -208,15 +204,5 @@ ActiveRecord::Schema.define(version: 20140815214131) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["participant_id"], name: "index_users_on_participant_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "videos", force: true do |t|
-    t.string   "vid_title"
-    t.string   "vid_link"
-    t.integer  "submission_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "videos", ["submission_id"], name: "index_videos_on_submission_id", using: :btree
 
 end

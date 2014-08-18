@@ -1,3 +1,4 @@
+$card-type-background: $red-orange;
 
 .bgheader_particpants_show {
   width: 100%;
@@ -151,6 +152,10 @@
     @include omega(3n);
   }
 
+
+  strong {
+    //TODO: add a different style for strong text
+  }
   .card-image {
     overflow: hidden;
     max-height: 150px;
@@ -191,11 +196,19 @@
 
   .card-header {
     @include transition (all 0.2s ease-in-out);
-    background-color: $card-header-background;
     border-bottom: $card-border;
     border-radius: $base-border-radius $base-border-radius 0 0;
     font-weight: bold;
     padding: $base-line-height/3 $gutter/2;
+
+
+    .c4day {
+        background-color: $card-type-background;
+    }
+
+    .cvhc {
+        background-color: $green;
+     }
   }
 
   .card-copy {
@@ -208,6 +221,7 @@
     .tickets-pu {
       background: none;
       padding: 0px;
+      margin: 0px;
       border: none;
       text-align: center;
       font-family: helvetica;
