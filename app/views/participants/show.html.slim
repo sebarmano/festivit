@@ -14,13 +14,12 @@ section
 
     = form_tag pick_up_tickets_path, method: :put
 
-
     ul
       - @participant.tickets.order(:ticket_type_id).each do |ticket|
         - unless ticket.qty == '0'
           .cards
             .card
-              .card-header
+              div class=["card-header c#{(ticket.ticket_type.productpairsid).downcase}"]
                 strong
                   | #{ticket.ticket_type.productpairsid}
                 | #{ticket.online_order_id}
@@ -37,13 +36,5 @@ section
                 ul
                   li
                     = "total: #{ticket.qty}  -  remaining: #{ticket.remaining}"
-              /    li
-                    = "#{ticket.remaining}"
-                    span Remaining
-                  li
-                    = "#{ticket.online_order_id}"
-                    span Order id
 
-
-
-    = submit_tag "Submit picked up tickets", class: "submit-button"
+    = submit_tag "Save picked up tickets", class: "submit-button"
