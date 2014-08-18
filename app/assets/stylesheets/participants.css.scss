@@ -1,3 +1,4 @@
+$card-type-background: $red-orange;
 
 .bgheader_particpants_show {
   width: 100%;
@@ -30,15 +31,63 @@
 }
 
 .form{
-  width: 50%;
+  @include span-columns(8);
+  @include shift (1);
 }
-.name{
+
+.fullName{
   float: left;
   width: 100%;
 }
-.participants{
-  @include fieldset;
+.firstName{
+  @include span-columns(4 of 8);
 }
+.lastName{
+  @include span-columns(4 of 8);
+}
+
+.logInCreate{
+  @include fieldset;
+  @include span-columns(6 of 6);
+}
+.email{
+  @include span-columns(6 of 6);
+  }
+.passwordCreate{
+  @include span-columns(2.5 of 6);
+}
+.passwordCreateConf{
+  @include span-columns(2.5 of 6);
+}
+
+.shield{
+  @include span-columns(8)
+}
+
+
+.address{
+  @include fieldset;
+  @include span-columns(8 of 8);
+}
+.street{
+  @include span-columns(8 of 8);
+}
+.city{
+  @include span-columns(2.5 of 8);
+}
+.state{
+  @include span-columns(1.5 of 8);
+}
+.zip{
+  @include span-columns(2 of 8);
+}
+.country{
+  @include span-columns(2 of 8);
+}
+.phone{
+  @include span-columns(4 of 8);
+}
+
 .address {
   @include fieldset;
 
@@ -60,9 +109,11 @@
     width: 30%;
     margin-right: 10px;
   }
-
 }
 
+.participants{
+  @include fieldset;
+}
 
 
 .filters {
@@ -101,6 +152,10 @@
     @include omega(3n);
   }
 
+
+  strong {
+    //TODO: add a different style for strong text
+  }
   .card-image {
     overflow: hidden;
     max-height: 150px;
@@ -141,11 +196,19 @@
 
   .card-header {
     @include transition (all 0.2s ease-in-out);
-    background-color: $card-header-background;
     border-bottom: $card-border;
     border-radius: $base-border-radius $base-border-radius 0 0;
     font-weight: bold;
     padding: $base-line-height/3 $gutter/2;
+
+
+    .c4day {
+        background-color: $card-type-background;
+    }
+
+    .cvhc {
+        background-color: $green;
+     }
   }
 
   .card-copy {
@@ -158,6 +221,7 @@
     .tickets-pu {
       background: none;
       padding: 0px;
+      margin: 0px;
       border: none;
       text-align: center;
       font-family: helvetica;
