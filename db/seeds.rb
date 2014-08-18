@@ -23,10 +23,12 @@
   )
 end
 
-10.times do
-  Submission.create(
-      group_name: Faker::Lorem.word,
+pa = Participant.all.pluck(:id)
+25.times do |i|
+  s = Submission.create(
+      group_name: Faker::Company.name
   )
+  s.fest_participant_submissions.create(participant_id: pa[i])
 end
 
 # Fest table

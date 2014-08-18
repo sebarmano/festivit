@@ -15,5 +15,5 @@ class FestParticipantRoleType < ActiveRecord::Base
   belongs_to :role_type
   belongs_to :participant
 
-  validates :role_type_id, :participant_id, :fest_id, presence: :true
+  # validates :role_type_id, :participant_id, :fest_id, presence: :true
 end

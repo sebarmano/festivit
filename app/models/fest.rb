@@ -19,6 +19,6 @@ class Fest < ActiveRecord::Base
   has_many :fest_participant_role_types
   has_many :fest_participant_submissions
 
-  validates :fest_code, :presence => true, :uniqueness => true
-  validates :name, :start_date, presence: true
+  # validates :fest_code, :presence => true, :uniqueness => true
+  # validates :name, :start_date, presence: true
 end

@@ -1,66 +1,67 @@
-doctype html
+doctype
+html
 
-.container.topSpacing
+  .container.topSpacing
 
-  h1.title Applications
-  table
-    tr
-      th
-        | Decision
-      th
-        | Participant
-      th
-        | Photo
-      th
-        | Video
-      th
-        | Music
-      th
-        | Contact
-      th
-        | Tags
+    h1.title Applications
+    = form_tag submissions_path, method: :get
+    = text_field_tag :search, params[:search]
+    = submit_tag "Search"
+    table
+      tr
+        th
+          | Decision
+        th
+          | Participant
+        th
+          | Photo
+        th
+          | Video
+        th
+          | Music
+        th
+          | Contact
+        th
+          | Tags
 
-      - @submissions.each do |submission|
-        - photos = submission.attachments.where(type: "photo")
-        - videos = submission.attachments.where(type: "video")
-        - songs = submission.attachments.where(type: "song")
-        - thing = submission.fest_participant_submissions.first
-        - participant = Participant.find_by(id: thing)
+        - @submissions.each do |submission|
+          - photos = submission.attachments.where(type: "photo")
+          - videos = submission.attachments.where(type: "video")
+          - songs = submission.attachments.where(type: "song")
+          - thing = submission.fest_participant_submissions.first
+          - if thing
+            - participant = Participant.find_by(id: thing.participant_id)
 
-        tr
+          tr
+            td.decision
+              = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+              = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+            
+            td.participant
+              span.name.ellipsis
+                = submission.group_name
 
-          td.decision
+            td.picTable
+              .modal
+                label for="modal-#{submission.id*2 -1}"
+                  .thumbPic
+                    - unless photos.first.nil?
+                      = image_tag photos.first.image.url, size: '140x100'
 
-            = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
-            /= button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
-          
-          td.participant
-            span.name.ellipsis
-               = submission.group_name
+                input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
+                .modal-window
+                  .modal-inner
+                    label.modal-close for="modal-#{submission.id*2-1}"
+                    .modalContainer
+                      ol.carousel
+                        - photos.each do |photo|
+                          li
+                            = image_tag photo.image.url, size: '600x400'
+                                //a#previous href="#"  Previous
+                                //a#next href="#"  Next
 
-          td.picTable
-            .modal
-              label for="modal-#{submission.id*2 -1}"
-                .thumbPic
-                  - unless photos.first.nil?
-                    = image_tag photos.first.image.url, size: '140x100'
-
-              input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
-              .modal-window
-                .modal-inner
-                  label.modal-close for="modal-#{submission.id*2-1}"
-                  .modalContainer
-                    ul.carousel
-                      - photos.each do |photo|
-                        li
-                          = image_tag photo.image.url, height:"80%"
-
-                      //a#previous href="#"  Previous
-                      //a#next href="#"  Next
-
-                    
-          td.videoTable
-            .modal
+            td.videoTable
+              .modal
                 label for="modal-#{submission.id*2}"
                   - if videos.first
                     .thumbVideo
@@ -74,36 +75,35 @@ doctype html
                     .modalContainer
                       - videos.each do |video|
                         = embed(video.link)
-          td.tracks
-            - songs.each do |audio|
-               embed height="25" autoplay="false" preload="none" src= audio.link width="80"
-                
-          td.info
-              span.contact
-                 - if participant
-                  = participant.name
-              span.contact
-                - if participant
-                  = participant.phone
-              span.contact
-                = submission.created_at.to_date
-              .clearFloat
-              span
-                span.social
-                  = link_to  "http://#{submission.facebook_link}"
-                    i.fa.fa-facebook-square
-                    
-                span.social
-                  = link_to "http://#{submission.twitter_link}"
-                    i.fa.fa-twitter
-                span.social
-                  = link_to "http://#{submission.website}"
-                    i.fa.fa-globe
-                span.social
+            td.tracks
+              - songs.each do |audio|
+                 embed height="25" autoplay="false" preload="none" src= audio.link width="80"
+                  
+            td.info
+                span.contact
+                   - if participant
+                    = participant.name
+                span.contact
                   - if participant
-                   = mail_to participant.email
-                      i.fa.fa-envelope
+                    = participant.phone
+                span.contact
+                  = submission.created_at.to_date
+                .clearFloat
+                span
+                  span.social
+                    = link_to  "http://#{submission.facebook_link}"
+                      i.fa.fa-facebook-square                    
+                  span.social
+                    = link_to "http://#{submission.twitter_link}"
+                      i.fa.fa-twitter
+                  span.social
+                    = link_to "http://#{submission.website}"
+                      i.fa.fa-globe
+                  span.social
+                    - if participant
+                      = mail_to participant.email
+                        i.fa.fa-envelope
 
-          td.tags
-              | Accoustic, solo local, preferred
-
+            td.tags
+              - if submission.tags
+                = submission.tag_list

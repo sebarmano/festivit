@@ -79,7 +79,7 @@ $(document).ready(function() {
 });
 
 $(function() {
-  $('ul.carousel').roundabout({
+  $('ol.carousel').roundabout({
       btnNext: ".next"
   });
 });

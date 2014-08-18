@@ -1,4 +1,3 @@
-
 section
   article
     h1 = @role
@@ -17,32 +16,33 @@ section
         = f.input "website"
 
       - if @role == "Healing Artist"
-       = f.input "practice_type", :label => "Modality:"
+       = f.input "practice_type", :label => "Practice type:"
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
+      = f.input "tag_list", :label => "Tags"
 
-      - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
+      - if @role == "Performer"
+        h3.tooltip-input-attachment Attachments
+        i.fa.fa-question.tooltip-item
+          .tooltip
+            p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
         - @types.each do |type|
-          h3 = type.capitalize
+          h4 = type.capitalize
           .attachments class = "#{type}s"
             = f.simple_fields_for :attachments do |attachment|
               = render 'attachment_fields', :f => attachment, locals: {:type => type }
             .links
               = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
-      /h3 Songs
-        /#attachments
-        /  = f.simple_fields_for :attachments do |attachment|
-        /    = render 'attachment_fields', :f => attachment
-        /  .links
-        /    = link_to_add_association 'add more attachments',f , :attachments
-        /h3 Videos
-        /#attachments
-        /  = f.simple_fields_for :attachments do |attachment|
-        /    = render 'attachment_fields', :f => attachment
-        /  .links
-        /    = link_to_add_association 'add more attachments',f , :attachments
+
+      - if @role == "Craft Vendor" || @role == "Food Vendor"
+        h4 = @types[2].capitalize
+        .attachments class = "#{@types[2]}s"
+          = f.simple_fields_for :attachments do |attachment|
+            = render 'attachment_fields', :f => attachment, locals: {:type => @types[2] }
+          .links
+            = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => @types[2]}}, class: "add_#{@types[2]}"
 
       - if @role == "Volunteer"
        = f.input "underage", :label => "Under 18?"

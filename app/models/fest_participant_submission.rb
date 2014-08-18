@@ -15,5 +15,5 @@ class FestParticipantSubmission < ActiveRecord::Base
   belongs_to :submission
   belongs_to :participant
 
-  validates :submission_id, :participant_id, :fest_id, presence: :true
+  # validates :submission_id, :participant_id, :fest_id, presence: :true
 end
