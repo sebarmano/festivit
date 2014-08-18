@@ -65,7 +65,12 @@ $tvhc-header-background: $blue;
 
 }
 
-
+.mobile-search input{
+  display: inline;
+  &#search {
+    width: 50%;
+  }
+}
 
 .filters {
   button {
