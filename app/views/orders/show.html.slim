@@ -1,8 +1,11 @@
+.bgheader
 section
   article
-    p
-      #notice
-        = notice
+    .notice
+      = notice
+    .alert
+      = alert
+
     ul
       li = @order.online_order_id
       li = @order.date_time

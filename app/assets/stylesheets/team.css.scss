@@ -17,7 +17,7 @@
   background-position: 50% 50%;
   background-size: cover;
   background-color: #BEB56E;
-  border: 1px solid $base-border-color;
+  border: 0px solid $base-border-color;
   height: $hover-tile-height;
   margin-bottom: $base-line-height;
   cursor: pointer;
@@ -41,7 +41,7 @@
     background:inherit;
     color: white;
     height:inherit;
-    padding: 1em 1.5em;
+    padding:0em 0em;
     a {
       color: white;
       &:hover {
@@ -51,15 +51,25 @@
   }
 
   .hover-tile-visible {
-    color: transparentize(white, .2);
-    font-family: $serif;
-    font-size: 1.5em;
+    color: transparentize(white, .1);
+    font-family: $sans-serif;
+    font-size: 1em;
     font-weight: 200;
-    padding-top: 8.25em;
     text-align: left;
+
+    bottom: 0;
+    p {
+      background: transparentize(black, .3);
+      position: relative;
+      bottom: 0;
+      margin-bottom: .5em;
+      width: 100%;
+      padding: 1em;
+    }
   }
 
   .hover-tile-hidden {
+    padding: 1.5em;
     background: transparentize(black, .5);
     h4 {
       margin-bottom: .5em;
