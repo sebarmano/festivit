@@ -4,18 +4,18 @@ section
   article
     = form_tag participants_path, method: :get
     .mobile-search
-      = search_field_tag :search, params[:search]
+      = text_field_tag :search, params[:search]
       = submit_tag "Search"
 
     .filters
       button
         = link_to "Customers", customers_participants_path
       button
-        = link_to "  Guests", guests_participants_path
+        = link_to "Guests", guests_participants_path
       button
-        = link_to "  Performers", guests_participants_path
+        = link_to "Performers", guests_participants_path
       button
-        = link_to "  All", participants_path
+        = link_to "All", participants_path
 
     ul id="participants_list"
       
