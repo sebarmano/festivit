@@ -13,7 +13,7 @@ section
          = f.input :fname, :label => "First Name"
          = f.input :lname, :label =>  "Last Name"
        = f.simple_fields_for :applicant do |p|
-        = p.input :email
+        = p.input :email, required: true
         = p.input :password, required: true
         = p.input :password_confirmation, required: true
        hr
