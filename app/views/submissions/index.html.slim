@@ -44,7 +44,7 @@ doctype html
             .modal
               label for="modal-#{submission.id*2 -1}"
                 .thumbPic
-                  - unless photos.first.nil?
+                  - if photos.first
                     = image_tag photos.first.image.url, size: '140x100'
 
               input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
@@ -185,7 +185,7 @@ section
           td.tracks
             - songs.each do |audio|
                embed height="25" autoplay="false" src= audio.link width="60"
-              
+
           td.info
             span.contact
                - if participant
@@ -267,4 +267,3 @@ section
               | Rock
               /= submission.tags
               | Accoustic, solo local, preferred
-

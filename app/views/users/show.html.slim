@@ -1,1 +1,19 @@
 h1 = @participant.fname
+
+section
+  article
+    - if current_user.admin?
+    = simple_form_for [@participant, @comment] do |f|
+      = f.input "body", label: "Add a Comment:"
+      = f.submit
+    - @participant.comments.each do |comment|
+      p
+        = comment.author
+        br
+        = comment.body
+    - @participant.submissions.each do |submission|
+      - submission.comments.each do |s_comment|
+        p = s_comment.author
+        p = link_to "Written On",  participant_submission_path(@participant, submission)
+        br
+        = s_comment.body

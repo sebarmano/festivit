@@ -53,25 +53,16 @@ section
 
     - @submission.attachments.each do |attachment|
       - if attachment.link
-       li = embed(attachment.link)
-       /li = image_tag thumb(attachment.link), class: "thumb"
-      -  if attachment.image
-         li = image_tag attachment.image.thumb('400x200#').url
+        li = embed(attachment.link)
+      - if attachment.image
+        li = image_tag attachment.image.thumb('400x200#').url
       - if attachment.type == "song"
         li = audio_tag attachment.song.url, controls: true
-      - @submission.attachments.each do |attachment|
-        - unless attachment.link == ""
-         li = embed(attachment.link)
-        -  if attachment.image
-           li = image_tag attachment.image.thumb('400x200#').url
 
-section
-  article
     .adminTools
       - if current_user.admin?
       =button_to 'Approve', action: 'approve'
       = link_to 'Edit', edit_participant_submission_path
-      / = link_to 'Back', submissions_path
       = simple_form_for [@participant, @submission, @comment] do |f|
         = f.input "body", label: "Add a Comment:"
         = f.submit
@@ -80,14 +71,3 @@ section
           = comment.author
           br
           = comment.body
-
-
-
-      - @submission.attachments.each do |attachment|
-        - if attachment.type == "video"
-          li = embed(attachment.link)
-        - if attachment.image
-          li = image_tag attachment.image.thumb('400x200#').url
-        - if attachment.type == "song"
-          li = embed(height="25", autoplay="false", src= attachment.song.url, width="60")
-
