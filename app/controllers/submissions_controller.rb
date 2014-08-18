@@ -11,6 +11,7 @@ class SubmissionsController < ApplicationController
   def show
     # TODO: need to fix all the blah.first
     @role = @participant.role_types.first.name
+    @comment = @submission.comments.new
   end
 
   def new
