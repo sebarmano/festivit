@@ -48,6 +48,7 @@ class Submission < ActiveRecord::Base
   has_many :participants, :through => :fest_participant_submissions
   has_many :fest_participant_role_types
   has_many :fest_participant_submissions
+  has_many :comments, as: :commentable
 
   accepts_nested_attributes_for :attachments, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :photos, :reject_if => :all_blank, :allow_destroy => true
@@ -63,5 +64,14 @@ class Submission < ActiveRecord::Base
     @participant = Participant.find_by(id: @thing.participant_id)
     SubmissionMailer.init_apply(@participant).deliver
     SubmissionMailer.init_admin(@participant).deliver
+  end
+
+  def self.search(search)
+    if search
+      search = search #TODO fix the capitalization on search
+      where("group_name LIKE ?", "%#{search}%")
+    else
+      all
+    end
   end
 end

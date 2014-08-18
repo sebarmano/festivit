@@ -12,7 +12,7 @@ html
     header.topbar
       div
         div.logo
-          = link_to do
+          = link_to "/" do
             = image_tag("logotype.svg" )
 
         ul.nav
@@ -25,10 +25,9 @@ html
             li Logged_in_as = current_user.email
               = link_to 'Logout', destroy_user_session_path, :method => :delete
 
-
-    == yield
-
     p.notice
       = notice
     p.alert
       = alert
+
+    == yield

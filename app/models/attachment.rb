@@ -23,5 +23,5 @@ class Attachment < ActiveRecord::Base
   dragonfly_accessor :song
   belongs_to :submission
 
-  validates :submission_id, presence: true
+  # validates :submission_id, presence: true
 end

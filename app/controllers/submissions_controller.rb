@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
   # authorize_actions_for :user_type
 
   def index
-    @submissions = Submission.all
+    @submissions = Submission.search(params[:search])
   end
 
   def show
@@ -12,6 +12,7 @@ class SubmissionsController < ApplicationController
     # TODO: need to fix all the blah.first
     @submission = @participant.submissions.first
     @role = @participant.role_types.first.name
+    @comment = @submission.comments.new
   end
 
   def new
@@ -96,6 +97,7 @@ class SubmissionsController < ApplicationController
                                          :practice_exp_date, :practice_years, :underage, :ticket_req, :days_avail,
                                          :deposit_type, :returning, :crew_hist, :crew_pref, :comments, :shit_pref,
                                          :why_volunteer, :mission_statement, :handouts, :_destroy, :participant_id,
-                                         :camping, attachments_attributes: [:id, :title, :link, :image, :type, :song] )
+                                         :camping, :tag_list,:facebook_link,:twitter_link,
+                                         attachments_attributes: [:id, :title, :link, :image, :type, :song] )
   end
 end
