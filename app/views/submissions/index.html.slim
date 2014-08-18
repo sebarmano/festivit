@@ -1,7 +1,8 @@
 doctype html
 
 .container.topSpacing
-  h1.title Performer Applications
+
+  h1.title Applications
   table
     tr
       th
@@ -30,15 +31,11 @@ doctype html
 
           td.decision
 
-            = button_to 'Approve', {action: 'approve', id: submission.id}, class: 'accept'
-            = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+            = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+            /= button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
           td.participant
             span.name.ellipsis
                = submission.group_name
-            span.paid
-              button Paid
-            .clearFloat
-              /TODO: need to get seed data for band
 
           td.picTable
             .modal
@@ -52,10 +49,16 @@ doctype html
                 .modal-inner
                   label.modal-close for="modal-#{submission.id*2-1}"
                   .modalContainer
-                    - photos.each do |photo|
-                      = image_tag photo.image.url
+                    ul.carousel
+                      - photos.each do |photo|
+                        li
+                          = image_tag photo.image.url
+
+                      //a#previous href="#"  Previous
+                      //a#next href="#"  Next
+
+                    
           td.videoTable
-            / TODO: Add video
             .modal
                 label for="modal-#{submission.id*2}"
                   - if videos.first
@@ -70,38 +73,34 @@ doctype html
                     .modalContainer
                       - videos.each do |video|
                         = embed(video.link)
-                    / = image_tag('video.png')
-                    //= embed(attachment.link)
           td.tracks
             - songs.each do |audio|
-               embed height="25" autoplay="false" src= audio.link width="60"
+               embed height="25" autoplay="false" src= audio.link width="80"
               
           td.info
             span.contact
                - if participant
                 = participant.name
-            .clearFloat
             span.contact
               a href="#"
                 - if participant
                  = mail_to participant.email, name = "E-mail"
-            .clearFloat
             span.contact
               - if participant
                 = participant.phone
-            .clearFloat
-            span.createdOn
+            span.contact
               = submission.created_at.to_date
             .clearFloat
             span
               span.social
-                = link_to"#", submission.facebook_link
+                = link_to  "http://#{submission.facebook_link}"
                   i.fa.fa-facebook-square
+                  
               span.social
-                = link_to"#", submission.twitter_link
+                = link_to "http://#{submission.twitter_link}"
                   i.fa.fa-twitter
               span.social
-                = link_to"#", submission.website
+                = link_to "http://#{submission.website}"
                   i.fa.fa-globe
 
           td

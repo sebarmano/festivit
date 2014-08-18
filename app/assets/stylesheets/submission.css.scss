@@ -157,7 +157,9 @@ audio{
 }
   &.decision {
 /*    @include span-columns(1);
-*/    button{
+*/  
+}
+  .accept{
       display: block;
       margin: 10 auto;
       background-color: #FFFFFF;
@@ -167,7 +169,6 @@ audio{
       padding: 5px;
       width: 80%;
 
-      &.accept{
         &:hover{
           background-color: $green;
           color: #FFFFFF;
@@ -175,13 +176,19 @@ audio{
       }
 
       &.decline{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
         &:hover{
           background-color: $red;
           color: #FFFFFF;
-        }
       }
       }
-    }
   .participant{
     width: 100px;
   }
@@ -200,9 +207,9 @@ audio{
     .paid{
       height: 10px;
       button {
-        background-color: $green;
+        background-color: #FFFFFF;
         font-size:.75em;
-        color: #FFFFFF;
+        color: #000000;
         height: 20px;
         margin: 12px 10px 0;
         padding: 5px;
@@ -211,10 +218,7 @@ audio{
     }
 
     .modalContainer{
-      height: 60%
-      img{
-        height: 70%;
-      }
+     height:900px;
     }
 
     .picTable{
@@ -242,7 +246,6 @@ audio{
     .info{
 /*      @include span-columns(2);
 */      width: 100px;
-      margin: 2px 20px;
     }
 
     .social{
@@ -251,11 +254,6 @@ audio{
     }
 
     .contact{
-      text-align: center;
-    }
-
-    .createdOn{
-      text-align: center;
     }
 
     .clearFloat{
