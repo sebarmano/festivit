@@ -4,7 +4,6 @@ class SubmissionsController < ApplicationController
   # authorize_actions_for :user_type
 
   def index
-    # @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
     @submissions = Submission.search(params[:search])
   end
 

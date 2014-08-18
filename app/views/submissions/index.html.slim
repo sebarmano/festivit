@@ -37,7 +37,7 @@ html
             td.decision
 
               = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
-            /= button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+              = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
             td.participant
               span.name.ellipsis
                 = submission.group_name

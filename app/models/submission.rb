@@ -69,7 +69,7 @@ class Submission < ActiveRecord::Base
   def self.search(search)
     if search
       search = search #TODO fix the capitalization on search
-      where("group_name LIKE ? OR tag LIKE ?","%#{search}%", "%#{search}%")
+      where("group_name LIKE ?", "%#{search}%")
     else
       all
     end
