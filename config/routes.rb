@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
-  post 'decline/:id', to: 'submission#decline'
+  post 'decline/:id', to: 'submissions#decline'
 
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"

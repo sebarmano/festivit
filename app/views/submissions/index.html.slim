@@ -1,62 +1,70 @@
-doctype html
+doctype
+html
 
-.container.topSpacing
-  h1.title Performer Applications
-  table
-    tr
-      th
-        | Decision
-      th
-        | Performer
-      th
-        | Photo
-      th
-        | Video
-      th
-        | Music
-      th
-        | Contact
-      th
-        | Tags
+  .container.topSpacing
 
-      - @submissions.each do |submission|
-        - photos = submission.attachments.where(type: "photo")
-        - videos = submission.attachments.where(type: "video")
-        - songs = submission.attachments.where(type: "song")
-        - thing = submission.fest_participant_submissions.first
-        - participant = Participant.find_by(id: thing)
+    h1.title Applications
+    = form_tag submissions_path, method: :get
+    = text_field_tag :search, params[:search]
+    = submit_tag "Search"
+    table
+      tr
+        th
+          | Decision
+        th
+          | Performer
+        th
+          | Photo
+        th
+          | Video
+        th
+          | Music
+        th
+          | Contact
+        th
+          | Tags
 
-        tr
+        - @submissions.each do |submission|
+          - photos = submission.attachments.where(type: "photo")
+          - videos = submission.attachments.where(type: "video")
+          - songs = submission.attachments.where(type: "song")
+          - thing = submission.fest_participant_submissions.first
+          - if thing
+            - participant = Participant.find_by(id: thing.participant_id)
 
-          td.decision
+          tr
 
-            = button_to 'Approve', {action: 'approve', id: submission.id}, class: 'accept'
-            = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
-          td.participant
-            span.name.ellipsis
-               = submission.group_name
-            span.paid
-              button Paid
-            .clearFloat
-              /TODO: need to get seed data for band
+            td.decision
 
-          td.picTable
-            .modal
-              label for="modal-#{submission.id*2 -1}"
-                .thumbPic
-                  - unless photos.first.nil?
-                    = image_tag photos.first.image.url, size: '140x100'
+              = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+              = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+            td.participant
+              span.name.ellipsis
+                = submission.group_name
 
-              input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
-              .modal-window
-                .modal-inner
-                  label.modal-close for="modal-#{submission.id*2-1}"
-                  .modalContainer
-                    - photos.each do |photo|
-                      = image_tag photo.image.url
-          td.videoTable
-            / TODO: Add video
-            .modal
+            td.picTable
+              .modal
+                label for="modal-#{submission.id*2 -1}"
+                  .thumbPic
+                    - unless photos.first.nil?
+                      = image_tag photos.first.image.url, size: '140x100'
+
+                input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
+                .modal-window
+                  .modal-inner
+                    label.modal-close for="modal-#{submission.id*2-1}"
+                    .modalContainer
+                      ul.carousel
+                        - photos.each do |photo|
+                          li
+                            = image_tag photo.image.url
+
+            //a#previous href="#"  Previous
+            //a#next href="#"  Next
+
+
+            td.videoTable
+              .modal
                 label for="modal-#{submission.id*2}"
                   - if videos.first
                     .thumbVideo
@@ -70,201 +78,36 @@ doctype html
                     .modalContainer
                       - videos.each do |video|
                         = embed(video.link)
-                    / = image_tag('video.png')
-                    //= embed(attachment.link)
-          td
-            / TODO: Add music
-            .modal
-                label for="modal-3"
-                  .btn.js-btn
-                    iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                input#modal-3.modal-state type="checkbox" /
-.bgheader_submissions
+            td.tracks
+              - songs.each do |audio|
+                - if audio.song
+                  = audio.title
+                  embed height="25" autoplay="false" src= audio.song.url width="80"
 
-section
-  article
-    h1 Band Applications
-    table
-      tr
-        th
-          | Accepted
-        th
-          | Paid
-        th
-          | Performer
-        th
-          | Band Photo
-        th
-          | Video
-        th
-          | Music
-        th
-          | Facebook
-        th
-          | Twitter
-
-        th
-          | Tags
-
-        - @submissions.each do |submission|
-          - participant = submission.participants.first
-          tr
-            /= submission.group_name
-          - unless participant.nil?
-            /if participant isn't showing it means there isn't one
-            td
-              button.decision Accepted
-              button.decision Declined
-            td
-              button $
-            td
-              /TODO: need to get seed data for band
-              a href="#"
-                = submission.group_name
-            td
-              .modal
-                label for="modal-1"
-                  .btn.js-btn
-                      | Photo
-                input#modal-1.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-1"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-            .modal
-                label for="modal-3"
-                  .btnMusic.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-            .modal
-                label for="modal-3"
-                  .btn.js-btn Music
-                input#modal-3.modal-state type="checkbox" /
-                .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-3"
-                    .modalContainer
-                      h1 = submission.group_name
-                      iframe frameborder="no" height="64" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="128"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                      iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-
-                /= image_tag('soundcloud.jpg')
-                        /= embed(attachment.link)
-          td
-            .contact
-                | Bob Smith
-                br
-                | 919-867-5309
-                br
+            td.info
+              span.contact
                 a href="#"
-                  | E-Mail
-                br
-                  | 07-07-14
-
-          td
-            .social
-              = link_to "Facebook", submission.facebook_link
-
-                br
-                /= submission.facebook_link
-              = link_to "Twitter", submission.twitter_link
-          td.tracks
-            - songs.each do |audio|
-               embed height="25" autoplay="false" src= audio.link width="60"
-              
-          td.info
-            span.contact
-               - if participant
-                = participant.name
-            .clearFloat
-            span.contact
-              a href="#"
+                  - if participant
+                    = mail_to participant.email, name = "#{participant.name}"
+              span.contact
                 - if participant
-                 = mail_to participant.email, name = "E-mail"
-            .clearFloat
-            span.contact
-              - if participant
-                = participant.phone
-            .clearFloat
-            span.createdOn
-              = submission.created_at.to_date
-            .clearFloat
-            span
-              span.social
-                = link_to"#", submission.facebook_link
-                  i.fa.fa-facebook-square
-              span.social
-                = link_to"#", submission.twitter_link
-                  i.fa.fa-twitter
-              span.social
-                = link_to"#", submission.website
-                  i.fa.fa-globe
+                  = participant.phone
+              span.contact
+                = submission.created_at.to_date
+              .clearFloat
+              span
+                span.social
+                  = link_to  "http://#{submission.facebook_link}"
+                    i.fa.fa-facebook-square
 
-          td
-            .tags
-              | Rock
-            /= submission.tags
-            / TODO: Add notes section in database
+                span.social
+                  = link_to "http://#{submission.twitter_link}"
+                    i.fa.fa-twitter
+                span.social
+                  = link_to "http://#{submission.website}"
+                    i.fa.fa-globe
 
-          / Do we
-          / - unless submission.participant_id.nil?
-          /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-          /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-          /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
-                      = image_tag('bg.jpg')
             td
-              / TODO: Add video
-              .modal
-                  label for="modal-2"
-                    .btn.js-btn Video
-                  input#modal-2.modal-state type="checkbox" /
-                  .modal-window
-                    .modal-inner
-                      label.modal-close for="modal-2"
-                      .modalContainer
-                        = image_tag('video.png')
-                      //= embed(attachment.link)
-            td
-              / TODO: Add music
-              .modal
-                  label for="modal-3"
-                    .btn.js-btn Music
-                  input#modal-3.modal-state type="checkbox" /
-                  .modal-window
-                    .modal-inner
-                      label.modal-close for="modal-3"
-                      .modalContainer
-                        h1 = submission.group_name
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                  /= image_tag('soundcloud.jpg')
-                          /= embed(attachment.link)
-            td
-              a href="https://www.facebook.com"
-                = image_tag('facebook.png')
-                /= submission.facebook_link
-            td
-              a href="https://www.twitter.com/"
-                = image_tag('twitter.png')
-                /= submission.twitter_link
-            td
-              / TODO: Add notes section in database
-              | Rock
-              /= submission.tags
-              | Accoustic, solo local, preferred
-
+              .tags
+                - if submission.tags
+                 = submission.tag_list
