@@ -14,13 +14,12 @@ section
          = f.input :lname, :label =>  "Last Name"
        = f.simple_fields_for :applicant do |p|
         = p.input :email
-        = p.input :password
-        = p.input :password_confirmation
+        = p.input :password, required: true
+        = p.input :password_confirmation, required: true
        hr
        .address
          span.street
            = f.input :street_address
-
          span.city
            = f.input :city
          span.state

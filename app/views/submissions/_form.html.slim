@@ -1,4 +1,3 @@
-
 section
   article
     h1 = @role
@@ -17,15 +16,19 @@ section
         = f.input "website"
 
       - if @role == "Healing Artist"
-       = f.input "practice_type", :label => "Modality:"
+       = f.input "practice_type", :label => "Practice type:"
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
 
       - if @role == "Performer" || @role == "Craft Vendor" || @role == "Food Vendor"
+        h3.tooltip-input-attachment Attachments
+        i.fa.fa-question.tooltip-item
+          .tooltip
+            p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
         - @types.each do |type|
-          h3 = type.capitalize
+          h4 = type.capitalize
           .attachments class = "#{type}s"
             = f.simple_fields_for :attachments do |attachment|
               = render 'attachment_fields', :f => attachment, locals: {:type => type }
