@@ -32,6 +32,16 @@
   background-repeat: no-repeat;
   z-index: 0;
   height: 16em;
+
+  @include media($mobile) {
+    width: 100%;
+    background-image: asset-url('blue_tint_x4.png');
+    background-size: 250%;
+    background-position: 30% 45%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    height: 16em;
+  }
 }
 
 
@@ -58,7 +68,10 @@ header.topbar {
           padding: 1em 1em 1em 1em;
           @include span-columns(2);
           @include shift(0);
-
+        }
+        @include media($medium-screen) {
+        @include span-columns(2);
+         @include shift(1);
         }
         // @include shift(0);
         color: white;
@@ -78,11 +91,17 @@ header.topbar {
           font-size: 1em;
           text-align: left;
           padding: 0em 1em 1em 1em;
-
         }
+
+        @include media($medium-screen) {
+         @include span-columns(6);
+         @include shift(0);
+         padding: 1em 0em 1em 1em;
+        }
+
         color: white;
         right: 0;
-        padding: 1em 0em 1em 1em;
+        padding: 1em 0em 1em 0em;
 
 
         li {
