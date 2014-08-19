@@ -9,18 +9,20 @@ section
       
     = form_tag participants_path, method: :get
     .mobile-search
-      = text_field_tag :search, params[:search]
+
+      = text_field_tag :search, params[:search], value: ""
+
       = submit_tag "Search"
 
     .filters
-      button.whiteButton
+      button
         = link_to "Customers", customers_participants_path
-      button.whiteButton
-        = link_to "  Guests", guests_participants_path
-      button.whiteButton
-        = link_to "  Performers", guests_participants_path
-      button.whiteButton
-        = link_to "  All", participants_path
+      button
+        = link_to "Guests", guests_participants_path
+      button
+        = link_to "Performers", guests_participants_path
+      button
+        = link_to "All", participants_path
 
     ul id="participants_list"
 

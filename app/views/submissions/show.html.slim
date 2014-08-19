@@ -62,6 +62,7 @@ section
             - if attachment.type == "song"
               li = audio_tag attachment.song.url, controls: true
 
+
           .adminTools
             - if current_user.admin?
             =button_to 'Approve', action: 'approve'
@@ -75,3 +76,4 @@ section
                 = comment.author
                 br
                 = comment.body
+

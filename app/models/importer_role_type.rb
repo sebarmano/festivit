@@ -4,13 +4,11 @@ class ImporterRoleType < ActiveImporter::Base
   skip_rows_if { row['name'].blank? }
 
   fetch_model do
-    # find or create ticket type
+    # find or create role type
     role_type = RoleType.where(
         name: row['name']
     ).first_or_initialize
   end
-
-  #column 'name', :name
 
   on :row_error do |ex|
     Rails.logger.error("Did not import: #{ex}")

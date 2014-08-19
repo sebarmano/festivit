@@ -1,7 +1,12 @@
-doctype
-html
+.bgheader
 
-  .container.topSpacing
+section
+  article
+
+    p.notice
+      = notice
+    p.alert
+      = alert
 
     h1.title Applications
     = form_tag submissions_path, method: :get
@@ -27,6 +32,7 @@ html
           | Tags
 
         - @submissions.each do |submission|
+
           - photos = submission.attachments.where(type: "photo")
           - videos = submission.attachments.where(type: "video")
           - songs = submission.attachments.where(type: "song")
@@ -38,18 +44,18 @@ html
             td.decision
               - if submission.approve.nil?
                 = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
-                = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline' 
-              
+                = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+
               - elsif submission.approve == true
 
                 = button_to 'Accept',nil,{:disabled =>true, class: 'accepted'}
                 = button_to 'Decline',nil,{:disabled => true,  class: 'declineDisable'}
-              
+
               - else
 
                 = button_to 'Accept',nil, { :disabled => true, class: 'acceptDisable' }
                 = button_to 'Decline',nil, { :disabled => true, class: 'declined' }
-            
+
             td.participant
               span.name.ellipsis
                 = submission.group_name
@@ -91,40 +97,40 @@ html
                             = embed(video.link)
 
             td.tracks
-                - songs.each do |audio|
-                  - if audio.song
-                    = audio.title
-                    br
-                    embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
-                    br
+              - songs.each do |audio|
+                - if audio.song
+                  = audio.title
+                  br
+                  embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
+                  br
             td.info
-                span#contactsubmissions
-                   - if participant
-                    = participant.name
-                span#contactsubmissions
-                  - if participant
-                    = participant.phone
-                span#contactsubmissions
-                  = submission.created_at.to_date
-                .clearFloat
-                span
-                   span.social
-                     -if  submission.facebook_link
-                      = link_to  "http://#{submission.facebook_link}"
-                        i.fa.fa-facebook-square                    
-                   span.social
-                     -unless submission.twitter_link.nil?
-                      = link_to "http://#{submission.twitter_link}"
-                        i.fa.fa-twitter
-                   span.social
-                     - unless submission.website.nil?
-                      = link_to "http://#{submission.website}"
-                        i.fa.fa-globe
+              span#contactsubmissions
+                - if participant
+                  = participant.name
+              span#contactsubmissions
+                - if participant
+                  = participant.phone
+              span#contactsubmissions
+                = submission.created_at.to_date
+              .clearFloat
+              span
+                span.social
+                  -if  submission.facebook_link
+                    = link_to  "http://#{submission.facebook_link}"
+                      i.fa.fa-facebook-square
+                span.social
+                  -unless submission.twitter_link.nil?
+                    = link_to "http://#{submission.twitter_link}"
+                      i.fa.fa-twitter
+                span.social
+                  - unless submission.website.nil?
+                    = link_to "http://#{submission.website}"
+                      i.fa.fa-globe
 
-                   span.social
-                      - unless participant.nil?
-                        = mail_to participant.email
-                          i.fa.fa-envelope
+                span.social
+                  - unless participant.nil?
+                    = mail_to participant.email
+                      i.fa.fa-envelope
 
             td.tags
               - if submission.tags

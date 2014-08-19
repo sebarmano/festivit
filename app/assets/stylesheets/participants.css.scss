@@ -1,4 +1,15 @@
-$card-type-background: $red-orange;
+$t4day-header-background: $red-orange;
+$tvhc-header-background: $blue;
+$tyouth-header-background: $yellow;
+$tpors-header-background: $red;
+$tthu-header-background: $blue-green;
+$tfri-header-background: $red-violet;
+$tsat-header-background: $blue-green;
+$tsun-header-background: $violet;
+$tpress-header-background: $orange;
+$tanyone-header-background: $light-gray;
+$ttent-header-background: $blue-violet;
+$tfpkg-header-background: $medium-gray;
 
 .bgheader_particpants_show {
   width: 100%;
@@ -32,7 +43,11 @@ $card-type-background: $red-orange;
 
 .form{
   @include span-columns(8);
-  @include shift (1);
+  @include shift (2);
+  @include media($mobile) {
+    @include span-columns(4);
+    @include shift (0);
+  }
 }
 
 .fullName{
@@ -160,8 +175,9 @@ $card-type-background: $red-orange;
 
 
   strong {
-    //TODO: add a different style for strong text
+    color: white;
   }
+
   .card-image {
     overflow: hidden;
     max-height: 150px;
@@ -208,12 +224,52 @@ $card-type-background: $red-orange;
     padding: $base-line-height/3 $gutter/2;
 
 
-    .c4day {
-        background-color: $card-type-background;
+    &.t4day {
+        background-color: $t4day-header-background;
     }
 
-    .cvhc {
-        background-color: $green;
+    &.tvhc {
+        background-color: $tvhc-header-background;
+     }
+
+    &.tyouth {
+        background-color: $tyouth-header-background;
+     }
+
+    &.tpors {
+        background-color: $tpors-header-background;
+     }
+
+    &.tthu {
+        background-color: $tthu-header-background;
+     }
+     
+    &.tfri {
+        background-color: $tfri-header-background;
+     }
+
+    &.tsat {
+        background-color: $tsun-header-background;
+     }
+
+    &.tsun {
+        background-color: $tsun-header-background;
+     }
+     
+    &.tpress {
+        background-color: $tpress-header-background;
+     }
+     
+    &.ttent {
+        background-color: $ttent-header-background;
+     }
+
+    &.tfpkg {
+        background-color: $tfpkg-header-background;
+     }
+
+    &.tanyone {
+        background-color: $tanyone-header-background;
      }
   }
 
@@ -238,7 +294,7 @@ $card-type-background: $red-orange;
   }
 
   .card-stats {
-    padding: $base-line-height/2 $gutter/2;
+    padding: 0px $gutter/2 $base-line-height/2 $gutter/2;
     overflow: auto;
 
     ul li {
@@ -260,10 +316,11 @@ $card-type-background: $red-orange;
       }
 
       span {
-        color: $base-font-color;
-        font-size: .7em;
-        display: block;
-        font-weight: normal;
+        display: inline;
+        // color: $base-font-color;
+        // font-size: .7em;
+        // display: block;
+        // font-weight: normal;
       }
     }
   }

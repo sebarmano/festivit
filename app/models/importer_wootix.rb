@@ -47,7 +47,7 @@ class ImporterWootix < ActiveImporter::Base
     raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
 
     if fest_code
-      # find or create fest name
+      # find fest name & raise error if no match
       fest = Fest.where(fest_code: fest_code).first
 
       raise NoFestCode, "No fest with code #{fest_code}" unless fest
@@ -56,7 +56,7 @@ class ImporterWootix < ActiveImporter::Base
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
-
+      # create a fest_participant_role_type
       fprt = FestParticipantRoleType.where(:participant => participant,
                                            :fest => fest,
                                            :role_type => role_type).first_or_initialize

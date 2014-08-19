@@ -1,50 +1,41 @@
-section
-  article
-    .notice
-      = notice
-    .alert
-      = alert
-    H3 Apply to Shakori Hills!
-    H4 Step 1 (of 2): Your contact info
-    br
-    = simple_form_for @participant do |f|
 
-     .form
+h3 Apply to Shakori Hills!
+h4 Step 1 (of 2): Your contact info
+br
+= simple_form_for @participant do |f|
+ .form
+   = f.simple_fields_for :role_types do |r|
+    = r.input :name, :label => "Select what role you would like to apply for:",
+                     :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
+    p The information below will be stored as the point of contact for the group.
+   .fullName
+    span.firstName
+      = f.input :fname, :label => "First Name"
+    span.lastName
+      = f.input :lname, :label =>  "Last Name"
+    span.phone
+      = f.input :phone
 
-       = f.simple_fields_for :role_types do |r|
-        = r.input :name, :label => "Select what role you would like to apply for:",
-                         :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
-        p The information below will be stored as the point of contact for the group.
-       
-        .fullName
-          span.firstName
-            = f.input :fname, :label => "First Name"
-          span.lastName
-            = f.input :lname, :label =>  "Last Name"
-       = f.simple_fields_for :applicant do |p|
-        
-        spam.phone
-             = f.input :phone
+    .address
+     span.street
+       = f.input :street_address
+     span.city
+       = f.input :city
+     span.state
+       = f.input :state
+     span.zip
+       = f.input :zip
+     span.country
+       = f.input :country, as: :string
 
-        .address
-           span.street
-             = f.input :street_address
-           span.city
-             = f.input :city
-           span.state
-             = f.input :state
-           span.zip
-             = f.input :zip
-           span.country
-             = f.input :country, as: :string
-        
-        .logInCreate
-           span.email
-             = p.input :email
-           span.passwordCreate
-             = p.input :password
-           span.passwordCreateConf 
-             = p.input :password_confirmation
-        
-        .shield
-          = f.button :submit, "Store Point of Contact"
+    .logInCreate
+      = f.simple_fields_for :applicant do |p|
+        span.email
+          = p.input :email
+        span.passwordCreate
+          = p.input :password
+        span.passwordCreateConf
+          = p.input :password_confirmation
+
+    .shield
+      = f.button :submit, "Store Point of Contact"
