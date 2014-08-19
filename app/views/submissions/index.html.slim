@@ -34,8 +34,17 @@ html
 
           tr
             td.decision
-              = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
-              = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+              if submission.approve.nill?
+                = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+                = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline' 
+              
+              elseif submission.approve
+                = button_to 'Accept', class: 'accepted'
+                = button_to 'Decline', class: 'declineDisabled'
+              
+              else
+                = button_to 'Accept', class: 'acceptDisable'
+                = button_to 'Decline', class: 'declined'  
             
             td.participant
               span.name.ellipsis
@@ -57,8 +66,6 @@ html
                         - photos.each do |photo|
                           li
                             = image_tag photo.image.url, size: '600x400'
-                                //a#previous href="#"  Previous
-                                //a#next href="#"  Next
 
             td.videoTable
               .modal
@@ -73,8 +80,11 @@ html
                   .modal-inner
                     label.modal-close for="modal-#{submission.id*2}"
                     .modalContainer
-                      - videos.each do |video|
-                        = embed(video.link)
+                      ol.carousel
+                        - videos.each do |video|
+                          li
+                            = embed(video.link)
+
             td.tracks
               - songs.each do |audio|
                  embed height="25" autoplay="false" preload="none" src= audio.link width="80"
@@ -90,19 +100,23 @@ html
                   = submission.created_at.to_date
                 .clearFloat
                 span
-                  span.social
-                    = link_to  "http://#{submission.facebook_link}"
-                      i.fa.fa-facebook-square                    
-                  span.social
-                    = link_to "http://#{submission.twitter_link}"
-                      i.fa.fa-twitter
-                  span.social
-                    = link_to "http://#{submission.website}"
-                      i.fa.fa-globe
-                  span.social
-                    - if participant
-                      = mail_to participant.email
-                        i.fa.fa-envelope
+                  - unless submission.facebook_link.nil?
+                    span.social
+                      = link_to  "http://#{submission.facebook_link}"
+                        i.fa.fa-facebook-square                    
+                  - unless submission.twitter_link.nil?
+                    span.social
+                      = link_to "http://#{submission.twitter_link}"
+                        i.fa.fa-twitter
+                  - unless submission.website.nil?
+                    span.social
+                      = link_to "http://#{submission.website}"
+                        i.fa.fa-globe
+                  - unless submission.participant.email.nil?
+                    span.social
+                      - if participant
+                        = mail_to participant.email
+                          i.fa.fa-envelope
 
             td.tags
               - if submission.tags
