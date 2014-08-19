@@ -34,6 +34,8 @@ class Participant < ActiveRecord::Base
   # validates :lname, :fname, presence: true
   # validates :lname, :uniqueness => {scope: [:fname], case_sensitive: false}
 
+  validates :lname, :fname, :phone, :street_address, presence: true
+
   def name
     "#{lname}, #{fname}"
   end

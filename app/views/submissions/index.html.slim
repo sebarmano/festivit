@@ -1,18 +1,25 @@
-doctype
-html
+.bgheader
 
-  .container.topSpacing
+section
+  article
+
+    p.notice
+      = notice
+    p.alert
+      = alert
 
     h1.title Applications
     = form_tag submissions_path, method: :get
-    = text_field_tag :search, params[:search]
-    = submit_tag "Search"
+    .mobile-search
+
+      = text_field_tag :search, params[:search]
+      = submit_tag "Search"
     table
       tr
         th
           | Decision
         th
-          | Performer
+          | Participant
         th
           | Photo
         th
@@ -25,6 +32,7 @@ html
           | Tags
 
         - @submissions.each do |submission|
+
           - photos = submission.attachments.where(type: "photo")
           - videos = submission.attachments.where(type: "video")
           - songs = submission.attachments.where(type: "song")
@@ -33,11 +41,21 @@ html
             - participant = Participant.find_by(id: thing.participant_id)
 
           tr
-
             td.decision
+              - if submission.approve.nil?
+                = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+                = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
 
-              = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
-              = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+              - elsif submission.approve == true
+
+                = button_to 'Accept',nil,{:disabled =>true, class: 'accepted'}
+                = button_to 'Decline',nil,{:disabled => true,  class: 'declineDisable'}
+
+              - else
+
+                = button_to 'Accept',nil, { :disabled => true, class: 'acceptDisable' }
+                = button_to 'Decline',nil, { :disabled => true, class: 'declined' }
+
             td.participant
               span.name.ellipsis
                 = submission.group_name
@@ -54,20 +72,17 @@ html
                   .modal-inner
                     label.modal-close for="modal-#{submission.id*2-1}"
                     .modalContainer
-                      ul.carousel
+                      ol.carousel
                         - photos.each do |photo|
                           li
-                            = image_tag photo.image.url
-
-            //a#previous href="#"  Previous
-            //a#next href="#"  Next
-
+                            = image_tag photo.image.url, size: '600x400'
 
             td.videoTable
               .modal
                 label for="modal-#{submission.id*2}"
                   - if videos.first
                     .thumbVideo
+
                       = image_tag thumb(videos.first.link), size: '140x100'
                   - else
                     .thumbVideo = image_tag('Performer.jpg')
@@ -76,38 +91,47 @@ html
                   .modal-inner
                     label.modal-close for="modal-#{submission.id*2}"
                     .modalContainer
-                      - videos.each do |video|
-                        = embed(video.link)
+                      ol.carousel
+                        - videos.each do |video|
+                          li
+                            = embed(video.link)
+
             td.tracks
               - songs.each do |audio|
                 - if audio.song
                   = audio.title
-                  embed height="25" autoplay="false" src= audio.song.url width="80"
-
+                  br
+                  embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
+                  br
             td.info
-              span.contact
-                a href="#"
-                  - if participant
-                    = mail_to participant.email, name = "#{participant.name}"
-              span.contact
+              span#contactsubmissions
+                - if participant
+                  = participant.name
+              span#contactsubmissions
                 - if participant
                   = participant.phone
-              span.contact
+              span#contactsubmissions
                 = submission.created_at.to_date
               .clearFloat
               span
                 span.social
-                  = link_to  "http://#{submission.facebook_link}"
-                    i.fa.fa-facebook-square
+                  -if  submission.facebook_link
+                    = link_to  "http://#{submission.facebook_link}"
+                      i.fa.fa-facebook-square
+                span.social
+                  -unless submission.twitter_link.nil?
+                    = link_to "http://#{submission.twitter_link}"
+                      i.fa.fa-twitter
+                span.social
+                  - unless submission.website.nil?
+                    = link_to "http://#{submission.website}"
+                      i.fa.fa-globe
 
                 span.social
-                  = link_to "http://#{submission.twitter_link}"
-                    i.fa.fa-twitter
-                span.social
-                  = link_to "http://#{submission.website}"
-                    i.fa.fa-globe
+                  - unless participant.nil?
+                    = mail_to participant.email
+                      i.fa.fa-envelope
 
-            td
-              .tags
-                - if submission.tags
-                 = submission.tag_list
+            td.tags
+              - if submission.tags
+                = submission.tag_list

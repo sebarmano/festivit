@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve, :decline]
+  before_action :set_participant, only: [:show, :edit, :update, :new, :create]
+
   before_action :authenticate_user!
   # authorize_actions_for :user_type
 
@@ -8,15 +10,12 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @participant = Participant.find(params[:participant_id])
     # TODO: need to fix all the blah.first
-    @submission = @participant.submissions.first
     @role = @participant.role_types.first.name
     @comment = @submission.comments.new
   end
 
   def new
-    @participant = Participant.find(params[:participant_id])
     @submission = @participant.submissions.new
     @role = @participant.role_types.first.name
     @types = ['song', 'video', 'photo']
@@ -24,11 +23,9 @@ class SubmissionsController < ApplicationController
   end
 
   def edit
-    @participant = Participant.find(params[:participant_id])
   end
 
   def create
-    @participant = Participant.find(params[:participant_id])
     @submission = Submission.new(submission_params)
     authorize_action_for(@submission)
 
@@ -46,7 +43,6 @@ class SubmissionsController < ApplicationController
   end
 
   def update
-    @participant = Participant.find(params[:participant_id])
     @role = @participant.role_types.first # TODO: allow for multi role sign up
     respond_to do |format|
       if @submission.update(submission_params)
@@ -73,7 +69,7 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.approved(@participant).deliver
+    SubmissionMailer.approved(@participant.applicant).deliver
     redirect_to submissions_path
   end
 
@@ -82,13 +78,17 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.decline(@participant).deliver
+    SubmissionMailer.decline(@participant.applicant).deliver
     redirect_to submissions_path
   end
   private
 
   def set_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def set_participant
+    @participant = Participant.find(params[:participant_id])
   end
 
   def submission_params

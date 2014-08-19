@@ -1,4 +1,9 @@
 .wideColumn {
   // @include span-columns(4);
   font-size: 2em;
+  @include media($mobile){
+    @include span-columns(4);
+    @include shift(0);
+    font-size: 1em;
+  }
 }
