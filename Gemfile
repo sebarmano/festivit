@@ -24,6 +24,7 @@ gem 'oembedr'
 gem 'acts-as-taggable-on'
 gem 'dragonfly-dropbox_data_store'
 gem 'prawn', '~> 1.2.1'
+gem 'prawn-table', '~> 0.1.0'
 
 
 #CSV import gems

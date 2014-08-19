@@ -1,17 +1,22 @@
 class WillCallPdf < Prawn::Document
   def initialize(participants)
-    super()
+    super(page_layout: :landscape)
     @participants = participants
     header
     participants_table
   end
 
   def header
-    text "This is the header"
+    text "Shakori Hills Will Call List", size:30, style: :bold
   end
 
   def participants_table
-    text "here goes the participants table"
+    move_down 20
+    table participant_rows, :cell_style => { size: 7 }
+  end
+
+  def participant_rows
+    [["Name"] + TicketType.all.map {|t| t.productpairsid}]
   end
 end
 
