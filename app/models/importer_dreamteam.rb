@@ -57,3 +57,4 @@ class ImporterDreamteam < ActiveImporter::Base
       Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
     end
   end
+end

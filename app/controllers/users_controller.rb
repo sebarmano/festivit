@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @participant = Applicant.find(params[:id]).participant
+    @comment = @participant.comments.new
   end
 
   def create

@@ -2,19 +2,6 @@
 
 section
   article
-    .adminTools
-      - if current_user.admin?
-      =button_to 'Approve', action: 'approve'
-      = link_to 'Edit', edit_participant_submission_path
-      / = link_to 'Back', submissions_path
-      = simple_form_for [@participant, @submission, @comment] do |f|
-        = f.input "body", label: "Add a Comment:"
-        = f.submit
-      - @submission.comments.each do |comment|
-        p
-          = comment.author
-          br
-          = comment.body
     p.notice
       = notice
     p.alert
@@ -73,4 +60,3 @@ section
                li = image_tag attachment.image.thumb('400x200#').url
             - if attachment.type == "song"
               li = audio_tag attachment.song.url, controls: true
-
