@@ -1,6 +1,4 @@
 .bgheader_particpants_show
-
-
 section
   article
     .notice
@@ -10,7 +8,7 @@ section
       
 
     h3
-    = @participant.name
+      = @participant.name
 
     = form_tag pick_up_tickets_path, method: :put
 
@@ -19,7 +17,7 @@ section
         - unless ticket.qty == '0'
           .cards
             .card
-              div class=["card-header c#{(ticket.ticket_type.productpairsid).downcase}"]
+              div class=["card-header t#{(ticket.ticket_type.productpairsid)}"]
                 strong
                   | #{ticket.ticket_type.productpairsid}
                 | #{ticket.online_order_id}
@@ -35,6 +33,6 @@ section
               .card-stats
                 ul
                   li
-                    = "total: #{ticket.qty}  -  remaining: #{ticket.remaining}"
+                    | total: #{ticket.qty}  -  remaining: <span>0</span>
 
     = submit_tag "Save picked up tickets", class: "submit-button"

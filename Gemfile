@@ -41,8 +41,7 @@ gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
 gem 'annotate', '~> 2.6.5'
-
-gem 'rails-assets-carousel'
+gem 'owlcarousel-rails'
 
 group :test do
   gem 'capybara'
