@@ -69,10 +69,10 @@ header.topbar {
           @include span-columns(2);
           @include shift(0);
         }
-        @include media($medium-screen) {
-        @include span-columns(2);
-        @include shift(1);
-        }
+        /*@include media($medium-screen) {*/
+        /*@include span-columns(2);*/
+        /*@include shift(1);*/
+        /*}*/
         // @include shift(0);
         color: white;
       }
@@ -93,11 +93,11 @@ header.topbar {
           padding: 0em 1em 1em 1em;
         }
 
-        @include media($medium-screen) {
-         @include span-columns(6);
-         @include shift(0);
-         padding: 1em 0em 1em 1em;
-        }
+        /*@include media($medium-screen) {*/
+         /*@include span-columns(6);*/
+         /*@include shift(0);*/
+         /*padding: 1em 0em 1em 1em;*/
+        /*}*/
 
         color: white;
         right: 0;
