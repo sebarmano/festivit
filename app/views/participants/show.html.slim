@@ -1,21 +1,23 @@
 .bgheader_particpants_show
-
-
 section
   article
+    .notice
+      = notice
+    .alert
+      = alert
+      
 
     h3
-    = @participant.name
+      = @participant.name
 
     = form_tag pick_up_tickets_path, method: :put
-
 
     ul
       - @participant.tickets.order(:ticket_type_id).each do |ticket|
         - unless ticket.qty == '0'
           .cards
             .card
-              .card-header
+              div class=["card-header t#{(ticket.ticket_type.productpairsid)}"]
                 strong
                   | #{ticket.ticket_type.productpairsid}
                 | #{ticket.online_order_id}
@@ -31,14 +33,6 @@ section
               .card-stats
                 ul
                   li
-                    = "total: #{ticket.qty}  -  remaining: #{ticket.remaining}"
-              /    li
-                    = "#{ticket.remaining}"
-                    span Remaining
-                  li
-                    = "#{ticket.online_order_id}"
-                    span Order id
+                    | total: #{ticket.qty}  -  remaining: <span>0</span>
 
-
-
-    = submit_tag "Submit picked up tickets", class: "submit-button"
+    = submit_tag "Save picked up tickets", class: "submit-button"

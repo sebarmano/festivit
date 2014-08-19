@@ -1,7 +1,15 @@
-- if params[:type] == 'Admin'
-  h1 Create an Admin
-- else
-  h1 Create a Volunteer
-= simple_form_for @user do |f|
-  = f.input :email
-  = f.button :submit
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    - if params[:type] == 'Admin'
+      h1 Create an Admin
+    - else
+      h1 Create a Volunteer
+    = simple_form_for @user do |f|
+      = f.input :email
+      = f.button :submit
