@@ -8,8 +8,9 @@ section
       = alert
       
     = form_tag participants_path, method: :get
-    = text_field_tag :search, params[:search]
-    = submit_tag "Search"
+    .mobile-search
+      = text_field_tag :search, params[:search]
+      = submit_tag "Search"
 
     .filters
       button.whiteButton

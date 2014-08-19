@@ -73,7 +73,7 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.approved(@participant).deliver
+    SubmissionMailer.approved(@participant.applicant).deliver
     redirect_to submissions_path
   end
 
@@ -82,7 +82,7 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.decline(@participant).deliver
+    SubmissionMailer.decline(@participant.applicant).deliver
     redirect_to submissions_path
   end
   private

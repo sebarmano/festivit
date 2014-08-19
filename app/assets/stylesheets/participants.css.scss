@@ -115,6 +115,12 @@ $card-type-background: $red-orange;
   @include fieldset;
 }
 
+.mobile-search input{
+  display: inline;
+  &#search {
+    width: 50%;
+  }
+}
 
 .filters {
   button {

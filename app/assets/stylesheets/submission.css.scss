@@ -468,3 +468,10 @@ td{
     top: 0;
   }
 }
+
+#contactsubmissions  {
+  @include outer-container;
+  @include span-columns(12);
+  padding: 10px 0;
+
+}
