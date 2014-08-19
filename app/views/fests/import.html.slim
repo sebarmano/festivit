@@ -1,0 +1,29 @@
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h3 Import Fest Types
+    = form_tag import_fests_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+    br
+      h1 Current Fest Types
+      table
+        thead
+          tr
+            th Fest id
+            th name
+            th Fest_code
+            th Tuple date
+            th colspan="3"
+        tbody
+          - @fests.each do |fest|
+            tr
+              td= fest.id
+              td= fest.name
+              td= fest.fest_code
+              td= fest.created_at

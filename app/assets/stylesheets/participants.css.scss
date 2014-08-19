@@ -32,15 +32,63 @@ $tvhc-header-background: $blue;
 }
 
 .form{
-  width: 50%;
+  @include span-columns(8);
+  @include shift (1);
 }
-.name{
+
+.fullName{
   float: left;
   width: 100%;
 }
-.participants{
-  @include fieldset;
+.firstName{
+  @include span-columns(4 of 8);
 }
+.lastName{
+  @include span-columns(4 of 8);
+}
+
+.logInCreate{
+  @include fieldset;
+  @include span-columns(6 of 6);
+}
+.email{
+  @include span-columns(6 of 6);
+  }
+.passwordCreate{
+  @include span-columns(2.5 of 6);
+}
+.passwordCreateConf{
+  @include span-columns(2.5 of 6);
+}
+
+.shield{
+  @include span-columns(8)
+}
+
+
+.address{
+  @include fieldset;
+  @include span-columns(8 of 8);
+}
+.street{
+  @include span-columns(8 of 8);
+}
+.city{
+  @include span-columns(2.5 of 8);
+}
+.state{
+  @include span-columns(1.5 of 8);
+}
+.zip{
+  @include span-columns(2 of 8);
+}
+.country{
+  @include span-columns(2 of 8);
+}
+.phone{
+  @include span-columns(4 of 8);
+}
+
 .address {
   @include fieldset;
 
@@ -62,7 +110,10 @@ $tvhc-header-background: $blue;
     width: 30%;
     margin-right: 10px;
   }
+}
 
+.participants{
+  @include fieldset;
 }
 
 .mobile-search input{
@@ -211,6 +262,10 @@ $tvhc-header-background: $blue;
 
       span {
         display: inline;
+        // color: $base-font-color;
+        // font-size: .7em;
+        // display: block;
+        // font-weight: normal;
       }
     }
   }

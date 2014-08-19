@@ -7,6 +7,31 @@ div.bg1 {
   width: 100%;
   z-index: 0;
   height: 900px;
+
+  .hero {
+    @include outer-container;
+    .unit {
+     h1 {
+      text-align: center;
+      font-weight:300;
+      font-size: $base-font-size * 3;
+      text-align: center;
+    }
+      h2 {
+
+      text-align: center;
+      font-weight:300;
+      font-size: $base-font-size * 2;
+      text-align: center;
+      }
+
+      padding-top: 34em;
+      @include span-columns(8);
+      @include shift(2);
+      color: white;
+
+    }
+  }
 }
 
 

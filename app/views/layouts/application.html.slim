@@ -25,9 +25,7 @@ html
             li Logged_in_as = current_user.email
               = link_to 'Logout', destroy_user_session_path, :method => :delete
 
-    p.notice
-      = notice
-    p.alert
-      = alert
 
     == yield
+
+    
