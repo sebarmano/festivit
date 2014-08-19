@@ -7,13 +7,24 @@ section
     .alert
       = alert
     table
+      thead
+        tr
+          th Role Type
+          th Fest
+          th Lname
+          th Fname
+          th Tuple date
+          th colspan="3"
+        tbody
       - @fest_participant_role_types.each do |fprt|
         tr
           td
-            = fprt.role_type.name
+            = fprt.role_type.name if fprt.role_type
           td
-            = fprt.fest.name
+            = fprt.fest.name if fprt.fest
           td
-            = fprt.participant.lname
+            = fprt.participant.lname if fprt.participant
           td
-            = fprt.participant.fname
+            = fprt.participant.fname if fprt.participant
+          td
+            = fprt.created_at

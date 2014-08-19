@@ -1,7 +1,5 @@
-#will import Google doc guest list
-class ImporterGuest < ActiveImporter::Base
-  class NoFestError < StandardError;
-  end
+#will import Google doc demo day
+class ImporterDemoday < ActiveImporter::Base
 
   imports Participant
 
@@ -9,15 +7,15 @@ class ImporterGuest < ActiveImporter::Base
 
   fetch_model do
     # find or create participant
-    @fullname = row['fullname'].split(',').map(&:strip) #TODO - deal w first few junk rows
-
+    @fullname = row['fullname'].split(' ')
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
     ).create
   end
 
-  column 'email', :email
+  column 'fullname'
+
   on :row_processing do
     # find ticket_type_id from column name & pull qty to tuple qty
     tix_columns = ["4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "Anyday",
@@ -27,27 +25,24 @@ class ImporterGuest < ActiveImporter::Base
       if row[tix_column]
         # create a ticket
         ticket = model.tickets.build(qty: row[tix_column],
-                                     online_order_id: (row['orderid']).to_s,
-                                     customer_notes: row['customer_notes'],
                                      status: row['status'])
         ticket_type = TicketType.where(productpairsid: tix_column, price: '0').first
         ticket.ticket_type = ticket_type
         ticket.save!
-        # set role_type
+        #set role_type
         if row['manual data group'] == 'phone'
-          role_type = RoleType.where(name: 'customer').first_or_initialize
+          role_type = RoleType.where(name: 'customer').create
         else
-          role_type = RoleType.where(name: 'guest').first_or_initialize
+          role_type = RoleType.where(name: 'guest').create
         end
         # create a fest_participant_role_type
         fprt = FestParticipantRoleType.where(:participant => @participant,
                                              :fest => ticket.ticket_type.fest,
-                                             :role_type => role_type).first_or_initialize
+                                             :role_type => role_type).create
         fprt.save!
       end
     end
   end
-
 
   on :row_error do |ex|
     Rails.logger.error("Did not import: #{ex}")

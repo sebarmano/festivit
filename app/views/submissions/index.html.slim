@@ -1,103 +1,137 @@
-.bgheader_submissions
+.bgheader
 
 section
   article
-    .notice
+
+    p.notice
       = notice
-    .alert
+    p.alert
       = alert
-    h3 Band Applications
+
+    h1.title Applications
+    = form_tag submissions_path, method: :get
+    .mobile-search
+
+      = text_field_tag :search, params[:search]
+      = submit_tag "Search"
     table
       tr
         th
-          | Accepted?
+          | Decision
         th
-          | Paid?
+          | Participant
         th
-          | Performer
-        th
-          | Band Photo
+          | Photo
         th
           | Video
         th
           | Music
         th
-          | Facebook
-        th
-          | Twitter
-
+          | Contact
         th
           | Tags
 
         - @submissions.each do |submission|
-          - participant = submission.participants.first
+
+          - photos = submission.attachments.where(type: "photo")
+          - videos = submission.attachments.where(type: "video")
+          - songs = submission.attachments.where(type: "song")
+          - thing = submission.fest_participant_submissions.first
+          - if thing
+            - participant = Participant.find_by(id: thing.participant_id)
+
           tr
-            /= submission.group_name
-          - unless participant.nil?
-            /if participant isn't showing it means there isn't one
-            td
-              button.decision Accepted
-              button.decision Declined
-            td
-              button $
-            td
-              /TODO: need to get seed data for band
-              a href="#"
+            td.decision
+              - if submission.approve.nil?
+                = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
+                = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline'
+
+              - elsif submission.approve == true
+
+                = button_to 'Accept',nil,{:disabled =>true, class: 'accepted'}
+                = button_to 'Decline',nil,{:disabled => true,  class: 'declineDisable'}
+
+              - else
+
+                = button_to 'Accept',nil, { :disabled => true, class: 'acceptDisable' }
+                = button_to 'Decline',nil, { :disabled => true, class: 'declined' }
+
+            td.participant
+              span.name.ellipsis
                 = submission.group_name
-            td
+
+            td.picTable
               .modal
-                label for="modal-1"
-                  .btn.js-btn 
-                      | Photo
-                input#modal-1.modal-state type="checkbox" /
+                label for="modal-#{submission.id*2 -1}"
+                  .thumbPic
+                    - unless photos.first.nil?
+                      = image_tag photos.first.image.url, size: '140x100'
+
+                input id="modal-#{submission.id*2-1}" class="modal-state" type="checkbox" /
                 .modal-window
                   .modal-inner
-                    label.modal-close for="modal-1"
+                    label.modal-close for="modal-#{submission.id*2-1}"
                     .modalContainer
-                      = image_tag('bg.jpg')
-            td
-              / TODO: Add video
-              .modal
-                  label for="modal-2"
-                    .btn.js-btn Video
-                  input#modal-2.modal-state type="checkbox" /
-                  .modal-window
-                    .modal-inner
-                      label.modal-close for="modal-2"
-                      .modalContainer
-                        = image_tag('video.png')
-                      //= embed(attachment.link)
-            td
-              / TODO: Add music
-              .modal
-                  label for="modal-3"
-                    .btn.js-btn Music
-                  input#modal-3.modal-state type="checkbox" /
-                  .modal-window
-                    .modal-inner
-                      label.modal-close for="modal-3"
-                      .modalContainer
-                        h1 = submission.group_name
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                        iframe frameborder="no" height="100" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/32046856&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" width="100%"
-                  /= image_tag('soundcloud.jpg')
-                          /= embed(attachment.link)
-            td
-              a href="https://www.facebook.com"
-                = image_tag('facebook.png')
-                /= submission.facebook_link
-            td
-              a href="https://www.twitter.com/"
-                = image_tag('twitter.png')
-                /= submission.twitter_link
-            td
-              / TODO: Add notes section in database
-              | Rock
-              /= submission.tags
+                      ol.carousel
+                        - photos.each do |photo|
+                          li
+                            = image_tag photo.image.url, size: '600x400'
 
-            / Do we
-            / - unless submission.participant_id.nil?
-            /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-            /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-            /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'} 
+            td.videoTable
+              .modal
+                label for="modal-#{submission.id*2}"
+                  - if videos.first
+                    .thumbVideo
+
+                      = image_tag thumb(videos.first.link), size: '140x100'
+                  - else
+                    .thumbVideo = image_tag('Performer.jpg')
+                input id="modal-#{submission.id*2}" class="modal-state" type="checkbox" /
+                .modal-window
+                  .modal-inner
+                    label.modal-close for="modal-#{submission.id*2}"
+                    .modalContainer
+                      ol.carousel
+                        - videos.each do |video|
+                          li
+                            = embed(video.link)
+
+            td.tracks
+              - songs.each do |audio|
+                - if audio.song
+                  = audio.title
+                  br
+                  embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
+                  br
+            td.info
+              span#contactsubmissions
+                - if participant
+                  = participant.name
+              span#contactsubmissions
+                - if participant
+                  = participant.phone
+              span#contactsubmissions
+                = submission.created_at.to_date
+              .clearFloat
+              span
+                span.social
+                  -if  submission.facebook_link
+                    = link_to  "http://#{submission.facebook_link}"
+                      i.fa.fa-facebook-square
+                span.social
+                  -unless submission.twitter_link.nil?
+                    = link_to "http://#{submission.twitter_link}"
+                      i.fa.fa-twitter
+                span.social
+                  - unless submission.website.nil?
+                    = link_to "http://#{submission.website}"
+                      i.fa.fa-globe
+
+                span.social
+                  - unless participant.nil?
+                    = mail_to participant.email
+                      i.fa.fa-envelope
+
+            td.tags
+              - if submission.tags
+                = submission.tag_list

@@ -1,6 +1,11 @@
 .logIn {
   @include span-columns(4);
   @include shift(4);
+  @include media($mobile){
+
+  @include span-columns(4);
+  @include shift(0);
+  }
   h3 {
     margin-bottom: 1em;
   }
@@ -14,4 +19,13 @@
   background-repeat: no-repeat;
   z-index: 0;
   height: 16em;
+  @include media($mobile) {
+    width: 100%;
+    background-image: asset-url('upside.jpg');
+    background-size: 320%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    height: 16em;
+  }
 }

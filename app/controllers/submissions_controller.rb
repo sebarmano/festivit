@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve, :decline]
   before_action :set_participant, only: [:show, :edit, :update, :new, :create]
+
   before_action :authenticate_user!
   # authorize_actions_for :user_type
 
@@ -22,6 +23,10 @@ class SubmissionsController < ApplicationController
   end
 
   def edit
+    @submission = @participant.submissions.new
+    @role = @participant.role_types.first.name
+    @types = ['song', 'video', 'photo']
+    authorize_action_for(@submission)
   end
 
   def create
@@ -68,7 +73,7 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.approved(@participant).deliver
+    SubmissionMailer.approved(@participant.applicant).deliver
     redirect_to submissions_path
   end
 
@@ -77,7 +82,7 @@ class SubmissionsController < ApplicationController
     @submission.save
     @thing = @submission.fest_participant_submissions.find_by(submission_id: @submission.id)
     @participant = Participant.find_by(id: @thing.participant_id)
-    SubmissionMailer.decline(@participant).deliver
+    SubmissionMailer.decline(@participant.applicant).deliver
     redirect_to submissions_path
   end
   private
