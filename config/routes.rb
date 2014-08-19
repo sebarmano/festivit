@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       post :import
       get :import_guests
       post :import_guests
+      get :import_demoday
+      post :import_demoday
     }
   end
 
@@ -41,6 +43,10 @@ Rails.application.routes.draw do
 
   get 'ticket_types/import', to: "ticket_types#import", :as => :import_ticket_types
   post 'ticket_types/import', to: "ticket_types#import"
+
+
+  get 'participants/import_demoday', to: "participants#import_demoday", :as => :import_demoday
+  post 'participants/import_demoday', to: "participants#import_demoday"
 
   get 'role_types/import', to: "role_types#import", :as => :import_role_types
   post 'role_types/import', to: "role_types#import"
