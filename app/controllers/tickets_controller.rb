@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
 
   def pick_up
     Ticket.update(params[:tickets].keys, params[:tickets].values)
-    redirect_to participants_path
+    redirect_to participants_path, notice: "Picked up tickets saved"
   end
 
   private
