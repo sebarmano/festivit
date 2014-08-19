@@ -52,11 +52,12 @@ class ImporterWootix < ActiveImporter::Base
 
       raise NoFestCode, "No fest with code #{fest_code}" unless fest
 
-      role_type = RoleType.where(name: 'customer').first_or_initialize
+      role_type = RoleType.where(name: 'customer').first
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
       # create a fest_participant_role_type
+
       fprt = FestParticipantRoleType.where(:participant => participant,
                                            :fest => fest,
                                            :role_type => role_type).first_or_initialize

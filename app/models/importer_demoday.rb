@@ -11,7 +11,7 @@ class ImporterDemoday < ActiveImporter::Base
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
-    ).first_or_initialize
+    ).create
   end
 
   column 'fullname'
@@ -31,14 +31,14 @@ class ImporterDemoday < ActiveImporter::Base
         ticket.save!
         #set role_type
         if row['manual data group'] == 'phone'
-          role_type = RoleType.where(name: 'customer').first_or_initialize
+          role_type = RoleType.where(name: 'customer').create
         else
-          role_type = RoleType.where(name: 'guest').first_or_initialize
+          role_type = RoleType.where(name: 'guest').create
         end
         # create a fest_participant_role_type
         fprt = FestParticipantRoleType.where(:participant => @participant,
                                              :fest => ticket.ticket_type.fest,
-                                             :role_type => role_type).first_or_initialize
+                                             :role_type => role_type).create
         fprt.save!
       end
     end
