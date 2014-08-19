@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :set_submission, only: [:show, :edit, :update, :destroy, :approve, :decline]
   before_action :authenticate_user!
   # authorize_actions_for :user_type
 
