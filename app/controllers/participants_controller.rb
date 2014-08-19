@@ -23,7 +23,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(participant_params)
     if @participant.save
       sign_in @participant.applicant
-      redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
+      redirect_to new_participant_submission_path(@participant), notice: "Your contact information has been stored."
     else
       render :new, flash: @participant.errors
     end

@@ -21,7 +21,7 @@ section
     br
     = simple_form_for [@participant, @submission] do |f|
       - unless @role == "Volunteer"
-        = f.input "group_name"
+        = f.input "group_name", required: true
 
       - if @role == "Performer"
         = f.input "bio", :label => "Performer Bio:"

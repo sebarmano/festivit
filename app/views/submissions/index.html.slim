@@ -16,10 +16,10 @@ section
       = submit_tag "Search"
     table
       tr
-        th
+        th.participant
           | Decision
         th
-          | Participant
+          | Group
         th
           | Photo
         th
@@ -58,7 +58,7 @@ section
 
             td.participant
               span.name.ellipsis
-                = submission.group_name
+                = link_to submission.group_name, "http://#{submission.website}"
 
             td.picTable
               .modal
@@ -97,21 +97,24 @@ section
                             = embed(video.link)
 
             td.tracks
-              - songs.each do |audio|
-                - if audio.song
-                  = audio.title
-                  br
-                  embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
-                  br
+              - unless songs.empty? 
+                - songs.each do |audio|
+                  - if audio.song
+                    = audio.title
+                    br
+                    embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
+                    br
+              - else 
+                p no songs uploaded
             td.info
               span#contactsubmissions
                 - if participant
-                  = participant.name
+                  = mail_to participant.applicant.email, participant.name
               span#contactsubmissions
                 - if participant
                   = participant.phone
               span#contactsubmissions
-                = submission.created_at.to_date
+                = "submitted: #{submission.created_at.to_date}"
               .clearFloat
               span
                 span.social
@@ -134,4 +137,4 @@ section
 
             td.tags
               - if submission.tags
-                = submission.tag_list
+                p = submission.tag_list

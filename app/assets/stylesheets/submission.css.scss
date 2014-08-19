@@ -146,6 +146,7 @@ td{
   margin: 0 10px;
   padding-top: 1em;
   display: block;
+  text-align: center;
 
 
 .accept{
@@ -173,6 +174,10 @@ td{
     font-size: .75em;
     padding: 5px;
     width: 80%;
+    &:hover{
+        background-color: $green;
+        color: #FFFFFF;
+      }
   }
 
 .acceptDisable{
@@ -184,7 +189,10 @@ td{
     font-size: .75em;
     padding: 5px;
     width: 80%;
-    
+      &:hover{
+        background-color: #FFFFFF;
+        color: #000000;
+      }
     }
 
 .decline{
@@ -211,6 +219,10 @@ td{
     font-size: .75em;
     padding: 5px;
     width: 80%;
+      &:hover{
+        background-color: #FFFFFF;
+        color: #000000;
+      }
   }
 
 .declined{
