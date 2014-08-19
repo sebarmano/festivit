@@ -64,22 +64,21 @@ $(function() {
 
 
 $(document).ready(function() {
+
   $(".button-subtract").click(function(e) {
     e.preventDefault();
-    $(".button-add").bind('click');
+
     elm = $(this).parent().children(".tickets-pu");
     var val = elm.val();
-    elm.val(Number(val)-1);
-
 
     elm2 = $(this).parent().parent().children(".card-stats").find("span")
     var rem = elm2.html();
-    elm2.html(Number(rem)+1);
     
     console.log(rem);
     console.log(val);
-    if(val < 2) {
-      $(this).off('click')
+    if(val > 0) {
+      elm.val(Number(val)-1);
+      elm2.html(Number(rem)+1);
     }
   });
 
@@ -87,16 +86,13 @@ $(document).ready(function() {
     e.preventDefault();
     elm = $(this).parent().children(".tickets-pu");
     var val = elm.val();
-    elm.val(Number(val)+1);
 
     elm2 = $(this).parent().parent().children(".card-stats").find("span")
     var rem = elm2.html();
-    if (rem > 0) {
-    elm2.html(Number(rem)-1);
-    }
 
-    if(rem < 2) {
-      $(this).off('click')
+    if (rem > 0) {
+      elm.val(Number(val)+1);
+      elm2.html(Number(rem)-1);
     }
   });
 });
