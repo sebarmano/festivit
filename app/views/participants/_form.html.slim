@@ -1,5 +1,6 @@
-H3 Apply to Shakori Hills!
-H4 Step 1 (of 2): Your contact info
+
+h3 Apply to Shakori Hills!
+h4 Step 1 (of 2): Your contact info
 br
 = simple_form_for @participant do |f|
  .form
@@ -16,16 +17,16 @@ br
       = f.input :phone
 
     .address
-       span.street
-         = f.input :street_address
-       span.city
-         = f.input :city
-       span.state
-         = f.input :state
-       span.zip
-         = f.input :zip
-       span.country
-         = f.input :country, as: :string
+     span.street
+       = f.input :street_address
+     span.city
+       = f.input :city
+     span.state
+       = f.input :state
+     span.zip
+       = f.input :zip
+     span.country
+       = f.input :country, as: :string
 
     .logInCreate
       = f.simple_fields_for :applicant do |p|
