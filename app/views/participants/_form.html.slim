@@ -1,8 +1,9 @@
-h3 Apply to Shakori Hills!
-h4 Step 1 (of 2): Your contact info
+.form
+  h3 Apply to Shakori Hills!
+  h4 Step 1 (of 2): Your contact info
+  br
+  = simple_form_for @participant do |f|
 
-= simple_form_for @participant do |f|
- .form
    = f.simple_fields_for :role_types do |r|
     = r.input :name, :label => "Select what role you would like to apply for:",
                      :collection => ['Craft Vendor', 'Food Vendor', 'Healing Artist', 'Non-Profit', 'Performer', 'Volunteer']
