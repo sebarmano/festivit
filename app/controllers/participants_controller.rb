@@ -4,9 +4,10 @@ class ParticipantsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = Prawn::Document.new
-        pdf.text "Welcome to Festivit"
-        send_data pdf.render
+        pdf = WillCallPdf.new(@participants)
+        send_data pdf.render, filename: "Will Call List",
+                              type: "application/pdf",
+                              disposition: "inline"
       end
     end
   end
