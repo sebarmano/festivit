@@ -11,15 +11,13 @@ section
       = file_field_tag :file
       = submit_tag "Import"
     p
-      | Export Ticket Types:
-      \#{link_to "CSV", ticket_types_path(format: "csv")} \
-      | \#{link_to "Excel", ticket_types_path(format: "xls")}
+
     br
       h1 Current Ticket Types
       table
         thead
           tr
-            th TicketType id
+            th TicketType ID
             th name
             th Sale status
             th Price
