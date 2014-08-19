@@ -9,7 +9,9 @@ section
       
     = form_tag participants_path, method: :get
     .mobile-search
+
       = text_field_tag :search, params[:search], value: ""
+
       = submit_tag "Search"
 
     .filters

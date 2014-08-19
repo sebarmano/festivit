@@ -31,8 +31,8 @@ class Participant < ActiveRecord::Base
   accepts_nested_attributes_for :applicant
   accepts_nested_attributes_for :role_types
 
-  validates :lname, :fname, presence: true
-  validates :lname, :uniqueness => {scope: [:fname], case_sensitive: false}
+  validates :lname, :fname, :phone, :street_address, presence: true
+
 
   def name
     "#{lname}, #{fname}"

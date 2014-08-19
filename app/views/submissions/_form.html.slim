@@ -34,6 +34,15 @@ section
            = f.input "practice_exp_date", :label => "License expiration date:"
            = f.input "practice_years", :label => "Length of time practicing:"
 
+
+
+      -unless @role == "Volunteer"
+
+        .fieldset
+          = f.input "website"
+          = f.input "facebook_link"
+          = f.input "twitter_link"
+
       - if @role == "Healing Artist"
        = f.input "practice_type", :label => "Practice type:"
        = f.input "practice_lic_no", :label => "License number:"
@@ -119,5 +128,8 @@ section
         = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
 
       - if @role == "Food Vendor"
+
+      = f.input "camping", :label => "Camping at the festival?"
+      = f.input "complete", :label => "Optional: save and complete later."
 
       =f.submit
