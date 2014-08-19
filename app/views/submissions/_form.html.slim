@@ -1,56 +1,17 @@
-.bgheader
-section
-  article
-    .notice
-      = notice
-    .alert
-      = alert
+h1 = @role + " Application"
+h6 Step 2 (of 2): Application Details
+br
+= simple_form_for [@participant, @submission] do |f|
+  - unless @role == "Volunteer"
+    = f.input "group_name"
 
-    - if @role == "Performer"
-      h1 Performer Application
-    - if @role == "Volunteer"
-      h1 Volunteer Application
-    - if @role == "Healing Artist"
-      h1 Healing Artist Application
-    - if @role == "Craft Vendor"
-      h1 Craft Vendor Application
-    - if @role == "Food Vendor"
-      h1 Food Vendor Application
-    h1 = @role
-    h6 Step 2 (of 2): Application Details
-    br
-    = simple_form_for [@participant, @submission] do |f|
-      - unless @role == "Volunteer"
-        = f.input "group_name"
+  - if @role == "Performer"
+    = f.input "bio", :label => "Performer Bio:"
 
-      - if @role == "Performer"
-        = f.input "bio", :label => "Performer Bio:"
+  - if @role == "Healing Artist"
 
-      - if @role == "Healing Artist"
-
-        .fieldset
-           = f.input "practice_type", :label => "Modality:"
-           = f.input "practice_lic_no", :label => "License number:"
-           = f.input "practice_exp_date", :label => "License expiration date:"
-           = f.input "practice_years", :label => "Length of time practicing:"
-
-
-
-      -unless @role == "Volunteer"
-
-        .fieldset
-          = f.input "website"
-          = f.input "facebook_link"
-          = f.input "twitter_link"
-
-          = f.input "tag_list", :label => "Tags", :label_html => { class: "tooltip-input" }
-            i.fa.fa-question.tooltip-item
-              .tooltip
-                p Share a (comma-separated) list of key words that describe your genre/craft/cause.
-            = f.input_field "tag_list", placeholder: "rock, mediterranean, educational, kids"
-
-      - if @role == "Healing Artist"
-       = f.input "practice_type", :label => "Practice type:"
+    .fieldset
+       = f.input "practice_type", :label => "Modality:"
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
@@ -84,12 +45,13 @@ section
   = f.input "tag_list", :label => "Tags"
 
   - if @role == "Performer"
-    h3.tooltip-input-attachment Attachments
+    br
+    h3.tooltip-input-attachment Share your stuff!
     i.fa.fa-question.tooltip-item
       .tooltip
         p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
     - @types.each do |type|
-      h4 = type.capitalize
+      h4 = type.capitalize + "(s)"
       .attachments class = "#{type}s"
         = f.simple_fields_for :attachments do |attachment|
           = render 'attachment_fields', :f => attachment, locals: {:type => type }
@@ -166,8 +128,9 @@ section
     = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
 
   - if @role == "Food Vendor"
-
+  br
   = f.input "camping", :label => "Camping at the festival?"
+  br
   = f.input "complete", :label => "Optional: save and complete later."
 
   =f.submit
