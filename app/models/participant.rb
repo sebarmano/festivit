@@ -52,7 +52,7 @@ class Participant < ActiveRecord::Base
 
   def self.search(search)
     if search
-      search = search.downcase #TODO fix the capitalization on search
+      search = search.downcase 
       where("lower(lname) LIKE ? OR lower(fname) LIKE ?","%#{search}%", "%#{search}%")
     else
       all
