@@ -194,7 +194,7 @@ div.cont3 {
 }
 
 div.cont4 {
-  background-image: asset-url('iphonec.png');
+  background-image: asset-url('iphonec.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -203,7 +203,7 @@ div.cont4 {
   color: white;
   
   @include media($mobile) {
-    background-image: asset-url('iphonec.png');
+    background-image: asset-url('iphonec.jpg');
     background-size: 300%;
     background-repeat: no-repeat;
     background-position: 20% 0% ;

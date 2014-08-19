@@ -71,7 +71,7 @@ header.topbar {
         }
         @include media($medium-screen) {
         @include span-columns(2);
-         @include shift(1);
+        @include shift(1);
         }
         // @include shift(0);
         color: white;
