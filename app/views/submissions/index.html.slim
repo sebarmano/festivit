@@ -112,7 +112,7 @@ html
                     span.social
                       = link_to "http://#{submission.website}"
                         i.fa.fa-globe
-                  - unless submission.participant.email.nil?
+
                     span.social
                       - if participant
                         = mail_to participant.email
