@@ -10,14 +10,14 @@ class ImporterGuest < ActiveImporter::Base
   fetch_model do
     # find or create participant
     @fullname = row['fullname'].split(',').map(&:strip) #TODO - deal w first few junk rows
+
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
-    ).first_or_initialize
+    ).create
   end
 
   column 'email', :email
-
   on :row_processing do
     # find ticket_type_id from column name & pull qty to tuple qty
     tix_columns = ["4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "Anyday",
