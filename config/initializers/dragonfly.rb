@@ -28,7 +28,7 @@ Dragonfly.app.configure do
       app_secret: Rails.application.secrets.dropbox_app_secret,
       access_token: Rails.application.secrets.dropbox_access_token,
       access_token_secret: Rails.application.secrets.dropbox_access_token_secret,
-      user_id: Rails.application.secrets.dropbox_user_id
+      user_id: Rails.application.secrets.dropbox_user_id,
       access_type: "app_folder"
   else
     datastore :file,
