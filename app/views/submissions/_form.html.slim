@@ -43,13 +43,17 @@ section
           = f.input "facebook_link"
           = f.input "twitter_link"
 
+          = f.input "tag_list", :label => "Tags", :label_html => { class: "tooltip-input" }
+            i.fa.fa-question.tooltip-item
+              .tooltip
+                p Share a (comma-separated) list of key words that describe your genre/craft/cause.
+            = f.input_field "tag_list", placeholder: "rock, mediterranean, educational, kids"
+
       - if @role == "Healing Artist"
        = f.input "practice_type", :label => "Practice type:"
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
-
-      = f.input "tag_list", :label => "Tags"
 
       - if @role == "Performer"
         h3.tooltip-input-attachment Attachments
@@ -102,7 +106,7 @@ section
           i.fa.fa-question.tooltip-item
             .tooltip
               p We will try to work with you, we can't place everyone in their top choice and we have shifts that need to be filled at all hours.
-            = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
+          = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
 
          = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
 
