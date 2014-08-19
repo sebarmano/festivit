@@ -34,15 +34,15 @@ html
 
           tr
             td.decision
-              if submission.approve.nill?
+              - if submission.approve.nil?
                 = button_to 'Accept', {action: 'approve', id: submission.id}, class: 'accept'
                 = button_to 'Decline', {action: 'decline', id: submission.id}, class: 'decline' 
               
-              elseif submission.approve
+              - elsif submission.approve
                 = button_to 'Accept', class: 'accepted'
                 = button_to 'Decline', class: 'declineDisabled'
               
-              else
+              - else
                 = button_to 'Accept', class: 'acceptDisable'
                 = button_to 'Decline', class: 'declined'  
             
