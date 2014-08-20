@@ -34,7 +34,7 @@ class Participant < ActiveRecord::Base
   # validates :lname, :fname, presence: true
   # validates :lname, :uniqueness => {scope: [:fname], case_sensitive: false}
 
-  validates :lname, :fname, :phone, :street_address, presence: true
+  validates :lname, :fname, :phone, presence: true
 
   def name
     "#{lname}, #{fname}"
@@ -54,7 +54,7 @@ class Participant < ActiveRecord::Base
 
   def self.search(search)
     if search
-      search = search.downcase 
+      search = search.downcase
       where("lower(lname) LIKE ? OR lower(fname) LIKE ?","%#{search}%", "%#{search}%")
     else
       all

@@ -240,7 +240,7 @@ $tfpkg-header-background: $medium-gray;
     &.tthu {
         background-color: $tthu-header-background;
      }
-     
+
     &.tfri {
         background-color: $tfri-header-background;
      }
@@ -252,11 +252,11 @@ $tfpkg-header-background: $medium-gray;
     &.tsun {
         background-color: $tsun-header-background;
      }
-     
+
     &.tpress {
         background-color: $tpress-header-background;
      }
-     
+
     &.ttent {
         background-color: $ttent-header-background;
      }
@@ -365,4 +365,15 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .submit-button {
   display: block;
   clear: both;
+  @include button($blue);
+}
+
+.back-button {
+  @include button(white);
+  color: white;
+}
+
+.order {
+  display: inline;
+  float: right;
 }

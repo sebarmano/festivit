@@ -23,6 +23,10 @@ class SubmissionsController < ApplicationController
   end
 
   def edit
+    @submission = @participant.submissions.new
+    @role = @participant.role_types.first.name
+    @types = ['song', 'video', 'photo']
+    authorize_action_for(@submission)
   end
 
   def create
