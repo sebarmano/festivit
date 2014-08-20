@@ -10,7 +10,6 @@ class ImporterGuest < ActiveImporter::Base
   fetch_model do
     # find or create participant
     @fullname = row['fullname'].split(',').map(&:strip) #TODO - deal w first few junk rows
-
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
@@ -57,3 +56,14 @@ class ImporterGuest < ActiveImporter::Base
     Rails.logger.warn("Lines not imported: #{row_errors}") if row_errors.count > 0
   end
 end
+#
+#TODO - separate roletype based on orderid
+#TODO - set orderid upon import from guests vs all imported from googledoc are same
+#   add line to ignore orderid == blank and orderid == 0
+#   orderid_regex = /prev/
+#   /^sh/
+#   /^guest/
+#   /^press/
+#   /^sguest/
+#   /^w/
+# OR, do manualdatagroup regex?

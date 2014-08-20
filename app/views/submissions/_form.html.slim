@@ -1,14 +1,4 @@
-- if @role == "Performer"
-  h1 Performer Application
-- if @role == "Volunteer"
-  h1 Volunteer Application
-- if @role == "Healing Artist"
-  h1 Healing Artist Application
-- if @role == "Craft Vendor"
-  h1 Craft Vendor Application
-- if @role == "Food Vendor"
-  h1 Food Vendor Application
-h1 = @role
+h1 = @role + " Application"
 h6 Step 2 (of 2): Application Details
 br
 = simple_form_for [@participant, @submission] do |f|
@@ -26,7 +16,18 @@ br
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
-
+      - if @role == "Performer"
+        h3.tooltip-input-attachment Attachments
+        i.fa.fa-question.tooltip-item
+          .tooltip
+            p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
+        - @types.each do |type|
+          h4 = type.capitalize
+          .attachments class = "#{type}s"
+            = f.simple_fields_for :attachments do |attachment|
+              = render 'attachment_fields', :f => attachment, locals: {:type => type }
+            .links
+              = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
 
   -unless @role == "Volunteer"
 
@@ -44,12 +45,13 @@ br
   = f.input "tag_list", :label => "Tags"
 
   - if @role == "Performer"
-    h3.tooltip-input-attachment Attachments
+    br
+    h3.tooltip-input-attachment Share your stuff!
     i.fa.fa-question.tooltip-item
       .tooltip
         p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
     - @types.each do |type|
-      h4 = type.capitalize
+      h4 = type.capitalize + "(s)"
       .attachments class = "#{type}s"
         = f.simple_fields_for :attachments do |attachment|
           = render 'attachment_fields', :f => attachment, locals: {:type => type }
@@ -77,7 +79,13 @@ br
 
      = f.input "deposit_type", :label => "Deposit payment type:", collection: ["credit card", "check", "money order"]
 
-     = f.input "returning", :label => "First time volunteer?"
+
+         = f.input "shift_pref", :label => "Time preference(s):", :label_html => { class: "tooltip-input" }
+          i.fa.fa-question.tooltip-item
+            .tooltip
+              p We will try to work with you, we can't place everyone in their top choice and we have shifts that need to be filled at all hours.
+          = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
+
 
      = f.input "crew_hist", :label => "What were your crew(s)? (For Hospitality Kitchen, also list position)."
 
@@ -120,8 +128,9 @@ br
     = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
 
   - if @role == "Food Vendor"
-
+  br
   = f.input "camping", :label => "Camping at the festival?"
+  br
   = f.input "complete", :label => "Optional: save and complete later."
 
   =f.submit
