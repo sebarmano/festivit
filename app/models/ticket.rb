@@ -38,4 +38,13 @@ class Ticket < ActiveRecord::Base
       end
     end
   end
+
+  def self.search(search)
+    if search
+      search = search.downcase
+      where("lower(customer_notes) LIKE ? OR lower(online_order_id) LIKE ?","%#{search}%", "%#{search}%")
+    else
+      all
+    end
+  end
 end

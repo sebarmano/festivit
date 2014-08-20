@@ -74,7 +74,6 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .logInCreate{
-  @include fieldset;
   @include span-columns(6 of 6);
 }
 .email{
@@ -93,7 +92,6 @@ $tfpkg-header-background: $medium-gray;
 
 
 .address{
-  @include fieldset;
   @include span-columns(8 of 8);
 }
 .street{
@@ -116,7 +114,6 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .address {
-  @include fieldset;
 
   .street{
     width: 40%;
@@ -139,7 +136,7 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .participants{
-  @include fieldset;
+
 }
 
 .mobile-search input{

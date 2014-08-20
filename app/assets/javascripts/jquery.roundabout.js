@@ -60,7 +60,7 @@
 
 	defaults = {
 		bearing: 0.0,
-		tilt: 0.0,
+		tilt: -2.0,
 		minZ: 100,
 		maxZ: 280,
 		minOpacity: 0.4,
@@ -99,7 +99,7 @@
 		dragFactor: 4,
 		triggerFocusEvents: true,
 		triggerBlurEvents: true,
-		responsive: false
+		responsive: true
 	};
 
 	internalData = {

@@ -99,6 +99,7 @@ $(document).ready(function() {
 
 $(function() {
   $('ol.carousel').roundabout({
-      btnNext: ".next"
+    btnNext: ".next"
+
   });
 });
