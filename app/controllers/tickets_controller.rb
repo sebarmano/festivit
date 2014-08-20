@@ -32,7 +32,7 @@ class TicketsController < ApplicationController
       importer.import
       redirect_to import_tickets_path, notice: "#{importer.row_success_count} tickets imported, with #{importer.row_error_count} errors."
     else
-      @tickets = Ticket.all
+      @tickets = Ticket.search(params[:search]).order(:online_order_id)
     end
   end
 
