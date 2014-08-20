@@ -134,6 +134,11 @@ a{
         }
       }
 
+.dashboardSearchbar{
+  float: left;
+  width: 40%
+}
+
 table {
   table-layout: auto;
 }
@@ -249,10 +254,7 @@ td{
     }
   .picTable{
     li{
-      img{
-        max-width:none;
-        height: auto;
-      }
+      
     }
     @include span-columns(2.5);
     padding: 0;
@@ -261,9 +263,24 @@ td{
     @include span-columns(2.5);
   }
 
+  .next{
+    float: right;
+    margin-top: 63px;
+    margin-right: 46%;
+    padding: 100px;
+    z-index: 999999999999;
+    img{
+      cursor: pointer;
+      height: 50px;
+      margin-right: auto;
+      margin-left: auto;
+      position: absolute;
+      z-index: 999999999999;
+    }
+  }
+
   .tracks {
     @include span-columns(2);
-    text-align: left;
     display: block;
     margin: 2px 20px;
   }
@@ -308,13 +325,29 @@ td{
     width: 20%;
   }
 }
+
+.carouselVideo{
+  margin-top: 20%;
+  img{
+    margin-top: 0;
+  }
+}
+.carouselPhoto{
+  margin-top: 0;
+  img{
+    margin-top: 0;
+  }
+}
+
 .modalContainer{
 /*  height: 90%;
-*/  padding-top:5em;
+*/  padding-top:10%;
 /*  width: 80%;
 */  img{
-/*    height: 90%;
-*/  }
+    height: 90%;
+    max-width: inherit;
+    margin-right: 50%;
+  }
 }
 //Modal Refill
 
@@ -322,7 +355,7 @@ td{
   /*margin-left: 25px;*/
   $modal-padding: 3em;
   $modal-background: $base-background-color;
-  $modal-close-color: gray;
+  $modal-close-color: #FFFFFF;
   /*//$modal-image-height: 648px;
   //$modal-image-width: $modal-image-height: 600px;*/
 
@@ -333,14 +366,6 @@ td{
 
   input[type="checkbox"] {
     display: none;
-  }
-
-  .btn {
-    @include button(simple, #477DCF);
-    padding: 20px 9px;
-    font-size: 1em;
-    height: 64px;
-    width: 64px;
   }
 
   .thumbPic {
@@ -389,18 +414,29 @@ td{
     @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
     @include size(1.5em);
     cursor: pointer;
-    background: $modal-background;
+    /*background: $modal-background;*/
+    color: white;
+    font-size: 2em;
+    padding-right: 30px;
 
-    &:after,
-    &:before {
-      @include position(absolute, 3px 3px 0 50%);
-      @include transform(rotate(45deg));
-      @include size(.15em 1.5em);
-      background: $modal-close-color;
-      content: '';
-      display: block;
-      margin: -3px 0 0 -1px;
+    &:hover:after,
+    &:hover:before {
+      background: darken($modal-close-color, 10);
     }
+
+    &:before {
+      @include transform(rotate(-45deg));
+    }
+  }
+
+    .modal-Video-close {
+    @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
+    @include size(1.5em);
+    cursor: pointer;
+    /*background: $modal-background;*/
+    color: white;
+    font-size: 2em;
+    padding-right: 30px;
 
     &:hover:after,
     &:hover:before {
@@ -415,20 +451,20 @@ td{
   .modal-inner {
     @include transition(opacity .25s ease);
     border-radius: $base-border-radius;
-    background: $modal-background;
+    /*background: $modal-background;*/
     margin: auto;
-    height: 60%;
+    height: 80%;
     position: relative;
-    overflow: auto;
-    width: 95%;
+    overflow: hidden;
+    max-width: 100%;
     /*padding: $modal-padding /2;*/
     margin-top: .6em;
 
     @include media($medium-screen) {
-      padding: 9.5em 3em 3em 3em;
-      width: 80%;
-      max-height: 80%;
-      margin-top: 6em;
+      padding: 7em 3em 3em 3em;
+      width: 100%;
+      max-height: 100%;
+      margin-top: 10em;
     }
 
  
