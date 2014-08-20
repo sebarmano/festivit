@@ -16,19 +16,6 @@ br
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
-      - if @role == "Performer"
-        h3.tooltip-input-attachment Attachments
-        i.fa.fa-question.tooltip-item
-          .tooltip
-            p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
-        - @types.each do |type|
-          h4 = type.capitalize
-          .attachments class = "#{type}s"
-            = f.simple_fields_for :attachments do |attachment|
-              = render 'attachment_fields', :f => attachment, locals: {:type => type }
-            .links
-              = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
-
   -unless @role == "Volunteer"
 
     .fieldset
