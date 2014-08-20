@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
+    @participants = Participant.includes(:tickets).search(params[:search]).order("lower(lname)","lower(fname)")
     respond_to do |format|
       format.html
       format.pdf do
