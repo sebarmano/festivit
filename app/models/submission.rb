@@ -56,6 +56,8 @@ class Submission < ActiveRecord::Base
   accepts_nested_attributes_for :videos, :reject_if => :all_blank, :allow_destroy => true
   # accepts_nested_attributes_for :participant
 
+  validates :group_name, presence: true
+
   include Authority::Abilities
 
   def mail_if_ready
