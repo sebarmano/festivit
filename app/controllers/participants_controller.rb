@@ -1,4 +1,5 @@
 class ParticipantsController < ApplicationController
+  include ImportHelper
   def index
     @participants = Participant.includes(:tickets).search(params[:search]).order("lower(lname)","lower(fname)")
     respond_to do |format|
@@ -53,6 +54,11 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
 
+  def demoday
+    @participants = Participant.demoday.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
   def import_guests
     if request.post?
       uploaded_io = params[:file]
@@ -73,6 +79,11 @@ class ParticipantsController < ApplicationController
     else
       @participants = Participant.all
     end
+  end
+
+  def import_demoday_google
+    demoday_importer
+    redirect_to import_demoday_participants_path
   end
 
   private
