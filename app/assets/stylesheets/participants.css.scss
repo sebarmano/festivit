@@ -258,7 +258,7 @@ $tfpkg-header-background: $medium-gray;
      }
 
     &.tsat {
-        background-color: $tsun-header-background;
+        background-color: $tsat-header-background;
      }
 
     &.tsun {
@@ -334,7 +334,7 @@ $tfpkg-header-background: $medium-gray;
     }
   }
 
-  &:hover {
+  :hover {
     background-color: $card-hover-background;
 
     .card-image img {
