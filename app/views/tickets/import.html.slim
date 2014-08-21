@@ -11,6 +11,11 @@ section
       = submit_tag "Import"
     .progress-bar
       span.meter style=("width: 60%")
+    = form_tag import_tickets_path, method: :get
+      .mobile-search
+
+        = text_field_tag :search, params[:search]
+        = submit_tag "Search"
     br
       h1 Current Tickets
       table

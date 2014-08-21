@@ -82,3 +82,16 @@
     background-position: 40px 0px;
   }
 }
+.importerContainer{
+  @include outer-container;
+}
+
+.participantsImport{
+  @include span-columns (8);
+  @include shift (2);
+}
+
+.pId{
+  @include span-columns (1 of 8);
+}
+

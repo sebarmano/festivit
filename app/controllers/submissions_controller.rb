@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
   # authorize_actions_for :user_type
 
   def index
-    @submissions = Submission.search(params[:search])
+    @submissions = Submission.search(params[:search]).order(:group_name)
   end
 
   def show

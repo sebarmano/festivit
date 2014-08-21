@@ -16,7 +16,7 @@
     span.phone
       = f.input :phone
 
-    .address
+    .address.fieldset
      span.street
        = f.input :street_address
      span.city
@@ -28,7 +28,7 @@
      span.country
        = f.input :country, as: :string
 
-    .logInCreate
+    .logInCreate.fieldset
       = f.simple_fields_for :applicant do |p|
         span.email
           = p.input :email, required: true
@@ -38,4 +38,4 @@
           = p.input :password_confirmation, required: true
 
     .shield
-      = f.button :submit, "Store Point of Contact"
+      = f.button :submit, "Continue to next step"
