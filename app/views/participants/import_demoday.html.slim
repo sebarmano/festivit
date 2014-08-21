@@ -7,10 +7,13 @@ section
     .alert
       = alert
       
-    h4 Import Participants
+    h4 Import Participants via CSV
     = form_tag import_demoday_participants_path, multipart: true do
       = file_field_tag :file
-      = submit_tag "Import Guests"
+      = submit_tag "Import"
+
+    h4 Import Participants from Google doc
+    = button_to 'Import', {action: 'import_demoday_google'}
 
     table.table-borders
       thead

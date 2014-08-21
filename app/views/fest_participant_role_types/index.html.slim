@@ -11,6 +11,7 @@ section
         tr
           th Role Type
           th Fest
+          th participant_id
           th Lname
           th Fname
           th Tuple date
@@ -22,6 +23,8 @@ section
             = fprt.role_type.name if fprt.role_type
           td
             = fprt.fest.name if fprt.fest
+          td
+            = fprt.participant.id if fprt.participant
           td
             = fprt.participant.lname if fprt.participant
           td
