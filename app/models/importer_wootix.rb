@@ -1,5 +1,6 @@
 class ImporterWootix < ActiveImporter::Base
-  class NoFestError < StandardError; end
+  class NoFestError < StandardError;
+  end
 
   imports Ticket
 
@@ -44,23 +45,18 @@ class ImporterWootix < ActiveImporter::Base
     sku_regex = /([A-Z]{3,4}20\d\d)([A-Z0-9]{3})/
     match = row['Item SKU'].match(sku_regex)
     fest_code = match[1] if match
-    raise NoFestCode, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
+    raise NoFestError, "SKU #{row['Item SKU']} did not contain valid fest code" unless fest_code
 
     if fest_code
       # find fest name & raise error if no match
-      fest = Fest.where(fest_code: fest_code).first
-
-      raise NoFestCode, "No fest with code #{fest_code}" unless fest
-
-      role_type = RoleType.where(name: 'customer').first
+      fest = Fest.where(fest_code: fest_code).first_or_create
+      role_type = RoleType.where(name: 'customer').first_or_create
 
       model.ticket_type.fest = fest
       model.ticket_type.save!
       # create a fest_participant_role_type
-
-      fprt = FestParticipantRoleType.where(:participant => participant,
-                                           :fest => fest,
-                                           :role_type => role_type).first_or_initialize
+      fprt = participant.fest_participant_role_types.build(fest: fest,
+                                                           role_type: role_type)
       fprt.save!
     end
   end

@@ -10,13 +10,14 @@ class ImporterGuest < ActiveImporter::Base
   fetch_model do
     # find or create participant
     @fullname = row['fullname'].split(',').map(&:strip) #TODO - deal w first few junk rows
-    @participant = Participant.where(
+    Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
-    ).find_or_initialize
+    ).first_or_initialize
   end
 
   column 'email', :email
+
   on :row_processing do
     # find ticket_type_id from column name & pull qty to tuple qty
     tix_columns = ["4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "Anyday",
@@ -25,24 +26,22 @@ class ImporterGuest < ActiveImporter::Base
     tix_columns.each do |tix_column|
       if row[tix_column]
         # create a ticket
-        ticket = model.tickets.build(qty: row[tix_column],
+        ticket = model.tickets.build(qty: row[tix_column].to_i,
                                      online_order_id: (row['orderid']).to_s,
                                      customer_notes: row['customer_notes'],
                                      status: row['status'])
-        ticket_type = TicketType.where(productpairsid: tix_column, price: '0').first
+        ticket_type = TicketType.where(productpairsid: tix_column, price: '0', fest_id: 3833).first_or_initialize
         ticket.ticket_type = ticket_type
-        ticket.save!
+
         # set role_type
         if row['manual data group'] == 'phone'
-          role_type = RoleType.where(name: 'customer').first_or_initialize
+          role_type = RoleType.where(name: 'customer').first_or_create
         else
-          role_type = RoleType.where(name: 'guest').first_or_initialize
+          role_type = RoleType.where(name: 'guest').first_or_create
         end
         # create a fest_participant_role_type
-        fprt = FestParticipantRoleType.where(:participant => @participant,
-                                             :fest => ticket.ticket_type.fest,
-                                             :role_type => role_type).first_or_initialize
-        fprt.save!
+        fprt = model.fest_participant_role_types.build(fest: ticket.ticket_type.fest,
+                                                       role_type: role_type)
       end
     end
   end
