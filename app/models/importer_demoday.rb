@@ -11,7 +11,7 @@ class ImporterDemoday < ActiveImporter::Base
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
-    ).create
+    ).first_or_initialize
   end
 
   column 'fullname'
@@ -26,7 +26,7 @@ class ImporterDemoday < ActiveImporter::Base
         # create a ticket
         ticket = model.tickets.build(qty: row[tix_column],
                                      status: row['status'])
-        ticket_type = TicketType.where(productpairsid: tix_column, price: '0').first
+        ticket_type = TicketType.where(productpairsid: tix_column, price: '0', fest_id: 3833).first
         ticket.ticket_type = ticket_type
         ticket.save!
         #set role_type

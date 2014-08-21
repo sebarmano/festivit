@@ -10,16 +10,18 @@ section
 
     h1.title Applications
     = form_tag submissions_path, method: :get
-    .mobile-search
-
-      = text_field_tag :search, params[:search]
-      = submit_tag "Search"
-    table
+    
+    .dashboardSearchbar
+      .mobile-search
+        = text_field_tag :search, params[:search]
+        = submit_tag "Search"
+    
+    table.dashboard
       tr
-        th
+        th.participants
           | Decision
         th
-          | Participant
+          | Group
         th
           | Photo
         th
@@ -58,7 +60,7 @@ section
 
             td.participant
               span.name.ellipsis
-                = submission.group_name
+                = link_to submission.group_name, "http://#{submission.website}"
 
             td.picTable
               .modal
@@ -71,47 +73,54 @@ section
                 .modal-window
                   .modal-inner
                     label.modal-close for="modal-#{submission.id*2-1}"
+                      | X 
                     .modalContainer
-                      ol.carousel
+                      ol.carousel.carouselPhoto
                         - photos.each do |photo|
                           li
-                            = image_tag photo.image.url, size: '600x400'
+                            = image_tag photo.image.url, size: '50%x40%'
 
             td.videoTable
               .modal
                 label for="modal-#{submission.id*2}"
                   - if videos.first
                     .thumbVideo
-
                       = image_tag thumb(videos.first.link), size: '140x100'
                   - else
                     .thumbVideo = image_tag('Performer.jpg')
                 input id="modal-#{submission.id*2}" class="modal-state" type="checkbox" /
                 .modal-window
-                  .modal-inner
-                    label.modal-close for="modal-#{submission.id*2}"
-                    .modalContainer
-                      ol.carousel
+                  .modal-Video-inner
+                    .modalVideoContainer
+                      a.next
+                        = image_tag('reverse-sync.png')
+                      ol.carousel.carouselVideo
                         - videos.each do |video|
                           li
-                            = embed(video.link)
+                            = embed(video.link)                        
+                      .clearFloat 
+                      label.modal-Video-close for="modal-#{submission.id*2}"
+                        | X         
+            td.tracks.ellipsis
+              - unless songs.empty? 
+                - songs.each do |audio|
+                  - if audio.song
+                    = audio.title
+                    .clearFloat
+                    embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
+                    .clearFloat
 
-            td.tracks
-              - songs.each do |audio|
-                - if audio.song
-                  = audio.title
-                  br
-                  embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
-                  br
+              - else 
+                p no songs uploaded
             td.info
               span#contactsubmissions
                 - if participant
-                  = participant.name
+                  = mail_to participant.applicant.email, participant.name
               span#contactsubmissions
                 - if participant
                   = participant.phone
               span#contactsubmissions
-                = submission.created_at.to_date
+                = "submitted: #{submission.created_at.to_date}"
               .clearFloat
               span
                 span.social
@@ -134,4 +143,4 @@ section
 
             td.tags
               - if submission.tags
-                = submission.tag_list
+                p = submission.tag_list

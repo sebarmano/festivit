@@ -39,7 +39,19 @@ $tfpkg-header-background: $medium-gray;
   background-repeat: no-repeat;
   z-index: 0;
   height: 16em;
+  @include media($mobile) {
+    width: 100%;
+    background-image: asset-url('hola.jpg');
+    background-size: 250%;
+    background-position: 40% 40%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    height: 16em;
+  }
 }
+
+
+
 
 .form{
   @include span-columns(8);
@@ -62,7 +74,6 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .logInCreate{
-  @include fieldset;
   @include span-columns(6 of 6);
 }
 .email{
@@ -81,7 +92,6 @@ $tfpkg-header-background: $medium-gray;
 
 
 .address{
-  @include fieldset;
   @include span-columns(8 of 8);
 }
 .street{
@@ -104,7 +114,6 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .address {
-  @include fieldset;
 
   .street{
     width: 40%;
@@ -127,7 +136,7 @@ $tfpkg-header-background: $medium-gray;
 }
 
 .participants{
-  @include fieldset;
+
 }
 
 .mobile-search input{

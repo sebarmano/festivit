@@ -13,7 +13,7 @@ class ImporterGuest < ActiveImporter::Base
     @participant = Participant.where(
         lname: @fullname.first,
         fname: @fullname.last
-    ).create
+    ).find_or_initialize
   end
 
   column 'email', :email
