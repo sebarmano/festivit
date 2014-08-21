@@ -53,6 +53,11 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
 
+  def demoday
+    @participants = Participant.demoday.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
   def import_guests
     if request.post?
       uploaded_io = params[:file]
