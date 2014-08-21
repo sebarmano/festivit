@@ -34,7 +34,7 @@ class Participant < ActiveRecord::Base
   # validates :lname, :fname, presence: true
   # validates :lname, :uniqueness => {scope: [:fname], case_sensitive: false}
 
-  validates :lname, :fname, :phone, presence: true
+  validates :lname, :fname, presence: true
 
   def name
     "#{lname}, #{fname}"
@@ -65,4 +65,5 @@ class Participant < ActiveRecord::Base
   scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
   scope :guests, ->{includes(:role_types).where("role_types.name = 'guest'").references(:role_type)}
   scope :performers, ->{includes(:role_types).where("role_types.name = 'performer'").references(:role_type)}
+  scope :demoday, ->{includes(:role_types).where("role_types.name = 'demoday'").references(:role_type)}
 end

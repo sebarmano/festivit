@@ -258,7 +258,7 @@ $tfpkg-header-background: $medium-gray;
      }
 
     &.tsat {
-        background-color: $tsun-header-background;
+        background-color: $tsat-header-background;
      }
 
     &.tsun {
@@ -334,7 +334,7 @@ $tfpkg-header-background: $medium-gray;
     }
   }
 
-  &:hover {
+  :hover {
     background-color: $card-hover-background;
 
     .card-image img {
@@ -378,6 +378,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   display: block;
   clear: both;
   @include button($blue);
+}
+
+button.demoday {
+  @include button(white);
 }
 
 .back-button {

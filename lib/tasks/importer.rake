@@ -27,6 +27,4 @@
 #                                    :password => 'mypass1234')
 #     importer.import
 #   end
-#
-#
 # end

@@ -17,12 +17,15 @@ Rails.application.routes.draw do
       get :guests
       get :customers
       get :performers
+      get :demoday
       get :import
       post :import
       get :import_guests
       post :import_guests
       get :import_demoday
       post :import_demoday
+      get :import_demoday_google
+      post :import_demoday_google
     }
   end
 
@@ -47,6 +50,9 @@ Rails.application.routes.draw do
 
   get 'participants/import_demoday', to: "participants#import_demoday", :as => :import_demoday
   post 'participants/import_demoday', to: "participants#import_demoday"
+
+  get 'participants/import_demoday_google', to: "participants#import_demoday_google", :as => :import_demoday_google
+  post 'participants/import_demoday_google', to: "participants#import_demoday_google"
 
   get 'role_types/import', to: "role_types#import", :as => :import_role_types
   post 'role_types/import', to: "role_types#import"
