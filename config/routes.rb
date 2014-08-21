@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :guests
       get :customers
       get :performers
+      get :demoday
       get :import
       post :import
       get :import_guests
