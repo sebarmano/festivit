@@ -384,9 +384,12 @@ button.demoday {
   @include button(white);
 }
 
+button.exporter {
+ @include button($green);
+}
+
 .back-button {
   @include button(white);
-  color: white;
 }
 
 .order {
