@@ -82,7 +82,7 @@ class ParticipantsController < ApplicationController
   end
 
   def import_demoday_google
-    demoday
+    demoday_importer
     redirect_to import_demoday_participants_path
   end
 
