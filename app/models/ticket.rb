@@ -23,7 +23,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :participant
 
   validates_uniqueness_of :ticket_type_id, :scope => [:online_order_id]
-  validates :participant_id, presence: true
+  validates :participant, presence: true
 
 
   def remaining

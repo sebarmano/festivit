@@ -1,4 +1,5 @@
 class ParticipantsController < ApplicationController
+  include ImportHelper
   def index
     @participants = Participant.includes(:tickets).search(params[:search]).order("lower(lname)","lower(fname)")
     respond_to do |format|
@@ -73,6 +74,11 @@ class ParticipantsController < ApplicationController
     else
       @participants = Participant.all
     end
+  end
+
+  def import_demoday_google
+    demoday
+    redirect_to import_demoday_participants_path
   end
 
   private

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       post :import_guests
       get :import_demoday
       post :import_demoday
+      get :import_demoday_google
+      post :import_demoday_google
     }
   end
 
