@@ -380,6 +380,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   @include button($blue);
 }
 
+button.demoday {
+  @include button(white);
+}
+
 .back-button {
   @include button(white);
   color: white;
