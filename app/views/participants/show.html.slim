@@ -26,12 +26,10 @@ section
               .card-copy
                 i.fa.fa-minus-circle.button-subtract
                 = fields_for "tickets[]", ticket do |f|
-                   = f.number_field :picked_up, max: ticket.remaining, min: 0,
-                     value: ticket.remaining, class: "tickets-pu"
+                   = f.hidden_field :picked_up, value:ticket.picked_up + ticket.remaining, class: "total-pu"
+                .tickets-pu
+                  = ticket.remaining
                 i.fa.fa-plus-circle.button-add
-              /.ribbon-wrapper
-                  .ribbon
-                    | #{ticket.ticket_type.id}
               .card-stats
                 ul
                   li

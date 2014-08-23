@@ -69,30 +69,37 @@ $(document).ready(function() {
     e.preventDefault();
 
     elm = $(this).parent().children(".tickets-pu");
-    var val = elm.val();
+    var val = elm.html();
 
     elm2 = $(this).parent().parent().children(".card-stats").find("span")
     var rem = elm2.html();
+
+    elm3 = $(this).parent().children(".total-pu");
+    var tpu = elm3.val();
     
-    console.log(rem);
-    console.log(val);
     if(val > 0) {
-      elm.val(Number(val)-1);
+      elm.html(Number(val)-1);
       elm2.html(Number(rem)+1);
+      elm3.val(Number(tpu)-1);
     }
   });
 
   $(".button-add").click(function(e) {
     e.preventDefault();
     elm = $(this).parent().children(".tickets-pu");
-    var val = elm.val();
+    var val = elm.html();
 
     elm2 = $(this).parent().parent().children(".card-stats").find("span")
     var rem = elm2.html();
 
+    elm3 = $(this).parent().children(".total-pu");
+    var tpu = elm3.val();
+    console.log("tpu value: %s", tpu);
+
     if (rem > 0) {
-      elm.val(Number(val)+1);
+      elm.html(Number(val)+1);
       elm2.html(Number(rem)-1);
+      elm3.val(Number(tpu)+1);
     }
   });
 });
