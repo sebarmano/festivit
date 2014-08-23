@@ -1,6 +1,6 @@
 class WillCallPdf < Prawn::Document
-  TIX = ["4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "TENT", "VHC",  "FPKNG", "Anyone"]
-  COLORS = ["f09e85", "f0eb6b", "f1868c", "75b8b0", "d183a9", "75b8b0", "9d8ca7", "f1bb6a", "8788a6", "477dca", "999999", "dddddd" ]
+  TIX = ["EVENT", "CMPG", "4day", "Youth", "PorS", "Thu", "Fri", "Sat", "Sun", "PRESS", "TENT", "VHC",  "FPKNG", "Anyone"]
+  COLORS = ["f09e85", "f0eb6b", "f09e85", "f0eb6b", "f1868c", "75b8b0", "d183a9", "75b8b0", "9d8ca7", "f1bb6a", "8788a6", "477dca", "999999", "dddddd" ]
   def initialize(participants)
     super()
     @participants = participants
@@ -14,12 +14,12 @@ class WillCallPdf < Prawn::Document
 
   def participants_table
     move_down 20
-    table participant_rows, :cell_style => { size: 9 } do
+    table participant_rows, :cell_style => { size: 8 } do
       row(0).font_style = :bold
       self.header = true
       columns(1..-1).align = :center
       self.row_colors = ["dddddd", "ffffff"]
-      12.times do |i| #TODO change this for the count of columns 
+      14.times do |i| #TODO change this for the count of columns 
         columns(i+1).first.background_color = COLORS[i]
       end
     end
