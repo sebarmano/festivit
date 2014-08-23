@@ -21,4 +21,14 @@
 *.swp
 *.swo
 
+# added .DS_Store
+.DS_Store
+
 /coverage/
+*.DS_Store
+tags
+
+
+# ignore dragonfly uploads
+public/system/dragonfly/development
+

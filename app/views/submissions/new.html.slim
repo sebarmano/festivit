@@ -1,6 +1,13 @@
-div class="container"
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
 
-  div id="newBand"
-    = render 'form'
+    div id="newBand"
+      = render 'form'
 
-  = link_to 'Back', submissions_path
+
+    = link_to 'Back', submissions_path

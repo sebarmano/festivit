@@ -1,0 +1,12 @@
+.bgheader
+section
+  article
+    - if current_user.admin?
+    = simple_form_for [@participant, @comment] do |f|
+      = f.input "body", label: "Add a Comment:"
+      = f.submit
+    - @participant.comments.each do |comment|
+      p
+        = comment.author
+        br
+        = comment.body

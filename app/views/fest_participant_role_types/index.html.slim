@@ -1,0 +1,33 @@
+.bgheader_particpants
+
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+    table
+      thead
+        tr
+          th Role Type
+          th Fest
+          th participant_id
+          th Lname
+          th Fname
+          th Tuple date
+          th colspan="3"
+        tbody
+      - @fest_participant_role_types.each do |fprt|
+        tr
+          td
+            = fprt.role_type.name if fprt.role_type
+          td
+            = fprt.fest.name if fprt.fest
+          td
+            = fprt.participant.id if fprt.participant
+          td
+            = fprt.participant.lname if fprt.participant
+          td
+            = fprt.participant.fname if fprt.participant
+          td
+            = fprt.created_at

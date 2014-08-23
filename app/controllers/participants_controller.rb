@@ -1,23 +1,30 @@
 class ParticipantsController < ApplicationController
+  include ImportHelper
   def index
-    @participants = Participant.includes(:tickets).search(params[:search]).order(:lname, :fname)
+    @participants = Participant.includes(:tickets).search(params[:search]).order("lower(lname)","lower(fname)")
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = WillCallPdf.new(@participants)
+        send_data pdf.render, filename: "Will Call List",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
 
   def new
     @participant = Participant.new
-    @participant.build_applicant
-    @participant.role_types.new
-    @participant.submissions.new
+    @applicant = @participant.build_applicant
+    @role_type = @participant.role_types.new
     # @submission = @participant.submissions.last
   end
 
   def create
     @participant = Participant.new(participant_params)
-    @participant.email = @participant.applicant.email
     if @participant.save
       sign_in @participant.applicant
-
-      redirect_to new_participant_submission_path(@participant), notice: "You've been successfully signed up"
+      redirect_to new_participant_submission_path(@participant), notice: "Your contact information has been stored."
     else
       render :new, flash: @participant.errors
     end
@@ -25,7 +32,11 @@ class ParticipantsController < ApplicationController
 
   def show
     @participant = Participant.find(params[:id])
-    @submission = @participant.submissions.last
+  end
+
+  def profile
+    @participant = Participant.find(params[:participant_id])
+    @comment = @participant.comments.new
   end
 
   def customers
@@ -33,17 +44,46 @@ class ParticipantsController < ApplicationController
     render template: 'participants/index'
   end
 
-  # def import
-  #   WootixImporter.import(params[:file])
-  #   #Participant.import(params[:file])
-  #   redirect_to participants_path, notice: "Participants imported."
-  # end
+  def guests
+    @participants = Participant.guests.order(:lname, :fname)
+    render template: 'participants/index'
+  end
 
-  def import
-    uploaded_io = params[:file]
-    importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
-    importer.import
-    redirect_to participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+  def performers
+    @participants = Participant.performers.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
+  def demoday
+    @participants = Participant.demoday.order(:lname, :fname)
+    render template: 'participants/index'
+  end
+
+  def import_guests
+    if request.post?
+      uploaded_io = params[:file]
+      importer = ImporterGuest.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer.import
+      redirect_to import_guests_participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+    else
+      @participants = Participant.all
+    end
+  end
+
+  def import_demoday
+    if request.post?
+      uploaded_io = params[:file]
+      importer = ImporterDemoday.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer.import
+      redirect_to import_demoday_participants_path, notice: "#{importer.row_success_count} Participants imported, with #{importer.row_error_count} errors."
+    else
+      @participants = Participant.all
+    end
+  end
+
+  def import_demoday_google
+    demoday_importer
+    redirect_to import_demoday_participants_path
   end
 
   private

@@ -2,31 +2,65 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@mixin fieldset{
+.bgheader_submissions_show {
+  width: 100%;
+  background-image: asset-url('concert.jpg');
+  background-size: cover;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+
+.bgheader_submissions {
+  width: 100%;
+  background-image: asset-url('dancers.jpg');
+  background-size: cover;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  // IE 6+, FF 7+, Op 11+, Saf 1.3+, Chr 1+
+    -o-text-overflow: ellipsis;  // for Opera 9 & 10
+  }
+
+.fieldset{
   background: #f7f7f7;
   border: 1px solid #ddd;
   margin: 0 0 .75em;
   padding: 1.5em;
   }
 
+a{
+  color: #477dca;
+}
+
 .topSpacing{
   padding-top: 100px;
 }
 
-h1{
+.container{
+  @include outer-container;
+}
+
+.title{
+//  text-align: center;
   padding-bottom: 15px;
   }
-
-.container{
-  width: 965px;
-}
 
 .formView{
   float: left;
 }
 
 #new_submission{
-max-width: 100%;
+  max-width: 600px;
+
 }
 
 #newBand{
@@ -38,7 +72,6 @@ max-width: 100%;
 }
 
 .showBand{
-  @include fieldset;
   @include span-columns(8);
   @include shift (2);
 }
@@ -79,188 +112,408 @@ max-width: 100%;
 
 .reccomendation{
   @include span-columns(8);
-  @include fieldset;
   max-width: 45%;
 }
 
 .adminTools{
   clear:both;
-  // @include span-columns(6);
-  // @include shift(6);
-  // margin: auto;
-  // text-align:center;
-  // width: 250px;
+/*  @include span-columns(6);
+  @include shift(6);
+  margin: auto;
+  text-align:center;
+  width: 250px;*/
 }
 
-td{
-  .photo{
-    height: 112px;
-  }
-  .decision{
-    width:107px;
-  }
-  .modalContainer{
-    height: 500px;
-  }
-}
-.dashboardPhoto{
-  padding-top:10px;
-  img{
-    height: 43px;
-  }
-}
-//Modal Refill
-
-.modal {
-  $modal-padding: 3em;
-  $modal-background: $base-background-color;
-  $modal-close-color: gray;
-  $modal-image-height: 648px;
-  //$modal-image-width: $modal-image-height;
-
-  label {
-    cursor: pointer;
-    margin-bottom: 0;
-  }
-
-  label img {
-    $img-width: 300px;
-    border-radius: $img-width/2;
-    display: block;
-    max-width: $img-width;
-  }
-
-  input[type="checkbox"] {
-    display: none;
-  }
-
-  .btn {
-    @include button(simple, #477DCF);
-    padding: 20px 9px;
-    font-size: 1em;
-    height: 64px;
-    width: 64px;
-    //margin-bottom: $base-line-height;
-  }
-
-  .modal-open {
-    overflow: hidden;
-  }
-
-  .modal-window { // overlay
-    @include transition(opacity .25s ease);
-    @include position(fixed, 0px 0px 0px 0px);
-    background: rgba(0,0,0, .85);
-    opacity: 0;
-    text-align: left;
-    visibility: hidden;
-    z-index: 99999999999;
-
-    .modal-bg {
-      @include position(absolute, 0px 0px 0px 0px);
-      cursor: pointer;
-    }
-  }
-
-  .modal-close {
-    @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
-    @include size(1.5em);
-    cursor: pointer;
-    background: $modal-background;
-
-    &:after,
-    &:before {
-      @include position(absolute, 3px 3px 0 50%);
-      @include transform(rotate(45deg));
-      @include size(.15em 1.5em);
-      background: $modal-close-color;
-      content: '';
+.whiteButton{
       display: block;
-      margin: -3px 0 0 -1px;
-    }
-
-    &:hover:after,
-    &:hover:before {
-      background: darken($modal-close-color, 10);
-    }
-
-    &:before {
-      @include transform(rotate(-45deg));
-    }
-  }
-
-  .modal-inner {
-    @include transition(opacity .25s ease);
-    border-radius: $base-border-radius;
-    background: $modal-background;
-    margin: auto;
-    max-height: 95%;
-    position: relative;
-    overflow: auto;
-    width: 95%;
-    padding: $modal-padding /2;
-    margin-top: .6em;
-
-    @include media($medium-screen) {
-      padding: $modal-padding;
-      width: 60%;
-      max-height: 60%;
-      margin-top: 10em;
-    }
-
-    @include media($large-screen) {
-      width: 50%;
-      margin-top: 10em;
-    }
-
-    h1 {
-      color: $base-font-color;
-      margin-bottom: .6em;
-      text-align: left;
-      text-transform: capitalize;
-    }
-
-    p {
-      font-size: $base-font-size;
-      max-width: 100% !important;
-      padding: 0;
-      text-align: left;
-
-      &.intro {
-        color: $blue;
-        line-height: 1.6em;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+    &:hover{
+        background-color: $blueGreen;
+        color: #FFFFFF;
+        }
       }
 
-      &.body {
-        color: $base-font-color;
-        line-height: 1.45em;
+.dashboardSearchbar{
+  float: left;
+  width: 40%
+}
 
-        @include media($medium-screen) {
-          @include columns(2 8em);
+table.dashboard {
+  table-layout: auto;
+
+
+  th{
+    text-align: start;
+  }
+
+  td{
+    margin: 0 10px;
+    padding-top: 1em;
+    display: block;
+    text-align: center;
+
+
+  .accept{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+
+        &:hover{
+          background-color: $green;
+          color: #FFFFFF;
+        }
+      }
+
+  .accepted{
+      display: block;
+      margin: 10 auto;
+      background-color: $green;
+      border: 1px solid #000000;
+      color: #FFFFFF;
+      font-size: .75em;
+      padding: 5px;
+      pointer-events: none;
+      width: 80%;
+    }
+
+  .acceptDisable{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      pointer-events: none;
+      width: 80%;
+      }
+
+  .decline{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      width: 80%;
+        &:hover{
+          background-color: $red;
+          color: #FFFFFF;
+      }
+    }
+
+  .declineDisable{
+      display: block;
+      margin: 10 auto;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      color: #000000;
+      font-size: .75em;
+      padding: 5px;
+      pointer-events: none;
+      width: 80%;
+    }
+
+  .declined{
+      display: block;
+      margin: 10 auto;
+      background-color: $red;
+      border: 1px solid #000000;
+      color: #FFFFFF;
+      font-size: .75em;
+      padding: 5px;
+      pointer-events: none;
+      width: 80%;
+    }
+
+    .participant{
+      @include span-columns(2);
+    }
+
+    .decision{
+      @include span-columns(1);
+    }
+    .name{
+      margin: 0 10px;
+      width: 90%
+      }
+    .picTable{
+      li{
+
+      }
+      @include span-columns(2.5);
+      padding: 0;
+    }
+    .videoTable{
+      @include span-columns(2.5);
+    }
+
+    .next{
+      float: right;
+      margin-top: 63px;
+      margin-right: 46%;
+      padding: 100px;
+      z-index: 999999999999;
+      img{
+        cursor: pointer;
+        height: 50px;
+        margin-right: auto;
+        margin-left: auto;
+        position: absolute;
+        z-index: 999999999999;
+      }
+    }
+
+    .tracks {
+      @include span-columns(2);
+      display: block;
+      margin: 2px 20px;
+    }
+
+    .info{
+      @include span-columns(1.5);
+      padding-bottom: 1em;
+      .social{
+        margin-left: 10px;
+        text-align: center;
+        font-size: $base-font-size;
+      }
+    }
+
+    .tags{
+      @include span-columns(1);
+    }
+
+    .social{
+      padding-right: 10px;
+    }
+
+    .clearFloat{
+      clear:both;
+    }
+  }
+
+  .paid{
+    height: 10px;
+    button {
+      background-color: #FFFFFF;
+      font-size:.75em;
+      color: #000000;
+      height: 20px;
+      margin: 12px 10px 0;
+      padding: 5px;
+      width: 20%;
+    }
+  }
+
+  .carouselVideo{
+    margin-top: 20%;
+    img{
+      margin-top: 0;
+    }
+  }
+  .carouselPhoto{
+    margin-top: 0;
+    img{
+      margin-top: 0;
+    }
+  }
+
+  .modalContainer{
+  /*  height: 90%;
+  */  padding-top:10%;
+  /*  width: 80%;
+  */  img{
+      height: 90%;
+      max-width: inherit;
+      margin-right: 50%;
+    }
+  }
+  //Modal Refill
+
+  .modal {
+    /*margin-left: 25px;*/
+    $modal-padding: 3em;
+    $modal-background: $base-background-color;
+    $modal-close-color: #FFFFFF;
+    /*//$modal-image-height: 648px;
+    //$modal-image-width: $modal-image-height: 600px;*/
+
+    label {
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .thumbPic {
+      margin: 0 auto;
+      li{
+        img{
+          min-width: 100%;
         }
       }
     }
 
-    a.cta {
-      color: white;
-      display: inline-block;
-      margin-right: .5em;
-      margin-top: 1em;
+    .thumbVideo {
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
 
-      &:last-child {
-        padding: 0 2em;
+    .modal {
+      $modal-padding: 3em;
+      $modal-background: $base-background-color;
+      $modal-close-color: gray;
+      $modal-image-height: auto;
+      //$modal-image-width: $modal-image-height;
+    }
+
+    .modal-open {
+      overflow: hidden;
+    }
+
+    .modal-window { // overlay
+      @include transition(opacity .25s ease);
+      @include position(fixed, 0px 0px 0px 0px);
+      background: rgba(0,0,0, .85);
+      opacity: 0;
+      text-align: left;
+      visibility: hidden;
+      z-index: 99999999999;
+
+      .modal-bg {
+        @include position(absolute, 0px 0px 0px 0px);
+        cursor: pointer;
       }
     }
-  }
 
-  .modal-state:checked + .modal-window {
-    opacity: 1;
-    visibility: visible;
-  }
+    .modal-close {
+      @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
+      @include size(1.5em);
+      cursor: pointer;
+      /*background: $modal-background;*/
+      color: white;
+      font-size: 2em;
+      padding-right: 30px;
 
-  .modal-state:checked + .modal-window .modal-inner {
-    top: 0;
+      &:hover:after,
+      &:hover:before {
+        background: darken($modal-close-color, 10);
+      }
+
+      &:before {
+        @include transform(rotate(-45deg));
+      }
+    }
+
+      .modal-Video-close {
+      @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
+      @include size(1.5em);
+      cursor: pointer;
+      /*background: $modal-background;*/
+      color: white;
+      font-size: 2em;
+      padding-right: 30px;
+
+      &:hover:after,
+      &:hover:before {
+        background: darken($modal-close-color, 10);
+      }
+
+      &:before {
+        @include transform(rotate(-45deg));
+      }
+    }
+
+    .modal-inner {
+      @include transition(opacity .25s ease);
+      border-radius: $base-border-radius;
+      /*background: $modal-background;*/
+      margin: auto;
+      height: 80%;
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      /*padding: $modal-padding /2;*/
+      margin-top: .6em;
+
+      @include media($medium-screen) {
+        padding: 7em 3em 3em 3em;
+        width: 100%;
+        max-height: 100%;
+        margin-top: 10em;
+      }
+
+
+
+      h1 {
+        color: $base-font-color;
+        margin-bottom: .6em;
+        text-align: left;
+        text-transform: capitalize;
+      }
+
+      p {
+        font-size: $base-font-size;
+        max-width: 100% !important;
+        padding: 0;
+        text-align: left;
+
+        &.intro {
+          color: $blue;
+          line-height: 1.6em;
+        }
+
+        &.body {
+          color: $base-font-color;
+          line-height: 1.45em;
+
+  /*         @include media(\$medium-screen) {
+    @include columns(2 8em);
+  } */
+        }
+      }
+
+      a.cta {
+        color: white;
+        display: inline-block;
+        margin-right: .5em;
+        margin-top: 1em;
+
+        &:last-child {
+          padding: 0 2em;
+        }
+      }
+    }
+
+    .modal-state:checked + .modal-window {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-state:checked + .modal-window .modal-inner {
+      top: 0;
+    }
   }
 }
+  #contactsubmissions  {
+    @include outer-container;
+    @include span-columns(12);
+    padding: 2px 0;
 
-// Based on code by Kasper Mikiewicz
+  }

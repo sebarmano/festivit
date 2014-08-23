@@ -28,17 +28,17 @@ class TicketsController < ApplicationController
   def import
     if request.post?
       uploaded_io = params[:file]
-      importer = WootixImporter.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
+      importer = ImporterWootix.new(uploaded_io.tempfile.path, :extension => File.extname(uploaded_io.original_filename))
       importer.import
       redirect_to import_tickets_path, notice: "#{importer.row_success_count} tickets imported, with #{importer.row_error_count} errors."
     else
-      @tickets = Ticket.all
+      @tickets = Ticket.search(params[:search]).order(:online_order_id)
     end
   end
 
   def pick_up
     Ticket.update(params[:tickets].keys, params[:tickets].values)
-    redirect_to participants_path
+    redirect_to participants_path, notice: "Picked up tickets saved"
   end
 
   private

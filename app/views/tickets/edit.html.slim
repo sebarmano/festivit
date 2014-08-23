@@ -1,6 +1,11 @@
-h1 editing ticket
-  = render 'form'
-
-
-  = link_to 'show', @ticket
-  = link_to 'Back', ticket_path
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+    h3 editing ticket
+      = render 'form'
+      = link_to 'show', @ticket
+      = link_to 'Back', ticket_path

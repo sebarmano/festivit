@@ -1,0 +1,39 @@
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h3 Import Ticket Types
+    = form_tag import_ticket_types_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+    p
+
+    br
+      h1 Current Ticket Types
+      table
+        thead
+          tr
+            th TicketType ID
+            th name
+            th Sale status
+            th Price
+            th SKU
+            th Fest ID
+            th ProductPairsID
+            th Tuple date
+            th colspan="3"
+        tbody
+          - @ticket_types.each do |ticket_type|
+            tr
+              td= ticket_type.id
+              td= ticket_type.name
+              td= ticket_type.sale_status
+              td= ticket_type.price
+              td= ticket_type.sku
+              td= ticket_type.fest_id
+              td= ticket_type.productpairsid
+              td= ticket_type.created_at

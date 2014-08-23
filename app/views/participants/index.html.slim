@@ -1,18 +1,40 @@
+.bgheader_particpants
+
 section
   article
-    = form_tag participants_path, method: :get
-    = text_field_tag :search, params[:search]
-    = submit_tag "Search"
+    .notice
+      = notice
+    .alert
+      = alert
 
-    = link_to "Customers", customers_participants_path
-    = link_to "  Volunteers", customers_participants_path
+    = form_tag participants_path, method: :get
+    .mobile-search
+
+      = text_field_tag :search, params[:search], value: ""
+
+      = submit_tag "Search"
+
+    .filters
+      button
+        = link_to "Customers", customers_participants_path
+      button
+        = link_to "Guests", guests_participants_path
+      button
+        = link_to "Performers", performers_participants_path
+      button.demoday
+        = link_to "Demo Day", demoday_participants_path
+      button
+        = link_to "All", participants_path
 
     ul id="participants_list"
+
       - @participants.each do |participant|
-        li
-          h3
-            = link_to participant.name, participant
-          / h4 Tickets
-            ul
-              = participant.tickets_count.each do |ticket_type, count|
-                li = "#{ticket_type.name}, #{count}"
+        - if participant.total_tickets
+          .contact
+            li
+              h3
+                = link_to participant.name, participant
+              / h4 Tickets
+                ul
+                  = participant.tickets_count.each do |ticket_type, count|
+                    li = "#{ticket_type.name}, #{count}"

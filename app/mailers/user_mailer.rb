@@ -1,7 +1,7 @@
 class UserMailer < Devise::Mailer
   include Devise::Controllers::UrlHelpers
 
-  default :from => "custom@mailer.com"
+  default :from => "festiviteam@gmail.com"
 
   def registration_email(user)
     @user = user

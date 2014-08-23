@@ -1,87 +1,123 @@
-section
-  article
-    - if @role == "Performer"
-      h1 Performer Application
-    - if @role == "Volunteer"
-      h1 Volunteer Application
-    - if @role == "Healing Artist"
-      h1 Healing Artist Application
-    - if @role == "Craft Vendor"
-      h1 Craft Vendor Application
-    - if @role == "Food Vendor"
-      h1 Food Vendor Application
-    h6 Step 2 (of 2): Application Details
-    br
-    = simple_form_for [@participant, @submission] do |f|
-      - unless @role == "Volunteer"
-        = f.input "group_name"
+h1 = @role + " Application"
+h6 Step 2 (of 2): Application Details
+br
+= simple_form_for [@participant, @submission] do |f|
+  - unless @role == "Volunteer"
+    = f.input "group_name"
 
+  - if @role == "Performer"
+    = f.input "bio", :label => "Performer Bio:"
 
-      - if @role == "Performer"
-        = f.input "bio", :label => "Performer Bio:"
+  - if @role == "Healing Artist"
 
-      -unless @role == "Volunteer"
-        = f.input "website"
-
-      - if @role == "Healing Artist"
+    .fieldset
        = f.input "practice_type", :label => "Modality:"
        = f.input "practice_lic_no", :label => "License number:"
        = f.input "practice_exp_date", :label => "License expiration date:"
        = f.input "practice_years", :label => "Length of time practicing:"
 
+  -unless @role == "Volunteer"
 
-      - if @role == "Performer" || @role =="Craft Vendor" || @role == "Food Vendor"
-        h3 Attachments
-        #attachments
-          = f.simple_fields_for :attachments do |attachment|
-            = render 'attachment_fields', :f => attachment
-          .links
-            = link_to_add_association 'add more attachments',f , :attachments
+    .fieldset
+      = f.input "website"
+      = f.input "facebook_link"
+      = f.input "twitter_link"
 
-      - if @role == "Volunteer"
-       = f.input "underage", :label => "Under 18?"
+  - if @role == "Healing Artist"
+   = f.input "practice_type", :label => "Practice type:"
+   = f.input "practice_lic_no", :label => "License number:"
+   = f.input "practice_exp_date", :label => "License expiration date:"
+   = f.input "practice_years", :label => "Length of time practicing:"
 
-       = f.input "ticket_req", :label => "What type of tickets do you want to earn for the festival?", collection: ["4-Day", "3-Day"]
+  = f.input "tag_list", :label => "Tags"
 
-       = f.input "days_avail", :label => "Days available to volunteer:", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
-                                :input_html => {:multiple => true}
+  - if @role == "Performer"
+    br
+    h3.tooltip-input-attachment Share your stuff!
+    i.fa.fa-question.tooltip-item
+      .tooltip
+        p Songs, Videos and Photos are limited to 3 uploads.  Videos supported are Vimeo and Youtube.
+    - @types.each do |type|
+      h4 = type.capitalize + "(s)"
+      .attachments class = "#{type}s"
+        = f.simple_fields_for :attachments do |attachment|
+          = render 'attachment_fields', :f => attachment, locals: {:type => type }
+        .links
+          = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => type}}, class: "add_" + type
 
-       = f.input "deposit_type", :label => "Deposit payment type:", collection: ["credit card", "check", "money order"]
+  - if @role == "Craft Vendor" || @role == "Food Vendor"
+    h4 = @types[2].capitalize
+    .attachments class = "#{@types[2]}s"
+      = f.simple_fields_for :attachments do |attachment|
+        = render 'attachment_fields', :f => attachment, locals: {:type => @types[2] }
+      .links
+        = link_to_add_association 'add more attachments',f , :attachments, :render_options => {locals: {:type => @types[2]}}, class: "add_#{@types[2]}"
 
-       = f.input "returning", :label => "First time volunteer?"
+  - if @role == "Volunteer"
 
-       = f.input "crew_hist", :label => "What were your crew(s)? (For Hospitality Kitchen, also list position)."
+   .fieldset
 
-       = f.input "crew_pref", :label => ("Top 3 Crew Preferences. (Crew descriptions and requirements are found on the #{link_to "Shakori Hills website", 'http://shakorihillsgrassroots.org/be-a-part/be-a-volunteer/volunteer-crew-details'}).").html_safe
+     = f.input "underage", :label => "Under 18?"
 
-       = f.input "comments", :label => "Special skills related to crew interest, or list other comments:"
-        /(if you have a friend or family that you would like to volunteer with please indicate that here and have them do the same on their application. We will try our best to work with you!)
+     = f.input "ticket_req", :label => "What type of tickets do you want to earn for the festival?", collection: ["4-Day", "3-Day"]
 
-       = f.input "shift_pref", :label => "Time preference(s):", collection: ["morning", "afternoon", "evening"]
-        /(We will try to work with you on this but there is no way that we can place everyone in their top choice and we have shifts that need to be filled at all hours.)
+     = f.input "days_avail", :label => "Days available (multi-select):", collection: ["Thursday", "Friday", "Saturday", "Sunday"],
+                              :input_html => {:multiple => true}
 
-       = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
+     = f.input "deposit_type", :label => "Deposit payment type:", collection: ["credit card", "check", "money order"]
 
 
-      - if @role == "Craft Vendor"
+         = f.input "shift_pref", :label => "Time preference(s):", :label_html => { class: "tooltip-input" }
+          i.fa.fa-question.tooltip-item
+            .tooltip
+              p We will try to work with you, we can't place everyone in their top choice and we have shifts that need to be filled at all hours.
+          = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
+
+
+     = f.input "crew_hist", :label => "What were your crew(s)? (For Hospitality Kitchen, also list position)."
+
+     = f.input "crew_pref", :label => ("Top 3 Crew Preferences. (Crew descriptions and requirements are found on the #{link_to "Shakori Hills website", 'http://shakorihillsgrassroots.org/be-a-part/be-a-volunteer/volunteer-crew-details'}).").html_safe
+
+     = f.input "comments", :label => "Special skills related to crew interest, or list other comments:", :label_html => { class: "tooltip-input" }
+      i.fa.fa-question.tooltip-item
+        .tooltip
+          p If you have a friend or family that you would like to volunteer with please indicate that here and have them do the same on their application. We will try our best to work with you.
+      = f.input_field "comments"
+
+
+     = f.input "shift_pref", :label => "Time preference(s):", :label_html => { class: "tooltip-input" }
+      i.fa.fa-question.tooltip-item
+        .tooltip
+          p We will try to work with you, we can't place everyone in their top choice and we have shifts that need to be filled at all hours.
+        = f.input_field "shift_pref", collection: ["morning", "afternoon", "evening"]
+
+     = f.input "why_volunteer", :label => "Why do you want to volunteer at the Shakori Hills Grassroots Festival of Music & Dance?"
+
+
+  - if @role == "Craft Vendor"
+
+    .fieldset
        = f.input "craft_desc", :label => "Description of your craft:"
 
-       = f.input "photo_desc", :label => "Photo descriptions (note materials, technique, description and price range):"
+       = f.input "photo_desc", :label => "Photo descriptions:", :label_html => { class: "tooltip-input" }
+         i.fa.fa-question.tooltip-item
+           .tooltip
+             p Note materials, technique, description and price range.
+         = f.input_field "photo_desc"
 
        = f.input "booth_desc", :label => "Booth descriptions and special requirements:"
 
+       = f.input "electrical", :label => "Electrical needs and amperage required:"
 
-      - if @role == "Food Vendor"
+  - if @role == "Non-Profit"
 
+    = f.input "mission_statement", :label => "Mission:"
+    = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
 
-      - if @role == "Non-Profit"
-       = f.input "mission_statement", :label => "Mission:"
-       = f.input "handouts", :label => "Distribution materials (eg: buttons, stickers, water):"
+  - if @role == "Food Vendor"
+  br
+  = f.input "camping", :label => "Camping at the festival?"
+  br
+  = f.input "complete", :label => "Optional: save and complete later."
 
-      -unless @role == "Volunteer"
-        = f.input "facebook_link"
-        = f.input "twitter_link"
-      = f.input "camping", :label => "Camping at the festival?"
-      = f.input "complete", :label => "Optional: save and complete later."
-
-      =f.submit
+  =f.submit

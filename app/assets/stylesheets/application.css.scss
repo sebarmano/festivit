@@ -9,22 +9,48 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
  *= require_self
  */
 
 @import "bourbon";
 @import "base/base";
 @import "neat";
+@import "font-awesome";
 @import "submission";
 @import "participants";
 @import "login";
 @import "welcome";
+@import "about";
+@import "team";
+@import "importers";
 
-.container {
-  @include outer-container;
-
+.error{
+  background-color: yellow;
+  font-size: 1.2em;
+  font-weight: bold;
 }
+
+.bgheader {
+  width: 100%;
+  background-image: asset-url('blue_tint_x4.png');
+  background-size: cover;
+  background-position: 50% 55%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+
+  @include media($mobile) {
+    width: 100%;
+    background-image: asset-url('blue_tint_x4.png');
+    background-size: 250%;
+    background-position: 30% 45%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    height: 16em;
+  }
+}
+
+
 
 body {
   margin: 0 auto;
@@ -37,39 +63,69 @@ header.topbar {
   position: fixed;
   top:0;
   z-index: 100;
-  padding: .5em;
 
   @include background-image(linear-gradient( bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.0) 100%));
   div {
     @include outer-container;
     div.logo {
+        padding: 1em 1em 1em 0em;
         @include span-columns(2);
         @include media($mobile) {
+          padding: 1em 1em 1em 1em;
           @include span-columns(2);
           @include shift(0);
-
         }
+        /*@include media($medium-screen) {*/
+        /*@include span-columns(2);*/
+        /*@include shift(1);*/
+        /*}*/
         // @include shift(0);
         color: white;
       }
 
       ul.nav {
-        @include span-columns(4);
-        @include shift(6);
+        font-family: $sans-serif;
+        font-size: 1.2em;
+        text-align: right;
+        @include span-columns(5);
+        @include shift(5);
         @include omega;
         @include media($mobile) {
           @include span-columns(4);
           @include shift(0);
+          font-family: $sans-serif;
+          font-size: 1em;
+          text-align: left;
+          padding: 0em 1em 1em 1em;
         }
+
+        /*@include media($medium-screen) {*/
+         /*@include span-columns(6);*/
+         /*@include shift(0);*/
+         /*padding: 1em 0em 1em 1em;*/
+        /*}*/
+
         color: white;
         right: 0;
-        padding: .7em 0em;
+        padding: 1em 0em 1em 0em;
+
 
         li {
           display: inline-block;
-          padding: 0em .5em .7em 0em;
+          padding: 0em .7em;
           position: relative;
           right: 0;
+          vertical-align: middle;
+          &:last-child {
+            padding-right: 0;
+
+            }
+          @include media($mobile) {
+          &:first-child {
+            padding-left: 0;
+          }
+          }
+
           // float: right;
         }
         a {
@@ -84,8 +140,104 @@ header.topbar {
 
   section {
     @include outer-container;
-    margin-top: 8em;
+    margin-top: 2em;
     article {
       @include span-columns(12);
+      @include media($mobile) {
+        @include span-columns(4);
+        @include shift(0);
+        padding: 1em 1em 1em 1em;
+
+      }
     }
   }
+
+
+
+
+
+.tooltip-item {
+  $tooltip-background: lightgrey;
+  $tooltip-color: $base-font-color;
+  $tooltip-width: 16em;
+  $tooltip-arrow-width: 8px;
+  $tooltip-shadow: 0 2px 2px silver;
+  $tooltip-distance-from-item: 140%;
+  $tooltip-arrow-distance-from-box: -$tooltip-arrow-width * 3.4;
+
+  border: 1px solid $base-border-color;
+  padding: .5em 1em;
+  border-radius: $base-border-radius;
+  position: relative;
+  background-color: lightblue;
+//  margin-bottom: $base-line-height;
+
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tooltip {
+    @include position(absolute, 0 0 0 50%);
+    @include box-sizing(border-box);
+    @include transition (all 0.2s ease-in-out);
+    bottom: $tooltip-distance-from-item;
+    background-color: $tooltip-background;
+    border-radius: $base-border-radius;
+    color: $tooltip-color;
+    font-size: .9em;
+    // Make sure you use -webkit-backface-visibility: hidden; on the body element to prevent 1px nudging bugs.
+    line-height: 1.5em;
+    margin-left: -($tooltip-width/2);
+    opacity: 0;
+    padding: 1em;
+    box-shadow: $tooltip-shadow;
+    text-align: center;
+    visibility: hidden;
+    min-width: $tooltip-width;
+    z-index: 10;
+    font-family: $serif;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &:after {
+      @include position(absolute, 0 0 0 46%);
+      margin-left: -$tooltip-arrow-width;
+      border: $tooltip-arrow-width solid transparent;
+      color: $tooltip-background;
+      content: '▼';
+      text-shadow: $tooltip-shadow;
+      font-size: 1.4em;
+      pointer-events: none;
+      bottom: $tooltip-arrow-distance-from-box;
+    }
+  }
+}
+.tooltip-input {
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+
+.alert{
+  text-align: center;
+  line-height: 3em;
+  background-color: $alert-color;
+  margin-bottom: 1em;
+}
+
+.notice {
+  text-align: center;
+  line-height: 3em;
+  background-color: $alert-color;
+  margin-bottom: 1em;
+}
+
+.tooltip-input-attachment {
+  float: left;
+  margin-right: 5px;
+  margin-top: -1px;
+}

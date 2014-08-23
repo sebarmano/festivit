@@ -8,19 +8,54 @@ Rails.application.routes.draw do
   resources :applicants, controller: 'users', only: [:show], type: 'Applicant'
 
   resources :participants, only: [:new, :create, :edit, :show, :index] do
-    resources :submissions, except: :index
+    resources :submissions, except: :index do
+      post :comments, to: 'comments#create'
+    end
+    get '/profile', to: 'participants#profile'
+    post :comments, to: 'comments#create'
     collection {
-	  get :customers
+      get :guests
+      get :customers
+      get :performers
+      get :demoday
       get :import
       post :import
+      get :import_guests
+      post :import_guests
+      get :import_demoday
+      post :import_demoday
+      get :import_demoday_google
+      post :import_demoday_google
     }
   end
 
+  #TODO - ck all these routes are needed outside the collections
 
   get 'submissions', to: 'submissions#index'
   post 'approve/:id', to: 'submissions#approve'
+  post 'decline/:id', to: 'submissions#decline'
+
   get 'tickets/import', to: "tickets#import", :as => :import_tickets
   post 'tickets/import', to: "tickets#import"
+
+  get 'participants/import_guests', to: "participants#import_guests", :as => :import_guests
+  post 'participants/import_guests', to: "participants#import_guests"
+
+  get 'fests/import', to: "fests#import", :as => :import_fests
+  post 'fests/import', to: "fests#import"
+
+  get 'ticket_types/import', to: "ticket_types#import", :as => :import_ticket_types
+  post 'ticket_types/import', to: "ticket_types#import"
+
+
+  get 'participants/import_demoday', to: "participants#import_demoday", :as => :import_demoday
+  post 'participants/import_demoday', to: "participants#import_demoday"
+
+  get 'participants/import_demoday_google', to: "participants#import_demoday_google", :as => :import_demoday_google
+  post 'participants/import_demoday_google', to: "participants#import_demoday_google"
+
+  get 'role_types/import', to: "role_types#import", :as => :import_role_types
+  post 'role_types/import', to: "role_types#import"
 
   resources :tickets do
     collection do
@@ -28,4 +63,27 @@ Rails.application.routes.draw do
       post :import
     end
   end
+
+  resources :ticket_types do
+    collection do
+      post :import
+    end
+  end
+
+  resources :role_types do
+    collection do
+      post :import
+    end
+  end
+
+  resources :fests do
+    collection do
+      post :import
+    end
+  end
+
+  resources :fest_participant_role_types, only: [:index]
+
+  get '/about', to: 'welcome#about'
+  get '/contact', to: 'welcome#contact'
 end

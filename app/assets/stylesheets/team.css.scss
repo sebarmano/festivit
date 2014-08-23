@@ -1,0 +1,156 @@
+.bgheader_team {
+  width: 100%;
+  background-image: asset-url('field.jpg');
+  background-size: cover;
+  background-position: 20% 0%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 16em;
+}
+
+.hover-tile-outer {
+  $hover-tile-height: 16em;
+
+  background-position: bottom;
+  background-size: cover;
+  background: asset-url("mae.jpg");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-color: #BEB56E;
+  border: 0px solid $base-border-color;
+  height: $hover-tile-height;
+  margin-bottom: $base-line-height;
+  cursor: pointer;
+
+  // @include media($medium-screen) {
+  //   width: 40%;
+  // }
+
+  .hover-tile-container {
+    height: $hover-tile-height;
+    overflow: hidden;
+
+  }
+
+  .hover-tile-container:hover > .hover-tile {
+    @include transform(translate(0, -100%));
+  }
+
+  .hover-tile {
+    @include transition(all, .2s ease-in-out);
+    background:inherit;
+    color: white;
+    height:inherit;
+    padding:0em 0em;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  .hover-tile-visible {
+    color: transparentize(white, .1);
+    font-family: $sans-serif;
+    font-size: 1em;
+    font-weight: 200;
+    text-align: left;
+
+    bottom: 0;
+    p {
+      background: transparentize(black, .3);
+      position: relative;
+      bottom: 0;
+      margin-bottom: .5em;
+      width: 100%;
+      padding: 1em;
+    }
+  }
+
+  .hover-tile-hidden {
+    padding: 1.5em;
+    background: transparentize(black, .5);
+    h4 {
+      margin-bottom: .5em;
+    }
+    p {
+      color: transparentize(white, .3);
+    }
+  }
+}
+
+li.block {
+@include span-columns(3);
+@include omega(4n);
+
+      @include media($mobile) {
+
+        @include span-columns(4);
+        @include omega(1n);
+      }
+}
+
+li.block.talal {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("talal.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.david {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("david.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.justin {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("justin.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.jeremy {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("jeremy.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.scott {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("scott.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+li.block.sebastian {
+  .hover-tile-outer {
+    background-position: bottom;
+    background-size: cover;
+    background: asset-url("sebastian.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+}
+
+.fa-2x {
+  margin-right: .5em;
+}

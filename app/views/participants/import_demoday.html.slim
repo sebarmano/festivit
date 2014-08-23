@@ -1,0 +1,31 @@
+.bgheader
+section
+  .importerContainer
+  article.participantsImport
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h4 Import Participants via CSV
+    = form_tag import_demoday_participants_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+
+    h4 Import Participants from Google doc
+    = button_to 'Import', {action: 'import_demoday_google'}
+
+    table.table-borders
+      thead
+        tr
+          th Particpant id
+          th Lname
+          th Fname
+          th Tuple date
+      tbody
+          - @participants.each do |participant|
+                tr
+                  td= participant.id
+                  td= participant.lname
+                  td= participant.fname
+                  td= participant.created_at

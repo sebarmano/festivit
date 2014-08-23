@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
+
 ruby '2.1.2'
 
 gem 'rails', '4.1.4'
@@ -20,6 +22,10 @@ gem 'slim', '~> 2.0.3'
 gem 'cocoon'
 gem 'oembedr'
 gem 'acts-as-taggable-on'
+gem 'dragonfly-dropbox_data_store'
+gem 'prawn', '~> 1.2.1'
+gem 'prawn-table', '~> 0.1.0'
+
 
 #CSV import gems
 gem 'roo'
@@ -36,6 +42,7 @@ gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
 gem 'authority'
 gem 'faker'
 gem 'annotate', '~> 2.6.5'
+gem 'owlcarousel-rails'
 
 group :test do
   gem 'capybara'
@@ -43,4 +50,9 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'guard', '~> 2.6.1'
+  gem 'guard-rspec'
 end
+
+# Guard with Mac OSX notifications, you can remove this gem if you don't use it.
+gem 'terminal-notifier-guard', group: :development

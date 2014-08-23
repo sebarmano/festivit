@@ -1,13 +1,42 @@
+.bgheader_particpants_show
 section
   article
-    h2
+    .notice
+      = notice
+    .alert
+      = alert
+      
+
+    h3
       = @participant.name
+    br
+
     = form_tag pick_up_tickets_path, method: :put
+
     ul
       - @participant.tickets.order(:ticket_type_id).each do |ticket|
-        li = "Order: #{ticket.online_order_id} - #{ticket.ticket_type.name}, Total: #{ticket.qty}, Remaining: #{ticket.remaining}"
-        = fields_for "tickets[]", ticket do |f|
-          = f.label :picked_up, 'To pick up:'
-          = f.number_field :picked_up, max: ticket.remaining, min: 0,
-            value: ticket.remaining
-    = submit_tag "Submit picked up tickets"
+        - unless ticket.qty == '0'
+          .cards
+            .card
+              div class=["card-header t#{(ticket.ticket_type.productpairsid)}"]
+                strong
+                  | #{ticket.ticket_type.productpairsid}
+                .order
+                  |  Order #: #{ticket.online_order_id}
+              .card-copy
+                i.fa.fa-minus-circle.button-subtract
+                = fields_for "tickets[]", ticket do |f|
+                   = f.number_field :picked_up, max: ticket.remaining, min: 0,
+                     value: ticket.remaining, class: "tickets-pu"
+                i.fa.fa-plus-circle.button-add
+              /.ribbon-wrapper
+                  .ribbon
+                    | #{ticket.ticket_type.id}
+              .card-stats
+                ul
+                  li
+                    | total: #{ticket.qty}  -  remaining: <span>0</span>
+
+    = submit_tag "Update", class: "submit-button"
+    .back-button
+      = link_to "Back", participants_path

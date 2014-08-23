@@ -1,11 +1,53 @@
 div.bg1 {
   // display: none;
   // position: fixed;
-  background-image: url('bg.jpg');
+  background-image: asset-url('bg.jpg');
   background-size: cover;
   background-attachment: fixed;
+  background-position: 50% 50%;
   width: 100%;
   z-index: 0;
+  height: 900px;
+
+  .hero {
+    @include outer-container;
+    .unit {
+     h1 {
+      text-align: center;
+      font-weight:300;
+      font-size: $base-font-size * 3;
+      text-align: center;
+    }
+      h2 {
+
+      text-align: center;
+      font-weight:300;
+      font-size: $base-font-size * 2;
+      text-align: center;
+      margin-top: 1em;
+      }
+
+      padding-top: 34em;
+      @include span-columns(8);
+      @include shift(2);
+      @include media($mobile) {
+        @include span-columns(4);
+        @include shift(0);
+        padding: 2.5em;
+        padding-top: 28em;
+      }
+
+      color: white;
+
+    }
+  }
+}
+
+.fa-4x {
+  margin-bottom: .5em;
+}
+.fa-2x {
+  margin-bottom: .65em;
 }
 
 
@@ -15,72 +57,47 @@ div.pnl1 {
 
   div.main {
     @include outer-container;
-    padding: 3em;
+    padding: 4em;
+
     div.block {
-      @include span-columns(3);
       text-align: center;
-      h3 {
-        margin-bottom: 1em;
+
+
+      a {
+        color: $dark-gray;
       }
 
-      p.smoothanchor {
-        margin-top: 1em;
-      }
+      @include span-columns(3);
+      @include omega(4n);
+      @include media($mobile) {
 
+        @include span-columns(2);
+        @include omega(2n);
+      }
     }
   }
 }
 
 div.cont1 {
-  background-image: url('iphone.jpg');
-  background-size: cover;
+  background-image: asset-url('iphone.jpg');
+  background-size: 160%;
   background-repeat: no-repeat;
+  background-position: 20% 30%;
   width: 100%;
   height: 800px;
   z-index: 99;
-  color: white;
+  color: $dark-gray;
 
-  div.mainContainer {
-    @include outer-container;
-
-    div.halfArea {
-      @include span-columns(4);
-      @include shift(1);
-      padding-top: 14em;
-    }
+  @include media($mobile) {
+    background-image: asset-url('iphone.jpg');
+    background-size: 400%;
+    background-repeat: no-repeat;
+    background-position: 40% 20%;
+    width: 100%;
+    height: 400px;
+    z-index: 99;
+    color: $dark-gray;
   }
-
-}
-
-div.cont2 {
-  background-image: url('macbook.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 800px;
-  z-index: 99;
-  color: white;
-
-  div.mainContainer {
-    @include outer-container;
-
-    div.halfArea {
-      @include span-columns(4);
-      @include shift(1);
-      padding-top: 18em;
-    }
-  }
-
-}
-
-div.cont3 {
-  background-image: url('secret.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 800px;
-  z-index: 99;
-
   div.mainContainer {
     @include outer-container;
 
@@ -88,20 +105,118 @@ div.cont3 {
       @include span-columns(4);
       @include shift(1);
       padding-top: 8em;
+      @include media($mobile) {
+        @include span-columns(4);
+        @include shift(0);
+        padding: 1em;
+        padding-top: 2em;
+        font-size: .75 * $base-font-size;
+
+
+      }
+    }
+  }
+
+}
+
+div.cont2 {
+  background-image: asset-url('macbook.jpg');
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: 70% 90%;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+  color: white;
+
+  @include media($mobile) {
+    background-image: asset-url('macbook.jpg');
+    background-size: 320%;
+    background-repeat: no-repeat;
+    background-position: 55% 0%;
+    width: 100%;
+    height: 600px;
+    z-index: 99;
+    color: white;
+  }
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(1);
+      padding-top: 10em;
+      @include media($mobile){
+        @include span-columns(4);
+        @include shift(0);
+        padding: 1em;
+        padding-top: 2em;
+        font-size: .75 * $base-font-size;
+      }
+
+    }
+  }
+
+}
+
+div.cont3 {
+  background-image: asset-url('secret.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  z-index: 99;
+
+  @include media($mobile) {
+    background-image: asset-url('secret.jpg');
+    background-size: 200%;
+    background-repeat: no-repeat;
+    background-position: 89% 40% ;
+    width: 100%;
+    height: 400px;
+    z-index: 99;
+    color: $dark-gray;
+  }
+  div.mainContainer {
+    @include outer-container;
+
+    div.halfArea {
+      @include span-columns(4);
+      @include shift(1);
+      padding-top: 8em;
+      @include media($mobile){
+        @include span-columns(3);
+        @include shift(1);
+        padding: 1em;
+        padding-top: 2em;
+        font-size: .75 * $base-font-size;
+      
+      }
     }
   }
 
 }
 
 div.cont4 {
-  background-image: url('iphonec.png');
-  background-size: cover;
+  background-image: asset-url('iphonec.jpg');
+  background-size: 130%;
+  background-position: 20% 45%;
   background-repeat: no-repeat;
   width: 100%;
   height: 800px;
   z-index: 99;
-  color: white;
-
+  color: $dark-gray;
+  
+  @include media($mobile) {
+    background-image: asset-url('iphonec.jpg');
+    background-size: 300%;
+    background-repeat: no-repeat;
+    background-position: 20% 0% ;
+    width: 100%;
+    height: 400px;
+    z-index: 99;
+    color: $dark-gray;
+  }
   div.mainContainer {
     @include outer-container;
 
@@ -109,35 +224,16 @@ div.cont4 {
       @include span-columns(4);
       @include shift(7);
       padding-top: 14em;
+      @include media($mobile){
+        @include span-columns(4);
+        @include shift(0);
+        padding: 1em;
+        padding-top: 2em;
+        font-size: .75 * $base-font-size;
+      
+      }
     }
   }
 
 
 }
-
-
-
-
-
-            // #parallaxContainer
-            //   .layer1
-            //   .layer2
-            //   .layer3
-            //
-            // #parallaxContainer {
-            //   div.layer1 {
-            //     background-image: url('bg.jpg');
-            //     // position: absolute;
-            //     height: 800px;
-            //     width: 100%;
-            //
-            //   }
-            //   div.layer2 {
-            //     background-image: url('logistics_woah.png');
-            //     height: 800px;
-            //     width: 100%;
-            //   }
-            //   div.layer3 {
-            //
-            //   }
-            // }

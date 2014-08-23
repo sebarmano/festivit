@@ -1,72 +1,79 @@
-.container.topSpacing
-  h1 Band Applications
-  table
-    tr
-      th
-        | Accepted?
-      th
-        | Paid?
-      th
-        | Band Name
-      th
-        | Band Photo
-      th
-        | Video
-      th
-        | Music
-      th
-        | Facebook
-      th
-        | Twitter
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h3 Band Applications
+    table
+      tr
+        th
+          | Accepted?
+        th
+          | Paid?
+        th
+          | Band Name
+        th
+          | Band Photo
+        th
+          | Video
+        th
+          | Music
+        th
+          | Facebook
+        th
+          | Twitter
 
-      th
-        | Tags
+        th
+          | Tags
 
-      - @submissions.each do |submission|
-        - participant = submission.participants.first
-        tr
-          /= submission.group_name
-        - unless participant.nil?
-          /if participant isn't showing it means there isn't one
-          td
-            button Y
-            button N
-          td
-            button Y
-            button N
-          td
-            /TODO: need to get seed data for band
-            a href="#"
-              | Smashing
+        - @submissions.each do |submission|
+          - participant = submission.participants.first
+          tr
             /= submission.group_name
-          td
-            a href="#"
-              = image_tag('logo.svg')
-          td
-            / TODO: Add video
-            a href="#"
-              = image_tag('video.png')
-            //= embed(attachment.link)
-          td
-            / TODO: Add music
-            a href="#"
-              = image_tag('soundcloud.png')
-            /= embed(attachment.link)
-          td
-            a href="#"
-              = image_tag('facebook.png')
-              /= submission.facebook_link
-          td
-            a href="#"
-              = image_tag('twitter.png')
-              /= submission.twitter_link
-          td
-            / TODO: Add notes section in database
-            | Rock
-            /= submission.tags
+          - unless participant.nil?
+            /if participant isn't showing it means there isn't one
+            td
+              button Y
+              button N
+            td
+              button Y
+              button N
+            td
+              /TODO: need to get seed data for band
+              a href="#"
+                | Smashing
+              /= submission.group_name
+            td
+              a href="#"
+                = image_tag('logo.svg')
+            td
+              / TODO: Add video
+              a href="#"
+                = image_tag('video.png')
+              //= embed(attachment.link)
+            td
+              / TODO: Add music
+              a href="#"
+                = image_tag('soundcloud.png')
+              /= embed(attachment.link)
+            td
+              a href="#"
+                = image_tag('facebook.png')
+                /= submission.facebook_link
+            td
+              a href="#"
+                = image_tag('twitter.png')
+                /= submission.twitter_link
+            td
+              / TODO: Add notes section in database
+              | Rock
+              /= submission.tags
 
-          / Do we
-          / - unless submission.participant_id.nil?
-          /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
-          /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
-          /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}
+            / Do we
+            / - unless submission.participant_id.nil?
+            /   =>> link_to 'Show', participant_submission_path(submission.participant_id, submission.id)
+            /   =>> link_to 'Edit', edit_participant_submission_path(submission.participant, submission)
+            /   =>> link_to 'Destroy', submission, method: :delete, data: {confirm: 'Are you sure?'}

@@ -1,0 +1,27 @@
+.bgheader
+section
+  article
+    .notice
+      = notice
+    .alert
+      = alert
+      
+    h3 Import Role Types
+    = form_tag import_role_types_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+    br
+      h1 Current Role Types
+      table
+        thead
+          tr
+            th RoleType ID
+            th name
+            th Tuple date
+            th colspan="3"
+        tbody
+          - @role_types.each do |role_type|
+            tr
+              td= role_type.id
+              td= role_type.name
+              td= role_type.created_at

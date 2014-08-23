@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813144003) do
+ActiveRecord::Schema.define(version: 20140817180304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,16 +24,29 @@ ActiveRecord::Schema.define(version: 20140813144003) do
     t.datetime "updated_at"
     t.integer  "submission_id"
     t.string   "type"
+    t.string   "song_uid"
   end
 
   add_index "attachments", ["submission_id"], name: "index_attachments_on_submission_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "fest_participant_role_types", force: true do |t|
     t.integer  "role_type_id"
     t.integer  "participant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "fest_id"
+    t.integer  "fest_id"
   end
 
   create_table "fest_participant_submissions", force: true do |t|
