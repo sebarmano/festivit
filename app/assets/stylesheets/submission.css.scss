@@ -183,11 +183,8 @@ table.dashboard {
       color: #FFFFFF;
       font-size: .75em;
       padding: 5px;
+      pointer-events: none;
       width: 80%;
-      &:hover{
-          background-color: $green;
-          color: #FFFFFF;
-        }
     }
 
   .acceptDisable{
@@ -198,11 +195,8 @@ table.dashboard {
       color: #000000;
       font-size: .75em;
       padding: 5px;
+      pointer-events: none;
       width: 80%;
-        &:hover{
-          background-color: #FFFFFF;
-          color: #000000;
-        }
       }
 
   .decline{
@@ -228,11 +222,8 @@ table.dashboard {
       color: #000000;
       font-size: .75em;
       padding: 5px;
+      pointer-events: none;
       width: 80%;
-        &:hover{
-          background-color: #FFFFFF;
-          color: #000000;
-        }
     }
 
   .declined{
@@ -243,6 +234,7 @@ table.dashboard {
       color: #FFFFFF;
       font-size: .75em;
       padding: 5px;
+      pointer-events: none;
       width: 80%;
     }
 
@@ -259,7 +251,7 @@ table.dashboard {
       }
     .picTable{
       li{
-        
+
       }
       @include span-columns(2.5);
       padding: 0;
@@ -467,7 +459,7 @@ table.dashboard {
         margin-top: 10em;
       }
 
-   
+
 
       h1 {
         color: $base-font-color;

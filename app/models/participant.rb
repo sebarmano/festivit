@@ -64,6 +64,6 @@ class Participant < ActiveRecord::Base
   #TODO add LIKE in guests to be able to search for it
   scope :customers, -> {includes(:role_types).where("role_types.name = 'customer'").references(:role_types)}
   scope :guests, ->{includes(:role_types).where("role_types.name = 'guest'").references(:role_type)}
-  scope :performers, ->{includes(:role_types).where("role_types.name = 'performer'").references(:role_type)}
+  scope :performers, ->{includes(:role_types).where("role_types.name = 'Performer'").references(:role_type)}
   scope :demoday, ->{includes(:role_types).where("role_types.name = 'demoday'").references(:role_type)}
 end

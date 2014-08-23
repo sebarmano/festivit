@@ -1,5 +1,5 @@
 class SubmissionMailer < ActionMailer::Base
-  default from: "admin@festiv.it"
+  default from: "festiviteam@gmail.com"
 
   def init_apply(applicant)
     @applicant = applicant
