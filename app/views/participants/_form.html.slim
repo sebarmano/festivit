@@ -31,11 +31,11 @@
     .logInCreate.fieldset
       = f.simple_fields_for :applicant do |p|
         span.email
-          = p.input :email
+          = p.input :email, required: true
         span.passwordCreate
-          = p.input :password
+          = p.input :password, required: true
         span.passwordCreateConf
-          = p.input :password_confirmation
+          = p.input :password_confirmation, required: true
 
     .shield
       = f.button :submit, "Continue to next step"

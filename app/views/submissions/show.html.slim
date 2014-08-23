@@ -2,7 +2,6 @@
 
 section
   article
-
     p.notice
       = notice
     p.alert
@@ -55,25 +54,20 @@ section
 
           - @submission.attachments.each do |attachment|
             - if attachment.type == "video"
-             li = embed(attachment.link)
-             /li = image_tag thumb(attachment.link), class: "thumb"
-            -  if attachment.image
-               li = image_tag attachment.image.thumb('400x200#').url
-            - if attachment.type == "song"
+              li = embed(attachment.link)
+            - if attachment.image
+              li = image_tag attachment.image.thumb('400x200#').url
+            - if attachment.type == "song" && !attachment.song.nil?
               li = audio_tag attachment.song.url, controls: true
-
 
           .adminTools
             - if current_user.admin?
-            =button_to 'Approve', action: 'approve'
-            = link_to 'Edit', edit_participant_submission_path
-            / = link_to 'Back', submissions_path
-            = simple_form_for [@participant, @submission, @comment] do |f|
-              = f.input "body", label: "Add a Comment:"
-              = f.submit
-            - @submission.comments.each do |comment|
-              p
-                = comment.author
-                br
-                = comment.body
-
+              =button_to 'Approve', action: 'approve'
+              = simple_form_for [@participant, @submission, @comment] do |f|
+                = f.input "body", label: "Add a Comment:"
+                = f.submit
+              - @submission.comments.each do |comment|
+                p
+                  = comment.author
+                  br
+                  = comment.body

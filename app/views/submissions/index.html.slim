@@ -10,12 +10,12 @@ section
 
     h1.title Applications
     = form_tag submissions_path, method: :get
-    
+
     .dashboardSearchbar
       .mobile-search
         = text_field_tag :search, params[:search]
         = submit_tag "Search"
-    
+
     table.dashboard
       tr
         th.participants
@@ -73,7 +73,7 @@ section
                 .modal-window
                   .modal-inner
                     label.modal-close for="modal-#{submission.id*2-1}"
-                      | X 
+                      | X
                     .modalContainer
                       ol.carousel.carouselPhoto
                         - photos.each do |photo|
@@ -97,12 +97,12 @@ section
                       ol.carousel.carouselVideo
                         - videos.each do |video|
                           li
-                            = embed(video.link)                        
-                      .clearFloat 
+                            = embed(video.link)
+                      .clearFloat
                       label.modal-Video-close for="modal-#{submission.id*2}"
-                        | X         
+                        | X
             td.tracks.ellipsis
-              - unless songs.empty? 
+              - unless songs.empty?
                 - songs.each do |audio|
                   - if audio.song
                     = audio.title
@@ -110,7 +110,7 @@ section
                     embed type="audio/mp3" height="30" autoplay="false" preload="none" src=audio.song.url width="100"
                     .clearFloat
 
-              - else 
+              - else
                 p no songs uploaded
             td.info
               span#contactsubmissions
@@ -138,7 +138,7 @@ section
 
                 span.social
                   - unless participant.nil?
-                    = mail_to participant.email
+                    = mail_to participant.applicant.email
                       i.fa.fa-envelope
 
             td.tags
