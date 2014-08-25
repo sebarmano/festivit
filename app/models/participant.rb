@@ -40,6 +40,14 @@ class Participant < ActiveRecord::Base
     "#{lname}, #{fname}"
   end
 
+  def fullname
+    "#{fname} #{lname}"
+  end
+
+  def addy
+    "#{street_address}, #{city}, #{state}, #{zip} #{country}"
+  end
+
   def tickets_count
     tickets.group(:ticket_type).count
   end

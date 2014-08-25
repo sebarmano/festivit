@@ -1,7 +1,23 @@
 .bgheader
 section
   article
+    h3
+      = @participant.fullname
+    br
+    .email.fieldset
+      span.email
+        = @participant.applicant.email
+      span.phone
+        = @participant.phone
+    br
+    .address.fieldset
+      span.addy
+        = @participant.addy
+    br
+    br
     - if current_user.admin?
+    br
+    hr
     = simple_form_for [@participant, @comment] do |f|
       = f.input "body", label: "Add a Comment:"
       = f.submit

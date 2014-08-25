@@ -1,9 +1,8 @@
 module ImportHelper
   def demoday_importer
-      importer = ImporterDemoday.new('1KFOCGLPaSsE-ey1IzQiw03YEmryZuutwMtT-1KxRQJQ',
-                                   :user => 'maedevelops@gmail.com',
-                                   :password => 'mypass12345')
-                                   #TODO - set up env variables in Heroku to replace this fake acct
+      importer = ImporterDemoday.new(ENV["GOOGLE_SHEET_DEMODAY"],
+                                   :user => ENV["GOOGLE_ACCT"],
+                                   :password => ENV["GOOGLE_PWD"])
     importer.import
   end
 end

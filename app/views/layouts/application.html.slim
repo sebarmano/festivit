@@ -2,7 +2,7 @@ html
   head
     title festivit
     meta name="keywords" content="festival"
-    meta content="width=device-width, initial-scale=1" name="viewport" /
+    meta content="width=device-width, initial-scale=1" name="viewport"
 
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag 'application'
@@ -21,6 +21,10 @@ html
           li = link_to "Apply", new_participant_path
           li = link_to "About", about_path
           li = link_to "Team", contact_path
+          - if user_signed_in?
+            li = link_to "Admin", root_path
+
+
           - unless user_signed_in?
             li = link_to 'Login', new_user_session_path
           - else

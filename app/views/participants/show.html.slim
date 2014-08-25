@@ -5,10 +5,11 @@ section
       = notice
     .alert
       = alert
-      
 
     h3
       = @participant.name
+    br
+    h8 Change bold number to match what you give.
     br
 
     = form_tag pick_up_tickets_path, method: :put
@@ -24,17 +25,32 @@ section
                 .order
                   |  Order #: #{ticket.online_order_id}
               .card-copy
-                i.fa.fa-minus-circle.button-subtract
+                i.fa.fa-plus-circle.button-add
                 = fields_for "tickets[]", ticket do |f|
                    = f.hidden_field :picked_up, value:ticket.picked_up + ticket.remaining, class: "total-pu"
                 .tickets-pu
                   = ticket.remaining
-                i.fa.fa-plus-circle.button-add
+                i.fa.fa-minus-circle.button-subtract
               .card-stats
                 ul
                   li
-                    | total: #{ticket.qty}  -  remaining: <span>0</span>
+                    | start: #{ticket.qty}. received: #{ticket.picked_up}. unused: <span>0</span>
 
     = submit_tag "Update", class: "submit-button"
     .back-button
-      = link_to "Back", participants_path
+      = link_to "Back to list", participants_path
+    br
+    br
+    h8 Bold numbers default to maximum available.
+    br
+    br
+    h8 WARNING: "Update" subtracts tickets shown.
+    br
+    h8 Use +/-
+    br
+    h8 to reflect ONLY what you're issuing,
+    br
+    h8 then, "Update."
+    br
+    br
+    h8 "Unused" shows what'll be left AFTER this.
