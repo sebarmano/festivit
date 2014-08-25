@@ -21,27 +21,32 @@ section
         thead
           tr
             th Online Order#
-            th Order Date
+            th Participant Name
+            th Ticket Type Abbr
+            th Purchased
+            th Picked up
             th Customer notes
             th Ticket Type ID
-            th Ticket Type Abbr
+            th Order Date
             th Participant ID
-            th Lname
-            th Fname
             th Tuple date
+            th Total
+            th Picked_up
             th colspan="3"
         tbody
           - @tickets.each do |ticket|
             tr
               td= ticket.online_order_id
-              td= ticket.date_time
+              td= ticket.participant.name
+              td= ticket.ticket_type.productpairsid if ticket.ticket_type
+              td= ticket.qty
+              td= ticket.picked_up
               td= ticket.customer_notes
               td= ticket.ticket_type_id
-              td= ticket.ticket_type.productpairsid if ticket.ticket_type
+              td= ticket.date_time
               td= ticket.participant_id
-              td= ticket.participant.lname
-              td= ticket.participant.fname
               td= ticket.created_at
-              td= link_to 'Show', ticket
-              td= link_to 'Edit', edit_ticket_path(ticket)
-              td= link_to 'Destroy', ticket, method: :delete, data:  { confirm: 'Are you sure?'}
+              td= @tickets.map{|item| item.qty.to_i}.reduce(0, :+)
+              td= @tickets.map{|item| item.picked_up.to_i}.reduce(0, :+)
+
+
