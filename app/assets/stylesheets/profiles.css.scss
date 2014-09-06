@@ -3,20 +3,21 @@
   $hero-background-bottom: adjust-hue($hero-background-top, -70);
   $hero-color: white;
   $gradient-angle: 10deg;
-  $hero-image: asset-url('iphonec.jpg');
+  $hero-image: asset-url('band.jpg');
 
   @include background( linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
 
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
-  padding-bottom: 4em;
   margin-top: 77px; //TODO change this to work properly
 
   .profile-picture {
     @include size(350px);
+    @include span-columns(4);
     border-radius: 175px;
-    background: red;
+    background: $hero-image no-repeat;
+    background-size: cover;
     margin: 0 auto;
     border: 10px solid white;
   }
@@ -29,22 +30,21 @@
   .profile-hero-inner {
     @include outer-container;
     @include clearfix;
-    padding: 3em;
     margin: auto;
     text-align: center;
     color: $hero-color;
+    position: relative;
 
     button {
-      @include
-      button(simple,
-      $base-background-color);
+      @include button(simple, $base-background-color);
       font-size: $base-font-size;
       outline: none;
     }
 
     .profile-hero-copy {
-      float: left;
-      text-align: center;
+      padding-top: 10px;
+      text-align: left;
+      @include span-columns(4);
       
       h1 {
         font-size: 1.6em;
@@ -56,15 +56,175 @@
 
       p {
         font-family: $serif;
-        margin: auto;
         margin-bottom: 3em;
         font-weight: 200;
         line-height: 1.4em;
         @include media($large-screen) {
           font-size: 1.1em;
-          max-width: 40%;
+          //max-width: 40%;
         }
       }
     }
+    .profile-social {
+      @include span-columns(4);
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+    }
   }
 }
+
+.bullets {
+  $icon-bullet-size: 3.5em;
+  @include outer-container;
+  margin-top: 40px;
+
+  overflow: auto;
+  margin-bottom: $base-line-height;
+
+  // change ".three-col-bullet" class to this for two bullet layout
+  .two-col-bullet {
+    @include media($large-screen) {
+      @include span-columns(6);
+      @include omega(2n);  
+    } 
+  }
+  
+  .three-col-bullet {
+    @include media($large-screen) {
+      @include span-columns(4);
+      @include omega(3n);
+    }
+  }
+
+  // change ".three-col-bullet" class to this for four bullet layout
+  .four-col-bullet {
+    @include media($large-screen) {
+      @include span-columns(3);
+      @include omega(4n);
+    }
+  }
+
+  .bullet-icon {
+    float: left;
+    background: $base-accent-color;
+    padding: $icon-bullet-size /4;
+    border-radius: 50%;
+    width: $icon-bullet-size;
+    height: $icon-bullet-size;
+  }
+
+  .bullet-icon-1 {
+    background: $base-accent-color;
+  }
+
+  .bullet-icon-2 {
+    background: adjust-hue($base-accent-color, -50);
+  }
+
+  .bullet-icon-3 {
+    background: adjust-hue($base-accent-color, -140);
+  }
+
+  .bullet-content {
+    margin-left: $icon-bullet-size *1.4;
+    margin-bottom: 2em;
+  }
+
+  h2 {
+    font-size: $icon-bullet-size /2.5;
+    padding-top: $icon-bullet-size /7;
+    margin-bottom: $icon-bullet-size /6;
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+    display: inline-block;
+  }
+}
+
+.line-behind-text {
+  border-bottom: 1px solid #CACACA;
+  text-align: center;
+  margin-bottom: 4.5em;
+
+  h6 {
+    background: white;
+    color: gray;
+    display: inline-block;
+    font-family: $helvetica;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 0 10px;
+    position: relative;
+    text-transform: uppercase;
+    top: 34px;
+  }
+}
+
+.messages {
+  @include outer-container;
+
+  .blackboard {
+    @include span-columns(6);
+
+    .comment {
+    $comment-gutter: 1.4em;
+    $comment-image-padding: .7em;
+    $comment-image-width: 4em;
+    $comment-color: $base-font-color;
+    $comment-background: lighten($base-accent-color, 15);
+    $comment-detail-color: transparentize($comment-color, .5);
+    $comment-image-vert-alignment: top;
+
+    display: table;
+    width: 100%;
+//    margin-bottom: $base-spacing;
+    padding-bottom: 1em;
+    border-bottom: 1px solid transparentize($comment-color, .9);
+
+    .comment-image,
+    .comment-content {
+      display: table-cell;
+      vertical-align: $comment-image-vert-alignment;
+    }
+
+    .comment-image {
+      padding-right: $comment-gutter;
+
+      > img {
+        width: $comment-image-width;
+        height: auto;
+        border-radius: $base-border-radius;
+        padding: $comment-image-padding;
+        background: $comment-background;
+        display: block;
+        max-width: none;
+      }
+
+      .comment-reverse-order & {
+        padding-right: 0;
+        padding-left: 10px;
+      }
+    }
+
+    .comment-content {
+      width: 100%;
+
+      h1 {
+        font-size: 1em;
+        margin-bottom: .5em;
+      }
+
+      p {
+        margin-bottom: .5em;
+      }
+
+      p.comment-detail {
+        font-style: italic;
+        font-size: .9em;
+        color: $comment-detail-color;
+      }
+    }
+  }
+ }
+}
+
+
