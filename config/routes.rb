@@ -86,4 +86,6 @@ Rails.application.routes.draw do
 
   get '/about', to: 'welcome#about'
   get '/contact', to: 'welcome#contact'
+
+resource :profile, only: [:show, :edit, :update]
 end
