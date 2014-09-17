@@ -301,7 +301,7 @@ $tcmpg-header-background: $medium-gray;
 
     .tickets-pu {
       background: none;
-      padding: 0 50px;
+      padding: 0 30px;
       margin: 0px;
       border: none;
       text-align: center;
@@ -309,6 +309,10 @@ $tcmpg-header-background: $medium-gray;
       box-shadow: none;
       display: inline;
       width: 50%;
+    }
+
+    i {
+      padding: 10px 20px;
     }
   }
 
