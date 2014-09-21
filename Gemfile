@@ -56,3 +56,4 @@ end
 
 # Guard with Mac OSX notifications, you can remove this gem if you don't use it.
 gem 'terminal-notifier-guard', group: :development
+gem 'pry-rails', group: :development

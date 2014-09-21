@@ -41,6 +41,10 @@ class TicketsController < ApplicationController
     redirect_to participants_path, notice: "Picked up tickets saved"
   end
 
+  def audit
+    @total_tickets = Ticket.total_per_type
+  end
+
   private
 
   def ticket_params

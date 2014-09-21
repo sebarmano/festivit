@@ -25,9 +25,20 @@ class Ticket < ActiveRecord::Base
   validates_uniqueness_of :ticket_type_id, :scope => [:online_order_id]
   validates :participant, presence: true
 
+  def nqty
+    qty.to_i
+  end
 
   def remaining
     qty.to_i - picked_up.to_i
+  end
+
+  def self.total_per_type
+    includes(:ticket_type).group(:ticket_type).sum(:qty).map {|tix, total| [tix.name, total]}
+  end
+
+  def self.picked_up_per_type
+    includes(:ticket_type).group(:ticket_type).sum(:picked_up).map {|tix, total| [tix.name, total]}
   end
 
   def self.to_csv(options = {})

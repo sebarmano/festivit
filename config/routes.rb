@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     collection do
       put :pick_up
       post :import
+      get :audit
     end
   end
 
